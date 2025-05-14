@@ -6,26 +6,32 @@ export const textareaType = defineType({
   type: "object",
   fields: [
     defineField({
-      name: "label",
-      title: "Label",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: "name",
       title: "Name",
       type: "string",
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "label",
+      title: "Label",
+      type: "string",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "description",
+      title: "Description",
+      type: "string",
+    }),
+    defineField({
+      name: "placeholder",
+      title: "Placeholder",
+      type: "string",
+    }),
+    defineField({
       name: "required",
       title: "Required",
       type: "boolean",
-    }),
-    defineField({
-      name: "defaultValue",
-      title: "Default Value",
-      type: "string",
+      initialValue: true,
     }),
     defineField({
       name: "minLength",
@@ -38,14 +44,15 @@ export const textareaType = defineType({
       type: "number",
     }),
     defineField({
-      name: "rows",
-      title: "Rows",
-      type: "number",
+      name: "pattern",
+      title: "Pattern",
+      type: "string",
     }),
     defineField({
-      name: "placeholder",
-      title: "Placeholder",
+      name: "defaultValue",
+      title: "Default Value",
       type: "string",
+      initialValue: "",
     }),
   ],
 });

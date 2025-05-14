@@ -13,6 +13,7 @@ import { FormBuilder } from "./form-builder";
 import { PortableText } from "next-sanity";
 import { toast } from "sonner";
 import { LoaderCircleIcon } from "lucide-react";
+import { Form as UIForm } from "./ui/form";
 
 export type FormProps = {
   form: FormType & {
@@ -25,10 +26,12 @@ export function Form({
 }: FormProps) {
   const { mutateAsync } = api.form.submit.useMutation();
 
-  const form = useForm({
-    defaultValues: getFormDefaultValues(content),
-    resolver: zodResolver(getFormSchema(content)),
-  });
+  const defaultValues = getFormDefaultValues(content);
+  const resolver = zodResolver(getFormSchema(content));
+
+  console.log(defaultValues);
+
+  const form = useForm({ defaultValues, resolver });
 
   async function handleSubmit(data: Record<string, unknown>) {
     const res = await mutateAsync({ slug: slug.current, data });
@@ -56,18 +59,21 @@ export function Form({
       </section>
 
       <section className="container">
-        <form
-          className="flex flex-col gap-4 py-8"
-          onSubmit={form.handleSubmit(handleSubmit)}
-        >
-          <FormBuilder content={content} form={form} />
-          <Button type="submit" disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting && (
-              <LoaderCircleIcon className="animate-spin" />
-            )}
-            Submit
-          </Button>
-        </form>
+        <UIForm {...form}>
+          <form
+            className="flex flex-col gap-8 py-8"
+            onSubmit={form.handleSubmit(handleSubmit)}
+          >
+            <FormBuilder content={content} form={form} />
+
+            <Button type="submit" disabled={form.formState.isSubmitting}>
+              {form.formState.isSubmitting && (
+                <LoaderCircleIcon className="animate-spin" />
+              )}
+              Submit
+            </Button>
+          </form>
+        </UIForm>
       </section>
     </div>
   );

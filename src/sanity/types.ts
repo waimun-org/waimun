@@ -70,16 +70,19 @@ export type Geopoint = {
 
 export type Checkbox = {
   _type: "checkbox";
-  label: string;
   name: string;
+  label: string;
+  description?: string;
   required?: boolean;
-  defaultValue?: string;
+  defaultValue?: boolean;
 };
 
 export type Select = {
   _type: "select";
-  label: string;
   name: string;
+  label: string;
+  description?: string;
+  placeholder?: string;
   required?: boolean;
   options: Array<string>;
   defaultValue?: string;
@@ -87,23 +90,25 @@ export type Select = {
 
 export type Textarea = {
   _type: "textarea";
-  label: string;
   name: string;
+  label: string;
+  description?: string;
+  placeholder?: string;
   required?: boolean;
-  defaultValue?: string;
   minLength?: number;
   maxLength?: number;
-  rows?: number;
-  placeholder?: string;
+  pattern?: string;
+  defaultValue?: string;
 };
 
 export type Input = {
   _type: "input";
-  label: string;
   name: string;
-  placeholder: string;
-  required: boolean;
-  type: "text" | "email" | "tel" | "number";
+  label: string;
+  description?: string;
+  placeholder?: string;
+  required?: boolean;
+  type?: "text" | "email" | "tel" | "number";
   minLength?: number;
   maxLength?: number;
   pattern?: string;
@@ -863,19 +868,21 @@ export type FORM_QUERYResult = {
     | {
         _key: string;
         _type: "checkbox";
-        label: string;
         name: string;
+        label: string;
+        description?: string;
         required?: boolean;
-        defaultValue?: string;
+        defaultValue?: boolean;
       }
     | {
         _key: string;
         _type: "input";
-        label: string;
         name: string;
-        placeholder: string;
-        required: boolean;
-        type: "email" | "number" | "tel" | "text";
+        label: string;
+        description?: string;
+        placeholder?: string;
+        required?: boolean;
+        type?: "email" | "number" | "tel" | "text";
         minLength?: number;
         maxLength?: number;
         pattern?: string;
@@ -884,8 +891,10 @@ export type FORM_QUERYResult = {
     | {
         _key: string;
         _type: "select";
-        label: string;
         name: string;
+        label: string;
+        description?: string;
+        placeholder?: string;
         required?: boolean;
         options: Array<string>;
         defaultValue?: string;
@@ -893,14 +902,15 @@ export type FORM_QUERYResult = {
     | {
         _key: string;
         _type: "textarea";
-        label: string;
         name: string;
+        label: string;
+        description?: string;
+        placeholder?: string;
         required?: boolean;
-        defaultValue?: string;
         minLength?: number;
         maxLength?: number;
-        rows?: number;
-        placeholder?: string;
+        pattern?: string;
+        defaultValue?: string;
       }
   >;
 } | null;

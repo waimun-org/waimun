@@ -53,7 +53,7 @@ export const formRouter = createTRPCRouter({
       );
 
       if (!response.ok) {
-        console.error(response);
+        console.error(await response.json());
         throw new Error(`Failed to submit form: ${response.statusText}`);
       }
 
