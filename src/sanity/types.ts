@@ -201,7 +201,7 @@ export type Footer = {
   _rev: string;
   title: string;
   copyright: string;
-  links: Array<
+  links?: Array<
     {
       _key: string;
     } & Link
@@ -689,7 +689,7 @@ export type FOOTER_QUERYResult = {
     _type: "link";
     text: string;
     url: string;
-  }>;
+  }> | null;
 } | null;
 // Variable: EVENTS_QUERY
 // Query: *[_type == "event"] {  ...,}
