@@ -1294,7 +1294,7 @@
             }
           }
         },
-        "optional": false
+        "optional": true
       }
     }
   },
