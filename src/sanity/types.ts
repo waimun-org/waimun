@@ -70,25 +70,25 @@ export type Geopoint = {
 
 export type Checkbox = {
   _type: "checkbox";
-  label?: string;
-  name?: string;
+  label: string;
+  name: string;
   required?: boolean;
   defaultValue?: string;
 };
 
 export type Select = {
   _type: "select";
-  label?: string;
-  name?: string;
+  label: string;
+  name: string;
   required?: boolean;
-  options?: Array<string>;
+  options: Array<string>;
   defaultValue?: string;
 };
 
 export type Textarea = {
   _type: "textarea";
-  label?: string;
-  name?: string;
+  label: string;
+  name: string;
   required?: boolean;
   defaultValue?: string;
   minLength?: number;
@@ -99,11 +99,11 @@ export type Textarea = {
 
 export type Input = {
   _type: "input";
-  label?: string;
-  name?: string;
-  placeholder?: string;
-  required?: boolean;
-  type?: "text" | "email" | "tel" | "number";
+  label: string;
+  name: string;
+  placeholder: string;
+  required: boolean;
+  type: "text" | "email" | "tel" | "number";
   minLength?: number;
   maxLength?: number;
   pattern?: string;
@@ -131,8 +131,8 @@ export type Form = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  description?: Array<{
+  title: string;
+  description: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -150,17 +150,17 @@ export type Form = {
     _type: "block";
     _key: string;
   }>;
-  slug?: Slug;
-  airtable?: {
-    baseId?: string;
-    tableId?: string;
+  slug: Slug;
+  airtable: {
+    baseId: string;
+    tableId: string;
   };
-  content?: FormBuilder;
+  content: FormBuilder;
 };
 
 export type Prose = {
   _type: "prose";
-  content?: Array<{
+  content: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -182,15 +182,15 @@ export type Prose = {
 
 export type Button = {
   _type: "button";
-  link?: Link;
-  variant?: "default" | "secondary" | "destructive" | "outline" | "ghost";
-  size?: "default" | "sm" | "lg";
+  link: Link;
+  variant: "default" | "secondary" | "destructive" | "outline" | "ghost";
+  size: "default" | "sm" | "lg";
 };
 
 export type Link = {
   _type: "link";
-  text?: string;
-  url?: string;
+  text: string;
+  url: string;
 };
 
 export type Footer = {
@@ -199,9 +199,9 @@ export type Footer = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  copyright?: string;
-  links?: Array<
+  title: string;
+  copyright: string;
+  links: Array<
     {
       _key: string;
     } & Link
@@ -214,8 +214,8 @@ export type Navigation = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  logo?: {
+  title: string;
+  logo: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -228,7 +228,7 @@ export type Navigation = {
     alt?: string;
     _type: "image";
   };
-  links?: Array<
+  links: Array<
     {
       _key: string;
     } & Link
@@ -237,9 +237,9 @@ export type Navigation = {
 
 export type SplitImage = {
   _type: "splitImage";
-  orientation?: "imageLeft" | "imageRight";
-  title?: string;
-  image?: {
+  orientation: "imageLeft" | "imageRight";
+  title: string;
+  image: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -252,7 +252,7 @@ export type SplitImage = {
     alt?: string;
     _type: "image";
   };
-  text?: Array<{
+  text: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -278,9 +278,9 @@ export type Page = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  slug?: Slug;
-  content?: Array<
+  title: string;
+  slug: Slug;
+  content: Array<
     | ({
         _key: string;
       } & Hero)
@@ -307,9 +307,9 @@ export type PageBuilder = Array<
 
 export type Hero = {
   _type: "hero";
-  title?: string;
-  intent?: "high-impact" | "low-impact";
-  text?: Array<{
+  title: string;
+  intent: "high-impact" | "low-impact";
+  text: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -332,7 +332,7 @@ export type Hero = {
       _key: string;
     } & Button
   >;
-  backgroundImage?: {
+  backgroundImage: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -353,8 +353,8 @@ export type Event = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
-  description?: Array<{
+  name: string;
+  description: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -372,10 +372,10 @@ export type Event = {
     _type: "block";
     _key: string;
   }>;
-  slug?: Slug;
+  slug: Slug;
   date?: string;
   venue?: string;
-  image?: {
+  image: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -394,7 +394,7 @@ export type Event = {
       _key: string;
     } & Button
   >;
-  details?: Array<{
+  details: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -473,7 +473,7 @@ export type SanityImageMetadata = {
 
 export type Slug = {
   _type: "slug";
-  current?: string;
+  current: string;
   source?: string;
 };
 
@@ -515,15 +515,15 @@ export type PAGE_QUERYResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  slug?: Slug;
+  title: string;
+  slug: Slug;
   content: Array<
     | {
         _key: string;
         _type: "hero";
-        title?: string;
-        intent?: "high-impact" | "low-impact";
-        text?: Array<{
+        title: string;
+        intent: "high-impact" | "low-impact";
+        text: Array<{
           children?: Array<{
             marks?: Array<string>;
             text?: string;
@@ -554,7 +554,7 @@ export type PAGE_QUERYResult = {
             _key: string;
           } & Button
         >;
-        backgroundImage?: {
+        backgroundImage: {
           asset?: {
             _ref: string;
             _type: "reference";
@@ -571,7 +571,7 @@ export type PAGE_QUERYResult = {
     | {
         _key: string;
         _type: "prose";
-        content?: Array<{
+        content: Array<{
           children?: Array<{
             marks?: Array<string>;
             text?: string;
@@ -601,9 +601,9 @@ export type PAGE_QUERYResult = {
     | {
         _key: string;
         _type: "splitImage";
-        orientation?: "imageLeft" | "imageRight";
-        title?: string;
-        image?: {
+        orientation: "imageLeft" | "imageRight";
+        title: string;
+        image: {
           asset?: {
             _ref: string;
             _type: "reference";
@@ -616,7 +616,7 @@ export type PAGE_QUERYResult = {
           alt?: string;
           _type: "image";
         };
-        text?: Array<{
+        text: Array<{
           children?: Array<{
             marks?: Array<string>;
             text?: string;
@@ -643,7 +643,7 @@ export type PAGE_QUERYResult = {
           _key: string;
         }>;
       }
-  > | null;
+  >;
 } | null;
 // Variable: NAVIGATION_QUERY
 // Query: *[_type == "navigation"][0] {  ...,  links[] {    ...,  }}
@@ -653,8 +653,8 @@ export type NAVIGATION_QUERYResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  logo?: {
+  title: string;
+  logo: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -670,9 +670,9 @@ export type NAVIGATION_QUERYResult = {
   links: Array<{
     _key: string;
     _type: "link";
-    text?: string;
-    url?: string;
-  }> | null;
+    text: string;
+    url: string;
+  }>;
 } | null;
 // Variable: FOOTER_QUERY
 // Query: *[_type == "footer"][0] {  ...,  links[] {    ...,  }}
@@ -682,14 +682,14 @@ export type FOOTER_QUERYResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  copyright?: string;
+  title: string;
+  copyright: string;
   links: Array<{
     _key: string;
     _type: "link";
-    text?: string;
-    url?: string;
-  }> | null;
+    text: string;
+    url: string;
+  }>;
 } | null;
 // Variable: EVENTS_QUERY
 // Query: *[_type == "event"] {  ...,}
@@ -699,8 +699,8 @@ export type EVENTS_QUERYResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
-  description?: Array<{
+  name: string;
+  description: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -718,10 +718,10 @@ export type EVENTS_QUERYResult = Array<{
     _type: "block";
     _key: string;
   }>;
-  slug?: Slug;
+  slug: Slug;
   date?: string;
   venue?: string;
-  image?: {
+  image: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -740,7 +740,7 @@ export type EVENTS_QUERYResult = Array<{
       _key: string;
     } & Button
   >;
-  details?: Array<{
+  details: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -767,8 +767,8 @@ export type EVENT_QUERYResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name?: string;
-  description?: Array<{
+  name: string;
+  description: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -786,10 +786,10 @@ export type EVENT_QUERYResult = {
     _type: "block";
     _key: string;
   }>;
-  slug?: Slug;
+  slug: Slug;
   date?: string;
   venue?: string;
-  image?: {
+  image: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -808,7 +808,7 @@ export type EVENT_QUERYResult = {
       _key: string;
     } & Button
   >;
-  details?: Array<{
+  details: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -835,8 +835,8 @@ export type FORM_QUERYResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
-  description?: Array<{
+  title: string;
+  description: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -854,28 +854,28 @@ export type FORM_QUERYResult = {
     _type: "block";
     _key: string;
   }>;
-  slug?: Slug;
-  airtable?: {
-    baseId?: string;
-    tableId?: string;
+  slug: Slug;
+  airtable: {
+    baseId: string;
+    tableId: string;
   };
   content: Array<
     | {
         _key: string;
         _type: "checkbox";
-        label?: string;
-        name?: string;
+        label: string;
+        name: string;
         required?: boolean;
         defaultValue?: string;
       }
     | {
         _key: string;
         _type: "input";
-        label?: string;
-        name?: string;
-        placeholder?: string;
-        required?: boolean;
-        type?: "email" | "number" | "tel" | "text";
+        label: string;
+        name: string;
+        placeholder: string;
+        required: boolean;
+        type: "email" | "number" | "tel" | "text";
         minLength?: number;
         maxLength?: number;
         pattern?: string;
@@ -884,17 +884,17 @@ export type FORM_QUERYResult = {
     | {
         _key: string;
         _type: "select";
-        label?: string;
-        name?: string;
+        label: string;
+        name: string;
         required?: boolean;
-        options?: Array<string>;
+        options: Array<string>;
         defaultValue?: string;
       }
     | {
         _key: string;
         _type: "textarea";
-        label?: string;
-        name?: string;
+        label: string;
+        name: string;
         required?: boolean;
         defaultValue?: string;
         minLength?: number;
@@ -902,7 +902,7 @@ export type FORM_QUERYResult = {
         rows?: number;
         placeholder?: string;
       }
-  > | null;
+  >;
 } | null;
 
 // Query TypeMap

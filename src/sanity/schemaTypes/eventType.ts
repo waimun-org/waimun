@@ -9,12 +9,14 @@ export const eventType = defineType({
       name: "name",
       title: "Name",
       type: "string",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "description",
       title: "Description",
       type: "array",
       of: [{ type: "block" }],
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "slug",
@@ -23,6 +25,7 @@ export const eventType = defineType({
       options: {
         source: "name",
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "date",
@@ -48,6 +51,7 @@ export const eventType = defineType({
       options: {
         hotspot: true,
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "price",
@@ -65,6 +69,7 @@ export const eventType = defineType({
       title: "Details",
       type: "array",
       of: [{ type: "block" }],
+      validation: (rule) => rule.required(),
     }),
   ],
 });

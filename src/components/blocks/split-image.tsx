@@ -12,26 +12,20 @@ export function SplitImage({ splitImage }: SplitImageProps) {
     <section className="container py-8">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div className="flex flex-col justify-center gap-4">
-          {splitImage.title && (
-            <h2 className="text-2xl font-bold md:text-4xl">
-              {splitImage.title}
-            </h2>
-          )}
+          <h2 className="text-2xl font-bold md:text-4xl">{splitImage.title}</h2>
 
           <div className="prose">
-            {splitImage.text && <PortableText value={splitImage.text} />}
+            <PortableText value={splitImage.text} />
           </div>
         </div>
 
-        {splitImage.image && (
-          <Image
-            className="aspect-[4/3] rounded-lg object-cover"
-            src={urlFor(splitImage.image).width(800).height(600).url()}
-            width={800}
-            height={600}
-            alt={splitImage.image.alt ?? ""}
-          />
-        )}
+        <Image
+          className="aspect-[4/3] rounded-lg object-cover"
+          src={urlFor(splitImage.image).width(800).height(600).url()}
+          width={800}
+          height={600}
+          alt={splitImage.image.alt ?? ""}
+        />
       </div>
     </section>
   );

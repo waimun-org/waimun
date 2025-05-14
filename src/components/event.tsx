@@ -18,17 +18,13 @@ export function Event({ event }: EventProps) {
             <EventMeta event={event} />
 
             <div className="flex flex-col gap-4">
-              {event.name && (
-                <h1 className="text-2xl font-bold text-balance md:text-4xl">
-                  {event.name}
-                </h1>
-              )}
+              <h1 className="text-2xl font-bold text-balance md:text-4xl">
+                {event.name}
+              </h1>
 
-              {event.description && (
-                <div className="prose prose-lg text-balance">
-                  <PortableText value={event.description} />
-                </div>
-              )}
+              <div className="prose prose-lg text-balance">
+                <PortableText value={event.description} />
+              </div>
             </div>
 
             {event.buttons && (
@@ -40,25 +36,21 @@ export function Event({ event }: EventProps) {
             )}
           </div>
 
-          {event.image && (
-            <Image
-              src={urlFor(event.image).width(800).height(600).url()}
-              alt={event.image.alt ?? ""}
-              width={800}
-              height={600}
-              priority
-              className="col-span-1 aspect-[4/3] rounded-lg object-cover"
-            />
-          )}
+          <Image
+            src={urlFor(event.image).width(800).height(600).url()}
+            alt={event.image.alt ?? ""}
+            width={800}
+            height={600}
+            priority
+            className="col-span-1 aspect-[4/3] rounded-lg object-cover"
+          />
         </div>
       </section>
 
       <section className="container py-8">
-        {event.details && (
-          <div className="prose">
-            <PortableText value={event.details} />
-          </div>
-        )}
+        <div className="prose">
+          <PortableText value={event.details} />
+        </div>
       </section>
     </div>
   );

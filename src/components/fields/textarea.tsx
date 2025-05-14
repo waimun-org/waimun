@@ -12,16 +12,14 @@ export function Textarea({ field, form }: TextareaProps) {
     throw new Error("Textarea field must be of type textarea");
   }
 
-  if (!field.name) {
-    throw new Error("Textarea field must have a name");
-  }
-
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={field.name}>{field.label}</label>
       <UITextarea
         id={field.name}
         required={field.required}
+        placeholder={field.placeholder}
+        rows={field.rows}
         {...form.register(field.name)}
       />
     </div>

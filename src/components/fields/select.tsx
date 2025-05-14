@@ -12,14 +12,6 @@ export function Select({ field, form }: SelectProps) {
     throw new Error("Select field must be of type select");
   }
 
-  if (!field.name) {
-    throw new Error("Select field must have a name");
-  }
-
-  if (!field.options) {
-    throw new Error("Select field must have options");
-  }
-
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={field.name}>{field.label}</label>

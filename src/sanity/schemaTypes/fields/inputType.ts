@@ -9,21 +9,25 @@ export const inputType = defineType({
       name: "label",
       title: "Label",
       type: "string",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "name",
       title: "Name",
       type: "string",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "placeholder",
       title: "Placeholder",
       type: "string",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "required",
       title: "Required",
       type: "boolean",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "type",
@@ -37,6 +41,7 @@ export const inputType = defineType({
           { title: "Number", value: "number" },
         ],
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "minLength",

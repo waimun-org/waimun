@@ -31,16 +31,16 @@ export function Form({
   });
 
   async function handleSubmit(data: Record<string, unknown>) {
-    if (!slug?.current) {
-      throw new Error("Form slug is required");
-    }
-
     const res = await mutateAsync({ slug: slug.current, data });
 
-    if (res.success) {
-      toast.success("Form submitted successfully");
-      form.reset();
+    if (!res.success) {
+      toast.error("An error occurred. Please try again later");
+
+      return;
     }
+
+    toast.success("Form submitted successfully");
+    form.reset();
   }
 
   return (
@@ -49,11 +49,9 @@ export function Form({
         <div className="container flex flex-col gap-4 py-8">
           <h1 className="text-2xl font-bold md:text-4xl">{title}</h1>
 
-          {description && (
-            <div className="prose">
-              <PortableText value={description} />
-            </div>
-          )}
+          <div className="prose">
+            <PortableText value={description} />
+          </div>
         </div>
       </section>
 

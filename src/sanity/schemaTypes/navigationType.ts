@@ -9,6 +9,7 @@ export const navigationType = defineType({
       name: "title",
       title: "Title",
       type: "string",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "logo",
@@ -24,12 +25,14 @@ export const navigationType = defineType({
       options: {
         hotspot: true,
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "links",
       title: "Links",
       type: "array",
       of: [{ type: "link" }],
+      validation: (rule) => rule.required(),
     }),
   ],
 });

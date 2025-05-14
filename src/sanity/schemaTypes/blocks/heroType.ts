@@ -9,6 +9,7 @@ export const heroType = defineType({
       name: "title",
       title: "Title",
       type: "string",
+      validation: (rule) => rule.required(),
     },
     {
       name: "intent",
@@ -20,12 +21,14 @@ export const heroType = defineType({
           { title: "Low Impact", value: "low-impact" },
         ],
       },
+      validation: (rule) => rule.required(),
     },
     {
       name: "text",
       title: "Text",
       type: "array",
       of: [{ type: "block" }],
+      validation: (rule) => rule.required(),
     },
     {
       name: "buttons",
@@ -44,6 +47,7 @@ export const heroType = defineType({
           type: "string",
         },
       ],
+      validation: (rule) => rule.required(),
     },
   ],
 });

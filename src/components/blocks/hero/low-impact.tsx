@@ -6,17 +6,13 @@ export function LowImpactHero({ hero }: HeroProps) {
   return (
     <section className="border-b">
       <div className="container flex flex-col gap-8 py-8">
-        {hero.title && (
-          <h1 className="text-2xl font-bold text-balance md:text-4xl">
-            {hero.title}
-          </h1>
-        )}
+        <h1 className="text-2xl font-bold text-balance md:text-4xl">
+          {hero.title}
+        </h1>
 
-        {hero.text && (
-          <div className="prose prose-lg text-balance">
-            <PortableText value={hero.text} />
-          </div>
-        )}
+        <div className="prose prose-lg text-balance">
+          <PortableText value={hero.text} />
+        </div>
 
         {hero.buttons && (
           <div className="flex flex-wrap gap-4">

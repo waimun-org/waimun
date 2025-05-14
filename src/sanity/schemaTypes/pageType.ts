@@ -9,6 +9,7 @@ export const pageType = defineType({
       name: "title",
       title: "Title",
       type: "string",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "slug",
@@ -17,11 +18,13 @@ export const pageType = defineType({
       options: {
         source: "title",
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "content",
       title: "Content",
       type: "pageBuilder",
+      validation: (rule) => rule.required(),
     }),
   ],
 });

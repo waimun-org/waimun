@@ -6,5 +6,5 @@ export type LinkProps = {
 };
 
 export function Link({ link }: LinkProps) {
-  return <LinkComponent href={link.url ?? "#"}>{link.text}</LinkComponent>;
+  return <LinkComponent href={link.url}>{link.text}</LinkComponent>;
 }
