@@ -1,11 +1,16 @@
+import { DisableDraftMode } from "@/components/disable-draft-mode";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { Toaster } from "@/components/ui/sonner";
 import { sanityFetch } from "@/sanity/lib/live";
 import { FOOTER_QUERY, NAVIGATION_QUERY } from "@/sanity/lib/queries";
 import type {
   FOOTER_QUERYResult,
   NAVIGATION_QUERYResult,
 } from "@/sanity/types";
+import { TRPCReactProvider } from "@/trpc/react";
+import { VisualEditing } from "next-sanity";
+import { draftMode } from "next/headers";
 
 async function getNavigation(): Promise<NAVIGATION_QUERYResult> {
   const result = await sanityFetch({
@@ -34,10 +39,21 @@ export default async function AppLayout({
   const footer = await getFooter();
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar navigation={navigation} />
-      <main className="flex-1">{children}</main>
-      <Footer footer={footer} />
-    </div>
+    <TRPCReactProvider>
+      <div className="flex min-h-screen flex-col">
+        <Navbar navigation={navigation} />
+        <main className="flex-1">{children}</main>
+        <Footer footer={footer} />
+      </div>
+
+      <Toaster />
+
+      {(await draftMode()).isEnabled && (
+        <>
+          <DisableDraftMode />
+          <VisualEditing />
+        </>
+      )}
+    </TRPCReactProvider>
   );
 }

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typegen": "sanity schema extract --path=./src/sanity/extract.json --enforce-required-fields && sanity typegen generate",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

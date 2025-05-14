@@ -22,9 +22,9 @@ export default async function FormPage({
   const { slug } = await params;
   const form = await getForm(slug);
 
-  if (!form?.content) {
+  if (!form) {
     return notFound();
   }
 
-  return <Form form={{ ...form, content: form.content }} />;
+  return <Form form={form} />;
 }

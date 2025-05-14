@@ -4,9 +4,10 @@ import { visionTool } from "@sanity/vision";
 import { presentationTool } from "sanity/presentation";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import schemaTypes from "./src/sanity/schemaTypes";
-import { structure } from "./src/sanity/structure";
+import schemaTypes from "@/sanity/schemaTypes";
+import { structure } from "@/sanity/structure";
 import { env } from "@/env.mjs";
+import { resolve } from "@/sanity/presentation/resolve";
 
 export default defineConfig({
   basePath: "/studio",
@@ -24,6 +25,7 @@ export default defineConfig({
           enable: "/api/draft-mode/enable",
         },
       },
+      resolve,
     }),
   ],
 });

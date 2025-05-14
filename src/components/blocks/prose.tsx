@@ -2,14 +2,14 @@ import { PortableText } from "next-sanity";
 import type { Prose } from "@/sanity/types";
 
 export type ProseProps = {
-  prose: Prose;
+  block: Prose;
 };
 
-export function Prose({ prose }: ProseProps) {
+export function Prose({ block }: ProseProps) {
   return (
     <section className="container py-8">
       <div className="prose">
-        <PortableText value={prose?.content} />
+        <PortableText value={block.content} />
       </div>
     </section>
   );

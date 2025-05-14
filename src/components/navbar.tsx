@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { urlFor } from "@/sanity/lib/image";
 import { type NAVIGATION_QUERYResult } from "@/sanity/types";
+import { stegaClean } from "@sanity/client/stega";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -38,7 +39,7 @@ export function Navbar({ navigation }: NavbarProps) {
               key={link._key}
               variant={"ghost"}
               asChild
-              className={pathname === link.url ? "bg-accent" : ""}
+              className={pathname === stegaClean(link.url) ? "bg-accent" : ""}
             >
               <Link href={link.url}>{link.text}</Link>
             </Button>
