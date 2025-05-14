@@ -12,6 +12,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { EVENTS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { AlertCircle } from "lucide-react";
 
 async function getEvents(): Promise<EVENTS_QUERYResult> {
   const result = await sanityFetch({
@@ -39,6 +41,17 @@ export async function Events({ block }: EventsProps) {
         <div className="prose">
           <PortableText value={block.description} />
         </div>
+      )}
+
+      {events.length === 0 && (
+        <Alert>
+          <AlertCircle className="h-4 w-4" />
+
+          <AlertTitle>No events found</AlertTitle>
+          <AlertDescription>
+            There are no events published at the moment.
+          </AlertDescription>
+        </Alert>
       )}
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
