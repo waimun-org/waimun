@@ -47,7 +47,6 @@ export const heroType = defineType({
           type: "string",
         },
       ],
-      validation: (rule) => rule.required(),
     },
   ],
 });
