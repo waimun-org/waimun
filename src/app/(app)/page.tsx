@@ -16,7 +16,7 @@ async function getPage(): Promise<PAGE_QUERYResult> {
 export default async function HomePage() {
   const page = await getPage();
 
-  if (!page?.content) {
+  if (!page) {
     return notFound();
   }
 

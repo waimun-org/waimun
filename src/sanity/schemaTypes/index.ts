@@ -14,6 +14,7 @@ import { inputType } from "./fields/inputType";
 import { checkboxType } from "./fields/checkboxType";
 import { textareaType } from "./fields/textareaType";
 import { selectType } from "./fields/selectType";
+import { eventsType } from "./blocks/eventsType";
 
 const schemaTypes = [
   eventType,
@@ -32,6 +33,7 @@ const schemaTypes = [
   textareaType,
   selectType,
   checkboxType,
+  eventsType,
 ];
 
 export default schemaTypes;

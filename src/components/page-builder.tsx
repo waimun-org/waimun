@@ -2,6 +2,7 @@ import { Hero } from "@/components/blocks/hero";
 import { SplitImage } from "@/components/blocks/split-image";
 import type { PageBuilder } from "@/sanity/types";
 import { Prose } from "./blocks/prose";
+import { Events } from "./blocks/events";
 
 export type PageBuilderProps = {
   content: PageBuilder;
@@ -13,11 +14,13 @@ export function PageBuilder({ content }: PageBuilderProps) {
       {content.map((block) => {
         switch (block._type) {
           case "hero":
-            return <Hero key={block._key} hero={block} />;
+            return <Hero key={block._key} block={block} />;
           case "splitImage":
-            return <SplitImage key={block._key} splitImage={block} />;
+            return <SplitImage key={block._key} block={block} />;
           case "prose":
-            return <Prose key={block._key} prose={block} />;
+            return <Prose key={block._key} block={block} />;
+          case "events":
+            return <Events key={block._key} block={block} />;
           default:
             return null;
         }

@@ -19,10 +19,6 @@ export const formRouter = createTRPCRouter({
         throw new Error("Form not found");
       }
 
-      if (!form?.content) {
-        throw new Error("Form content not found");
-      }
-
       const formSchema = getFormSchema(form.content);
       const results = formSchema.safeParse(input.data);
 

@@ -2,11 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SanityLive } from "@/sanity/lib/live";
-import { draftMode } from "next/headers";
-import { VisualEditing } from "next-sanity";
-import { TRPCReactProvider } from "@/trpc/react";
-import { Toaster } from "@/components/ui/sonner";
-import { DisableDraftMode } from "@/components/disable-draft-mode";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,17 +21,8 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
-        <TRPCReactProvider>
-          {children}
-          {(await draftMode()).isEnabled && (
-            <>
-              <DisableDraftMode />
-              <VisualEditing />
-            </>
-          )}
-          <SanityLive />
-          <Toaster />
-        </TRPCReactProvider>
+        {children}
+        <SanityLive />
       </body>
     </html>
   );

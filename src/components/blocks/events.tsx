@@ -1,24 +1,45 @@
+import type { EVENTS_QUERYResult, Events } from "@/sanity/types";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "@/components/ui/card";
 import { PortableText } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
-import type { Event } from "@/sanity/types";
+import { EVENTS_QUERY } from "@/sanity/lib/queries";
+import { sanityFetch } from "@/sanity/lib/live";
+
+async function getEvents(): Promise<EVENTS_QUERYResult> {
+  const result = await sanityFetch({
+    query: EVENTS_QUERY,
+    tags: ["events"],
+  });
+
+  return result.data as EVENTS_QUERYResult;
+}
 
 export type EventsProps = {
-  events: Event[];
+  block: Events;
 };
 
-export function Events({ events }: EventsProps) {
+export async function Events({ block }: EventsProps) {
+  const events = await getEvents();
+
   return (
     <section className="container flex flex-col gap-8 py-8">
-      <h2 className="text-2xl font-bold md:text-4xl">Events</h2>
+      {block.title && (
+        <h2 className="text-2xl font-bold md:text-4xl">{block.title}</h2>
+      )}
+
+      {block.description && (
+        <div className="prose">
+          <PortableText value={block.description} />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {events.map((event) => (
