@@ -6,10 +6,10 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "cdn.sanity.io",
-        pathname: "/**",
-      },
-    ],
-  },
+        pathname: "/**"
+      }
+    ]
+  }
 };
 
 export default nextConfig;

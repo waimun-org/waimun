@@ -8,14 +8,14 @@ async function getEvent(slug: string): Promise<EVENT_QUERYResult> {
   const result = await sanityFetch({
     query: EVENT_QUERY,
     params: { slug },
-    tags: ["event", slug],
+    tags: ["event", slug]
   });
 
   return result.data as EVENT_QUERYResult;
 }
 
 export default async function EventPage({
-  params,
+  params
 }: {
   params: Promise<{ slug: string }>;
 }) {

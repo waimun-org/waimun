@@ -9,22 +9,22 @@ export const pageType = defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required()
     }),
     defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
       options: {
-        source: "title",
+        source: "title"
       },
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required()
     }),
     defineField({
       name: "content",
       title: "Content",
       type: "pageBuilder",
-      validation: (rule) => rule.required(),
-    }),
-  ],
+      validation: (rule) => rule.required()
+    })
+  ]
 });

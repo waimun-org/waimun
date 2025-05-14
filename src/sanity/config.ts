@@ -10,9 +10,9 @@ export default defineConfig({
   plugins: [
     presentationTool({
       previewUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-      resolve,
+      resolve
     }),
-    structureTool(),
+    structureTool()
   ],
-  basePath: "/studio",
+  basePath: "/studio"
 });

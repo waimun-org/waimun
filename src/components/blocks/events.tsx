@@ -4,7 +4,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from "@/components/ui/card";
 import { PortableText } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
@@ -18,7 +18,7 @@ import { AlertCircle } from "lucide-react";
 async function getEvents(): Promise<EVENTS_QUERYResult> {
   const result = await sanityFetch({
     query: EVENTS_QUERY,
-    tags: ["events"],
+    tags: ["events"]
   });
 
   return result.data as EVENTS_QUERYResult;

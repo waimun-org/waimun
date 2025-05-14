@@ -10,7 +10,7 @@ export const proseType = defineType({
       title: "Content",
       type: "array",
       of: [{ type: "block" }],
-      validation: (rule) => rule.required(),
-    }),
-  ],
+      validation: (rule) => rule.required()
+    })
+  ]
 });

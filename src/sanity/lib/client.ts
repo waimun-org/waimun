@@ -6,5 +6,5 @@ export const client = createClient({
   dataset: env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: env.NEXT_PUBLIC_SANITY_API_VERSION,
   useCdn: true,
-  stega: { studioUrl: "http://localhost:3000/studio" },
+  stega: { studioUrl: "http://localhost:3000/studio" }
 });

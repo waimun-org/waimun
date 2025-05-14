@@ -7,7 +7,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from "../ui/form";
 
 export type InputFieldProps = {
@@ -17,7 +17,7 @@ export type InputFieldProps = {
 
 export function InputField({
   field: { name, label, placeholder, required, description },
-  form,
+  form
 }: InputFieldProps) {
   return (
     <FormField

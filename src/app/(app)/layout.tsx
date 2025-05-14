@@ -6,7 +6,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { FOOTER_QUERY, NAVIGATION_QUERY } from "@/sanity/lib/queries";
 import type {
   FOOTER_QUERYResult,
-  NAVIGATION_QUERYResult,
+  NAVIGATION_QUERYResult
 } from "@/sanity/types";
 import { TRPCReactProvider } from "@/trpc/react";
 import { VisualEditing } from "next-sanity";
@@ -15,7 +15,7 @@ import { draftMode } from "next/headers";
 async function getNavigation(): Promise<NAVIGATION_QUERYResult> {
   const result = await sanityFetch({
     query: NAVIGATION_QUERY,
-    tags: ["navigation"],
+    tags: ["navigation"]
   });
 
   return result.data as NAVIGATION_QUERYResult;
@@ -24,14 +24,14 @@ async function getNavigation(): Promise<NAVIGATION_QUERYResult> {
 async function getFooter(): Promise<FOOTER_QUERYResult> {
   const result = await sanityFetch({
     query: FOOTER_QUERY,
-    tags: ["footer"],
+    tags: ["footer"]
   });
 
   return result.data as FOOTER_QUERYResult;
 }
 
 export default async function AppLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {

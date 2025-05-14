@@ -7,7 +7,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from "../ui/form";
 
 export type CheckboxFieldProps = {
@@ -17,7 +17,7 @@ export type CheckboxFieldProps = {
 
 export function CheckboxField({
   field: { name, label, required, description },
-  form,
+  form
 }: CheckboxFieldProps) {
   return (
     <FormField

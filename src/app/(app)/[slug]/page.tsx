@@ -8,14 +8,14 @@ async function getPage(slug: string): Promise<PAGE_QUERYResult> {
   const result = await sanityFetch({
     query: PAGE_QUERY,
     params: { slug },
-    tags: ["page", slug],
+    tags: ["page", slug]
   });
 
   return result.data as PAGE_QUERYResult;
 }
 
 export default async function Page({
-  params,
+  params
 }: {
   params: Promise<{ slug: string }>;
 }) {
