@@ -9,11 +9,13 @@ export const selectType = defineType({
       name: "label",
       title: "Label",
       type: "string",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "name",
       title: "Name",
       type: "string",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "required",
@@ -25,6 +27,7 @@ export const selectType = defineType({
       title: "Options",
       type: "array",
       of: [{ type: "string" }],
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "defaultValue",

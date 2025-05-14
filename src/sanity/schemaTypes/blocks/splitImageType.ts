@@ -15,11 +15,13 @@ export const splitImageType = defineType({
           { value: "imageRight", title: "Image Right" },
         ],
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "title",
       title: "Title",
       type: "string",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "image",
@@ -35,12 +37,14 @@ export const splitImageType = defineType({
       options: {
         hotspot: true,
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "text",
       title: "Text",
       type: "array",
       of: [{ type: "block" }],
+      validation: (rule) => rule.required(),
     }),
   ],
 });

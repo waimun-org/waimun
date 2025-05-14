@@ -12,10 +12,6 @@ export function Checkbox({ field, form }: CheckboxProps) {
     throw new Error("Checkbox field must be of type checkbox");
   }
 
-  if (!field.name) {
-    throw new Error("Checkbox field must have a name");
-  }
-
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={field.name}>{field.label}</label>

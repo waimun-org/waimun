@@ -27,21 +27,17 @@ export function Events({ events }: EventsProps) {
               <CardHeader>
                 <CardTitle>{event.name}</CardTitle>
                 <CardDescription className="prose">
-                  {event.description && (
-                    <PortableText value={event.description} />
-                  )}
+                  <PortableText value={event.description} />
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {event.image && (
-                  <Image
-                    className="aspect-[4/3] rounded-lg object-cover"
-                    src={urlFor(event.image).width(800).height(600).url()}
-                    width={800}
-                    height={600}
-                    alt={event.image.alt ?? ""}
-                  />
-                )}
+                <Image
+                  className="aspect-[4/3] rounded-lg object-cover"
+                  src={urlFor(event.image).width(800).height(600).url()}
+                  width={800}
+                  height={600}
+                  alt={event.image.alt ?? ""}
+                />
               </CardContent>
             </Card>
           </Link>

@@ -13,10 +13,6 @@ export function Input({ field, form }: InputProps) {
     throw new Error("Input field must be of type input");
   }
 
-  if (!field.name) {
-    throw new Error("Input field must have a name");
-  }
-
   const error = form.formState.errors[field.name];
 
   return (

@@ -8,11 +8,9 @@ export type ProseProps = {
 export function Prose({ prose }: ProseProps) {
   return (
     <section className="container py-8">
-      {prose.content && (
-        <div className="prose">
-          <PortableText value={prose?.content} />
-        </div>
-      )}
+      <div className="prose">
+        <PortableText value={prose?.content} />
+      </div>
     </section>
   );
 }

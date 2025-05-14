@@ -13,11 +13,9 @@ export function Footer({ footer }: FooterProps) {
   return (
     <footer className="border-t">
       <div className="text-muted-foreground container flex h-16 items-center justify-between text-sm">
-        {footer.copyright && (
-          <div className="flex items-center gap-4">
-            <p>{footer.copyright}</p>
-          </div>
-        )}
+        <div className="flex items-center gap-4">
+          <p>{footer.copyright}</p>
+        </div>
 
         {footer.links && (
           <div className="flex items-center gap-4">

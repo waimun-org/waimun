@@ -9,6 +9,7 @@ export const buttonType = defineType({
       name: "link",
       title: "Link",
       type: "link",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "variant",
@@ -23,6 +24,7 @@ export const buttonType = defineType({
           { title: "Ghost", value: "ghost" },
         ],
       },
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "size",
@@ -35,6 +37,7 @@ export const buttonType = defineType({
           { title: "Large", value: "lg" },
         ],
       },
+      validation: (rule) => rule.required(),
     }),
   ],
 });
