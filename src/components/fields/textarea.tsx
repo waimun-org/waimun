@@ -1,27 +1,48 @@
 import type { Textarea } from "@/sanity/types";
 import { type UseFormReturn } from "react-hook-form";
 import { Textarea as UITextarea } from "../ui/textarea";
+import {
+  FormControl,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  FormField,
+  FormDescription,
+} from "../ui/form";
 
-export type TextareaProps = {
+export type TextareaFieldProps = {
   field: Textarea;
   form: UseFormReturn<Record<string, unknown>>;
 };
 
-export function Textarea({ field, form }: TextareaProps) {
-  if (field._type !== "textarea") {
-    throw new Error("Textarea field must be of type textarea");
-  }
-
+export function TextareaField({
+  field: { name, label, placeholder, required, description },
+  form,
+}: TextareaFieldProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={field.name}>{field.label}</label>
-      <UITextarea
-        id={field.name}
-        required={field.required}
-        placeholder={field.placeholder}
-        rows={field.rows}
-        {...form.register(field.name)}
-      />
-    </div>
+    <FormField
+      control={form.control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>
+            {label}
+            {required && <span className="text-red-500">*</span>}
+          </FormLabel>
+          <FormControl>
+            <UITextarea
+              {...field}
+              value={field.value as string}
+              placeholder={placeholder}
+              className="min-h-[160px]"
+            />
+          </FormControl>
+
+          {description && <FormDescription>{description}</FormDescription>}
+
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 }

@@ -338,6 +338,13 @@
             "value": "checkbox"
           }
         },
+        "name": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
         "label": {
           "type": "objectAttribute",
           "value": {
@@ -345,12 +352,12 @@
           },
           "optional": false
         },
-        "name": {
+        "description": {
           "type": "objectAttribute",
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
         },
         "required": {
           "type": "objectAttribute",
@@ -362,7 +369,7 @@
         "defaultValue": {
           "type": "objectAttribute",
           "value": {
-            "type": "string"
+            "type": "boolean"
           },
           "optional": true
         }
@@ -382,6 +389,13 @@
             "value": "select"
           }
         },
+        "name": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
         "label": {
           "type": "objectAttribute",
           "value": {
@@ -389,12 +403,19 @@
           },
           "optional": false
         },
-        "name": {
+        "description": {
           "type": "objectAttribute",
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
+        },
+        "placeholder": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
         },
         "required": {
           "type": "objectAttribute",
@@ -436,13 +457,6 @@
             "value": "textarea"
           }
         },
-        "label": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": false
-        },
         "name": {
           "type": "objectAttribute",
           "value": {
@@ -450,17 +464,31 @@
           },
           "optional": false
         },
+        "label": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
+        "description": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "placeholder": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
         "required": {
           "type": "objectAttribute",
           "value": {
             "type": "boolean"
-          },
-          "optional": true
-        },
-        "defaultValue": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
           },
           "optional": true
         },
@@ -478,14 +506,14 @@
           },
           "optional": true
         },
-        "rows": {
+        "pattern": {
           "type": "objectAttribute",
           "value": {
-            "type": "number"
+            "type": "string"
           },
           "optional": true
         },
-        "placeholder": {
+        "defaultValue": {
           "type": "objectAttribute",
           "value": {
             "type": "string"
@@ -508,13 +536,6 @@
             "value": "input"
           }
         },
-        "label": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": false
-        },
         "name": {
           "type": "objectAttribute",
           "value": {
@@ -522,19 +543,33 @@
           },
           "optional": false
         },
-        "placeholder": {
+        "label": {
           "type": "objectAttribute",
           "value": {
             "type": "string"
           },
           "optional": false
         },
+        "description": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "placeholder": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
         "required": {
           "type": "objectAttribute",
           "value": {
             "type": "boolean"
           },
-          "optional": false
+          "optional": true
         },
         "type": {
           "type": "objectAttribute",
@@ -559,7 +594,7 @@
               }
             ]
           },
-          "optional": false
+          "optional": true
         },
         "minLength": {
           "type": "objectAttribute",

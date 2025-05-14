@@ -1,27 +1,65 @@
 import type { Select } from "@/sanity/types";
 import { type UseFormReturn } from "react-hook-form";
-import { Select as UISelect } from "../ui/select";
+import {
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Select as UISelect,
+} from "../ui/select";
+import {
+  FormControl,
+  FormDescription,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import { FormField } from "../ui/form";
 
-export type SelectProps = {
+export type SelectFieldProps = {
   field: Select;
   form: UseFormReturn<Record<string, unknown>>;
 };
 
-export function Select({ field, form }: SelectProps) {
-  if (field._type !== "select") {
-    throw new Error("Select field must be of type select");
-  }
-
+export function SelectField({
+  field: { name, label, placeholder, options, required, description },
+  form,
+}: SelectFieldProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={field.name}>{field.label}</label>
-      <UISelect required={field.required} {...form.register(field.name)}>
-        {field.options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </UISelect>
-    </div>
+    <FormField
+      control={form.control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>
+            {label}
+            {required && <span className="text-red-500">*</span>}
+          </FormLabel>
+
+          <FormControl>
+            <UISelect
+              onValueChange={field.onChange}
+              value={field.value as string}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder={placeholder} />
+              </SelectTrigger>
+
+              <SelectContent>
+                {options.map((option) => (
+                  <SelectItem key={option} value={option}>
+                    {option}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </UISelect>
+          </FormControl>
+
+          {description && <FormDescription>{description}</FormDescription>}
+
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 }

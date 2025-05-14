@@ -1,31 +1,48 @@
 import type { Input } from "@/sanity/types";
 import { type UseFormReturn } from "react-hook-form";
 import { Input as UIInput } from "../ui/input";
-import { Label } from "../ui/label";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 
-export type InputProps = {
+export type InputFieldProps = {
   field: Input;
   form: UseFormReturn<Record<string, unknown>>;
 };
 
-export function Input({ field, form }: InputProps) {
-  if (field._type !== "input") {
-    throw new Error("Input field must be of type input");
-  }
-
-  const error = form.formState.errors[field.name];
-
+export function InputField({
+  field: { name, label, placeholder, required, description },
+  form,
+}: InputFieldProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <Label htmlFor={field.name}>{field.label}</Label>
-      <UIInput
-        id={field.name}
-        required={field.required}
-        placeholder={field.placeholder}
-        type={field.type}
-        {...form.register(field.name)}
-      />
-      {error && <p className="text-sm text-red-500">{error.message}</p>}
-    </div>
+    <FormField
+      control={form.control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>
+            {label}
+            {required && <span className="text-red-500">*</span>}
+          </FormLabel>
+
+          <FormControl>
+            <UIInput
+              {...field}
+              value={field.value as string}
+              placeholder={placeholder}
+            />
+          </FormControl>
+
+          {description && <FormDescription>{description}</FormDescription>}
+
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 }

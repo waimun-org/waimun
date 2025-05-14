@@ -1,25 +1,49 @@
 import type { Checkbox } from "@/sanity/types";
 import { type UseFormReturn } from "react-hook-form";
 import { Checkbox as UICheckbox } from "../ui/checkbox";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 
-export type CheckboxProps = {
+export type CheckboxFieldProps = {
   field: Checkbox;
   form: UseFormReturn<Record<string, unknown>>;
 };
 
-export function Checkbox({ field, form }: CheckboxProps) {
-  if (field._type !== "checkbox") {
-    throw new Error("Checkbox field must be of type checkbox");
-  }
-
+export function CheckboxField({
+  field: { name, label, required, description },
+  form,
+}: CheckboxFieldProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={field.name}>{field.label}</label>
-      <UICheckbox
-        id={field.name}
-        required={field.required}
-        {...form.register(field.name)}
-      />
-    </div>
+    <FormField
+      control={form.control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <div className="flex items-center gap-2">
+            <FormControl>
+              <UICheckbox
+                checked={field.value as boolean}
+                onCheckedChange={field.onChange}
+              />
+            </FormControl>
+
+            <FormLabel>
+              {label}
+              {required && <span className="text-red-500">*</span>}
+            </FormLabel>
+
+            {description && <FormDescription>{description}</FormDescription>}
+          </div>
+
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 }

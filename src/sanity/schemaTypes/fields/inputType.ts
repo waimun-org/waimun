@@ -6,28 +6,32 @@ export const inputType = defineType({
   type: "object",
   fields: [
     defineField({
-      name: "label",
-      title: "Label",
-      type: "string",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: "name",
       title: "Name",
       type: "string",
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "label",
+      title: "Label",
+      type: "string",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "description",
+      title: "Description",
+      type: "string",
+    }),
+    defineField({
       name: "placeholder",
       title: "Placeholder",
       type: "string",
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "required",
       title: "Required",
       type: "boolean",
-      validation: (rule) => rule.required(),
+      initialValue: true,
     }),
     defineField({
       name: "type",
@@ -41,7 +45,7 @@ export const inputType = defineType({
           { title: "Number", value: "number" },
         ],
       },
-      validation: (rule) => rule.required(),
+      initialValue: "text",
     }),
     defineField({
       name: "minLength",
@@ -62,6 +66,7 @@ export const inputType = defineType({
       name: "defaultValue",
       title: "Default Value",
       type: "string",
+      initialValue: "",
     }),
   ],
 });
