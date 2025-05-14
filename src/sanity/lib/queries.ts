@@ -28,3 +28,10 @@ export const EVENTS_QUERY = groq`*[_type == "event"] {
 export const EVENT_QUERY = groq`*[_type == "event" && slug.current == $slug][0] {
   ...,
 }`;
+
+export const FORM_QUERY = groq`*[_type == "form" && slug.current == $slug][0] {
+  ...,
+  content[] {
+    ...,
+  }
+}`;

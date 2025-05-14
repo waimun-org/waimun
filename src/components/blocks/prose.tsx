@@ -1,17 +1,16 @@
 import { PortableText } from "next-sanity";
-import { type PAGE_QUERYResult } from "@/sanity/types";
+import type { Prose } from "@/sanity/types";
 
-export type ProseProps = Extract<
-  NonNullable<NonNullable<PAGE_QUERYResult>["content"]>[number],
-  { _type: "prose" }
->;
+export type ProseProps = {
+  prose: Prose;
+};
 
-export function Prose({ content }: ProseProps) {
+export function Prose({ prose }: ProseProps) {
   return (
     <section className="container py-8">
-      {content && (
+      {prose.content && (
         <div className="prose">
-          <PortableText value={content} />
+          <PortableText value={prose?.content} />
         </div>
       )}
     </section>

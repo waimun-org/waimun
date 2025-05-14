@@ -68,6 +68,96 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Checkbox = {
+  _type: "checkbox";
+  label?: string;
+  name?: string;
+  required?: boolean;
+  defaultValue?: string;
+};
+
+export type Select = {
+  _type: "select";
+  label?: string;
+  name?: string;
+  required?: boolean;
+  options?: Array<string>;
+  defaultValue?: string;
+};
+
+export type Textarea = {
+  _type: "textarea";
+  label?: string;
+  name?: string;
+  required?: boolean;
+  defaultValue?: string;
+  minLength?: number;
+  maxLength?: number;
+  rows?: number;
+  placeholder?: string;
+};
+
+export type Input = {
+  _type: "input";
+  label?: string;
+  name?: string;
+  placeholder?: string;
+  required?: boolean;
+  type?: "text" | "email" | "tel" | "number";
+  minLength?: number;
+  maxLength?: number;
+  pattern?: string;
+  defaultValue?: string;
+};
+
+export type FormBuilder = Array<
+  | ({
+      _key: string;
+    } & Input)
+  | ({
+      _key: string;
+    } & Textarea)
+  | ({
+      _key: string;
+    } & Select)
+  | ({
+      _key: string;
+    } & Checkbox)
+>;
+
+export type Form = {
+  _id: string;
+  _type: "form";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  slug?: Slug;
+  airtable?: {
+    baseId?: string;
+    tableId?: string;
+  };
+  content?: FormBuilder;
+};
+
 export type Prose = {
   _type: "prose";
   content?: Array<{
@@ -393,6 +483,12 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | Checkbox
+  | Select
+  | Textarea
+  | Input
+  | FormBuilder
+  | Form
   | Prose
   | Button
   | Link
@@ -731,6 +827,83 @@ export type EVENT_QUERYResult = {
     _key: string;
   }>;
 } | null;
+// Variable: FORM_QUERY
+// Query: *[_type == "form" && slug.current == $slug][0] {  ...,  content[] {    ...,  }}
+export type FORM_QUERYResult = {
+  _id: string;
+  _type: "form";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  slug?: Slug;
+  airtable?: {
+    baseId?: string;
+    tableId?: string;
+  };
+  content: Array<
+    | {
+        _key: string;
+        _type: "checkbox";
+        label?: string;
+        name?: string;
+        required?: boolean;
+        defaultValue?: string;
+      }
+    | {
+        _key: string;
+        _type: "input";
+        label?: string;
+        name?: string;
+        placeholder?: string;
+        required?: boolean;
+        type?: "email" | "number" | "tel" | "text";
+        minLength?: number;
+        maxLength?: number;
+        pattern?: string;
+        defaultValue?: string;
+      }
+    | {
+        _key: string;
+        _type: "select";
+        label?: string;
+        name?: string;
+        required?: boolean;
+        options?: Array<string>;
+        defaultValue?: string;
+      }
+    | {
+        _key: string;
+        _type: "textarea";
+        label?: string;
+        name?: string;
+        required?: boolean;
+        defaultValue?: string;
+        minLength?: number;
+        maxLength?: number;
+        rows?: number;
+        placeholder?: string;
+      }
+  > | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -741,5 +914,6 @@ declare module "@sanity/client" {
     '*[_type == "footer"][0] {\n  ...,\n  links[] {\n    ...,\n  }\n}': FOOTER_QUERYResult;
     '*[_type == "event"] {\n  ...,\n}': EVENTS_QUERYResult;
     '*[_type == "event" && slug.current == $slug][0] {\n  ...,\n}': EVENT_QUERYResult;
+    '*[_type == "form" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_QUERYResult;
   }
 }
