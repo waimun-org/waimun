@@ -332,7 +332,7 @@ export type Hero = {
       _key: string;
     } & Button
   >;
-  backgroundImage: {
+  backgroundImage?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -554,7 +554,7 @@ export type PAGE_QUERYResult = {
             _key: string;
           } & Button
         >;
-        backgroundImage: {
+        backgroundImage?: {
           asset?: {
             _ref: string;
             _type: "reference";

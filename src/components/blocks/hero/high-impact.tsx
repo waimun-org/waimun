@@ -25,14 +25,16 @@ export function HighImpactHero({ hero }: HeroProps) {
         )}
       </div>
 
-      <Image
-        className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
-        src={urlFor(hero.backgroundImage).width(1920).height(1080).url()}
-        width={1920}
-        height={1080}
-        priority
-        alt={hero.backgroundImage.alt ?? ""}
-      />
+      {hero.backgroundImage && (
+        <Image
+          className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
+          src={urlFor(hero.backgroundImage).width(1920).height(1080).url()}
+          width={1920}
+          height={1080}
+          priority
+          alt={hero.backgroundImage.alt ?? ""}
+        />
+      )}
     </section>
   );
 }
