@@ -12,16 +12,16 @@ export const splitImageType = defineType({
       options: {
         list: [
           { value: "imageLeft", title: "Image Left" },
-          { value: "imageRight", title: "Image Right" },
-        ],
+          { value: "imageRight", title: "Image Right" }
+        ]
       },
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required()
     }),
     defineField({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required()
     }),
     defineField({
       name: "image",
@@ -31,20 +31,20 @@ export const splitImageType = defineType({
         {
           name: "alt",
           title: "Alt Text",
-          type: "string",
-        },
+          type: "string"
+        }
       ],
       options: {
-        hotspot: true,
+        hotspot: true
       },
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required()
     }),
     defineField({
       name: "text",
       title: "Text",
       type: "array",
       of: [{ type: "block" }],
-      validation: (rule) => rule.required(),
-    }),
-  ],
+      validation: (rule) => rule.required()
+    })
+  ]
 });

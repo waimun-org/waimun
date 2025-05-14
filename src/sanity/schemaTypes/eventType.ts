@@ -9,33 +9,33 @@ export const eventType = defineType({
       name: "name",
       title: "Name",
       type: "string",
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required()
     }),
     defineField({
       name: "description",
       title: "Description",
       type: "array",
       of: [{ type: "block" }],
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required()
     }),
     defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
       options: {
-        source: "name",
+        source: "name"
       },
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required()
     }),
     defineField({
       name: "date",
       title: "Date",
-      type: "datetime",
+      type: "datetime"
     }),
     defineField({
       name: "venue",
       title: "Venue",
-      type: "string",
+      type: "string"
     }),
     defineField({
       name: "image",
@@ -45,31 +45,31 @@ export const eventType = defineType({
         {
           name: "alt",
           type: "string",
-          title: "Alt Text",
-        },
+          title: "Alt Text"
+        }
       ],
       options: {
-        hotspot: true,
+        hotspot: true
       },
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required()
     }),
     defineField({
       name: "price",
       title: "Price",
-      type: "number",
+      type: "number"
     }),
     defineField({
       name: "buttons",
       title: "Buttons",
       type: "array",
-      of: [defineArrayMember({ type: "button" })],
+      of: [defineArrayMember({ type: "button" })]
     }),
     defineField({
       name: "details",
       title: "Details",
       type: "array",
       of: [{ type: "block" }],
-      validation: (rule) => rule.required(),
-    }),
-  ],
+      validation: (rule) => rule.required()
+    })
+  ]
 });

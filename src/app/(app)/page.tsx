@@ -7,7 +7,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 async function getPage(): Promise<PAGE_QUERYResult> {
   const result = await sanityFetch({
     query: PAGE_QUERY,
-    params: { slug: "home" },
+    params: { slug: "home" }
   });
 
   return result.data as PAGE_QUERYResult;

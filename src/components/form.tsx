@@ -2,7 +2,7 @@
 
 import type {
   Form as FormType,
-  FormBuilder as FormBuilderType,
+  FormBuilder as FormBuilderType
 } from "@/sanity/types";
 import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
@@ -22,7 +22,7 @@ export type FormProps = {
 };
 
 export function Form({
-  form: { title, description, slug, content },
+  form: { title, description, slug, content }
 }: FormProps) {
   const { mutateAsync } = api.form.submit.useMutation();
 

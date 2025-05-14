@@ -7,7 +7,7 @@ import {
   FormLabel,
   FormMessage,
   FormField,
-  FormDescription,
+  FormDescription
 } from "../ui/form";
 
 export type TextareaFieldProps = {
@@ -17,7 +17,7 @@ export type TextareaFieldProps = {
 
 export function TextareaField({
   field: { name, label, placeholder, required, description },
-  form,
+  form
 }: TextareaFieldProps) {
   return (
     <FormField

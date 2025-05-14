@@ -12,7 +12,7 @@ export const formRouter = createTRPCRouter({
     .input(z.object({ slug: z.string(), data: z.record(z.any()) }))
     .mutation(async ({ input }) => {
       const form = await client.fetch<FORM_QUERYResult>(FORM_QUERY, {
-        slug: input.slug,
+        slug: input.slug
       });
 
       if (!form) {
@@ -33,7 +33,7 @@ export const formRouter = createTRPCRouter({
       }
 
       const body = {
-        fields: data,
+        fields: data
       };
 
       const response = await fetch(
@@ -42,10 +42,10 @@ export const formRouter = createTRPCRouter({
           method: "POST",
           headers: {
             Authorization: `Bearer ${env.AIRTABLE_TOKEN}`,
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
           },
-          body: JSON.stringify(body),
-        },
+          body: JSON.stringify(body)
+        }
       );
 
       if (!response.ok) {
@@ -54,7 +54,7 @@ export const formRouter = createTRPCRouter({
       }
 
       return {
-        success: true,
+        success: true
       };
-    }),
+    })
 });

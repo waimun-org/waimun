@@ -4,7 +4,7 @@ import { ZodError } from "zod";
 
 export const createTRPCContext = async (opts: { headers: Headers }) => {
   return {
-    ...opts,
+    ...opts
   };
 };
 
@@ -15,11 +15,10 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
       ...shape,
       data: {
         ...shape.data,
-        zodError:
-          error.cause instanceof ZodError ? error.cause.flatten() : null,
-      },
+        zodError: error.cause instanceof ZodError ? error.cause.flatten() : null
+      }
     };
-  },
+  }
 });
 
 export const createCallerFactory = t.createCallerFactory;

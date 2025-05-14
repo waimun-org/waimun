@@ -2,7 +2,7 @@ import { type FormBuilder } from "@/sanity/types";
 import { z, type ZodSchema } from "zod";
 
 export function getFormDefaultValues(
-  formBuilder: FormBuilder,
+  formBuilder: FormBuilder
 ): Record<string, unknown> {
   return formBuilder.reduce(
     (acc, field) => {
@@ -23,7 +23,7 @@ export function getFormDefaultValues(
       }
       return acc;
     },
-    {} as Record<string, unknown>,
+    {} as Record<string, unknown>
   );
 }
 
@@ -54,7 +54,7 @@ export function getFormSchema(formBuilder: FormBuilder): ZodSchema {
 
           if (field.pattern) {
             fieldSchema = (fieldSchema as z.ZodString).regex(
-              new RegExp(field.pattern),
+              new RegExp(field.pattern)
             );
           }
         }
@@ -89,7 +89,7 @@ export function getFormSchema(formBuilder: FormBuilder): ZodSchema {
 
         if (field.required) {
           fieldSchema = fieldSchema.refine((value) => value === true, {
-            message: "This field is required",
+            message: "This field is required"
           });
         }
 

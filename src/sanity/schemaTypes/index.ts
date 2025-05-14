@@ -33,7 +33,7 @@ const schemaTypes = [
   textareaType,
   selectType,
   checkboxType,
-  eventsType,
+  eventsType
 ];
 
 export default schemaTypes;

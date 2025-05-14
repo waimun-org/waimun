@@ -9,7 +9,7 @@ export const heroType = defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required()
     },
     {
       name: "intent",
@@ -18,23 +18,23 @@ export const heroType = defineType({
       options: {
         list: [
           { title: "High Impact", value: "high-impact" },
-          { title: "Low Impact", value: "low-impact" },
-        ],
+          { title: "Low Impact", value: "low-impact" }
+        ]
       },
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required()
     },
     {
       name: "text",
       title: "Text",
       type: "array",
       of: [{ type: "block" }],
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required()
     },
     {
       name: "buttons",
       title: "Buttons",
       type: "array",
-      of: [defineArrayMember({ type: "button" })],
+      of: [defineArrayMember({ type: "button" })]
     },
     {
       name: "backgroundImage",
@@ -44,9 +44,9 @@ export const heroType = defineType({
         {
           name: "alt",
           title: "Alt Text",
-          type: "string",
-        },
-      ],
-    },
-  ],
+          type: "string"
+        }
+      ]
+    }
+  ]
 });

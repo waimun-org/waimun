@@ -5,14 +5,14 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Select as UISelect,
+  Select as UISelect
 } from "../ui/select";
 import {
   FormControl,
   FormDescription,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from "../ui/form";
 import { FormField } from "../ui/form";
 
@@ -23,7 +23,7 @@ export type SelectFieldProps = {
 
 export function SelectField({
   field: { name, label, placeholder, options, required, description },
-  form,
+  form
 }: SelectFieldProps) {
   return (
     <FormField

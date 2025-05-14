@@ -8,14 +8,14 @@ async function getForm(slug: string): Promise<FORM_QUERYResult> {
   const result = await sanityFetch({
     query: FORM_QUERY,
     params: { slug },
-    tags: ["form", slug],
+    tags: ["form", slug]
   });
 
   return result.data as FORM_QUERYResult;
 }
 
 export default async function FormPage({
-  params,
+  params
 }: {
   params: Promise<{ slug: string }>;
 }) {

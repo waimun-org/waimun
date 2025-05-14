@@ -5,5 +5,5 @@ import { env } from "@/env.mjs";
 export const { sanityFetch, SanityLive } = defineLive({
   client,
   serverToken: env.SANITY_API_READ_TOKEN,
-  browserToken: env.SANITY_API_READ_TOKEN,
+  browserToken: env.SANITY_API_READ_TOKEN
 });

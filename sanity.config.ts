@@ -14,7 +14,7 @@ export default defineConfig({
   projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: env.NEXT_PUBLIC_SANITY_DATASET,
   schema: {
-    types: schemaTypes,
+    types: schemaTypes
   },
   plugins: [
     structureTool({ structure }),
@@ -22,10 +22,10 @@ export default defineConfig({
     presentationTool({
       previewUrl: {
         previewMode: {
-          enable: "/api/draft-mode/enable",
-        },
+          enable: "/api/draft-mode/enable"
+        }
       },
-      resolve,
-    }),
-  ],
+      resolve
+    })
+  ]
 });
