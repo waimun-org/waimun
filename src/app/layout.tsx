@@ -6,6 +6,7 @@ import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity";
 import { TRPCReactProvider } from "@/trpc/react";
 import { Toaster } from "@/components/ui/sonner";
+import { DisableDraftMode } from "@/components/disable-draft-mode";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,7 +28,12 @@ export default async function RootLayout({
       <body className={`${inter.variable} antialiased`}>
         <TRPCReactProvider>
           {children}
-          {(await draftMode()).isEnabled && <VisualEditing />}
+          {(await draftMode()).isEnabled && (
+            <>
+              <DisableDraftMode />
+              <VisualEditing />
+            </>
+          )}
           <SanityLive />
           <Toaster />
         </TRPCReactProvider>

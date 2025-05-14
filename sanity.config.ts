@@ -1,6 +1,7 @@
 "use client";
 
 import { visionTool } from "@sanity/vision";
+import { presentationTool } from "sanity/presentation";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import schemaTypes from "./src/sanity/schemaTypes";
@@ -17,5 +18,12 @@ export default defineConfig({
   plugins: [
     structureTool({ structure }),
     visionTool({ defaultApiVersion: env.NEXT_PUBLIC_SANITY_API_VERSION }),
+    presentationTool({
+      previewUrl: {
+        previewMode: {
+          enable: "/api/draft-mode/enable",
+        },
+      },
+    }),
   ],
 });
