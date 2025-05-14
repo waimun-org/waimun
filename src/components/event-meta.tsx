@@ -1,9 +1,9 @@
-import { type EVENT_QUERYResult } from "@/sanity/types";
+import type { Event } from "@/sanity/types";
 import { format } from "date-fns";
 import { CalendarIcon, CircleDollarSignIcon, MapPinIcon } from "lucide-react";
 
 export type EventMetaProps = {
-  event: NonNullable<EVENT_QUERYResult>;
+  event: Event;
 };
 
 export function EventMeta({ event }: EventMetaProps) {

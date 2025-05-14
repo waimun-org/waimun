@@ -1,8 +1,8 @@
 import { PAGE_QUERY } from "@/sanity/lib/queries";
-import { PageBuilder } from "@/components/page-builder";
 import { notFound } from "next/navigation";
 import type { PAGE_QUERYResult } from "@/sanity/types";
 import { sanityFetch } from "@/sanity/lib/live";
+import { PageBuilder } from "@/components/page-builder";
 
 async function getPage(slug: string): Promise<PAGE_QUERYResult> {
   const result = await sanityFetch({
@@ -22,9 +22,9 @@ export default async function Page({
   const { slug } = await params;
   const page = await getPage(slug);
 
-  if (!page) {
+  if (!page?.content) {
     return notFound();
   }
 
-  return <PageBuilder content={page?.content} />;
+  return <PageBuilder content={page.content} />;
 }

@@ -8,6 +8,12 @@ import { buttonType } from "./buttonType";
 import { footerType } from "./footerType";
 import { linkType } from "./linkType";
 import { proseType } from "./blocks/proseType";
+import { formType } from "./formType";
+import { formBuilderType } from "./formBuilderType";
+import { inputType } from "./fields/inputType";
+import { checkboxType } from "./fields/checkboxType";
+import { textareaType } from "./fields/textareaType";
+import { selectType } from "./fields/selectType";
 
 const schemaTypes = [
   eventType,
@@ -20,6 +26,12 @@ const schemaTypes = [
   buttonType,
   linkType,
   proseType,
+  formType,
+  formBuilderType,
+  inputType,
+  textareaType,
+  selectType,
+  checkboxType,
 ];
 
 export default schemaTypes;

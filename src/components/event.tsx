@@ -1,12 +1,12 @@
 import { urlFor } from "@/sanity/lib/image";
-import { type EVENT_QUERYResult } from "@/sanity/types";
+import type { Event } from "@/sanity/types";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 import { EventMeta } from "./event-meta";
 import { Button } from "./button";
 
 export type EventProps = {
-  event: NonNullable<EVENT_QUERYResult>;
+  event: Event;
 };
 
 export function Event({ event }: EventProps) {

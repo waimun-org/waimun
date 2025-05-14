@@ -1,4 +1,3 @@
-import { type EVENTS_QUERYResult } from "@/sanity/types";
 import {
   Card,
   CardContent,
@@ -10,9 +9,10 @@ import { PortableText } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
+import type { Event } from "@/sanity/types";
 
 export type EventsProps = {
-  events: NonNullable<EVENTS_QUERYResult>;
+  events: Event[];
 };
 
 export function Events({ events }: EventsProps) {

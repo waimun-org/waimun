@@ -4,6 +4,8 @@ import "./globals.css";
 import { SanityLive } from "@/sanity/lib/live";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity";
+import { TRPCReactProvider } from "@/trpc/react";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -23,9 +25,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
-        {children}
-        {(await draftMode()).isEnabled && <VisualEditing />}
-        <SanityLive />
+        <TRPCReactProvider>
+          {children}
+          {(await draftMode()).isEnabled && <VisualEditing />}
+          <SanityLive />
+          <Toaster />
+        </TRPCReactProvider>
       </body>
     </html>
   );
