@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "npm run typegen",
     "dev": "next dev --turbopack",
-    "prebuild": "npm run typegen",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typegen": "sanity schema extract --path=./src/sanity/extract.json --enforce-required-fields && sanity typegen generate"
+    "typegen": "sanity schema extract --path=./src/sanity/extract.json --enforce-required-fields && sanity typegen generate",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
