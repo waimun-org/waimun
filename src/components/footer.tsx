@@ -12,7 +12,7 @@ export function Footer({ footer }: FooterProps) {
 
   return (
     <footer className="border-t">
-      <div className="text-muted-foreground container flex h-16 items-center justify-between text-sm">
+      <div className="text-muted-foreground container flex flex-col-reverse flex-wrap gap-8 p-4 text-sm md:flex-row md:justify-between">
         <div className="flex items-center gap-4">
           <p>{footer.copyright}</p>
         </div>
