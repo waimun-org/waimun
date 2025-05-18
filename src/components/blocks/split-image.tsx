@@ -1,4 +1,4 @@
-import { PortableText, stegaClean } from "next-sanity";
+import { PortableText } from "next-sanity";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import type { SplitImage } from "@/sanity/types";
@@ -23,7 +23,7 @@ export function SplitImage({ block }: SplitImageProps) {
         <Image
           className={cn(
             "aspect-[4/3] rounded-lg object-cover",
-            stegaClean(block.orientation) === "imageLeft" && "md:order-first"
+            block.orientation === "imageLeft" && "md:order-first"
           )}
           src={urlFor(block.image).width(800).height(600).url()}
           width={800}

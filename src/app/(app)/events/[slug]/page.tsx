@@ -1,18 +1,8 @@
 import { EVENT_QUERY } from "@/sanity/lib/queries";
 import { Event } from "@/components/event";
 import { notFound } from "next/navigation";
-import { sanityFetch } from "@/sanity/lib/live";
+import { client } from "@/sanity/lib/client";
 import type { EVENT_QUERYResult } from "@/sanity/types";
-
-async function getEvent(slug: string): Promise<EVENT_QUERYResult> {
-  const result = await sanityFetch({
-    query: EVENT_QUERY,
-    params: { slug },
-    tags: ["event", slug]
-  });
-
-  return result.data as EVENT_QUERYResult;
-}
 
 export default async function EventPage({
   params
@@ -20,7 +10,7 @@ export default async function EventPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const event = await getEvent(slug);
+  const event = await client.fetch<EVENT_QUERYResult>(EVENT_QUERY, { slug });
 
   if (!event) {
     return notFound();

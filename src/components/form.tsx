@@ -8,12 +8,12 @@ import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getFormDefaultValues, getFormSchema } from "@/utils/form";
-import { api } from "@/trpc/react";
 import { FormBuilder } from "./form-builder";
 import { PortableText } from "next-sanity";
 import { toast } from "sonner";
 import { LoaderCircleIcon } from "lucide-react";
 import { Form as UIForm } from "./ui/form";
+import { submitForm } from "@/app/(app)/forms/actions";
 
 export type FormProps = {
   form: FormType & {
@@ -24,21 +24,15 @@ export type FormProps = {
 export function Form({
   form: { title, description, slug, content }
 }: FormProps) {
-  const { mutateAsync } = api.form.submit.useMutation();
-
   const defaultValues = getFormDefaultValues(content);
   const resolver = zodResolver(getFormSchema(content));
-
-  console.log(defaultValues);
-
   const form = useForm({ defaultValues, resolver });
 
   async function handleSubmit(data: Record<string, unknown>) {
-    const res = await mutateAsync({ slug: slug.current, data });
+    const res = await submitForm({ slug: slug.current, data });
 
     if (!res.success) {
-      toast.error("An error occurred. Please try again later");
-
+      toast.error(res.error);
       return;
     }
 
