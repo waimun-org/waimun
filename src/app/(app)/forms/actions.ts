@@ -16,7 +16,10 @@ export async function submitForm(input: z.infer<typeof submitFormSchema>) {
   const parsedInput = submitFormSchema.safeParse(input);
 
   if (!parsedInput.success) {
-    throw new Error("Invalid form data");
+    return {
+      success: false,
+      error: "Invalid form data"
+    };
   }
 
   const { slug, data } = parsedInput.data;
