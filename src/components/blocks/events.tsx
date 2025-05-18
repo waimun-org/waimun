@@ -11,17 +11,12 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
 import { EVENTS_QUERY } from "@/sanity/lib/queries";
-import { sanityFetch } from "@/sanity/lib/live";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { AlertCircle } from "lucide-react";
+import { client } from "@/sanity/lib/client";
 
 async function getEvents(): Promise<EVENTS_QUERYResult> {
-  const result = await sanityFetch({
-    query: EVENTS_QUERY,
-    tags: ["events"]
-  });
-
-  return result.data as EVENTS_QUERYResult;
+  return await client.fetch(EVENTS_QUERY);
 }
 
 export type EventsProps = {
