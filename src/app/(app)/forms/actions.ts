@@ -4,8 +4,8 @@ import { client } from "@/sanity/lib/client";
 import type { FORM_QUERYResult } from "@/sanity/types";
 import { FORM_QUERY } from "@/sanity/lib/queries";
 import { getFormSchema } from "@/utils/form";
-import { env } from "@/env.mjs";
 import { z } from "zod";
+import { Resource } from "sst";
 
 const submitFormSchema = z.object({
   slug: z.string(),
@@ -45,7 +45,7 @@ export async function submitForm(input: z.infer<typeof submitFormSchema>) {
     {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${env.AIRTABLE_TOKEN}`,
+        Authorization: `Bearer ${Resource.AirtableToken.value}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ fields: results.data as unknown })
