@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "pnpm run typegen && next build",
-    "dev": "pnpm run typegen && next dev --turbopack",
+    "build": "next build",
+    "dev": "next dev --turbopack",
     "format": "prettier --write .",
     "lint": "next lint",
     "start": "next start",
-    "typecheck": "tsc --noEmit",
-    "typegen": "sanity schema extract --path=./src/sanity/extract.json --enforce-required-fields && sanity typegen generate",
-    "stripe": "stripe listen --forward-to localhost:3000/api/stripe"
+    "check": "tsc --noEmit && next lint",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe",
+    "sanity:typegen": "sanity schema extract --path=./src/sanity/extract.json --enforce-required-fields && sanity typegen generate",
+    "sst:deploy": "sst deploy --stage production",
+    "sst:dev": "sst dev"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -18,7 +20,7 @@
     "@radix-ui/react-label": "^2.1.6",
     "@radix-ui/react-select": "^2.2.4",
     "@radix-ui/react-slot": "^1.2.2",
-    "@sanity/client": "^7.2.1",
+    "@sanity/client": "^7.2.2",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.88.3",
     "@t3-oss/env-nextjs": "^0.13.4",
@@ -35,7 +37,7 @@
     "react-hook-form": "^7.56.4",
     "sanity": "^3.88.3",
     "sonner": "^2.0.3",
-    "sst": "3.14.27",
+    "sst": "3.14.28",
     "stripe": "^18.1.0",
     "styled-components": "^6.1.18",
     "tailwind-merge": "^3.3.0",
@@ -44,7 +46,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.1.7",
-    "@types/node": "^22.15.18",
+    "@types/node": "^22.15.19",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "eslint": "^9.27.0",

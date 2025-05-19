@@ -5,21 +5,9 @@
 
 declare module "sst" {
   export interface Resource {
-    "AirtableToken": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
     "MyWeb": {
       "type": "sst.aws.Nextjs"
       "url": string
-    }
-    "StripeSecretKey": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "StripeWebhookSecret": {
-      "type": "sst.sst.Secret"
-      "value": string
     }
   }
 }

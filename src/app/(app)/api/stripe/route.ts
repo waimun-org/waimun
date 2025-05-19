@@ -5,7 +5,6 @@ import type { FORM_BY_ID_QUERYResult } from "@/sanity/types";
 import { stripe } from "@/stripe";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-import { Resource } from "sst";
 import type Stripe from "stripe";
 
 export async function POST(request: Request) {
@@ -25,7 +24,7 @@ export async function POST(request: Request) {
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      Resource.StripeWebhookSecret.value
+      process.env.STRIPE_WEBHOOK_SECRET!
     );
   } catch (error) {
     console.error(error);
