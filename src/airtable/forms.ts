@@ -1,5 +1,3 @@
-import { Resource } from "sst";
-
 interface AirtableConfig {
   baseId: string;
   tableId: string;
@@ -14,7 +12,7 @@ export async function createRecord(
     {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${Resource.AirtableToken.value}`,
+        Authorization: `Bearer ${process.env.AIRTABLE_TOKEN}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -53,7 +51,7 @@ export async function updateRecord(
     {
       method: "PATCH",
       headers: {
-        Authorization: `Bearer ${Resource.AirtableToken.value}`,
+        Authorization: `Bearer ${process.env.AIRTABLE_TOKEN}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
