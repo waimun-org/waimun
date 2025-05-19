@@ -183,6 +183,10 @@ export type Form = {
     baseId: string;
     tableId: string;
   };
+  stripe: {
+    enabled: boolean;
+    priceId?: string;
+  };
   content: FormBuilder;
 };
 
@@ -825,9 +829,9 @@ export type EVENTS_QUERYResult = Array<{
     _key: string;
   }>;
 }>;
-// Variable: EVENT_QUERY
+// Variable: EVENT_BY_SLUG_QUERY
 // Query: *[_type == "event" && slug.current == $slug][0] {  ...,}
-export type EVENT_QUERYResult = {
+export type EVENT_BY_SLUG_QUERYResult = {
   _id: string;
   _type: "event";
   _createdAt: string;
@@ -893,9 +897,9 @@ export type EVENT_QUERYResult = {
     _key: string;
   }>;
 } | null;
-// Variable: FORM_QUERY
+// Variable: FORM_BY_SLUG_QUERY
 // Query: *[_type == "form" && slug.current == $slug][0] {  ...,  content[] {    ...,  }}
-export type FORM_QUERYResult = {
+export type FORM_BY_SLUG_QUERYResult = {
   _id: string;
   _type: "form";
   _createdAt: string;
@@ -924,6 +928,96 @@ export type FORM_QUERYResult = {
   airtable: {
     baseId: string;
     tableId: string;
+  };
+  stripe: {
+    enabled: boolean;
+    priceId?: string;
+  };
+  content: Array<
+    | {
+        _key: string;
+        _type: "checkbox";
+        name: string;
+        label: string;
+        description?: string;
+        required?: boolean;
+        defaultValue?: boolean;
+      }
+    | {
+        _key: string;
+        _type: "input";
+        name: string;
+        label: string;
+        description?: string;
+        placeholder?: string;
+        required?: boolean;
+        type?: "email" | "number" | "tel" | "text";
+        minLength?: number;
+        maxLength?: number;
+        pattern?: string;
+        defaultValue?: string;
+      }
+    | {
+        _key: string;
+        _type: "select";
+        name: string;
+        label: string;
+        description?: string;
+        placeholder?: string;
+        required?: boolean;
+        options: Array<string>;
+        defaultValue?: string;
+      }
+    | {
+        _key: string;
+        _type: "textarea";
+        name: string;
+        label: string;
+        description?: string;
+        placeholder?: string;
+        required?: boolean;
+        minLength?: number;
+        maxLength?: number;
+        pattern?: string;
+        defaultValue?: string;
+      }
+  >;
+} | null;
+// Variable: FORM_BY_ID_QUERY
+// Query: *[_type == "form" && _id == $id][0] {  ...,  content[] {    ...,  }}
+export type FORM_BY_ID_QUERYResult = {
+  _id: string;
+  _type: "form";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  description: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  slug: Slug;
+  airtable: {
+    baseId: string;
+    tableId: string;
+  };
+  stripe: {
+    enabled: boolean;
+    priceId?: string;
   };
   content: Array<
     | {
@@ -984,7 +1078,8 @@ declare module "@sanity/client" {
     '*[_type == "navigation"][0] {\n  ...,\n  links[] {\n    ...,\n  }\n}': NAVIGATION_QUERYResult;
     '*[_type == "footer"][0] {\n  ...,\n  links[] {\n    ...,\n  }\n}': FOOTER_QUERYResult;
     '*[_type == "event"] {\n  ...,\n}': EVENTS_QUERYResult;
-    '*[_type == "event" && slug.current == $slug][0] {\n  ...,\n}': EVENT_QUERYResult;
-    '*[_type == "form" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_QUERYResult;
+    '*[_type == "event" && slug.current == $slug][0] {\n  ...,\n}': EVENT_BY_SLUG_QUERYResult;
+    '*[_type == "form" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_BY_SLUG_QUERYResult;
+    '*[_type == "form" && _id == $id][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_BY_ID_QUERYResult;
   }
 }

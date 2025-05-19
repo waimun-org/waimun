@@ -48,6 +48,26 @@ export const formType = defineType({
       validation: (rule) => rule.required()
     }),
     defineField({
+      name: "stripe",
+      title: "Stripe",
+      type: "object",
+      fields: [
+        defineField({
+          name: "enabled",
+          title: "Enabled",
+          type: "boolean",
+          initialValue: false,
+          validation: (rule) => rule.required()
+        }),
+        defineField({
+          name: "priceId",
+          title: "Price ID",
+          type: "string"
+        })
+      ],
+      validation: (rule) => rule.required()
+    }),
+    defineField({
       name: "content",
       title: "Content",
       type: "formBuilder",

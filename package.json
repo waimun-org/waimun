@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
-    "dev": "next dev --turbopack",
+    "build": "pnpm run typegen && next build",
+    "dev": "pnpm run typegen && next dev --turbopack",
     "format": "prettier --write .",
     "lint": "next lint",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "typegen": "sanity schema extract --path=./src/sanity/extract.json --enforce-required-fields && sanity typegen generate"
+    "typegen": "sanity schema extract --path=./src/sanity/extract.json --enforce-required-fields && sanity typegen generate",
+    "stripe": "stripe listen --forward-to localhost:3000/api/stripe"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -35,6 +36,7 @@
     "sanity": "^3.88.3",
     "sonner": "^2.0.3",
     "sst": "3.14.27",
+    "stripe": "^18.1.0",
     "styled-components": "^6.1.18",
     "tailwind-merge": "^3.3.0",
     "zod": "^3.24.4"
