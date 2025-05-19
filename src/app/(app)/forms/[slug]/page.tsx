@@ -1,8 +1,9 @@
-import { FORM_QUERY } from "@/sanity/lib/queries";
+import { FORM_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import { Form } from "@/components/form";
 import { client } from "@/sanity/lib/client";
-import type { FORM_QUERYResult } from "@/sanity/types";
+import type { FORM_BY_SLUG_QUERYResult } from "@/sanity/types";
+import { stripe } from "@/stripe";
 
 export default async function FormPage({
   params
@@ -10,11 +11,18 @@ export default async function FormPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const form = await client.fetch<FORM_QUERYResult>(FORM_QUERY, { slug });
+  const form = await client.fetch<FORM_BY_SLUG_QUERYResult>(
+    FORM_BY_SLUG_QUERY,
+    { slug }
+  );
 
   if (!form) {
     return notFound();
   }
 
-  return <Form form={form} />;
+  const price = form.stripe.priceId
+    ? await stripe.prices.retrieve(form.stripe.priceId)
+    : null;
+
+  return <Form form={form} price={{ ...price }} />;
 }

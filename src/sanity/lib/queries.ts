@@ -25,11 +25,18 @@ export const EVENTS_QUERY = groq`*[_type == "event"] {
   ...,
 }`;
 
-export const EVENT_QUERY = groq`*[_type == "event" && slug.current == $slug][0] {
+export const EVENT_BY_SLUG_QUERY = groq`*[_type == "event" && slug.current == $slug][0] {
   ...,
 }`;
 
-export const FORM_QUERY = groq`*[_type == "form" && slug.current == $slug][0] {
+export const FORM_BY_SLUG_QUERY = groq`*[_type == "form" && slug.current == $slug][0] {
+  ...,
+  content[] {
+    ...,
+  }
+}`;
+
+export const FORM_BY_ID_QUERY = groq`*[_type == "form" && _id == $id][0] {
   ...,
   content[] {
     ...,

@@ -1153,6 +1153,29 @@
         },
         "optional": false
       },
+      "stripe": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "enabled": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "boolean"
+              },
+              "optional": false
+            },
+            "priceId": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": false
+      },
       "content": {
         "type": "objectAttribute",
         "value": {

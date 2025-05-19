@@ -13,6 +13,14 @@ declare module "sst" {
       "type": "sst.aws.Nextjs"
       "url": string
     }
+    "StripeSecretKey": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "StripeWebhookSecret": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
   }
 }
 /// <reference path="sst-env.d.ts" />
