@@ -25,7 +25,7 @@ export function CheckboxField({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <div className="flex items-center gap-2">
+          <div className="flex gap-2">
             <FormControl>
               <UICheckbox
                 checked={field.value as boolean}
@@ -33,12 +33,14 @@ export function CheckboxField({
               />
             </FormControl>
 
-            <FormLabel>
-              {label}
-              {required && <span className="text-red-500">*</span>}
-            </FormLabel>
+            <div className="flex flex-col gap-1">
+              <FormLabel>
+                {label}
+                {required && <span className="text-red-500">*</span>}
+              </FormLabel>
 
-            {description && <FormDescription>{description}</FormDescription>}
+              {description && <FormDescription>{description}</FormDescription>}
+            </div>
           </div>
 
           <FormMessage />
