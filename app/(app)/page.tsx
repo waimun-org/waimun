@@ -4,13 +4,12 @@ import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import type { PAGE_QUERYResult } from "@/sanity/types";
 
-export default async function Page({
-  params
-}: {
-  params: Promise<{ slug?: string }>;
-}) {
-  const { slug = "home" } = await params;
-  const page = await client.fetch<PAGE_QUERYResult>(PAGE_QUERY, { slug });
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const page = await client.fetch<PAGE_QUERYResult>(PAGE_QUERY, {
+    slug: "home"
+  });
 
   if (!page) {
     return notFound();
