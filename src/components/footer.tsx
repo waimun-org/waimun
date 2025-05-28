@@ -1,4 +1,4 @@
-import { type FOOTER_QUERYResult } from "@/sanity/types";
+import type { FOOTER_QUERYResult } from "@/sanity/types";
 import { Link } from "./link";
 
 export type FooterProps = {

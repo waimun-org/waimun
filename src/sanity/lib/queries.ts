@@ -23,6 +23,9 @@ export const FOOTER_QUERY = groq`*[_type == "footer"][0] {
 
 export const EVENTS_QUERY = groq`*[_type == "event"] {
   ...,
+  image {
+    ...,
+  }
 }`;
 
 export const EVENT_BY_SLUG_QUERY = groq`*[_type == "event" && slug.current == $slug][0] {

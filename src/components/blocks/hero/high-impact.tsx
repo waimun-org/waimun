@@ -1,8 +1,7 @@
 import { PortableText } from "next-sanity";
-import { urlFor } from "@/sanity/lib/image";
 import { Button } from "@/components/button";
 import type { HeroProps } from ".";
-import Image from "next/image";
+import { Image } from "@/components/image";
 
 export function HighImpactHero({ block }: HeroProps) {
   return (
@@ -27,11 +26,11 @@ export function HighImpactHero({ block }: HeroProps) {
 
       {block.backgroundImage && (
         <Image
-          className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
-          src={urlFor(block.backgroundImage).width(1920).height(1080).url()}
-          width={1920}
-          height={1080}
+          image={block.backgroundImage}
+          className="pointer-events-none absolute inset-0 -z-10 object-cover"
+          fill
           priority
+          fetchPriority="high"
           alt={block.backgroundImage.alt ?? ""}
         />
       )}

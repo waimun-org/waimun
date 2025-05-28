@@ -1,11 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { urlFor } from "@/sanity/lib/image";
-import { type NAVIGATION_QUERYResult } from "@/sanity/types";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Image } from "./image";
+import type { NAVIGATION_QUERYResult } from "@/sanity/types";
 
 export type NavbarProps = {
   navigation: NAVIGATION_QUERYResult;
@@ -23,11 +22,10 @@ export function Navbar({ navigation }: NavbarProps) {
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src={urlFor(navigation.logo).width(32).height(32).url()}
+            image={navigation.logo}
             alt={navigation.logo.alt ?? ""}
-            width={32}
-            height={32}
             priority
+            fetchPriority="high"
             className="h-8 w-auto"
           />
         </Link>
