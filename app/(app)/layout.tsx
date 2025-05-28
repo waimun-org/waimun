@@ -13,22 +13,8 @@ async function getLayoutData(): Promise<{
   footer: FOOTER_QUERYResult;
 }> {
   const [navigation, footer] = await Promise.all([
-    client.fetch<NAVIGATION_QUERYResult>(
-      NAVIGATION_QUERY,
-      {},
-      {
-        cache: "force-cache",
-        next: { revalidate: 300 }
-      }
-    ),
-    client.fetch<FOOTER_QUERYResult>(
-      FOOTER_QUERY,
-      {},
-      {
-        cache: "force-cache",
-        next: { revalidate: 300 }
-      }
-    )
+    client.fetch<NAVIGATION_QUERYResult>(NAVIGATION_QUERY),
+    client.fetch<FOOTER_QUERYResult>(FOOTER_QUERY)
   ]);
 
   return { navigation, footer };

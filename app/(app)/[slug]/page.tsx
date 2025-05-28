@@ -7,14 +7,7 @@ import type { PAGE_QUERYResult } from "@/sanity/types";
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-  const pages = await client.fetch<{ slug: string }[]>(
-    PAGES_SLUGS_QUERY,
-    {},
-    {
-      cache: "force-cache",
-      next: { revalidate: 3600 }
-    }
-  );
+  const pages = await client.fetch<{ slug: string }[]>(PAGES_SLUGS_QUERY);
 
   return pages.map((page) => ({
     slug: page.slug
@@ -27,14 +20,7 @@ export default async function Page({
   params: Promise<{ slug?: string }>;
 }) {
   const { slug = "home" } = await params;
-  const page = await client.fetch<PAGE_QUERYResult>(
-    PAGE_QUERY,
-    { slug },
-    {
-      cache: "force-cache",
-      next: { revalidate: 60 }
-    }
-  );
+  const page = await client.fetch<PAGE_QUERYResult>(PAGE_QUERY, { slug });
 
   if (!page) {
     return notFound();
