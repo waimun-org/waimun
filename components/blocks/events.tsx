@@ -7,8 +7,7 @@ import {
   CardTitle
 } from "@/components/ui/card";
 import { PortableText } from "next-sanity";
-import { urlFor } from "@/sanity/lib/image";
-import Image from "next/image";
+import { Image } from "@/components/image";
 import Link from "next/link";
 import { EVENTS_QUERY } from "@/sanity/lib/queries";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
@@ -16,7 +15,19 @@ import { AlertCircle } from "lucide-react";
 import { client } from "@/sanity/lib/client";
 
 async function getEvents(): Promise<EVENTS_QUERYResult> {
-  return await client.fetch(EVENTS_QUERY);
+  try {
+    return await client.fetch(
+      EVENTS_QUERY,
+      {},
+      {
+        cache: "force-cache",
+        next: { revalidate: 300 }
+      }
+    );
+  } catch (error) {
+    console.error("Failed to fetch events:", error);
+    return [];
+  }
 }
 
 export type EventsProps = {
@@ -61,11 +72,9 @@ export async function Events({ block }: EventsProps) {
               </CardHeader>
               <CardContent>
                 <Image
-                  className="aspect-[4/3] rounded-lg object-cover"
-                  src={urlFor(event.image).width(800).height(600).url()}
-                  width={800}
-                  height={600}
+                  image={event.image}
                   alt={event.image.alt ?? ""}
+                  className="aspect-[4/3] rounded-lg object-cover"
                 />
               </CardContent>
             </Card>

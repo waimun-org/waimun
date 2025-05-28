@@ -8,12 +8,30 @@ import type {
   NAVIGATION_QUERYResult
 } from "@/sanity/types";
 
-async function getNavigation(): Promise<NAVIGATION_QUERYResult> {
-  return await client.fetch(NAVIGATION_QUERY);
-}
+async function getLayoutData(): Promise<{
+  navigation: NAVIGATION_QUERYResult;
+  footer: FOOTER_QUERYResult;
+}> {
+  const [navigation, footer] = await Promise.all([
+    client.fetch<NAVIGATION_QUERYResult>(
+      NAVIGATION_QUERY,
+      {},
+      {
+        cache: "force-cache",
+        next: { revalidate: 300 }
+      }
+    ),
+    client.fetch<FOOTER_QUERYResult>(
+      FOOTER_QUERY,
+      {},
+      {
+        cache: "force-cache",
+        next: { revalidate: 300 }
+      }
+    )
+  ]);
 
-async function getFooter(): Promise<FOOTER_QUERYResult> {
-  return await client.fetch(FOOTER_QUERY);
+  return { navigation, footer };
 }
 
 export default async function AppLayout({
@@ -21,8 +39,7 @@ export default async function AppLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const navigation = await getNavigation();
-  const footer = await getFooter();
+  const { navigation, footer } = await getLayoutData();
 
   return (
     <>
