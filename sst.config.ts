@@ -7,14 +7,19 @@ export default $config({
       name: "waimun",
       removal: input?.stage === "production" ? "retain" : "remove",
       protect: ["production"].includes(input?.stage),
-      home: "aws"
+      home: "aws",
+      providers: {
+        aws: { region: "ap-southeast-2" }
+      }
     };
   },
   async run() {
     new sst.aws.Nextjs("MyWeb", {
       domain: {
         name: "waimun.org",
-        dns: sst.cloudflare.dns()
+        dns: sst.cloudflare.dns({
+          proxy: true
+        })
       }
     });
   }

@@ -1,9 +1,8 @@
-import { urlFor } from "@/sanity/lib/image";
 import type { Event } from "@/sanity/types";
 import { PortableText } from "next-sanity";
-import Image from "next/image";
 import { EventMeta } from "./event-meta";
 import { Button } from "./button";
+import { Image } from "./image";
 
 export type EventProps = {
   event: Event;
@@ -37,11 +36,10 @@ export function Event({ event }: EventProps) {
           </div>
 
           <Image
-            src={urlFor(event.image).width(800).height(600).url()}
+            image={event.image}
             alt={event.image.alt ?? ""}
-            width={800}
-            height={600}
             priority
+            fetchPriority="high"
             className="col-span-1 aspect-[4/3] rounded-lg object-cover"
           />
         </div>
