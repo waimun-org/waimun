@@ -16,14 +16,7 @@ import { client } from "@/sanity/lib/client";
 
 async function getEvents(): Promise<EVENTS_QUERYResult> {
   try {
-    return await client.fetch(
-      EVENTS_QUERY,
-      {},
-      {
-        cache: "force-cache",
-        next: { revalidate: 300 }
-      }
-    );
+    return await client.fetch<EVENTS_QUERYResult>(EVENTS_QUERY);
   } catch (error) {
     console.error("Failed to fetch events:", error);
     return [];
