@@ -1,6 +1,5 @@
 import { PortableText } from "next-sanity";
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
+import { Image } from "@/components/image";
 import type { SplitImage } from "@/sanity/types";
 import { cn } from "@/lib/utils";
 
@@ -25,9 +24,7 @@ export function SplitImage({ block }: SplitImageProps) {
             "aspect-[4/3] rounded-lg object-cover",
             block.orientation === "imageLeft" && "md:order-first"
           )}
-          src={urlFor(block.image).width(800).height(600).url()}
-          width={800}
-          height={600}
+          image={block.image}
           alt={block.image.alt ?? ""}
         />
       </div>
