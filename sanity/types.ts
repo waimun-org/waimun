@@ -545,7 +545,7 @@ export type AllSanitySchemaTypes =
   | Slug
   | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./src/sanity/lib/queries.ts
+// Source: sanity/lib/queries.ts
 // Variable: PAGE_QUERY
 // Query: *[_type == "page" && slug.current == $slug][0] {  ...,  content[] {    ...,  }}
 export type PAGE_QUERYResult = {
@@ -715,6 +715,11 @@ export type PAGE_QUERYResult = {
       }
   >;
 } | null;
+// Variable: PAGES_SLUGS_QUERY
+// Query: *[_type == "page" && defined(slug.current)]{  "slug": slug.current}
+export type PAGES_SLUGS_QUERYResult = Array<{
+  slug: string;
+}>;
 // Variable: NAVIGATION_QUERY
 // Query: *[_type == "navigation"][0] {  ...,  links[] {    ...,  }}
 export type NAVIGATION_QUERYResult = {
@@ -897,6 +902,11 @@ export type EVENT_BY_SLUG_QUERYResult = {
     _key: string;
   }>;
 } | null;
+// Variable: EVENTS_SLUGS_QUERY
+// Query: *[_type == "event" && defined(slug.current)]{  "slug": slug.current}
+export type EVENTS_SLUGS_QUERYResult = Array<{
+  slug: string;
+}>;
 // Variable: FORM_BY_SLUG_QUERY
 // Query: *[_type == "form" && slug.current == $slug][0] {  ...,  content[] {    ...,  }}
 export type FORM_BY_SLUG_QUERYResult = {
@@ -983,6 +993,11 @@ export type FORM_BY_SLUG_QUERYResult = {
       }
   >;
 } | null;
+// Variable: FORMS_SLUGS_QUERY
+// Query: *[_type == "form" && defined(slug.current)]{  "slug": slug.current}
+export type FORMS_SLUGS_QUERYResult = Array<{
+  slug: string;
+}>;
 // Variable: FORM_BY_ID_QUERY
 // Query: *[_type == "form" && _id == $id][0] {  ...,  content[] {    ...,  }}
 export type FORM_BY_ID_QUERYResult = {
@@ -1075,11 +1090,14 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "page" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': PAGE_QUERYResult;
+    '*[_type == "page" && defined(slug.current)]{\n  "slug": slug.current\n}': PAGES_SLUGS_QUERYResult;
     '*[_type == "navigation"][0] {\n  ...,\n  links[] {\n    ...,\n  }\n}': NAVIGATION_QUERYResult;
     '*[_type == "footer"][0] {\n  ...,\n  links[] {\n    ...,\n  }\n}': FOOTER_QUERYResult;
     '*[_type == "event"] {\n  ...,\n  image {\n    ...,\n  }\n}': EVENTS_QUERYResult;
     '*[_type == "event" && slug.current == $slug][0] {\n  ...,\n}': EVENT_BY_SLUG_QUERYResult;
+    '*[_type == "event" && defined(slug.current)]{\n  "slug": slug.current\n}': EVENTS_SLUGS_QUERYResult;
     '*[_type == "form" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_BY_SLUG_QUERYResult;
+    '*[_type == "form" && defined(slug.current)]{\n  "slug": slug.current\n}': FORMS_SLUGS_QUERYResult;
     '*[_type == "form" && _id == $id][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_BY_ID_QUERYResult;
   }
 }
