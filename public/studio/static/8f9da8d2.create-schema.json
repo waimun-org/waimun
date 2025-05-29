@@ -402,10 +402,7 @@
             "rules": [
               {
                 "flag": "valid",
-                "constraint": [
-                  "high-impact",
-                  "low-impact"
-                ]
+                "constraint": ["high-impact", "low-impact"]
               },
               {
                 "flag": "presence",
@@ -685,10 +682,7 @@
             "rules": [
               {
                 "flag": "valid",
-                "constraint": [
-                  "imageLeft",
-                  "imageRight"
-                ]
+                "constraint": ["imageLeft", "imageRight"]
               },
               {
                 "flag": "presence",
@@ -1076,11 +1070,7 @@
             "rules": [
               {
                 "flag": "valid",
-                "constraint": [
-                  "default",
-                  "sm",
-                  "lg"
-                ]
+                "constraint": ["default", "sm", "lg"]
               },
               {
                 "flag": "presence",
