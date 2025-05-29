@@ -3,7 +3,7 @@ import { PageBuilder } from "@/components/page-builder";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import type { PAGE_QUERYResult } from "@/sanity/types";
-import { generateMetadata as generateSEOMetadata } from "@/lib/seo";
+import { generateNextMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -22,7 +22,7 @@ export async function generateMetadata({
     return {};
   }
 
-  return generateSEOMetadata(page);
+  return generateNextMetadata(page);
 }
 
 export default async function Page({ params }: PageProps) {

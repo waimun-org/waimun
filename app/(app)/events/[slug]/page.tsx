@@ -3,7 +3,7 @@ import { Event } from "@/components/event";
 import { notFound } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import type { EVENT_BY_SLUG_QUERYResult } from "@/sanity/types";
-import { generateMetadata as generateSEOMetadata } from "@/lib/seo";
+import { generateNextMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
@@ -25,7 +25,7 @@ export async function generateMetadata({
     return {};
   }
 
-  return generateSEOMetadata(event);
+  return generateNextMetadata(event);
 }
 
 export default async function EventPage({ params }: EventPageProps) {
