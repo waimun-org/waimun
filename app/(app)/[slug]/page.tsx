@@ -1,18 +1,10 @@
 import { notFound } from "next/navigation";
 import { PageBuilder } from "@/components/page-builder";
-import { PAGE_QUERY, PAGES_SLUGS_QUERY } from "@/sanity/lib/queries";
+import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import type { PAGE_QUERYResult } from "@/sanity/types";
 
-export const revalidate = 60;
-
-export async function generateStaticParams() {
-  const pages = await client.fetch<{ slug: string }[]>(PAGES_SLUGS_QUERY);
-
-  return pages.map((page) => ({
-    slug: page.slug
-  }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function Page({
   params
