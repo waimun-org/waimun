@@ -30,7 +30,7 @@ export function HighImpactHero({ block }: HeroProps) {
           className="pointer-events-none absolute inset-0 -z-10 object-cover"
           fill
           priority
-          fetchPriority="high"
+          sizes="100vw"
           alt={block.backgroundImage.alt ?? ""}
         />
       )}

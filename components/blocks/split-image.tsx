@@ -25,6 +25,7 @@ export function SplitImage({ block }: SplitImageProps) {
             block.orientation === "imageLeft" && "md:order-first"
           )}
           image={block.image}
+          sizes="(min-width: 768px) 50vw, 100vw"
           alt={block.image.alt ?? ""}
         />
       </div>
