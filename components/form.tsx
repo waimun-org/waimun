@@ -70,7 +70,7 @@ export function Form({
         </div>
       </section>
 
-      <section className="container flex flex-col gap-8 py-8">
+      <section className="container flex max-w-2xl flex-col gap-8 py-8 md:py-16">
         <Suspense fallback={null}>
           <PaymentStatus />
         </Suspense>

@@ -44,9 +44,10 @@ export default async function FormPage({
     return notFound();
   }
 
-  const price = form.stripe.priceId
-    ? await stripe.prices.retrieve(form.stripe.priceId)
-    : null;
+  const price =
+    form.stripe.enabled && form.stripe.priceId
+      ? await stripe.prices.retrieve(form.stripe.priceId)
+      : null;
 
   return <Form form={form} price={{ ...price }} />;
 }
