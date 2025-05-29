@@ -29,7 +29,7 @@ export default async function RootLayout({
         {children}
         <Script
           src="/script.js"
-          data-website-id="f5c03301-b2d8-4127-82e0-b32fca3d3268"
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
           strategy="afterInteractive"
         />
       </body>

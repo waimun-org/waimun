@@ -17,11 +17,11 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/script.js",
-        destination: "https://umami-production-0526.up.railway.app/script.js"
+        destination: `${process.env.NEXT_PUBLIC_UMAMI_URL}/script.js`
       },
       {
         source: "/api/send",
-        destination: "https://umami-production-0526.up.railway.app/api/send"
+        destination: `${process.env.NEXT_PUBLIC_UMAMI_URL}/api/send`
       }
     ];
   }
