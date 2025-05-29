@@ -4,7 +4,7 @@ import { z, type ZodSchema } from "zod";
 export function getFormDefaultValues(
   formBuilder: FormBuilder
 ): Record<string, unknown> {
-  return formBuilder.reduce(
+  const values = formBuilder.reduce(
     (acc, field) => {
       acc[field.name] = field.defaultValue;
       switch (field._type) {
@@ -25,6 +25,10 @@ export function getFormDefaultValues(
     },
     {} as Record<string, unknown>
   );
+
+  values.hcaptchaToken = "";
+
+  return values;
 }
 
 export function getFormSchema(formBuilder: FormBuilder): ZodSchema {
@@ -98,6 +102,8 @@ export function getFormSchema(formBuilder: FormBuilder): ZodSchema {
 
     schema[field.name] = field.required ? fieldSchema : fieldSchema.optional();
   });
+
+  schema.hcaptchaToken = z.string().min(1, "Please complete the captcha");
 
   return z.object(schema);
 }

@@ -9,6 +9,7 @@ import { Button } from "./ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getFormDefaultValues, getFormSchema } from "@/utils/form";
 import { FormBuilder } from "./form-builder";
+import { HCaptcha } from "./hcaptcha";
 import { PortableText } from "next-sanity";
 import { toast } from "sonner";
 import {
@@ -92,6 +93,8 @@ export function Form({
             onSubmit={form.handleSubmit(handleSubmit)}
           >
             <FormBuilder content={content} form={form} />
+
+            <HCaptcha form={form} />
 
             <Button
               type="submit"
