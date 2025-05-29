@@ -3,6 +3,7 @@
 import { client } from "@/sanity/lib/client";
 import { FORM_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { getFormSchema } from "@/utils/form";
+import { verifyHCaptchaToken } from "@/utils/hcaptcha";
 import { z } from "zod";
 import { stripe } from "@/stripe";
 import { createRecord } from "@/airtable/forms";
@@ -53,10 +54,24 @@ export async function submitForm(input: z.infer<typeof submitFormSchema>) {
     };
   }
 
+  const formData = parsedValues.data as Record<string, unknown> & {
+    hcaptchaToken: string;
+  };
+  const isValidCaptcha = await verifyHCaptchaToken(formData.hcaptchaToken);
+
+  if (!isValidCaptcha) {
+    return {
+      success: false,
+      error: "Captcha verification failed. Please try again."
+    };
+  }
+
   let recordId: string | undefined;
 
   try {
-    const recordData = parsedValues.data as Record<string, unknown>;
+    const recordData = Object.fromEntries(
+      Object.entries(formData).filter(([key]) => key !== "hcaptchaToken")
+    );
 
     if (form.stripe.enabled) {
       recordData["Payment Status"] = "Pending";
