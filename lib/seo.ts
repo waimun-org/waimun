@@ -10,11 +10,6 @@ export const siteConfig = {
   locale: "en-NZ"
 };
 
-export type GenerateMetadata = {
-  slug: Slug;
-  seo: Seo;
-};
-
 function getImages(seo: Seo) {
   if (!seo.image) {
     return [];
@@ -30,7 +25,15 @@ function getImages(seo: Seo) {
   ];
 }
 
-export function generateMetadata({ slug, seo }: GenerateMetadata): Metadata {
+export type GenerateNextMetadata = {
+  slug: Slug;
+  seo: Seo;
+};
+
+export function generateNextMetadata({
+  slug,
+  seo
+}: GenerateNextMetadata): Metadata {
   const canonical = `${siteConfig.url}${slug.current}`;
 
   const metadata: Metadata = {

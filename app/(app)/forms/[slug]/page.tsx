@@ -4,8 +4,30 @@ import { Form } from "@/components/form";
 import { client } from "@/sanity/lib/client";
 import type { FORM_BY_SLUG_QUERYResult } from "@/sanity/types";
 import { stripe } from "@/stripe";
+import type { Metadata } from "next";
+import { generateNextMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
+
+interface FormPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
+  params
+}: FormPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const form = await client.fetch<FORM_BY_SLUG_QUERYResult>(
+    FORM_BY_SLUG_QUERY,
+    { slug }
+  );
+
+  if (!form) {
+    return {};
+  }
+
+  return generateNextMetadata(form);
+}
 
 export default async function FormPage({
   params
