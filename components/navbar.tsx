@@ -25,7 +25,7 @@ export function Navbar({ navigation }: NavbarProps) {
             image={navigation.logo}
             alt={navigation.logo.alt ?? ""}
             priority
-            fetchPriority="high"
+            sizes="200px"
             className="h-8 w-auto"
           />
         </Link>
