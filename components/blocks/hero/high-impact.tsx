@@ -6,6 +6,18 @@ import { Image } from "@/components/image";
 export function HighImpactHero({ block }: HeroProps) {
   return (
     <section className="relative flex min-h-[600px] flex-col items-center justify-center overflow-hidden">
+      {block.backgroundImage && (
+        <Image
+          image={block.backgroundImage}
+          className="pointer-events-none absolute inset-0 -z-10 object-cover"
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          alt={block.backgroundImage.alt ?? ""}
+        />
+      )}
+
       <div className="flex flex-col items-center justify-center gap-8 text-center text-white">
         <h1 className="text-4xl font-bold text-balance md:text-6xl">
           {block.title}
@@ -23,17 +35,6 @@ export function HighImpactHero({ block }: HeroProps) {
           </div>
         )}
       </div>
-
-      {block.backgroundImage && (
-        <Image
-          image={block.backgroundImage}
-          className="pointer-events-none absolute inset-0 -z-10 object-cover"
-          fill
-          priority
-          sizes="100vw"
-          alt={block.backgroundImage.alt ?? ""}
-        />
-      )}
     </section>
   );
 }
