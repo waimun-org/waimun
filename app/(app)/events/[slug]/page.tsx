@@ -1,18 +1,10 @@
-import { EVENT_BY_SLUG_QUERY, EVENTS_SLUGS_QUERY } from "@/sanity/lib/queries";
+import { EVENT_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { Event } from "@/components/event";
 import { notFound } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import type { EVENT_BY_SLUG_QUERYResult } from "@/sanity/types";
 
-export const revalidate = 60;
-
-export async function generateStaticParams() {
-  const events = await client.fetch<{ slug: string }[]>(EVENTS_SLUGS_QUERY);
-
-  return events.map((event) => ({
-    slug: event.slug
-  }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function EventPage({
   params
@@ -22,9 +14,7 @@ export default async function EventPage({
   const { slug } = await params;
   const event = await client.fetch<EVENT_BY_SLUG_QUERYResult>(
     EVENT_BY_SLUG_QUERY,
-    {
-      slug
-    }
+    { slug }
   );
 
   if (!event) {
