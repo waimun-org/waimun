@@ -12,6 +12,18 @@ const nextConfig: NextConfig = {
         pathname: "/**"
       }
     ]
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/script.js",
+        destination: "https://umami-production-0526.up.railway.app/script.js"
+      },
+      {
+        source: "/api/send",
+        destination: "https://umami-production-0526.up.railway.app/api/send"
+      }
+    ];
   }
 };
 
