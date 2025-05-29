@@ -20,7 +20,7 @@ import { Form as UIForm } from "./ui/form";
 import { submitForm } from "@/app/(app)/forms/actions";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useState, useEffect } from "react";
 import type Stripe from "stripe";
 import Link from "next/link";
 
@@ -40,6 +40,7 @@ export function Form({
   const defaultValues = getFormDefaultValues(content);
   const resolver = zodResolver(getFormSchema(content));
   const form = useForm({ defaultValues, resolver });
+  const [isSuccess, setIsSuccess] = useState(false);
 
   async function handleSubmit(values: Record<string, unknown>) {
     const res = await submitForm({ slug: slug.current, formValues: values });
@@ -54,9 +55,19 @@ export function Form({
       return;
     }
 
-    toast.success("Form submitted successfully");
+    setIsSuccess(true);
     form.reset();
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      const timer = setTimeout(() => {
+        setIsSuccess(false);
+      }, 3000); // Green for 3 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess]);
 
   return (
     <div>
@@ -86,11 +97,13 @@ export function Form({
               type="submit"
               disabled={form.formState.isSubmitting}
               id="submit"
+              variant={isSuccess ? "success" : undefined}
             >
               {form.formState.isSubmitting && (
                 <LoaderCircleIcon className="animate-spin" />
               )}
-              {stripe.enabled ? "Pay" : "Submit"}
+              {isSuccess && <CheckCircleIcon />}
+              {isSuccess ? "Success" : stripe.enabled ? "Pay" : "Submit"}
             </Button>
           </form>
         </UIForm>
