@@ -28,6 +28,12 @@ export const formType = defineType({
       validation: (rule) => rule.required()
     }),
     defineField({
+      name: "seo",
+      title: "SEO",
+      type: "seo",
+      validation: (rule) => rule.required()
+    }),
+    defineField({
       name: "airtable",
       title: "Airtable",
       type: "object",

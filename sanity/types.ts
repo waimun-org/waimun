@@ -124,6 +124,7 @@ export type Form = {
     _key: string;
   }>;
   slug: Slug;
+  seo: Seo;
   airtable: {
     baseId: string;
     tableId: string;
@@ -257,6 +258,7 @@ export type Page = {
   _rev: string;
   title: string;
   slug: Slug;
+  seo: Seo;
   content: Array<
     | ({
         _key: string;
@@ -356,6 +358,7 @@ export type Event = {
     _key: string;
   }>;
   slug: Slug;
+  seo: Seo;
   date?: string;
   venue?: string;
   image: {
@@ -395,6 +398,26 @@ export type Event = {
     _type: "block";
     _key: string;
   }>;
+};
+
+export type Seo = {
+  _type: "seo";
+  title: string;
+  description: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  noIndex: boolean;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -533,6 +556,7 @@ export type AllSanitySchemaTypes =
   | PageBuilder
   | Hero
   | Event
+  | Seo
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -547,7 +571,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/lib/queries.ts
 // Variable: PAGE_QUERY
-// Query: *[_type == "page" && slug.current == $slug][0] {  ...,  content[] {    ...,  }}
+// Query: *[_type == "page" && slug.current == $slug][0] {  ...,  seo {    ...,  },  content[] {    ...,  }}
 export type PAGE_QUERYResult = {
   _id: string;
   _type: "page";
@@ -556,6 +580,25 @@ export type PAGE_QUERYResult = {
   _rev: string;
   title: string;
   slug: Slug;
+  seo: {
+    _type: "seo";
+    title: string;
+    description: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    noIndex: boolean;
+  };
   content: Array<
     | {
         _key: string;
@@ -715,11 +758,6 @@ export type PAGE_QUERYResult = {
       }
   >;
 } | null;
-// Variable: PAGES_SLUGS_QUERY
-// Query: *[_type == "page" && defined(slug.current)]{  "slug": slug.current}
-export type PAGES_SLUGS_QUERYResult = Array<{
-  slug: string;
-}>;
 // Variable: NAVIGATION_QUERY
 // Query: *[_type == "navigation"][0] {  ...,  links[] {    ...,  }}
 export type NAVIGATION_QUERYResult = {
@@ -794,6 +832,7 @@ export type EVENTS_QUERYResult = Array<{
     _key: string;
   }>;
   slug: Slug;
+  seo: Seo;
   date?: string;
   venue?: string;
   image: {
@@ -835,7 +874,7 @@ export type EVENTS_QUERYResult = Array<{
   }>;
 }>;
 // Variable: EVENT_BY_SLUG_QUERY
-// Query: *[_type == "event" && slug.current == $slug][0] {  ...,}
+// Query: *[_type == "event" && slug.current == $slug][0] {  ...,  seo {    ...,  },}
 export type EVENT_BY_SLUG_QUERYResult = {
   _id: string;
   _type: "event";
@@ -862,6 +901,25 @@ export type EVENT_BY_SLUG_QUERYResult = {
     _key: string;
   }>;
   slug: Slug;
+  seo: {
+    _type: "seo";
+    title: string;
+    description: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    noIndex: boolean;
+  };
   date?: string;
   venue?: string;
   image: {
@@ -902,11 +960,6 @@ export type EVENT_BY_SLUG_QUERYResult = {
     _key: string;
   }>;
 } | null;
-// Variable: EVENTS_SLUGS_QUERY
-// Query: *[_type == "event" && defined(slug.current)]{  "slug": slug.current}
-export type EVENTS_SLUGS_QUERYResult = Array<{
-  slug: string;
-}>;
 // Variable: FORM_BY_SLUG_QUERY
 // Query: *[_type == "form" && slug.current == $slug][0] {  ...,  content[] {    ...,  }}
 export type FORM_BY_SLUG_QUERYResult = {
@@ -935,6 +988,7 @@ export type FORM_BY_SLUG_QUERYResult = {
     _key: string;
   }>;
   slug: Slug;
+  seo: Seo;
   airtable: {
     baseId: string;
     tableId: string;
@@ -993,11 +1047,6 @@ export type FORM_BY_SLUG_QUERYResult = {
       }
   >;
 } | null;
-// Variable: FORMS_SLUGS_QUERY
-// Query: *[_type == "form" && defined(slug.current)]{  "slug": slug.current}
-export type FORMS_SLUGS_QUERYResult = Array<{
-  slug: string;
-}>;
 // Variable: FORM_BY_ID_QUERY
 // Query: *[_type == "form" && _id == $id][0] {  ...,  content[] {    ...,  }}
 export type FORM_BY_ID_QUERYResult = {
@@ -1026,6 +1075,7 @@ export type FORM_BY_ID_QUERYResult = {
     _key: string;
   }>;
   slug: Slug;
+  seo: Seo;
   airtable: {
     baseId: string;
     tableId: string;
@@ -1084,20 +1134,58 @@ export type FORM_BY_ID_QUERYResult = {
       }
   >;
 } | null;
+// Variable: PAGES_SLUGS_QUERY
+// Query: *[_type == "page" && defined(slug.current)]{  "slug": slug.current,  "lastModified": _updatedAt}
+export type PAGES_SLUGS_QUERYResult = Array<{
+  slug: string;
+  lastModified: string;
+}>;
+// Variable: EVENTS_SLUGS_QUERY
+// Query: *[_type == "event" && defined(slug.current)]{  "slug": slug.current,  "lastModified": _updatedAt}
+export type EVENTS_SLUGS_QUERYResult = Array<{
+  slug: string;
+  lastModified: string;
+}>;
+// Variable: FORMS_SLUGS_QUERY
+// Query: *[_type == "form" && defined(slug.current)]{  "slug": slug.current,  "lastModified": _updatedAt}
+export type FORMS_SLUGS_QUERYResult = Array<{
+  slug: string;
+  lastModified: string;
+}>;
+// Variable: SITEMAP_QUERY
+// Query: {  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": select(      slug.current == "home" => 1.0,      0.8    )  },  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.7  },  "forms": *[_type == "form" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.6  }}
+export type SITEMAP_QUERYResult = {
+  pages: Array<{
+    slug: string;
+    lastModified: string;
+    priority: 0.8 | 1;
+  }>;
+  events: Array<{
+    slug: string;
+    lastModified: string;
+    priority: 0.7;
+  }>;
+  forms: Array<{
+    slug: string;
+    lastModified: string;
+    priority: 0.6;
+  }>;
+};
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "page" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': PAGE_QUERYResult;
-    '*[_type == "page" && defined(slug.current)]{\n  "slug": slug.current\n}': PAGES_SLUGS_QUERYResult;
+    '*[_type == "page" && slug.current == $slug][0] {\n  ...,\n  seo {\n    ...,\n  },\n  content[] {\n    ...,\n  }\n}': PAGE_QUERYResult;
     '*[_type == "navigation"][0] {\n  ...,\n  links[] {\n    ...,\n  }\n}': NAVIGATION_QUERYResult;
     '*[_type == "footer"][0] {\n  ...,\n  links[] {\n    ...,\n  }\n}': FOOTER_QUERYResult;
     '*[_type == "event"] {\n  ...,\n  image {\n    ...,\n  }\n}': EVENTS_QUERYResult;
-    '*[_type == "event" && slug.current == $slug][0] {\n  ...,\n}': EVENT_BY_SLUG_QUERYResult;
-    '*[_type == "event" && defined(slug.current)]{\n  "slug": slug.current\n}': EVENTS_SLUGS_QUERYResult;
+    '*[_type == "event" && slug.current == $slug][0] {\n  ...,\n  seo {\n    ...,\n  },\n}': EVENT_BY_SLUG_QUERYResult;
     '*[_type == "form" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_BY_SLUG_QUERYResult;
-    '*[_type == "form" && defined(slug.current)]{\n  "slug": slug.current\n}': FORMS_SLUGS_QUERYResult;
     '*[_type == "form" && _id == $id][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_BY_ID_QUERYResult;
+    '*[_type == "page" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': PAGES_SLUGS_QUERYResult;
+    '*[_type == "event" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': EVENTS_SLUGS_QUERYResult;
+    '*[_type == "form" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': FORMS_SLUGS_QUERYResult;
+    '{\n  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": select(\n      slug.current == "home" => 1.0,\n      0.8\n    )\n  },\n  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.7\n  },\n  "forms": *[_type == "form" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.6\n  }\n}': SITEMAP_QUERYResult;
   }
 }

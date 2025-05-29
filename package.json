@@ -10,7 +10,7 @@
     "start": "next start",
     "check": "tsc --noEmit && next lint",
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe",
-    "sanity:typegen": "sanity schema extract --enforce-required-fields && sanity typegen generate"
+    "sanity:typegen": "sanity schema extract --path ./sanity/extract.json --enforce-required-fields && sanity typegen generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
