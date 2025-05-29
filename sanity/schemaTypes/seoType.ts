@@ -7,13 +7,13 @@ export const seoType = defineType({
   fields: [
     defineField({
       name: "title",
-      title: "Meta Title",
+      title: "Title",
       type: "string",
       validation: (rule) => rule.required()
     }),
     defineField({
       name: "description",
-      title: "Meta Description",
+      title: "Description",
       type: "text",
       validation: (rule) => rule.required()
     }),
@@ -34,7 +34,7 @@ export const seoType = defineType({
     }),
     defineField({
       name: "noIndex",
-      title: "No Index",
+      title: "Hide from search engines?",
       type: "boolean",
       initialValue: false,
       validation: (rule) => rule.required()

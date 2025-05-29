@@ -3,7 +3,7 @@ import { heroType } from "./blocks/heroType";
 import { pageBuilderType } from "./pageBuilderType";
 import { pageType } from "./pageType";
 import { splitImageType } from "./blocks/splitImageType";
-import { navigationType } from "./navigationType";
+import { headerType } from "./headerType";
 import { buttonType } from "./buttonType";
 import { footerType } from "./footerType";
 import { linkType } from "./linkType";
@@ -23,7 +23,7 @@ const schemaTypes = [
   pageBuilderType,
   pageType,
   splitImageType,
-  navigationType,
+  headerType,
   footerType,
   buttonType,
   linkType,

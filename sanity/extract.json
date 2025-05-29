@@ -1241,7 +1241,7 @@
     }
   },
   {
-    "name": "navigation",
+    "name": "header",
     "type": "document",
     "attributes": {
       "_id": {
@@ -1254,7 +1254,7 @@
         "type": "objectAttribute",
         "value": {
           "type": "string",
-          "value": "navigation"
+          "value": "header"
         }
       },
       "_createdAt": {

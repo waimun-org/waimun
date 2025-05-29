@@ -1,8 +1,8 @@
 import { defineField, defineType } from "sanity";
 
-export const navigationType = defineType({
-  name: "navigation",
-  title: "Navigation",
+export const headerType = defineType({
+  name: "header",
+  title: "Header",
   type: "document",
   fields: [
     defineField({
