@@ -7,7 +7,7 @@ export const PAGE_QUERY = groq`*[_type == "page" && slug.current == $slug][0] {
   }
 }`;
 
-export const NAVIGATION_QUERY = groq`*[_type == "navigation"][0] {
+export const HEADER_QUERY = groq`*[_type == "header"][0] {
   ...,
   links[] {
     ...,

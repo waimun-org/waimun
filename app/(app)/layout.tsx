@@ -1,23 +1,20 @@
+import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { Navbar } from "@/components/navbar";
 import { Toaster } from "@/components/ui/sonner";
 import { client } from "@/sanity/lib/client";
-import { FOOTER_QUERY, NAVIGATION_QUERY } from "@/sanity/lib/queries";
-import type {
-  FOOTER_QUERYResult,
-  NAVIGATION_QUERYResult
-} from "@/sanity/types";
+import { FOOTER_QUERY, HEADER_QUERY } from "@/sanity/lib/queries";
+import type { FOOTER_QUERYResult, HEADER_QUERYResult } from "@/sanity/types";
 
 async function getLayoutData(): Promise<{
-  navigation: NAVIGATION_QUERYResult;
+  header: HEADER_QUERYResult;
   footer: FOOTER_QUERYResult;
 }> {
-  const [navigation, footer] = await Promise.all([
-    client.fetch<NAVIGATION_QUERYResult>(NAVIGATION_QUERY),
+  const [header, footer] = await Promise.all([
+    client.fetch<HEADER_QUERYResult>(HEADER_QUERY),
     client.fetch<FOOTER_QUERYResult>(FOOTER_QUERY)
   ]);
 
-  return { navigation, footer };
+  return { header, footer };
 }
 
 export default async function AppLayout({
@@ -25,12 +22,12 @@ export default async function AppLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { navigation, footer } = await getLayoutData();
+  const { header, footer } = await getLayoutData();
 
   return (
     <>
       <div className="flex min-h-screen flex-col">
-        <Navbar navigation={navigation} />
+        <Header header={header} />
         <main className="flex-1">{children}</main>
         <Footer footer={footer} />
       </div>
