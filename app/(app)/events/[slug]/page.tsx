@@ -3,14 +3,32 @@ import { Event } from "@/components/event";
 import { notFound } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import type { EVENT_BY_SLUG_QUERYResult } from "@/sanity/types";
+import { generateMetadata as generateSEOMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
 
-export default async function EventPage({
-  params
-}: {
+interface EventPageProps {
   params: Promise<{ slug: string }>;
-}) {
+}
+
+export async function generateMetadata({
+  params
+}: EventPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const event = await client.fetch<EVENT_BY_SLUG_QUERYResult>(
+    EVENT_BY_SLUG_QUERY,
+    { slug }
+  );
+
+  if (!event) {
+    return {};
+  }
+
+  return generateSEOMetadata(event);
+}
+
+export default async function EventPage({ params }: EventPageProps) {
   const { slug } = await params;
   const event = await client.fetch<EVENT_BY_SLUG_QUERYResult>(
     EVENT_BY_SLUG_QUERY,
