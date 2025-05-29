@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/seo";
+import { PostHogProvider } from "./providers";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,7 +25,9 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang={siteConfig.locale}>
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+      <body className={`${inter.variable} antialiased`}>
+        <PostHogProvider>{children}</PostHogProvider>
+      </body>
     </html>
   );
 }
