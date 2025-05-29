@@ -13,5 +13,11 @@ export default function GlobalError({
     Sentry.captureException(error);
   }, [error]);
 
-  return <NextError statusCode={0} withDarkMode={false} />;
+  return (
+    <html>
+      <body>
+        <NextError statusCode={0} withDarkMode={false} />;
+      </body>
+    </html>
+  );
 }
