@@ -14,21 +14,19 @@ export function MainNav({ header }: MainNavProps) {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden items-center gap-2 md:flex">
+    <nav className="hidden items-center gap-6 md:flex">
       {header.links.map((link) => (
-        <Button
+        <Link
           key={link._key}
-          variant={"ghost"}
-          asChild
-          className={cn(pathname === link.url && "bg-accent")}
+          href={link.url}
+          target={link.url.startsWith("http") ? "_blank" : undefined}
+          className={cn(
+            "text-muted-foreground hover:text-foreground text-sm font-medium transition-colors",
+            pathname === link.url && "text-foreground"
+          )}
         >
-          <Link
-            href={link.url}
-            target={link.url.startsWith("http") ? "_blank" : undefined}
-          >
-            {link.text}
-          </Link>
-        </Button>
+          {link.text}
+        </Link>
       ))}
     </nav>
   );
