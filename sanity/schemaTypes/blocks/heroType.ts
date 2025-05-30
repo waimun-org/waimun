@@ -39,8 +39,7 @@ export const heroType = defineType({
     {
       name: "backgroundImage",
       title: "Background Image",
-      type: "image",
-      validation: (rule) => rule.required()
+      type: "image"
     }
   ]
 });
