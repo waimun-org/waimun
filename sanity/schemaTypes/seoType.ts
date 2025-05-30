@@ -28,7 +28,8 @@ export const seoType = defineType({
         defineField({
           name: "alt",
           title: "Alt Text",
-          type: "string"
+          type: "string",
+          validation: (rule) => rule.required()
         })
       ]
     }),

@@ -51,7 +51,8 @@ export const eventType = defineType({
         {
           name: "alt",
           type: "string",
-          title: "Alt Text"
+          title: "Alt Text",
+          validation: (rule) => rule.required()
         }
       ],
       options: {
