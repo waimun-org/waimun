@@ -12,12 +12,6 @@ export const footerType = defineType({
       validation: (rule) => rule.required()
     }),
     defineField({
-      name: "copyright",
-      title: "Copyright",
-      type: "string",
-      validation: (rule) => rule.required()
-    }),
-    defineField({
       name: "links",
       title: "Links",
       type: "array",
