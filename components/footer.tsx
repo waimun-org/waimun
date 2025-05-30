@@ -13,7 +13,7 @@ export function Footer({ footer }: FooterProps) {
 
   return (
     <footer className="border-t">
-      <div className="container flex flex-wrap justify-between gap-6 p-4 text-sm">
+      <div className="container flex flex-wrap justify-between gap-6 text-sm">
         <div className="flex flex-wrap gap-3">
           {footer.links.map((link) => (
             <Link
