@@ -16,7 +16,7 @@ export function HighImpactHero({ block }: HeroProps) {
         alt=""
       />
 
-      <div className="flex flex-col items-center justify-center gap-8 p-4 text-center text-white">
+      <div className="container flex flex-col items-center justify-center gap-8 text-center text-white">
         <h1 className="max-w-2xl text-4xl font-bold text-balance md:text-6xl">
           {block.title}
         </h1>
