@@ -29,7 +29,7 @@ export function MobileNav({ header }: MobileNavProps) {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button variant="ghost" size="icon" className="md:hidden">
-          <MenuIcon className="size-6" />
+          <MenuIcon className="size-5" />
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </DrawerTrigger>
