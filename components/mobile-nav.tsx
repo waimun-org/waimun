@@ -41,8 +41,8 @@ export function MobileNav({ header }: MobileNavProps) {
           </DrawerDescription>
         </DrawerHeader>
 
-        <div className="min-h-[640px] overflow-y-auto p-6">
-          <div className="flex flex-col gap-3">
+        <div className="flex min-h-[240px] flex-col gap-6 p-6">
+          <div className="flex flex-1 flex-col gap-3 overflow-y-auto">
             {header.links.map((link) => (
               <Link
                 key={link._key}
@@ -59,9 +59,7 @@ export function MobileNav({ header }: MobileNavProps) {
             ))}
           </div>
 
-          <div className="mt-auto">
-            <Socials socials={header.socials} />
-          </div>
+          <Socials socials={header.socials} />
         </div>
       </DrawerContent>
     </Drawer>
