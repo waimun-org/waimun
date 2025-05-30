@@ -16,24 +16,6 @@
 export type Events = {
   _type: "events";
   title?: string;
-  description?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
 };
 
 export type Checkbox = {
@@ -201,7 +183,6 @@ export type Footer = {
   _updatedAt: string;
   _rev: string;
   title: string;
-  copyright: string;
   links: Array<
     {
       _key: string;
@@ -378,7 +359,7 @@ export type Hero = {
       _key: string;
     } & Button
   >;
-  backgroundImage: {
+  backgroundImage?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -647,32 +628,6 @@ export type PAGE_QUERYResult = {
         _key: string;
         _type: "events";
         title?: string;
-        description?: Array<{
-          children?: Array<{
-            marks?: Array<string>;
-            text?: string;
-            _type: "span";
-            _key: string;
-          }>;
-          style?:
-            | "blockquote"
-            | "h1"
-            | "h2"
-            | "h3"
-            | "h4"
-            | "h5"
-            | "h6"
-            | "normal";
-          listItem?: "bullet" | "number";
-          markDefs?: Array<{
-            href?: string;
-            _type: "link";
-            _key: string;
-          }>;
-          level?: number;
-          _type: "block";
-          _key: string;
-        }>;
       }
     | {
         _key: string;
@@ -710,7 +665,7 @@ export type PAGE_QUERYResult = {
             _key: string;
           } & Button
         >;
-        backgroundImage: {
+        backgroundImage?: {
           asset?: {
             _ref: string;
             _type: "reference";
@@ -857,7 +812,6 @@ export type FOOTER_QUERYResult = {
   _updatedAt: string;
   _rev: string;
   title: string;
-  copyright: string;
   links: Array<{
     _key: string;
     _type: "link";

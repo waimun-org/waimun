@@ -27,21 +27,11 @@ export type EventsProps = {
   block: Events;
 };
 
-export async function Events({ block }: EventsProps) {
+export async function Events(_: EventsProps) {
   const events = await getEvents();
 
   return (
     <section className="container flex flex-col gap-8 py-8">
-      {block.title && (
-        <h2 className="text-2xl font-bold md:text-4xl">{block.title}</h2>
-      )}
-
-      {block.description && (
-        <div className="prose">
-          <PortableText value={block.description} />
-        </div>
-      )}
-
       {events.length === 0 && (
         <Alert>
           <AlertCircle className="h-4 w-4" />
