@@ -41,7 +41,7 @@ export function MobileNav({ header }: MobileNavProps) {
           </DrawerDescription>
         </DrawerHeader>
 
-        <div className="flex min-h-[240px] flex-col gap-6 p-6">
+        <div className="container flex min-h-[240px] flex-col gap-6 py-8">
           <div className="flex flex-1 flex-col gap-3 overflow-y-auto">
             {header.links.map((link) => (
               <Link
