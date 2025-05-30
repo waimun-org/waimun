@@ -16,6 +16,7 @@ import { textareaType } from "./fields/textareaType";
 import { selectType } from "./fields/selectType";
 import { eventsType } from "./blocks/eventsType";
 import { seoType } from "./seoType";
+import { socialType } from "./socialType";
 
 const schemaTypes = [
   eventType,
@@ -25,6 +26,7 @@ const schemaTypes = [
   splitImageType,
   headerType,
   footerType,
+  socialType,
   buttonType,
   linkType,
   proseType,

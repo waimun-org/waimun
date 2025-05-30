@@ -11,12 +11,18 @@ export const HEADER_QUERY = groq`*[_type == "header"][0] {
   ...,
   links[] {
     ...,
+  },
+  socials[] {
+    ...,
   }
 }`;
 
 export const FOOTER_QUERY = groq`*[_type == "footer"][0] {
   ...,
   links[] {
+    ...,
+  },
+  socials[] {
     ...,
   }
 }`;

@@ -46,7 +46,8 @@ export const heroType = defineType({
           title: "Alt Text",
           type: "string"
         }
-      ]
+      ],
+      validation: (rule) => rule.required()
     }
   ]
 });

@@ -15,6 +15,7 @@ import type { HEADER_QUERYResult } from "@/sanity/types";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Socials } from "./socials";
 
 export type MobileNavProps = {
   header: NonNullable<HEADER_QUERYResult>;
@@ -40,7 +41,7 @@ export function MobileNav({ header }: MobileNavProps) {
           </DrawerDescription>
         </DrawerHeader>
 
-        <div className="overflow-y-auto p-6">
+        <div className="min-h-[640px] overflow-y-auto p-6">
           <div className="flex flex-col gap-3">
             {header.links.map((link) => (
               <Link
@@ -56,6 +57,10 @@ export function MobileNav({ header }: MobileNavProps) {
                 {link.text}
               </Link>
             ))}
+          </div>
+
+          <div className="mt-auto">
+            <Socials socials={header.socials} />
           </div>
         </div>
       </DrawerContent>
