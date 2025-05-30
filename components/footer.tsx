@@ -1,5 +1,6 @@
 import type { FOOTER_QUERYResult } from "@/sanity/types";
 import { Link } from "./link";
+import { Socials } from "./socials";
 
 export type FooterProps = {
   footer: FOOTER_QUERYResult;
@@ -17,13 +18,15 @@ export function Footer({ footer }: FooterProps) {
           <p>{footer.copyright}</p>
         </div>
 
-        {footer.links && (
+        <div className="flex items-center gap-4">
           <div className="flex items-center gap-4">
             {footer.links.map((link) => (
               <Link key={link._key} link={link} />
             ))}
           </div>
-        )}
+
+          <Socials socials={footer.socials} />
+        </div>
       </div>
     </footer>
   );

@@ -14,6 +14,10 @@ export interface ImageProps
 export function Image({ image, fill, ...props }: ImageProps) {
   const imageProps = useNextSanityImage(client, image);
 
+  if (!imageProps) {
+    return null;
+  }
+
   return (
     <NextImage
       {...imageProps}

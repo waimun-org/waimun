@@ -171,6 +171,29 @@ export type Link = {
   url: string;
 };
 
+export type Social = {
+  _id: string;
+  _type: "social";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  url: string;
+  icon: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  };
+};
+
 export type Footer = {
   _id: string;
   _type: "footer";
@@ -179,11 +202,30 @@ export type Footer = {
   _rev: string;
   title: string;
   copyright: string;
-  links?: Array<
+  links: Array<
     {
       _key: string;
     } & Link
   >;
+  socials: Array<{
+    title: string;
+    url: string;
+    icon: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "image";
+    };
+    _type: "social";
+    _key: string;
+  }>;
 };
 
 export type Header = {
@@ -211,6 +253,25 @@ export type Header = {
       _key: string;
     } & Link
   >;
+  socials: Array<{
+    title: string;
+    url: string;
+    icon: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "image";
+    };
+    _type: "social";
+    _key: string;
+  }>;
 };
 
 export type SplitImage = {
@@ -317,7 +378,7 @@ export type Hero = {
       _key: string;
     } & Button
   >;
-  backgroundImage?: {
+  backgroundImage: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -549,6 +610,7 @@ export type AllSanitySchemaTypes =
   | Prose
   | Button
   | Link
+  | Social
   | Footer
   | Header
   | SplitImage
@@ -649,7 +711,7 @@ export type PAGE_QUERYResult = {
             _key: string;
           } & Button
         >;
-        backgroundImage?: {
+        backgroundImage: {
           asset?: {
             _ref: string;
             _type: "reference";
@@ -741,7 +803,7 @@ export type PAGE_QUERYResult = {
   >;
 } | null;
 // Variable: HEADER_QUERY
-// Query: *[_type == "header"][0] {  ...,  links[] {    ...,  }}
+// Query: *[_type == "header"][0] {  ...,  links[] {    ...,  },  socials[] {    ...,  }}
 export type HEADER_QUERYResult = {
   _id: string;
   _type: "header";
@@ -768,9 +830,28 @@ export type HEADER_QUERYResult = {
     text: string;
     url: string;
   }>;
+  socials: Array<{
+    title: string;
+    url: string;
+    icon: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "image";
+    };
+    _type: "social";
+    _key: string;
+  }>;
 } | null;
 // Variable: FOOTER_QUERY
-// Query: *[_type == "footer"][0] {  ...,  links[] {    ...,  }}
+// Query: *[_type == "footer"][0] {  ...,  links[] {    ...,  },  socials[] {    ...,  }}
 export type FOOTER_QUERYResult = {
   _id: string;
   _type: "footer";
@@ -784,7 +865,26 @@ export type FOOTER_QUERYResult = {
     _type: "link";
     text: string;
     url: string;
-  }> | null;
+  }>;
+  socials: Array<{
+    title: string;
+    url: string;
+    icon: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "image";
+    };
+    _type: "social";
+    _key: string;
+  }>;
 } | null;
 // Variable: EVENTS_QUERY
 // Query: *[_type == "event"] {  ...,}
@@ -1141,8 +1241,8 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "page" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': PAGE_QUERYResult;
-    '*[_type == "header"][0] {\n  ...,\n  links[] {\n    ...,\n  }\n}': HEADER_QUERYResult;
-    '*[_type == "footer"][0] {\n  ...,\n  links[] {\n    ...,\n  }\n}': FOOTER_QUERYResult;
+    '*[_type == "header"][0] {\n  ...,\n  links[] {\n    ...,\n  },\n  socials[] {\n    ...,\n  }\n}': HEADER_QUERYResult;
+    '*[_type == "footer"][0] {\n  ...,\n  links[] {\n    ...,\n  },\n  socials[] {\n    ...,\n  }\n}': FOOTER_QUERYResult;
     '*[_type == "event"] {\n  ...,\n}': EVENTS_QUERYResult;
     '*[_type == "event" && slug.current == $slug][0] {\n  ...\n}': EVENT_BY_SLUG_QUERYResult;
     '*[_type == "form" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_BY_SLUG_QUERYResult;

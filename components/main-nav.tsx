@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { HEADER_QUERYResult } from "@/sanity/types";
 import { cn } from "@/lib/utils";
+import { Socials } from "./socials";
 
 export type MainNavProps = {
   header: NonNullable<HEADER_QUERYResult>;
@@ -27,6 +28,8 @@ export function MainNav({ header }: MainNavProps) {
           {link.text}
         </Link>
       ))}
+
+      <Socials socials={header.socials} />
     </nav>
   );
 }

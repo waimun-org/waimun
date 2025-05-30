@@ -21,7 +21,15 @@ export const footerType = defineType({
       name: "links",
       title: "Links",
       type: "array",
-      of: [{ type: "link" }]
+      of: [{ type: "link" }],
+      validation: (rule) => rule.required()
+    }),
+    defineField({
+      name: "socials",
+      title: "Socials",
+      type: "array",
+      of: [{ type: "social" }],
+      validation: (rule) => rule.required()
     })
   ]
 });
