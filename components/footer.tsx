@@ -18,12 +18,10 @@ export function Footer({ footer }: FooterProps) {
           <p>{footer.copyright}</p>
         </div>
 
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-4">
-            {footer.links.map((link) => (
-              <Link key={link._key} link={link} />
-            ))}
-          </div>
+        <div className="flex items-center gap-6">
+          {footer.links.map((link) => (
+            <Link key={link._key} link={link} />
+          ))}
 
           <Socials socials={footer.socials} />
         </div>
