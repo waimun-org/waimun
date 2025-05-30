@@ -245,7 +245,7 @@ export type Header = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
+    alt: string;
     _type: "image";
   };
   links: Array<
@@ -288,7 +288,7 @@ export type SplitImage = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
+    alt: string;
     _type: "image";
   };
   text: Array<{
@@ -388,7 +388,6 @@ export type Hero = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
     _type: "image";
   };
 };
@@ -432,7 +431,7 @@ export type Event = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
+    alt: string;
     _type: "image";
   };
   price?: number;
@@ -475,7 +474,7 @@ export type Seo = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
+    alt: string;
     _type: "image";
   };
   noIndex: boolean;
@@ -721,7 +720,6 @@ export type PAGE_QUERYResult = {
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
-          alt?: string;
           _type: "image";
         };
       }
@@ -770,7 +768,7 @@ export type PAGE_QUERYResult = {
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
-          alt?: string;
+          alt: string;
           _type: "image";
         };
         text: Array<{
@@ -821,7 +819,7 @@ export type HEADER_QUERYResult = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
+    alt: string;
     _type: "image";
   };
   links: Array<{
@@ -927,7 +925,7 @@ export type EVENTS_QUERYResult = Array<{
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
+    alt: string;
     _type: "image";
   };
   price?: number;
@@ -996,7 +994,7 @@ export type EVENT_BY_SLUG_QUERYResult = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
+    alt: string;
     _type: "image";
   };
   price?: number;

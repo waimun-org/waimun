@@ -19,7 +19,7 @@ export function Header({ header }: HeaderProps) {
         <Link href="/" className="flex items-center gap-2">
           <Image
             image={header.logo}
-            alt={header.logo.alt ?? ""}
+            alt={header.logo.alt}
             priority
             sizes="200px"
             className="h-8 w-auto"

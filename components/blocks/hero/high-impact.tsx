@@ -13,7 +13,7 @@ export function HighImpactHero({ block }: HeroProps) {
         priority
         fetchPriority="high"
         sizes="100vw"
-        alt={block.backgroundImage.alt ?? ""}
+        alt=""
       />
 
       <div className="flex flex-col items-center justify-center gap-8 p-4 text-center text-white">

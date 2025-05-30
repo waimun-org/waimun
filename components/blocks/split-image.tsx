@@ -26,7 +26,7 @@ export function SplitImage({ block }: SplitImageProps) {
           )}
           image={block.image}
           sizes="(min-width: 768px) 50vw, 100vw"
-          alt={block.image.alt ?? ""}
+          alt={block.image.alt}
         />
       </div>
     </section>

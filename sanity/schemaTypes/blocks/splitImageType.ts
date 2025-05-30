@@ -31,7 +31,8 @@ export const splitImageType = defineType({
         {
           name: "alt",
           title: "Alt Text",
-          type: "string"
+          type: "string",
+          validation: (rule) => rule.required()
         }
       ],
       options: {
