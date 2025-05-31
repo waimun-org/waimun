@@ -18,6 +18,13 @@ export function HighImpactHero({ block }: HeroProps) {
         />
       )}
 
+      {block.backgroundColor && (
+        <div
+          className="absolute inset-0 -z-20"
+          style={{ backgroundColor: block.backgroundColor.hex }}
+        />
+      )}
+
       <div className="container flex flex-col items-center justify-center gap-8 text-white">
         <div className="flex flex-col items-center gap-4 text-center">
           <h1 className="max-w-2xl text-4xl font-bold text-balance md:text-6xl">

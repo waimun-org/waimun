@@ -371,6 +371,7 @@ export type Hero = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  backgroundColor?: Color;
 };
 
 export type Event = {
@@ -459,6 +460,39 @@ export type Seo = {
     _type: "image";
   };
   noIndex: boolean;
+};
+
+export type Color = {
+  _type: "color";
+  hex?: string;
+  alpha?: number;
+  hsl?: HslaColor;
+  hsv?: HsvaColor;
+  rgb?: RgbaColor;
+};
+
+export type RgbaColor = {
+  _type: "rgbaColor";
+  r?: number;
+  g?: number;
+  b?: number;
+  a?: number;
+};
+
+export type HsvaColor = {
+  _type: "hsvaColor";
+  h?: number;
+  s?: number;
+  v?: number;
+  a?: number;
+};
+
+export type HslaColor = {
+  _type: "hslaColor";
+  h?: number;
+  s?: number;
+  l?: number;
+  a?: number;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -599,6 +633,10 @@ export type AllSanitySchemaTypes =
   | Hero
   | Event
   | Seo
+  | Color
+  | RgbaColor
+  | HsvaColor
+  | HslaColor
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -677,6 +715,7 @@ export type PAGE_QUERYResult = {
           crop?: SanityImageCrop;
           _type: "image";
         };
+        backgroundColor?: Color;
       }
     | {
         _key: string;
