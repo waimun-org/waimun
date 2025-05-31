@@ -14,7 +14,7 @@ export function Footer({ footer }: FooterProps) {
   return (
     <footer className="border-t">
       <div className="container flex h-16 flex-wrap items-center justify-between gap-6 text-sm">
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-4">
           {footer.links.map((link) => (
             <Link
               key={link._key}

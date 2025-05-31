@@ -42,7 +42,7 @@ export function MobileNav({ header }: MobileNavProps) {
         </DrawerHeader>
 
         <div className="container flex min-h-[240px] flex-col gap-6 py-8">
-          <div className="flex flex-1 flex-col gap-3 overflow-y-auto">
+          <div className="flex flex-1 flex-col gap-4 overflow-y-auto">
             {header.links.map((link) => (
               <Link
                 key={link._key}
@@ -50,7 +50,7 @@ export function MobileNav({ header }: MobileNavProps) {
                 onClick={() => setOpen(false)}
                 target={link.url.startsWith("http") ? "_blank" : undefined}
                 className={cn(
-                  "font-medium",
+                  "text-lg font-medium",
                   pathname !== link.url && "text-muted-foreground"
                 )}
               >
