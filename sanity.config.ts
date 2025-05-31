@@ -5,6 +5,7 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import schemaTypes from "@/sanity/schemaTypes";
 import { structure } from "@/sanity/structure";
+import { colorInput } from "@sanity/color-input";
 
 export default defineConfig({
   basePath: "/studio",
@@ -17,6 +18,7 @@ export default defineConfig({
     structureTool({ structure }),
     visionTool({
       defaultApiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION!
-    })
+    }),
+    colorInput()
   ]
 });

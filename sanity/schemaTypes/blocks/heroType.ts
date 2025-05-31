@@ -39,7 +39,17 @@ export const heroType = defineType({
     {
       name: "backgroundImage",
       title: "Background Image",
+      description: "The background image for the high impact hero",
       type: "image"
+    },
+    {
+      name: "backgroundColor",
+      title: "Background Color",
+      description: "The background color for the high impact hero",
+      type: "color",
+      options: {
+        disableAlpha: true
+      }
     }
   ]
 });
