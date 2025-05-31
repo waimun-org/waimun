@@ -14,7 +14,7 @@ export function Header({ header }: HeaderProps) {
   }
 
   return (
-    <header className="border-b">
+    <header className="bg-background sticky top-0 z-50 border-b">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <Image
