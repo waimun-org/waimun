@@ -34,45 +34,9 @@ export const teamMemberType = defineType({
     }),
     defineField({
       name: "socials",
-      title: "Social Links",
+      title: "Socials",
       type: "array",
-      of: [
-        {
-          type: "object",
-          name: "social",
-          fields: [
-            defineField({
-              name: "title",
-              title: "Title",
-              type: "string",
-              validation: (rule) => rule.required()
-            }),
-            defineField({
-              name: "url",
-              title: "URL",
-              type: "url",
-              validation: (rule) => rule.required()
-            }),
-            defineField({
-              name: "icon",
-              title: "Icon",
-              type: "image",
-              fields: [
-                defineField({
-                  name: "alt",
-                  title: "Alt Text",
-                  type: "string",
-                  validation: (rule) => rule.required()
-                })
-              ],
-              validation: (rule) => rule.required(),
-              options: {
-                hotspot: true
-              }
-            })
-          ]
-        }
-      ],
+      of: [{ type: "social" }],
       validation: (rule) => rule.required()
     })
   ]

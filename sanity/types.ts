@@ -47,25 +47,11 @@ export type TeamMember = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  socials: Array<{
-    title: string;
-    url: string;
-    icon: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string;
-      _type: "image";
-    };
-    _type: "social";
-    _key: string;
-  }>;
+  socials: Array<
+    {
+      _key: string;
+    } & Social
+  >;
 };
 
 export type Team = {
@@ -219,11 +205,7 @@ export type Link = {
 };
 
 export type Social = {
-  _id: string;
   _type: "social";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
   title: string;
   url: string;
   icon: {
@@ -253,25 +235,11 @@ export type Footer = {
       _key: string;
     } & Link
   >;
-  socials: Array<{
-    title: string;
-    url: string;
-    icon: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string;
-      _type: "image";
-    };
-    _type: "social";
-    _key: string;
-  }>;
+  socials: Array<
+    {
+      _key: string;
+    } & Social
+  >;
 };
 
 export type Header = {
@@ -299,25 +267,11 @@ export type Header = {
       _key: string;
     } & Link
   >;
-  socials: Array<{
-    title: string;
-    url: string;
-    icon: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string;
-      _type: "image";
-    };
-    _type: "social";
-    _key: string;
-  }>;
+  socials: Array<
+    {
+      _key: string;
+    } & Social
+  >;
 };
 
 export type SplitImage = {
@@ -906,6 +860,8 @@ export type HEADER_QUERYResult = {
     url: string;
   }>;
   socials: Array<{
+    _key: string;
+    _type: "social";
     title: string;
     url: string;
     icon: {
@@ -921,8 +877,6 @@ export type HEADER_QUERYResult = {
       alt: string;
       _type: "image";
     };
-    _type: "social";
-    _key: string;
   }>;
 } | null;
 // Variable: FOOTER_QUERY
@@ -941,6 +895,8 @@ export type FOOTER_QUERYResult = {
     url: string;
   }>;
   socials: Array<{
+    _key: string;
+    _type: "social";
     title: string;
     url: string;
     icon: {
@@ -956,8 +912,6 @@ export type FOOTER_QUERYResult = {
       alt: string;
       _type: "image";
     };
-    _type: "social";
-    _key: string;
   }>;
 } | null;
 // Variable: EVENTS_QUERY
