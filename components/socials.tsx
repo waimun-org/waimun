@@ -17,6 +17,7 @@ export function Socials({ socials }: SocialsProps) {
           href={social.url}
           target="_blank"
           rel="noopener noreferrer"
+          className="transition-opacity hover:opacity-50"
         >
           <Image alt={social.title} image={social.icon} className="size-5" />
         </Link>
