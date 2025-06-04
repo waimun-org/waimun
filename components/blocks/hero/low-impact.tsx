@@ -10,9 +10,11 @@ export function LowImpactHero({ block }: HeroProps) {
           {block.title}
         </h1>
 
-        <div className="prose md:prose-lg text-balance">
-          <PortableText value={block.text} />
-        </div>
+        {block.text && (
+          <div className="prose md:prose-lg max-w-none text-balance">
+            <PortableText value={block.text} />
+          </div>
+        )}
       </div>
 
       {block.buttons && (

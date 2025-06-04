@@ -22,8 +22,7 @@ export const footerType = defineType({
       name: "socials",
       title: "Socials",
       type: "array",
-      of: [{ type: "social" }],
-      validation: (rule) => rule.required()
+      of: [{ type: "social" }]
     })
   ]
 });

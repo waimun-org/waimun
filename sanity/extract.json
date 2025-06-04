@@ -203,7 +203,7 @@
               }
             }
           },
-          "optional": false
+          "optional": true
         },
         "image": {
           "type": "objectAttribute",
@@ -294,7 +294,7 @@
               }
             }
           },
-          "optional": false
+          "optional": true
         }
       }
     }
@@ -1523,7 +1523,7 @@
             }
           }
         },
-        "optional": false
+        "optional": true
       }
     }
   },
@@ -1687,7 +1687,7 @@
             }
           }
         },
-        "optional": false
+        "optional": true
       }
     }
   },
@@ -1981,7 +1981,7 @@
               }
             }
           },
-          "optional": false
+          "optional": true
         }
       }
     }
@@ -2434,7 +2434,7 @@
               }
             }
           },
-          "optional": false
+          "optional": true
         },
         "buttons": {
           "type": "objectAttribute",
@@ -2757,7 +2757,7 @@
             }
           }
         },
-        "optional": false
+        "optional": true
       },
       "slug": {
         "type": "objectAttribute",
@@ -2773,7 +2773,7 @@
           "type": "inline",
           "name": "seo"
         },
-        "optional": false
+        "optional": true
       },
       "date": {
         "type": "objectAttribute",
@@ -3071,7 +3071,7 @@
             }
           }
         },
-        "optional": false
+        "optional": true
       }
     }
   },
@@ -3100,7 +3100,7 @@
           "value": {
             "type": "string"
           },
-          "optional": false
+          "optional": true
         },
         "image": {
           "type": "objectAttribute",

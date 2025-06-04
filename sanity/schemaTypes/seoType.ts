@@ -14,8 +14,7 @@ export const seoType = defineType({
     defineField({
       name: "description",
       title: "Description",
-      type: "text",
-      validation: (rule) => rule.required()
+      type: "text"
     }),
     defineField({
       name: "image",

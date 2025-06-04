@@ -27,13 +27,20 @@ function getImages(seo: Seo) {
 
 export type GenerateNextMetadata = {
   slug: Slug;
-  seo: Seo;
+  seo?: Seo;
 };
 
 export function generateNextMetadata({
   slug,
   seo
 }: GenerateNextMetadata): Metadata {
+  if (!seo) {
+    return {
+      title: siteConfig.name,
+      description: siteConfig.description
+    };
+  }
+
   const canonical = `${siteConfig.url}${slug.current}`;
 
   const metadata: Metadata = {

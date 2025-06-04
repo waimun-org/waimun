@@ -27,8 +27,7 @@ export const heroType = defineType({
       name: "text",
       title: "Text",
       type: "array",
-      of: [{ type: "block" }],
-      validation: (rule) => rule.required()
+      of: [{ type: "block" }]
     },
     {
       name: "buttons",

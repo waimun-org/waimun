@@ -17,7 +17,7 @@ export type TeamMember = {
   _type: "teamMember";
   name: string;
   role: string;
-  bio: Array<{
+  bio?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -47,7 +47,7 @@ export type TeamMember = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  socials: Array<
+  socials?: Array<
     {
       _key: string;
     } & Social
@@ -235,7 +235,7 @@ export type Footer = {
       _key: string;
     } & Link
   >;
-  socials: Array<
+  socials?: Array<
     {
       _key: string;
     } & Social
@@ -267,7 +267,7 @@ export type Header = {
       _key: string;
     } & Link
   >;
-  socials: Array<
+  socials?: Array<
     {
       _key: string;
     } & Social
@@ -291,7 +291,7 @@ export type SplitImage = {
     alt: string;
     _type: "image";
   };
-  text: Array<{
+  text?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -361,7 +361,7 @@ export type Hero = {
   _type: "hero";
   title: string;
   intent: "high-impact" | "low-impact";
-  text: Array<{
+  text?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -406,7 +406,7 @@ export type Event = {
   _updatedAt: string;
   _rev: string;
   name: string;
-  description: Array<{
+  description?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -425,7 +425,7 @@ export type Event = {
     _key: string;
   }>;
   slug: Slug;
-  seo: Seo;
+  seo?: Seo;
   date?: string;
   venue?: string;
   image: {
@@ -447,7 +447,7 @@ export type Event = {
       _key: string;
     } & Button
   >;
-  details: Array<{
+  details?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -470,7 +470,7 @@ export type Event = {
 export type Seo = {
   _type: "seo";
   title: string;
-  description: string;
+  description?: string;
   image?: {
     asset?: {
       _ref: string;
@@ -699,7 +699,7 @@ export type PAGE_QUERYResult = {
         _type: "hero";
         title: string;
         intent: "high-impact" | "low-impact";
-        text: Array<{
+        text?: Array<{
           children?: Array<{
             marks?: Array<string>;
             text?: string;
@@ -792,7 +792,7 @@ export type PAGE_QUERYResult = {
           alt: string;
           _type: "image";
         };
-        text: Array<{
+        text?: Array<{
           children?: Array<{
             marks?: Array<string>;
             text?: string;
@@ -877,7 +877,7 @@ export type HEADER_QUERYResult = {
       alt: string;
       _type: "image";
     };
-  }>;
+  }> | null;
 } | null;
 // Variable: FOOTER_QUERY
 // Query: *[_type == "footer"][0] {  ...,  links[] {    ...,  },  socials[] {    ...,  }}
@@ -912,7 +912,7 @@ export type FOOTER_QUERYResult = {
       alt: string;
       _type: "image";
     };
-  }>;
+  }> | null;
 } | null;
 // Variable: EVENTS_QUERY
 // Query: *[_type == "event"] {  ...,}
@@ -923,7 +923,7 @@ export type EVENTS_QUERYResult = Array<{
   _updatedAt: string;
   _rev: string;
   name: string;
-  description: Array<{
+  description?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -942,7 +942,7 @@ export type EVENTS_QUERYResult = Array<{
     _key: string;
   }>;
   slug: Slug;
-  seo: Seo;
+  seo?: Seo;
   date?: string;
   venue?: string;
   image: {
@@ -964,7 +964,7 @@ export type EVENTS_QUERYResult = Array<{
       _key: string;
     } & Button
   >;
-  details: Array<{
+  details?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -992,7 +992,7 @@ export type EVENT_BY_SLUG_QUERYResult = {
   _updatedAt: string;
   _rev: string;
   name: string;
-  description: Array<{
+  description?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -1011,7 +1011,7 @@ export type EVENT_BY_SLUG_QUERYResult = {
     _key: string;
   }>;
   slug: Slug;
-  seo: Seo;
+  seo?: Seo;
   date?: string;
   venue?: string;
   image: {
@@ -1033,7 +1033,7 @@ export type EVENT_BY_SLUG_QUERYResult = {
       _key: string;
     } & Button
   >;
-  details: Array<{
+  details?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;

@@ -26,7 +26,7 @@ export function Footer({ footer }: FooterProps) {
           ))}
         </div>
 
-        <Socials socials={footer.socials} />
+        {footer.socials && <Socials socials={footer.socials} />}
       </div>
     </footer>
   );

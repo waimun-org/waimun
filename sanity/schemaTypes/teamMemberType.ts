@@ -21,8 +21,7 @@ export const teamMemberType = defineType({
       name: "bio",
       title: "Bio",
       type: "array",
-      of: [{ type: "block" }],
-      validation: (rule) => rule.required()
+      of: [{ type: "block" }]
     }),
     defineField({
       name: "image",
@@ -36,8 +35,7 @@ export const teamMemberType = defineType({
       name: "socials",
       title: "Socials",
       type: "array",
-      of: [{ type: "social" }],
-      validation: (rule) => rule.required()
+      of: [{ type: "social" }]
     })
   ]
 });

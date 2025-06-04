@@ -29,7 +29,7 @@ export function MainNav({ header }: MainNavProps) {
         </Link>
       ))}
 
-      <Socials socials={header.socials} />
+      {header.socials && <Socials socials={header.socials} />}
     </nav>
   );
 }

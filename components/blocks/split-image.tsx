@@ -14,9 +14,11 @@ export function SplitImage({ block }: SplitImageProps) {
         <div className="flex flex-col justify-center gap-4">
           <h2 className="text-2xl font-bold md:text-4xl">{block.title}</h2>
 
-          <div className="prose">
-            <PortableText value={block.text} />
-          </div>
+          {block.text && (
+            <div className="prose">
+              <PortableText value={block.text} />
+            </div>
+          )}
         </div>
 
         <Image
