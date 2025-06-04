@@ -31,9 +31,11 @@ export function HighImpactHero({ block }: HeroProps) {
             {block.title}
           </h1>
 
-          <div className="prose prose-lg md:prose-2xl prose-invert mx-auto text-center text-balance">
-            <PortableText value={block.text} />
-          </div>
+          {block.text && (
+            <div className="prose prose-lg md:prose-2xl prose-invert mx-auto text-center text-balance">
+              <PortableText value={block.text} />
+            </div>
+          )}
         </div>
 
         {block.buttons && (

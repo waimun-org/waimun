@@ -1,16 +1,16 @@
-import type { FOOTER_QUERYResult, HEADER_QUERYResult } from "@/sanity/types";
+import type { Social } from "@/sanity/types";
 import Link from "next/link";
 import { Image } from "./image";
 
+export type Socials = Array<Social & { _key: string }>;
+
 export type SocialsProps = {
-  socials:
-    | NonNullable<HEADER_QUERYResult>["socials"]
-    | NonNullable<FOOTER_QUERYResult>["socials"];
+  socials: Socials;
 };
 
 export function Socials({ socials }: SocialsProps) {
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-2">
       {socials.map((social) => (
         <Link
           key={social._key}

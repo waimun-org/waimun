@@ -15,8 +15,7 @@ export const eventType = defineType({
       name: "description",
       title: "Description",
       type: "array",
-      of: [{ type: "block" }],
-      validation: (rule) => rule.required()
+      of: [{ type: "block" }]
     }),
     defineField({
       name: "slug",
@@ -30,8 +29,7 @@ export const eventType = defineType({
     defineField({
       name: "seo",
       title: "SEO",
-      type: "seo",
-      validation: (rule) => rule.required()
+      type: "seo"
     }),
     defineField({
       name: "date",
@@ -75,8 +73,7 @@ export const eventType = defineType({
       name: "details",
       title: "Details",
       type: "array",
-      of: [{ type: "block" }],
-      validation: (rule) => rule.required()
+      of: [{ type: "block" }]
     })
   ]
 });

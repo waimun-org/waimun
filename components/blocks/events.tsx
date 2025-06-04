@@ -49,9 +49,11 @@ export async function Events(_: EventsProps) {
             <Card>
               <CardHeader>
                 <CardTitle>{event.name}</CardTitle>
-                <CardDescription className="prose">
-                  <PortableText value={event.description} />
-                </CardDescription>
+                {event.description && (
+                  <CardDescription className="prose">
+                    <PortableText value={event.description} />
+                  </CardDescription>
+                )}
               </CardHeader>
               <CardContent>
                 <Image

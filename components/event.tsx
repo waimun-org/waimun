@@ -21,9 +21,11 @@ export function Event({ event }: EventProps) {
                 {event.name}
               </h1>
 
-              <div className="prose prose-lg text-balance">
-                <PortableText value={event.description} />
-              </div>
+              {event.description && (
+                <div className="prose prose-lg text-balance">
+                  <PortableText value={event.description} />
+                </div>
+              )}
             </div>
 
             {event.buttons && (
@@ -47,7 +49,11 @@ export function Event({ event }: EventProps) {
 
       <section className="container py-8">
         <div className="prose">
-          <PortableText value={event.details} />
+          {event.details ? (
+            <PortableText value={event.details} />
+          ) : (
+            <p>No details available</p>
+          )}
         </div>
       </section>
     </div>

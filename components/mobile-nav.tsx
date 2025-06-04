@@ -59,7 +59,7 @@ export function MobileNav({ header }: MobileNavProps) {
             ))}
           </div>
 
-          <Socials socials={header.socials} />
+          {header.socials && <Socials socials={header.socials} />}
         </div>
       </DrawerContent>
     </Drawer>

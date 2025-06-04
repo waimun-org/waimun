@@ -44,8 +44,7 @@ export const splitImageType = defineType({
       name: "text",
       title: "Text",
       type: "array",
-      of: [{ type: "block" }],
-      validation: (rule) => rule.required()
+      of: [{ type: "block" }]
     })
   ]
 });
