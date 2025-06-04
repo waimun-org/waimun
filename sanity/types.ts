@@ -13,6 +13,71 @@
  */
 
 // Source: schema.json
+export type TeamMember = {
+  _type: "teamMember";
+  name: string;
+  role: string;
+  bio: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  socials: Array<{
+    title: string;
+    url: string;
+    icon: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "image";
+    };
+    _type: "social";
+    _key: string;
+  }>;
+};
+
+export type Team = {
+  _type: "team";
+  title: string;
+  members: Array<
+    {
+      _key: string;
+    } & TeamMember
+  >;
+};
+
 export type Events = {
   _type: "events";
   title?: string;
@@ -314,6 +379,9 @@ export type Page = {
     | ({
         _key: string;
       } & Events)
+    | ({
+        _key: string;
+      } & Team)
   >;
 };
 
@@ -330,6 +398,9 @@ export type PageBuilder = Array<
   | ({
       _key: string;
     } & Events)
+  | ({
+      _key: string;
+    } & Team)
 >;
 
 export type Hero = {
@@ -614,6 +685,8 @@ export type SanityAssetSourceData = {
 };
 
 export type AllSanitySchemaTypes =
+  | TeamMember
+  | Team
   | Events
   | Checkbox
   | Select
@@ -791,6 +864,16 @@ export type PAGE_QUERYResult = {
           _type: "block";
           _key: string;
         }>;
+      }
+    | {
+        _key: string;
+        _type: "team";
+        title: string;
+        members: Array<
+          {
+            _key: string;
+          } & TeamMember
+        >;
       }
   >;
 } | null;

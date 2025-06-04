@@ -2,9 +2,10 @@
 
 import { useNextSanityImage } from "next-sanity-image";
 import { client } from "@/sanity/lib/client";
-import NextImage from "next/image";
+import NextImage, { getImageProps } from "next/image";
 import type { ImageProps as NextImageProps } from "next/image";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { AvatarImage as AvatarImagePrimitive } from "@/components/ui/avatar";
 
 export interface ImageProps
   extends Omit<NextImageProps, "src" | "width" | "height"> {
@@ -27,4 +28,14 @@ export function Image({ image, fill, ...props }: ImageProps) {
       {...props}
     />
   );
+}
+
+export function AvatarImage({ image, ...props }: ImageProps) {
+  const sanityImageProps = useNextSanityImage(client, image);
+  const { props: imageProps } = getImageProps({
+    ...sanityImageProps,
+    ...props
+  });
+
+  return <AvatarImagePrimitive {...imageProps} />;
 }

@@ -10,7 +10,7 @@ export function LowImpactHero({ block }: HeroProps) {
           {block.title}
         </h1>
 
-        <div className="prose prose-lg text-balance">
+        <div className="prose md:prose-lg text-balance">
           <PortableText value={block.text} />
         </div>
       </div>

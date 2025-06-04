@@ -17,6 +17,8 @@ import { selectType } from "./fields/selectType";
 import { eventsType } from "./blocks/eventsType";
 import { seoType } from "./seoType";
 import { socialType } from "./socialType";
+import { teamType } from "./blocks/teamType";
+import { teamMemberType } from "./teamMemberType";
 
 const schemaTypes = [
   eventType,
@@ -37,7 +39,9 @@ const schemaTypes = [
   selectType,
   checkboxType,
   eventsType,
-  seoType
+  seoType,
+  teamType,
+  teamMemberType
 ];
 
 export default schemaTypes;
