@@ -27,10 +27,6 @@ export function HighImpactHero({ block }: HeroProps) {
   const useLightText = block.backgroundColor?.hex
     ? shouldUseLightText(block.backgroundColor.hex)
     : true;
-  const textColorClass = useLightText
-    ? "text-primary-foreground"
-    : "text-foreground";
-  const proseClass = useLightText ? "prose-invert" : "";
 
   return (
     <section className="relative flex min-h-[600px] flex-col items-center justify-center overflow-hidden">
@@ -56,7 +52,7 @@ export function HighImpactHero({ block }: HeroProps) {
       <div
         className={cn(
           "container flex flex-col items-center justify-center gap-8",
-          textColorClass
+          useLightText && "text-primary-foreground"
         )}
       >
         <div className="flex flex-col items-center gap-4 text-center">
