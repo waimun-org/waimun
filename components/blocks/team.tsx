@@ -38,7 +38,7 @@ export function TeamMember({ member }: TeamMemberProps) {
     <Card key={member._key}>
       <CardHeader>
         <div className="flex flex-wrap items-center gap-4">
-          <Avatar className="size-20">
+          <Avatar className="size-20 text-xl">
             {member.image && (
               <AvatarImage
                 image={member.image}
@@ -46,7 +46,12 @@ export function TeamMember({ member }: TeamMemberProps) {
                 className="object-cover"
               />
             )}
-            <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
+            <AvatarFallback>
+              {member.name
+                .split(" ")
+                .map((name) => name[0])
+                .join("")}
+            </AvatarFallback>
           </Avatar>
 
           <div className="flex flex-col gap-2">
@@ -56,19 +61,21 @@ export function TeamMember({ member }: TeamMemberProps) {
         </div>
       </CardHeader>
 
-      <CardContent className="flex flex-col gap-8">
-        {member.bio && (
-          <div className="prose prose-sm text-muted-foreground text-balance">
-            <PortableText value={member.bio} />
-          </div>
-        )}
+      {(member.bio ?? member.socials) && (
+        <CardContent className="flex flex-col gap-8">
+          {member.bio && (
+            <div className="prose prose-sm text-muted-foreground text-balance">
+              <PortableText value={member.bio} />
+            </div>
+          )}
 
-        {member.socials && (
-          <div className="flex items-center gap-2">
-            <Socials socials={member.socials} />
-          </div>
-        )}
-      </CardContent>
+          {member.socials && (
+            <div className="flex items-center gap-2">
+              <Socials socials={member.socials} />
+            </div>
+          )}
+        </CardContent>
+      )}
     </Card>
   );
 }
