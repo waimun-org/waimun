@@ -45,6 +45,7 @@ export type TeamMember = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    alt?: string;
     _type: "image";
   };
   socials?: Array<
@@ -156,8 +157,7 @@ export type Form = {
     _type: "block";
     _key: string;
   }>;
-  slug: Slug;
-  seo: Seo;
+  content: FormBuilder;
   airtable: {
     baseId: string;
     tableId: string;
@@ -166,7 +166,8 @@ export type Form = {
     enabled: boolean;
     priceId?: string;
   };
-  content: FormBuilder;
+  slug: Slug;
+  seo: Seo;
 };
 
 export type Prose = {
@@ -195,7 +196,7 @@ export type Button = {
   _type: "button";
   link: Link;
   variant: "default" | "secondary" | "destructive" | "outline" | "ghost";
-  size: "default" | "sm" | "lg";
+  size: "sm" | "default" | "lg";
 };
 
 export type Link = {
@@ -319,7 +320,6 @@ export type Page = {
   _rev: string;
   title: string;
   slug: Slug;
-  seo: Seo;
   content: Array<
     | ({
         _key: string;
@@ -337,6 +337,7 @@ export type Page = {
         _key: string;
       } & Team)
   >;
+  seo: Seo;
 };
 
 export type PageBuilder = Array<
@@ -424,10 +425,9 @@ export type Event = {
     _type: "block";
     _key: string;
   }>;
-  slug: Slug;
-  seo?: Seo;
   date?: string;
   venue?: string;
+  price?: number;
   image: {
     asset?: {
       _ref: string;
@@ -441,7 +441,6 @@ export type Event = {
     alt: string;
     _type: "image";
   };
-  price?: number;
   buttons?: Array<
     {
       _key: string;
@@ -465,6 +464,8 @@ export type Event = {
     _type: "block";
     _key: string;
   }>;
+  slug: Slug;
+  seo?: Seo;
 };
 
 export type Seo = {
@@ -687,7 +688,6 @@ export type PAGE_QUERYResult = {
   _rev: string;
   title: string;
   slug: Slug;
-  seo: Seo;
   content: Array<
     | {
         _key: string;
@@ -830,6 +830,7 @@ export type PAGE_QUERYResult = {
         >;
       }
   >;
+  seo: Seo;
 } | null;
 // Variable: HEADER_QUERY
 // Query: *[_type == "header"][0] {  ...,  links[] {    ...,  },  socials[] {    ...,  }}
@@ -941,10 +942,9 @@ export type EVENTS_QUERYResult = Array<{
     _type: "block";
     _key: string;
   }>;
-  slug: Slug;
-  seo?: Seo;
   date?: string;
   venue?: string;
+  price?: number;
   image: {
     asset?: {
       _ref: string;
@@ -958,7 +958,6 @@ export type EVENTS_QUERYResult = Array<{
     alt: string;
     _type: "image";
   };
-  price?: number;
   buttons?: Array<
     {
       _key: string;
@@ -982,6 +981,8 @@ export type EVENTS_QUERYResult = Array<{
     _type: "block";
     _key: string;
   }>;
+  slug: Slug;
+  seo?: Seo;
 }>;
 // Variable: EVENT_BY_SLUG_QUERY
 // Query: *[_type == "event" && slug.current == $slug][0] {  ...}
@@ -1010,10 +1011,9 @@ export type EVENT_BY_SLUG_QUERYResult = {
     _type: "block";
     _key: string;
   }>;
-  slug: Slug;
-  seo?: Seo;
   date?: string;
   venue?: string;
+  price?: number;
   image: {
     asset?: {
       _ref: string;
@@ -1027,7 +1027,6 @@ export type EVENT_BY_SLUG_QUERYResult = {
     alt: string;
     _type: "image";
   };
-  price?: number;
   buttons?: Array<
     {
       _key: string;
@@ -1051,6 +1050,8 @@ export type EVENT_BY_SLUG_QUERYResult = {
     _type: "block";
     _key: string;
   }>;
+  slug: Slug;
+  seo?: Seo;
 } | null;
 // Variable: FORM_BY_SLUG_QUERY
 // Query: *[_type == "form" && slug.current == $slug][0] {  ...,  content[] {    ...,  }}
@@ -1079,16 +1080,6 @@ export type FORM_BY_SLUG_QUERYResult = {
     _type: "block";
     _key: string;
   }>;
-  slug: Slug;
-  seo: Seo;
-  airtable: {
-    baseId: string;
-    tableId: string;
-  };
-  stripe: {
-    enabled: boolean;
-    priceId?: string;
-  };
   content: Array<
     | {
         _key: string;
@@ -1138,6 +1129,16 @@ export type FORM_BY_SLUG_QUERYResult = {
         defaultValue?: string;
       }
   >;
+  airtable: {
+    baseId: string;
+    tableId: string;
+  };
+  stripe: {
+    enabled: boolean;
+    priceId?: string;
+  };
+  slug: Slug;
+  seo: Seo;
 } | null;
 // Variable: FORM_BY_ID_QUERY
 // Query: *[_type == "form" && _id == $id][0] {  ...,  content[] {    ...,  }}
@@ -1166,16 +1167,6 @@ export type FORM_BY_ID_QUERYResult = {
     _type: "block";
     _key: string;
   }>;
-  slug: Slug;
-  seo: Seo;
-  airtable: {
-    baseId: string;
-    tableId: string;
-  };
-  stripe: {
-    enabled: boolean;
-    priceId?: string;
-  };
   content: Array<
     | {
         _key: string;
@@ -1225,6 +1216,16 @@ export type FORM_BY_ID_QUERYResult = {
         defaultValue?: string;
       }
   >;
+  airtable: {
+    baseId: string;
+    tableId: string;
+  };
+  stripe: {
+    enabled: boolean;
+    priceId?: string;
+  };
+  slug: Slug;
+  seo: Seo;
 } | null;
 // Variable: PAGES_SLUGS_QUERY
 // Query: *[_type == "page" && defined(slug.current)]{  "slug": slug.current,  "lastModified": _updatedAt}

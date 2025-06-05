@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { LinkIcon } from "@sanity/icons";
 
 export const linkType = defineType({
   name: "link",
   title: "Link",
   type: "object",
+  icon: LinkIcon,
   fields: [
     defineField({
       name: "text",
@@ -21,5 +23,20 @@ export const linkType = defineType({
           scheme: ["http", "https", "mailto", "tel"]
         })
     })
-  ]
+  ],
+  preview: {
+    select: {
+      title: "text",
+      subtitle: "url"
+    },
+    prepare(selection: { title?: string; subtitle?: string }) {
+      const { title, subtitle } = selection;
+
+      return {
+        title: title ?? "Link",
+        subtitle: subtitle ?? "No URL set",
+        media: LinkIcon
+      };
+    }
+  }
 });

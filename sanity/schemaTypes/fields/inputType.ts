@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { EditIcon } from "@sanity/icons";
 
 export const inputType = defineType({
   name: "input",
   title: "Input",
   type: "object",
+  icon: EditIcon,
   fields: [
     defineField({
       name: "name",
@@ -68,5 +70,25 @@ export const inputType = defineType({
       type: "string",
       initialValue: ""
     })
-  ]
+  ],
+  preview: {
+    select: {
+      label: "label",
+      type: "type",
+      required: "required"
+    },
+    prepare(selection: { label?: string; type?: string; required?: boolean }) {
+      const { label, type, required } = selection;
+      const typeLabel = type
+        ? type.charAt(0).toUpperCase() + type.slice(1)
+        : "Text";
+      const requiredLabel = required ? " • Required" : "";
+
+      return {
+        title: label ?? "Input Field",
+        subtitle: `${typeLabel}${requiredLabel}`,
+        media: EditIcon
+      };
+    }
+  }
 });

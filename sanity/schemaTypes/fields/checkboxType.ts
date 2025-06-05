@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { CheckmarkIcon } from "@sanity/icons";
 
 export const checkboxType = defineType({
   name: "checkbox",
   title: "Checkbox",
   type: "object",
+  icon: CheckmarkIcon,
   fields: [
     defineField({
       name: "name",
@@ -25,16 +27,36 @@ export const checkboxType = defineType({
     defineField({
       name: "required",
       title: "Required",
-      description: "Whether the checkbox must be checked",
       type: "boolean",
       initialValue: false
     }),
     defineField({
       name: "defaultValue",
       title: "Default Value",
-      description: "Whether the checkbox should be checked by default",
       type: "boolean",
       initialValue: false
     })
-  ]
+  ],
+  preview: {
+    select: {
+      label: "label",
+      required: "required",
+      defaultValue: "defaultValue"
+    },
+    prepare(selection: {
+      label?: string;
+      required?: boolean;
+      defaultValue?: boolean;
+    }) {
+      const { label, required, defaultValue } = selection;
+      const requiredLabel = required ? " • Required" : "";
+      const defaultLabel = defaultValue ? " • Default: checked" : "";
+
+      return {
+        title: label ?? "Checkbox Field",
+        subtitle: `Checkbox${requiredLabel}${defaultLabel}`,
+        media: CheckmarkIcon
+      };
+    }
+  }
 });
