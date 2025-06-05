@@ -37,7 +37,7 @@ export function TeamMember({ member }: TeamMemberProps) {
   return (
     <Card key={member._key}>
       <CardHeader>
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex items-center gap-4">
           <Avatar className="size-20 text-xl">
             {member.image && (
               <AvatarImage
