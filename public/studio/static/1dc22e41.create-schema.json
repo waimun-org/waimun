@@ -523,10 +523,7 @@
             "rules": [
               {
                 "flag": "valid",
-                "constraint": [
-                  "high-impact",
-                  "low-impact"
-                ]
+                "constraint": ["high-impact", "low-impact"]
               },
               {
                 "flag": "presence",
@@ -808,10 +805,7 @@
             "rules": [
               {
                 "flag": "valid",
-                "constraint": [
-                  "imageLeft",
-                  "imageRight"
-                ]
+                "constraint": ["imageLeft", "imageRight"]
               },
               {
                 "flag": "presence",
@@ -1194,10 +1188,7 @@
                 "flag": "uri",
                 "constraint": {
                   "options": {
-                    "scheme": [
-                      "/^http$/",
-                      "/^https$/"
-                    ],
+                    "scheme": ["/^http$/", "/^https$/"],
                     "allowRelative": false,
                     "relativeOnly": false,
                     "allowCredentials": false
@@ -1344,11 +1335,7 @@
             "rules": [
               {
                 "flag": "valid",
-                "constraint": [
-                  "default",
-                  "sm",
-                  "lg"
-                ]
+                "constraint": ["default", "sm", "lg"]
               },
               {
                 "flag": "presence",
