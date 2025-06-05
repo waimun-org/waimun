@@ -2,6 +2,116 @@
   {
     "fields": [
       {
+        "name": "h",
+        "type": "number",
+        "title": "Hue"
+      },
+      {
+        "name": "s",
+        "type": "number",
+        "title": "Saturation"
+      },
+      {
+        "name": "l",
+        "type": "number",
+        "title": "Lightness"
+      },
+      {
+        "name": "a",
+        "type": "number",
+        "title": "Alpha"
+      }
+    ],
+    "name": "hslaColor",
+    "type": "object",
+    "title": "Hue Saturation Lightness"
+  },
+  {
+    "fields": [
+      {
+        "name": "h",
+        "type": "number",
+        "title": "Hue"
+      },
+      {
+        "name": "s",
+        "type": "number",
+        "title": "Saturation"
+      },
+      {
+        "name": "v",
+        "type": "number",
+        "title": "Value"
+      },
+      {
+        "name": "a",
+        "type": "number",
+        "title": "Alpha"
+      }
+    ],
+    "name": "hsvaColor",
+    "type": "object",
+    "title": "Hue Saturation Value"
+  },
+  {
+    "fields": [
+      {
+        "name": "r",
+        "type": "number",
+        "title": "Red"
+      },
+      {
+        "name": "g",
+        "type": "number",
+        "title": "Green"
+      },
+      {
+        "name": "b",
+        "type": "number",
+        "title": "Blue"
+      },
+      {
+        "name": "a",
+        "type": "number",
+        "title": "Alpha"
+      }
+    ],
+    "name": "rgbaColor",
+    "type": "object",
+    "title": "Red Green Blue (rgb)"
+  },
+  {
+    "fields": [
+      {
+        "name": "hex",
+        "type": "string"
+      },
+      {
+        "name": "alpha",
+        "type": "number"
+      },
+      {
+        "name": "hsl",
+        "type": "hslaColor",
+        "title": "Hue Saturation Lightness"
+      },
+      {
+        "name": "hsv",
+        "type": "hsvaColor",
+        "title": "Hue Saturation Value"
+      },
+      {
+        "name": "rgb",
+        "type": "rgbaColor",
+        "title": "Red Green Blue (rgb)"
+      }
+    ],
+    "name": "color",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
         "validation": [
           {
             "rules": [
@@ -17,17 +127,6 @@
         "type": "string"
       },
       {
-        "validation": [
-          {
-            "rules": [
-              {
-                "flag": "presence",
-                "constraint": "required"
-              }
-            ],
-            "level": "error"
-          }
-        ],
         "of": [
           {
             "marks": {
@@ -150,48 +249,31 @@
       },
       {
         "options": {
-          "source": "name"
+          "dateFormat": "YYYY-MM-DD",
+          "timeFormat": "HH:mm"
         },
-        "validation": [
-          {
-            "rules": [
-              {
-                "flag": "custom"
-              },
-              {
-                "flag": "presence",
-                "constraint": "required"
-              }
-            ],
-            "level": "error"
-          }
-        ],
-        "name": "slug",
-        "type": "slug"
-      },
-      {
-        "validation": [
-          {
-            "rules": [
-              {
-                "flag": "presence",
-                "constraint": "required"
-              }
-            ],
-            "level": "error"
-          }
-        ],
-        "name": "seo",
-        "type": "seo",
-        "title": "SEO"
-      },
-      {
         "name": "date",
-        "type": "datetime"
+        "type": "datetime",
+        "title": "Date & Time"
       },
       {
         "name": "venue",
         "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 0
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "price",
+        "type": "number"
       },
       {
         "options": {
@@ -230,10 +312,6 @@
         "type": "image"
       },
       {
-        "name": "price",
-        "type": "number"
-      },
-      {
         "of": [
           {
             "type": "button"
@@ -243,17 +321,6 @@
         "type": "array"
       },
       {
-        "validation": [
-          {
-            "rules": [
-              {
-                "flag": "presence",
-                "constraint": "required"
-              }
-            ],
-            "level": "error"
-          }
-        ],
         "of": [
           {
             "marks": {
@@ -373,6 +440,33 @@
         ],
         "name": "details",
         "type": "array"
+      },
+      {
+        "options": {
+          "source": "name",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO"
       }
     ],
     "name": "event",
@@ -387,6 +481,10 @@
               {
                 "flag": "presence",
                 "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 100
               }
             ],
             "level": "error"
@@ -406,14 +504,18 @@
               "title": "Low Impact",
               "value": "low-impact"
             }
-          ]
+          ],
+          "layout": "radio"
         },
         "validation": [
           {
             "rules": [
               {
                 "flag": "valid",
-                "constraint": ["high-impact", "low-impact"]
+                "constraint": [
+                  "high-impact",
+                  "low-impact"
+                ]
               },
               {
                 "flag": "presence",
@@ -424,20 +526,10 @@
           }
         ],
         "name": "intent",
-        "type": "string"
+        "type": "string",
+        "title": "Impact"
       },
       {
-        "validation": [
-          {
-            "rules": [
-              {
-                "flag": "presence",
-                "constraint": "required"
-              }
-            ],
-            "level": "error"
-          }
-        ],
         "of": [
           {
             "marks": {
@@ -559,6 +651,17 @@
         "type": "array"
       },
       {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 3
+              }
+            ],
+            "level": "error"
+          }
+        ],
         "of": [
           {
             "type": "button"
@@ -568,8 +671,20 @@
         "type": "array"
       },
       {
+        "options": {
+          "hotspot": true
+        },
+        "hidden": "conditional",
         "name": "backgroundImage",
         "type": "image"
+      },
+      {
+        "options": {
+          "disableAlpha": true
+        },
+        "hidden": "conditional",
+        "name": "backgroundColor",
+        "type": "color"
       }
     ],
     "name": "hero",
@@ -588,6 +703,9 @@
       },
       {
         "type": "events"
+      },
+      {
+        "type": "team"
       }
     ],
     "name": "pageBuilder",
@@ -612,7 +730,8 @@
       },
       {
         "options": {
-          "source": "title"
+          "source": "title",
+          "maxLength": 96
         },
         "validation": [
           {
@@ -643,9 +762,8 @@
             "level": "error"
           }
         ],
-        "name": "seo",
-        "type": "seo",
-        "title": "SEO"
+        "name": "content",
+        "type": "pageBuilder"
       },
       {
         "validation": [
@@ -659,8 +777,9 @@
             "level": "error"
           }
         ],
-        "name": "content",
-        "type": "pageBuilder"
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO"
       }
     ],
     "name": "page",
@@ -686,7 +805,10 @@
             "rules": [
               {
                 "flag": "valid",
-                "constraint": ["imageLeft", "imageRight"]
+                "constraint": [
+                  "imageLeft",
+                  "imageRight"
+                ]
               },
               {
                 "flag": "presence",
@@ -751,17 +873,6 @@
         "type": "image"
       },
       {
-        "validation": [
-          {
-            "rules": [
-              {
-                "flag": "presence",
-                "constraint": "required"
-              }
-            ],
-            "level": "error"
-          }
-        ],
         "of": [
           {
             "marks": {
@@ -946,6 +1057,10 @@
               {
                 "flag": "presence",
                 "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
               }
             ],
             "level": "error"
@@ -960,17 +1075,6 @@
         "type": "array"
       },
       {
-        "validation": [
-          {
-            "rules": [
-              {
-                "flag": "presence",
-                "constraint": "required"
-              }
-            ],
-            "level": "error"
-          }
-        ],
         "of": [
           {
             "type": "social"
@@ -1007,6 +1111,10 @@
               {
                 "flag": "presence",
                 "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 1
               }
             ],
             "level": "error"
@@ -1021,17 +1129,6 @@
         "type": "array"
       },
       {
-        "validation": [
-          {
-            "rules": [
-              {
-                "flag": "presence",
-                "constraint": "required"
-              }
-            ],
-            "level": "error"
-          }
-        ],
         "of": [
           {
             "type": "social"
@@ -1069,7 +1166,10 @@
                 "flag": "uri",
                 "constraint": {
                   "options": {
-                    "scheme": ["/^http$/", "/^https$/"],
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
                     "allowRelative": false,
                     "relativeOnly": false,
                     "allowCredentials": false
@@ -1126,7 +1226,7 @@
       }
     ],
     "name": "social",
-    "type": "document"
+    "type": "object"
   },
   {
     "fields": [
@@ -1149,7 +1249,7 @@
         "options": {
           "list": [
             {
-              "title": "Default",
+              "title": "Primary (Default)",
               "value": "default"
             },
             {
@@ -1168,8 +1268,10 @@
               "title": "Ghost",
               "value": "ghost"
             }
-          ]
+          ],
+          "layout": "dropdown"
         },
+        "initialValue": "default",
         "validation": [
           {
             "rules": [
@@ -1198,25 +1300,31 @@
         "options": {
           "list": [
             {
-              "title": "Default",
-              "value": "default"
-            },
-            {
               "title": "Small",
               "value": "sm"
+            },
+            {
+              "title": "Medium (Default)",
+              "value": "default"
             },
             {
               "title": "Large",
               "value": "lg"
             }
-          ]
+          ],
+          "layout": "radio"
         },
+        "initialValue": "default",
         "validation": [
           {
             "rules": [
               {
                 "flag": "valid",
-                "constraint": ["default", "sm", "lg"]
+                "constraint": [
+                  "sm",
+                  "default",
+                  "lg"
+                ]
               },
               {
                 "flag": "presence",
@@ -1574,41 +1682,25 @@
         "type": "array"
       },
       {
-        "options": {
-          "source": "title"
-        },
         "validation": [
           {
             "rules": [
               {
-                "flag": "custom"
+                "flag": "presence",
+                "constraint": "required"
               },
               {
-                "flag": "presence",
-                "constraint": "required"
+                "flag": "min",
+                "constraint": 1
               }
             ],
-            "level": "error"
+            "level": "error",
+            "message": "Form needs at least one field"
           }
         ],
-        "name": "slug",
-        "type": "slug"
-      },
-      {
-        "validation": [
-          {
-            "rules": [
-              {
-                "flag": "presence",
-                "constraint": "required"
-              }
-            ],
-            "level": "error"
-          }
-        ],
-        "name": "seo",
-        "type": "seo",
-        "title": "SEO"
+        "name": "content",
+        "type": "formBuilder",
+        "title": "Fields"
       },
       {
         "validation": [
@@ -1689,6 +1781,7 @@
             "type": "boolean"
           },
           {
+            "hidden": "conditional",
             "name": "priceId",
             "type": "string",
             "title": "Price ID"
@@ -1696,6 +1789,28 @@
         ],
         "name": "stripe",
         "type": "object"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
       },
       {
         "validation": [
@@ -1709,8 +1824,9 @@
             "level": "error"
           }
         ],
-        "name": "content",
-        "type": "formBuilder"
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO"
       }
     ],
     "name": "form",
@@ -2000,13 +2116,11 @@
       },
       {
         "initialValue": false,
-        "description": "Whether the checkbox must be checked",
         "name": "required",
         "type": "boolean"
       },
       {
         "initialValue": false,
-        "description": "Whether the checkbox should be checked by default",
         "name": "defaultValue",
         "type": "boolean"
       }
@@ -2033,6 +2147,10 @@
               {
                 "flag": "presence",
                 "constraint": "required"
+              },
+              {
+                "flag": "max",
+                "constraint": 60
               }
             ],
             "level": "error"
@@ -2042,12 +2160,13 @@
         "type": "string"
       },
       {
+        "rows": 3,
         "validation": [
           {
             "rules": [
               {
-                "flag": "presence",
-                "constraint": "required"
+                "flag": "max",
+                "constraint": 160
               }
             ],
             "level": "error"
@@ -2094,13 +2213,235 @@
             "level": "error"
           }
         ],
+        "description": "Prevent search engines from indexing this page.",
         "name": "noIndex",
         "type": "boolean",
-        "title": "Hide from search engines?"
+        "title": "Hide from Search Engines"
       }
     ],
     "name": "seo",
     "type": "object",
     "title": "SEO"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "type": "teamMember"
+          }
+        ],
+        "name": "members",
+        "type": "array"
+      }
+    ],
+    "name": "team",
+    "type": "object"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "role",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "i18nTitleKey": "inputs.portable-text.annotation.link",
+                  "options": {
+                    "modal": {
+                      "type": "popover"
+                    }
+                  },
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/",
+                                    "/^tel$/",
+                                    "/^mailto$/"
+                                  ],
+                                  "allowRelative": true,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "description": "A valid web, email, phone, or relative link.",
+                      "name": "href",
+                      "type": "url",
+                      "title": "Link"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Italic"
+                },
+                {
+                  "value": "code",
+                  "title": "Code"
+                },
+                {
+                  "value": "underline",
+                  "title": "Underline"
+                },
+                {
+                  "value": "strike-through",
+                  "title": "Strike"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bulleted list"
+              },
+              {
+                "value": "number",
+                "title": "Numbered list"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h1",
+                "title": "Heading 1"
+              },
+              {
+                "value": "h2",
+                "title": "Heading 2"
+              },
+              {
+                "value": "h3",
+                "title": "Heading 3"
+              },
+              {
+                "value": "h4",
+                "title": "Heading 4"
+              },
+              {
+                "value": "h5",
+                "title": "Heading 5"
+              },
+              {
+                "value": "h6",
+                "title": "Heading 6"
+              },
+              {
+                "value": "blockquote",
+                "title": "Quote"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "bio",
+        "type": "array"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "fields": [
+          {
+            "name": "alt",
+            "type": "string",
+            "title": "Alt Text"
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "of": [
+          {
+            "type": "social"
+          }
+        ],
+        "name": "socials",
+        "type": "array"
+      }
+    ],
+    "name": "teamMember",
+    "type": "object"
   }
 ]
