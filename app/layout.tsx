@@ -24,8 +24,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={siteConfig.locale}>
-      <body className={`${inter.variable} antialiased`}>
+    <html lang={siteConfig.locale} className={inter.variable}>
+      <body className="antialiased">
         {children}
         <Script
           src="/script.js"
