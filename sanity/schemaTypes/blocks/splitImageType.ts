@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { ImageIcon } from "@sanity/icons";
 
 export const splitImageType = defineType({
   name: "splitImage",
   title: "Split Image",
   type: "object",
+  icon: ImageIcon,
   fields: [
     defineField({
       name: "orientation",
@@ -46,5 +48,22 @@ export const splitImageType = defineType({
       type: "array",
       of: [{ type: "block" }]
     })
-  ]
+  ],
+  preview: {
+    select: {
+      title: "title",
+      orientation: "orientation"
+    },
+    prepare(selection: { title?: string; orientation?: string }) {
+      const { title, orientation } = selection;
+      const orientationLabel =
+        orientation === "imageLeft" ? "Image Left" : "Image Right";
+
+      return {
+        title: title ?? "Split Image",
+        subtitle: orientationLabel,
+        media: ImageIcon
+      };
+    }
+  }
 });

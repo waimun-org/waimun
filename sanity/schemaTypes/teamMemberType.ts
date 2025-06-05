@@ -1,9 +1,11 @@
-import { defineType, defineField } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
+import { UsersIcon } from "@sanity/icons";
 
 export const teamMemberType = defineType({
   name: "teamMember",
   title: "Team Member",
   type: "object",
+  icon: UsersIcon,
   fields: [
     defineField({
       name: "name",
@@ -29,13 +31,35 @@ export const teamMemberType = defineType({
       type: "image",
       options: {
         hotspot: true
-      }
+      },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt Text",
+          type: "string"
+        })
+      ]
     }),
     defineField({
       name: "socials",
       title: "Socials",
       type: "array",
-      of: [{ type: "social" }]
+      of: [defineArrayMember({ type: "social" })]
     })
-  ]
+  ],
+  preview: {
+    select: {
+      title: "name",
+      subtitle: "role"
+    },
+    prepare(selection: { title?: string; subtitle?: string }) {
+      const { title, subtitle } = selection;
+
+      return {
+        title: title ?? "Team Member",
+        subtitle: subtitle ?? "No role specified",
+        media: UsersIcon
+      };
+    }
+  }
 });

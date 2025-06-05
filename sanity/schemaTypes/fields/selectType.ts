@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { ChevronDownIcon } from "@sanity/icons";
 
 export const selectType = defineType({
   name: "select",
   title: "Select",
   type: "object",
+  icon: ChevronDownIcon,
   fields: [
     defineField({
       name: "name",
@@ -46,5 +48,27 @@ export const selectType = defineType({
       type: "string",
       initialValue: ""
     })
-  ]
+  ],
+  preview: {
+    select: {
+      label: "label",
+      options: "options",
+      required: "required"
+    },
+    prepare(selection: {
+      label?: string;
+      options?: string[];
+      required?: boolean;
+    }) {
+      const { label, options, required } = selection;
+      const optionCount = Array.isArray(options) ? options.length : 0;
+      const requiredLabel = required ? " • Required" : "";
+
+      return {
+        title: label ?? "Select Field",
+        subtitle: `${optionCount} option${optionCount !== 1 ? "s" : ""}${requiredLabel}`,
+        media: ChevronDownIcon
+      };
+    }
+  }
 });

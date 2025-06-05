@@ -263,6 +263,13 @@
                 },
                 "optional": true
               },
+              "alt": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
               "_type": {
                 "type": "objectAttribute",
                 "value": {
@@ -962,19 +969,11 @@
         },
         "optional": false
       },
-      "slug": {
+      "content": {
         "type": "objectAttribute",
         "value": {
           "type": "inline",
-          "name": "slug"
-        },
-        "optional": false
-      },
-      "seo": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "seo"
+          "name": "formBuilder"
         },
         "optional": false
       },
@@ -1024,11 +1023,19 @@
         },
         "optional": false
       },
-      "content": {
+      "slug": {
         "type": "objectAttribute",
         "value": {
           "type": "inline",
-          "name": "formBuilder"
+          "name": "slug"
+        },
+        "optional": false
+      },
+      "seo": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "seo"
         },
         "optional": false
       }
@@ -1286,11 +1293,11 @@
             "of": [
               {
                 "type": "string",
-                "value": "default"
+                "value": "sm"
               },
               {
                 "type": "string",
-                "value": "sm"
+                "value": "default"
               },
               {
                 "type": "string",
@@ -2036,14 +2043,6 @@
         },
         "optional": false
       },
-      "seo": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "seo"
-        },
-        "optional": false
-      },
       "content": {
         "type": "objectAttribute",
         "value": {
@@ -2128,6 +2127,14 @@
               }
             ]
           }
+        },
+        "optional": false
+      },
+      "seo": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "seo"
         },
         "optional": false
       }
@@ -2759,22 +2766,6 @@
         },
         "optional": true
       },
-      "slug": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "slug"
-        },
-        "optional": false
-      },
-      "seo": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "seo"
-        },
-        "optional": true
-      },
       "date": {
         "type": "objectAttribute",
         "value": {
@@ -2786,6 +2777,13 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
+        },
+        "optional": true
+      },
+      "price": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
         },
         "optional": true
       },
@@ -2864,13 +2862,6 @@
           }
         },
         "optional": false
-      },
-      "price": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "number"
-        },
-        "optional": true
       },
       "buttons": {
         "type": "objectAttribute",
@@ -3070,6 +3061,22 @@
               }
             }
           }
+        },
+        "optional": true
+      },
+      "slug": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "slug"
+        },
+        "optional": false
+      },
+      "seo": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "seo"
         },
         "optional": true
       }

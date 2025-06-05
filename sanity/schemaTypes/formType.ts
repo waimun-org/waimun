@@ -1,14 +1,51 @@
 import { defineField, defineType } from "sanity";
+import {
+  EditIcon,
+  DocumentTextIcon,
+  LinkIcon,
+  SearchIcon,
+  CogIcon
+} from "@sanity/icons";
 
 export const formType = defineType({
   name: "form",
   title: "Form",
   type: "document",
+  icon: EditIcon,
+  groups: [
+    {
+      name: "content",
+      title: "Content",
+      icon: DocumentTextIcon,
+      default: true
+    },
+    {
+      name: "fields",
+      title: "Fields",
+      icon: EditIcon
+    },
+    {
+      name: "integrations",
+      title: "Integrations",
+      icon: CogIcon
+    },
+    {
+      name: "settings",
+      title: "Settings",
+      icon: LinkIcon
+    },
+    {
+      name: "seo",
+      title: "SEO",
+      icon: SearchIcon
+    }
+  ],
   fields: [
     defineField({
       name: "title",
       title: "Title",
       type: "string",
+      group: "content",
       validation: (rule) => rule.required()
     }),
     defineField({
@@ -16,27 +53,22 @@ export const formType = defineType({
       title: "Description",
       type: "array",
       of: [{ type: "block" }],
+      group: "content",
       validation: (rule) => rule.required()
     }),
     defineField({
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      options: {
-        source: "title"
-      },
-      validation: (rule) => rule.required()
-    }),
-    defineField({
-      name: "seo",
-      title: "SEO",
-      type: "seo",
-      validation: (rule) => rule.required()
+      name: "content",
+      title: "Fields",
+      type: "formBuilder",
+      group: "fields",
+      validation: (rule) =>
+        rule.required().min(1).error("Form needs at least one field")
     }),
     defineField({
       name: "airtable",
       title: "Airtable",
       type: "object",
+      group: "integrations",
       fields: [
         defineField({
           name: "baseId",
@@ -57,6 +89,7 @@ export const formType = defineType({
       name: "stripe",
       title: "Stripe",
       type: "object",
+      group: "integrations",
       fields: [
         defineField({
           name: "enabled",
@@ -68,16 +101,60 @@ export const formType = defineType({
         defineField({
           name: "priceId",
           title: "Price ID",
-          type: "string"
+          type: "string",
+          hidden: ({ parent }: { parent?: { enabled?: boolean } }) =>
+            !parent?.enabled
         })
       ],
       validation: (rule) => rule.required()
     }),
     defineField({
-      name: "content",
-      title: "Content",
-      type: "formBuilder",
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      group: "settings",
+      options: {
+        source: "title",
+        maxLength: 96,
+        slugify: (input: string) =>
+          input.toLowerCase().replace(/\s+/g, "-").slice(0, 96)
+      },
+      validation: (rule) => rule.required()
+    }),
+    defineField({
+      name: "seo",
+      title: "SEO",
+      type: "seo",
+      group: "seo",
       validation: (rule) => rule.required()
     })
+  ],
+  preview: {
+    select: {
+      title: "title",
+      fieldCount: "content"
+    },
+    prepare(selection: { title?: string; fieldCount?: unknown[] }) {
+      const { title, fieldCount } = selection;
+      const count = Array.isArray(fieldCount) ? fieldCount.length : 0;
+
+      return {
+        title: title ?? "Untitled Form",
+        subtitle: `${count} field${count !== 1 ? "s" : ""}`,
+        media: EditIcon
+      };
+    }
+  },
+  orderings: [
+    {
+      title: "Form Name A-Z",
+      name: "titleAsc",
+      by: [{ field: "title", direction: "asc" }]
+    },
+    {
+      title: "Last Updated",
+      name: "updatedDesc",
+      by: [{ field: "_updatedAt", direction: "desc" }]
+    }
   ]
 });

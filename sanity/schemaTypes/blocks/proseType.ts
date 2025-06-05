@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { DocumentTextIcon } from "@sanity/icons";
 
 export const proseType = defineType({
   name: "prose",
   title: "Prose",
   type: "object",
+  icon: DocumentTextIcon,
   fields: [
     defineField({
       name: "content",
@@ -12,5 +14,13 @@ export const proseType = defineType({
       of: [{ type: "block" }],
       validation: (rule) => rule.required()
     })
-  ]
+  ],
+  preview: {
+    prepare() {
+      return {
+        title: "Prose",
+        media: DocumentTextIcon
+      };
+    }
+  }
 });

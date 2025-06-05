@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { DocumentTextIcon } from "@sanity/icons";
 
 export const textareaType = defineType({
   name: "textarea",
   title: "Textarea",
   type: "object",
+  icon: DocumentTextIcon,
   fields: [
     defineField({
       name: "name",
@@ -54,5 +56,21 @@ export const textareaType = defineType({
       type: "string",
       initialValue: ""
     })
-  ]
+  ],
+  preview: {
+    select: {
+      label: "label",
+      required: "required"
+    },
+    prepare(selection: { label?: string; required?: boolean }) {
+      const { label, required } = selection;
+      const requiredLabel = required ? " • Required" : "";
+
+      return {
+        title: label ?? "Textarea Field",
+        subtitle: `Textarea${requiredLabel}`,
+        media: DocumentTextIcon
+      };
+    }
+  }
 });
