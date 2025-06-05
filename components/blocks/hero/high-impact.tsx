@@ -26,13 +26,13 @@ export function HighImpactHero({ block }: HeroProps) {
       )}
 
       <div className="container flex flex-col items-center justify-center gap-8 text-white">
-        <div className="flex flex-col items-center gap-4 text-center">
-          <h1 className="max-w-2xl text-4xl font-bold text-balance md:text-6xl">
+        <div className="flex flex-col items-center gap-8 text-center">
+          <h1 className="text-2xl font-bold text-balance md:text-4xl lg:text-6xl">
             {block.title}
           </h1>
 
           {block.text && (
-            <div className="prose prose-lg md:prose-2xl prose-invert mx-auto text-center text-balance">
+            <div className="prose prose-base md:prose-lg prose-invert text-balance">
               <PortableText value={block.text} />
             </div>
           )}
