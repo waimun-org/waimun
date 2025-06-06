@@ -14,6 +14,8 @@ import { inputType } from "./fields/inputType";
 import { checkboxType } from "./fields/checkboxType";
 import { textareaType } from "./fields/textareaType";
 import { selectType } from "./fields/selectType";
+import { separatorType } from "./fields/separatorType";
+import { textBlockType } from "./fields/textBlockType";
 import { eventsType } from "./blocks/eventsType";
 import { seoType } from "./seoType";
 import { socialType } from "./socialType";
@@ -38,6 +40,8 @@ const schemaTypes = [
   textareaType,
   selectType,
   checkboxType,
+  separatorType,
+  textBlockType,
   eventsType,
   seoType,
   teamType,
