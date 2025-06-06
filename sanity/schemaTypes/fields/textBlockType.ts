@@ -8,6 +8,12 @@ export const textBlockType = defineType({
   icon: DocumentTextIcon,
   fields: [
     defineField({
+      name: "label",
+      title: "Label",
+      type: "string",
+      initialValue: "Text Block",
+    }),
+    defineField({
       name: "content",
       title: "Content",
       type: "array",
@@ -16,9 +22,14 @@ export const textBlockType = defineType({
     }),
   ],
   preview: {
-    prepare() {
+    select: {
+      label: "label",
+    },
+    prepare(selection: { label?: string }) {
+      const { label } = selection;
+
       return {
-        title: "Text Block",
+        title: label ?? "Text Block",
         media: DocumentTextIcon,
       };
     },
