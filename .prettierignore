@@ -1,0 +1,4 @@
+public/studio/static/
+sanity/extract.json
+sanity/types.ts
+pnpm-lock.yaml
