@@ -70,6 +70,33 @@ export type Events = {
   title?: string;
 };
 
+export type TextBlock = {
+  _type: "textBlock";
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
+export type Separator = {
+  _type: "separator";
+  label?: string;
+};
+
 export type Checkbox = {
   _type: "checkbox";
   name: string;
@@ -130,6 +157,12 @@ export type FormBuilder = Array<
   | ({
       _key: string;
     } & Checkbox)
+  | ({
+      _key: string;
+    } & Separator)
+  | ({
+      _key: string;
+    } & TextBlock)
 >;
 
 export type Form = {
@@ -649,6 +682,8 @@ export type AllSanitySchemaTypes =
   | TeamMember
   | Team
   | Events
+  | TextBlock
+  | Separator
   | Checkbox
   | Select
   | Textarea
@@ -1123,6 +1158,11 @@ export type FORM_BY_SLUG_QUERYResult = {
       }
     | {
         _key: string;
+        _type: "separator";
+        label?: string;
+      }
+    | {
+        _key: string;
         _type: "textarea";
         name: string;
         label: string;
@@ -1133,6 +1173,36 @@ export type FORM_BY_SLUG_QUERYResult = {
         maxLength?: number;
         pattern?: string;
         defaultValue?: string;
+      }
+    | {
+        _key: string;
+        _type: "textBlock";
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?:
+            | "blockquote"
+            | "h1"
+            | "h2"
+            | "h3"
+            | "h4"
+            | "h5"
+            | "h6"
+            | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            href?: string;
+            _type: "link";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
       }
   >;
   airtable: {
@@ -1216,6 +1286,11 @@ export type FORM_BY_ID_QUERYResult = {
       }
     | {
         _key: string;
+        _type: "separator";
+        label?: string;
+      }
+    | {
+        _key: string;
         _type: "textarea";
         name: string;
         label: string;
@@ -1226,6 +1301,36 @@ export type FORM_BY_ID_QUERYResult = {
         maxLength?: number;
         pattern?: string;
         defaultValue?: string;
+      }
+    | {
+        _key: string;
+        _type: "textBlock";
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?:
+            | "blockquote"
+            | "h1"
+            | "h2"
+            | "h3"
+            | "h4"
+            | "h5"
+            | "h6"
+            | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            href?: string;
+            _type: "link";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
       }
   >;
   airtable: {

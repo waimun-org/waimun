@@ -6,6 +6,10 @@ export function getFormDefaultValues(
 ): Record<string, unknown> {
   const values = formBuilder.reduce(
     (acc, field) => {
+      if (field._type === "separator" || field._type === "textBlock") {
+        return acc;
+      }
+
       acc[field.name] = field.defaultValue;
       switch (field._type) {
         case "input":
@@ -35,6 +39,10 @@ export function getFormSchema(formBuilder: FormBuilder): ZodSchema {
   const schema: Record<string, z.ZodTypeAny> = {};
 
   formBuilder.forEach((field) => {
+    if (field._type === "separator" || field._type === "textBlock") {
+      return;
+    }
+
     let fieldSchema: z.ZodTypeAny;
 
     switch (field._type) {
@@ -98,6 +106,9 @@ export function getFormSchema(formBuilder: FormBuilder): ZodSchema {
         }
 
         break;
+
+      default:
+        return;
     }
 
     schema[field.name] = field.required ? fieldSchema : fieldSchema.optional();
