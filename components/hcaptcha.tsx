@@ -11,20 +11,13 @@ export type HCaptchaFieldProps = {
 
 export function HCaptcha({ form }: HCaptchaFieldProps) {
   const hcaptchaRef = useRef<HCaptchaComponent>(null);
-  const siteKey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
+  const siteKey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY!;
 
   useEffect(() => {
     if (form.formState.isSubmitted && hcaptchaRef.current) {
       hcaptchaRef.current.resetCaptcha();
     }
   }, [form.formState.isSubmitted]);
-
-  if (!siteKey) {
-    console.error(
-      "hCaptcha site key not found. Please set NEXT_PUBLIC_HCAPTCHA_SITE_KEY environment variable.",
-    );
-    return null;
-  }
 
   return (
     <FormField

@@ -172,7 +172,7 @@ export async function submitForm(input: SubmitForm) {
   const parsedInput = tryCatch(() => submitFormSchema.parse(input));
 
   if (parsedInput.error) {
-    console.error(parsedInput.error);
+    console.error("Invalid form data:", parsedInput.error);
     return { success: false, error: "Invalid form data" };
   }
 
@@ -183,7 +183,7 @@ export async function submitForm(input: SubmitForm) {
   );
 
   if (validationResult.error) {
-    console.error(validationResult.error);
+    console.error("Invalid form data:", validationResult.error);
     return { success: false, error: "Invalid form data" };
   }
 
@@ -194,7 +194,7 @@ export async function submitForm(input: SubmitForm) {
   );
 
   if (recordResult.error) {
-    console.error(recordResult.error);
+    console.error("Failed to create form record:", recordResult.error);
     return { success: false, error: "Failed to create form record" };
   }
 
@@ -206,7 +206,11 @@ export async function submitForm(input: SubmitForm) {
     );
 
     if (stripeResult.error) {
-      console.error(stripeResult.error);
+      console.error(
+        "Failed to create Stripe checkout session:",
+        stripeResult.error,
+      );
+
       return {
         success: false,
         error: "Failed to create Stripe checkout session",
