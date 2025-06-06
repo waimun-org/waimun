@@ -156,7 +156,6 @@ export const formType = defineType({
           title: "Additional Instructions",
           type: "text",
           rows: 3,
-          description: "Optional instructions for the customer",
           hidden: ({ parent }: { parent?: { enabled?: boolean } }) =>
             !parent?.enabled
         })
