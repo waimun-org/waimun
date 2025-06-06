@@ -151,6 +151,7 @@ export function Form({ form: formConfig, price }: FormProps) {
             <FormBuilder content={formConfig.content} form={form} />
             <HCaptcha form={form} />
             <Button
+              id="submit"
               type="submit"
               disabled={form.formState.isSubmitting}
               variant={isSuccess === true ? "success" : undefined}
