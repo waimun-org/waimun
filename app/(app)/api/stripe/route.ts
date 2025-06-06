@@ -3,9 +3,9 @@ import { client } from "@/sanity/lib/client";
 import { FORM_BY_ID_QUERY } from "@/sanity/lib/queries";
 import type { FORM_BY_ID_QUERYResult } from "@/sanity/types";
 import { stripe } from "@/stripe";
+import { tryCatch } from "@/utils/try-catch";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-import type Stripe from "stripe";
 
 export async function POST(request: Request) {
   const headersList = await headers();
@@ -15,25 +15,27 @@ export async function POST(request: Request) {
   if (!signature) {
     return NextResponse.json(
       { error: "No signature found in request headers" },
-      { status: 400 },
+      { status: 400 }
     );
   }
 
-  let event: Stripe.Event;
-  try {
-    event = stripe.webhooks.constructEvent(
+  const eventResult = tryCatch(() =>
+    stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!,
-    );
-  } catch (error) {
-    console.error(error);
+      process.env.STRIPE_WEBHOOK_SECRET!
+    )
+  );
 
+  if (eventResult.error) {
+    console.error("Webhook signature verification failed:", eventResult.error);
     return NextResponse.json(
       { error: "Error verifying webhook signature" },
-      { status: 400 },
+      { status: 400 }
     );
   }
+
+  const event = eventResult.data;
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
@@ -48,29 +50,28 @@ export async function POST(request: Request) {
     if (!formId) {
       return NextResponse.json(
         { error: "No formId found in checkout session metadata" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
-    let form: FORM_BY_ID_QUERYResult | undefined;
+    const formResult = await tryCatch(
+      client.fetch<FORM_BY_ID_QUERYResult>(FORM_BY_ID_QUERY, {
+        id: formId
+      })
+    );
 
-    try {
-      form = await client.fetch<FORM_BY_ID_QUERYResult>(FORM_BY_ID_QUERY, {
-        id: formId,
-      });
-
-      if (!form) {
-        return NextResponse.json({ error: "Form not found" }, { status: 400 });
-      }
-    } catch (error) {
-      console.error(error);
-
+    if (formResult.error) {
+      console.error("Failed to fetch form:", formResult.error);
       return NextResponse.json(
-        {
-          error: "Failed to update form payment status.",
-        },
-        { status: 500 },
+        { error: "Failed to fetch form data" },
+        { status: 500 }
       );
+    }
+
+    const form = formResult.data;
+
+    if (!form) {
+      return NextResponse.json({ error: "Form not found" }, { status: 400 });
     }
 
     const recordId = metadata.recordId;
@@ -78,25 +79,26 @@ export async function POST(request: Request) {
     if (!recordId) {
       return NextResponse.json(
         { error: "No recordId found in checkout session metadata" },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
-    try {
-      await updateRecord(
+    const updateResult = await tryCatch(
+      updateRecord(
         {
           baseId: form.airtable.baseId,
-          tableId: form.airtable.tableId,
+          tableId: form.airtable.tableId
         },
         recordId,
-        { "Payment Status": "Paid" },
-      );
-    } catch (error) {
-      console.error(error);
+        { "Payment Status": "Paid" }
+      )
+    );
 
+    if (updateResult.error) {
+      console.error("Failed to update record in Airtable:", updateResult.error);
       return NextResponse.json(
         { error: "Failed to update record in Airtable" },
-        { status: 500 },
+        { status: 500 }
       );
     }
   }
