@@ -4,7 +4,7 @@ import type { PageBuilder } from "@/sanity/types";
 import { Prose } from "./blocks/prose";
 import { Events } from "./blocks/events";
 import { Team } from "./blocks/team";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 
 export type PageBuilderProps = {
   content: PageBuilder;

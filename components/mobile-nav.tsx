@@ -14,7 +14,7 @@ import {
 import type { HEADER_QUERYResult } from "@/sanity/types";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import { Socials } from "./socials";
 
 export type MobileNavProps = {

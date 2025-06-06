@@ -1,7 +1,7 @@
 import { PortableText } from "next-sanity";
 import { Image } from "@/components/image";
 import type { SplitImage } from "@/sanity/types";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 
 export type SplitImageProps = {
   block: SplitImage;

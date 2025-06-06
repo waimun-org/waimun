@@ -1,8 +1,8 @@
-import { updateRecord } from "@/airtable/forms";
+import { updateRecord } from "@/lib/airtable";
 import { client } from "@/sanity/lib/client";
 import { FORM_BY_ID_QUERY } from "@/sanity/lib/queries";
 import type { FORM_BY_ID_QUERYResult } from "@/sanity/types";
-import { stripe } from "@/stripe";
+import { stripe } from "@/lib/stripe";
 import { tryCatch } from "@/utils/try-catch";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";

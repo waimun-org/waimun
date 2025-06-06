@@ -7,7 +7,7 @@ import type {
 import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { getFormDefaultValues, getFormSchema } from "@/utils/form";
+import { getFormDefaultValues, getFormSchema } from "@/lib/form";
 import { FormBuilder } from "./form-builder";
 import { HCaptcha } from "./hcaptcha";
 import { PortableText } from "next-sanity";

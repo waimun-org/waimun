@@ -2,12 +2,12 @@
 
 import { client } from "@/sanity/lib/client";
 import { FORM_BY_SLUG_QUERY } from "@/sanity/lib/queries";
-import { getFormSchema } from "@/utils/form";
-import { verifyHCaptchaToken } from "@/utils/hcaptcha";
+import { getFormSchema } from "@/lib/form";
+import { verifyHCaptchaToken } from "@/lib/hcaptcha";
 import { tryCatch } from "@/utils/try-catch";
 import { z } from "zod";
-import { stripe } from "@/stripe";
-import { createRecord } from "@/airtable/forms";
+import { stripe } from "@/lib/stripe";
+import { createRecord } from "@/lib/airtable";
 import type { FORM_BY_SLUG_QUERYResult } from "@/sanity/types";
 import { headers } from "next/headers";
 

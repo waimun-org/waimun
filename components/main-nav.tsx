@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { HEADER_QUERYResult } from "@/sanity/types";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import { Socials } from "./socials";
 
 export type MainNavProps = {
