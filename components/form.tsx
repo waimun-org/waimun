@@ -22,7 +22,6 @@ import { submitForm } from "@/app/(app)/forms/actions";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
-import type Stripe from "stripe";
 import Link from "next/link";
 import { PaymentMethodDialog } from "./payment-method-dialog";
 import { BankDetailsDialog } from "./bank-details-dialog";
@@ -34,7 +33,10 @@ export type FormProps = {
   price?: Price | null;
 };
 
-export type Price = Partial<Pick<Stripe.Price, "unit_amount" | "currency">>;
+export type Price = {
+  unitAmount: number;
+  currency: string;
+};
 
 type PaymentMethod = "stripe" | "bankTransfer";
 
@@ -214,14 +216,14 @@ export function PaymentInformation({ price }: { price?: Price | null }) {
     return null;
   }
 
-  if (!price.unit_amount || !price.currency) {
+  if (!price.unitAmount || !price.currency) {
     return null;
   }
 
   const formattedPrice = new Intl.NumberFormat("en-NZ", {
     style: "currency",
     currency: price.currency.toUpperCase()
-  }).format(price.unit_amount / 100);
+  }).format(price.unitAmount / 100);
 
   return (
     <Link
