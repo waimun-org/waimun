@@ -72,6 +72,7 @@ export type Events = {
 
 export type TextBlock = {
   _type: "textBlock";
+  label?: string;
   content: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -1177,6 +1178,7 @@ export type FORM_BY_SLUG_QUERYResult = {
     | {
         _key: string;
         _type: "textBlock";
+        label?: string;
         content: Array<{
           children?: Array<{
             marks?: Array<string>;
@@ -1305,6 +1307,7 @@ export type FORM_BY_ID_QUERYResult = {
     | {
         _key: string;
         _type: "textBlock";
+        label?: string;
         content: Array<{
           children?: Array<{
             marks?: Array<string>;
