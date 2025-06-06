@@ -3,12 +3,12 @@ export async function verifyHCaptchaToken(token: string): Promise<boolean> {
     const response = await fetch("https://hcaptcha.com/siteverify", {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/x-www-form-urlencoded",
       },
       body: new URLSearchParams({
         secret: process.env.HCAPTCHA_SECRET_KEY!,
-        response: token
-      })
+        response: token,
+      }),
     });
 
     const data = (await response.json()) as {

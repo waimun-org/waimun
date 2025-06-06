@@ -11,37 +11,37 @@ export const checkboxType = defineType({
       name: "name",
       title: "Name",
       type: "string",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "label",
       title: "Label",
       type: "string",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "description",
       title: "Description",
-      type: "string"
+      type: "string",
     }),
     defineField({
       name: "required",
       title: "Required",
       type: "boolean",
-      initialValue: false
+      initialValue: false,
     }),
     defineField({
       name: "defaultValue",
       title: "Default Value",
       type: "boolean",
-      initialValue: false
-    })
+      initialValue: false,
+    }),
   ],
   preview: {
     select: {
       label: "label",
       required: "required",
-      defaultValue: "defaultValue"
+      defaultValue: "defaultValue",
     },
     prepare(selection: {
       label?: string;
@@ -55,8 +55,8 @@ export const checkboxType = defineType({
       return {
         title: label ?? "Checkbox Field",
         subtitle: `Checkbox${requiredLabel}${defaultLabel}`,
-        media: CheckmarkIcon
+        media: CheckmarkIcon,
       };
-    }
-  }
+    },
+  },
 });

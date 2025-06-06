@@ -11,49 +11,49 @@ export const selectType = defineType({
       name: "name",
       title: "Name",
       type: "string",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "label",
       title: "Label",
       type: "string",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "description",
       title: "Description",
-      type: "string"
+      type: "string",
     }),
     defineField({
       name: "placeholder",
       title: "Placeholder",
-      type: "string"
+      type: "string",
     }),
     defineField({
       name: "required",
       title: "Required",
       type: "boolean",
-      initialValue: true
+      initialValue: true,
     }),
     defineField({
       name: "options",
       title: "Options",
       type: "array",
       of: [{ type: "string" }],
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "defaultValue",
       title: "Default Value",
       type: "string",
-      initialValue: ""
-    })
+      initialValue: "",
+    }),
   ],
   preview: {
     select: {
       label: "label",
       options: "options",
-      required: "required"
+      required: "required",
     },
     prepare(selection: {
       label?: string;
@@ -67,8 +67,8 @@ export const selectType = defineType({
       return {
         title: label ?? "Select Field",
         subtitle: `${optionCount} option${optionCount !== 1 ? "s" : ""}${requiredLabel}`,
-        media: ChevronDownIcon
+        media: ChevronDownIcon,
       };
-    }
-  }
+    },
+  },
 });

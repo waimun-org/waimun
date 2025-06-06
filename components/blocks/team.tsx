@@ -3,7 +3,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "@/components/ui/card";
 import type { Team, TeamMember } from "@/sanity/types";
 import { Avatar, AvatarFallback } from "../ui/avatar";

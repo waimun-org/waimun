@@ -13,11 +13,11 @@ type Result<T, E> = Success<T> | Failure<E>;
 export function tryCatch<T, E = Error>(fn: () => T): Result<T, E>;
 
 export function tryCatch<T, E = Error>(
-  promise: Promise<T>
+  promise: Promise<T>,
 ): Promise<Result<T, E>>;
 
 export function tryCatch<T, E = Error>(
-  input: (() => T) | Promise<T>
+  input: (() => T) | Promise<T>,
 ): Result<T, E> | Promise<Result<T, E>> {
   if (typeof input === "function") {
     try {
@@ -32,14 +32,14 @@ export function tryCatch<T, E = Error>(
       .then(
         (data): Success<T> => ({
           data: data,
-          error: undefined
-        })
+          error: undefined,
+        }),
       )
       .catch(
         (error): Failure<E> => ({
           data: undefined,
-          error: error as E
-        })
+          error: error as E,
+        }),
       );
   }
 

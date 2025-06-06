@@ -16,7 +16,7 @@ interface FormPageProps {
 
 async function getFormBySlug(slug: string): Promise<FORM_BY_SLUG_QUERYResult> {
   const result = await tryCatch(
-    client.fetch<FORM_BY_SLUG_QUERYResult>(FORM_BY_SLUG_QUERY, { slug })
+    client.fetch<FORM_BY_SLUG_QUERYResult>(FORM_BY_SLUG_QUERY, { slug }),
   );
 
   if (result.error) {
@@ -28,7 +28,7 @@ async function getFormBySlug(slug: string): Promise<FORM_BY_SLUG_QUERYResult> {
 }
 
 export async function generateMetadata({
-  params
+  params,
 }: FormPageProps): Promise<Metadata> {
   const { slug } = await params;
   const form = await getFormBySlug(slug);
@@ -41,7 +41,7 @@ export async function generateMetadata({
 }
 
 export default async function FormPage({
-  params
+  params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
@@ -79,6 +79,6 @@ export async function getPrice(priceId: string): Promise<Price | null> {
 
   return {
     unitAmount: unit_amount,
-    currency
+    currency,
   };
 }

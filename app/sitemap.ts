@@ -18,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url,
       lastModified: new Date(page.lastModified),
       changeFrequency: "weekly",
-      priority: page.priority
+      priority: page.priority,
     });
   });
 
@@ -27,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${siteConfig.url}/events/${event.slug}`,
       lastModified: new Date(event.lastModified),
       changeFrequency: "monthly",
-      priority: event.priority
+      priority: event.priority,
     });
   });
 
@@ -36,7 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${siteConfig.url}/forms/${form.slug}`,
       lastModified: new Date(form.lastModified),
       changeFrequency: "monthly",
-      priority: form.priority
+      priority: form.priority,
     });
   });
 

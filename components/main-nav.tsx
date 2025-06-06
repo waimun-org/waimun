@@ -22,7 +22,7 @@ export function MainNav({ header }: MainNavProps) {
           target={link.url.startsWith("http") ? "_blank" : undefined}
           className={cn(
             "text-muted-foreground hover:text-foreground text-sm font-medium transition-colors",
-            pathname === link.url && "text-foreground"
+            pathname === link.url && "text-foreground",
           )}
         >
           {link.text}

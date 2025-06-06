@@ -11,56 +11,56 @@ export const textareaType = defineType({
       name: "name",
       title: "Name",
       type: "string",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "label",
       title: "Label",
       type: "string",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "description",
       title: "Description",
-      type: "string"
+      type: "string",
     }),
     defineField({
       name: "placeholder",
       title: "Placeholder",
-      type: "string"
+      type: "string",
     }),
     defineField({
       name: "required",
       title: "Required",
       type: "boolean",
-      initialValue: true
+      initialValue: true,
     }),
     defineField({
       name: "minLength",
       title: "Min Length",
-      type: "number"
+      type: "number",
     }),
     defineField({
       name: "maxLength",
       title: "Max Length",
-      type: "number"
+      type: "number",
     }),
     defineField({
       name: "pattern",
       title: "Pattern",
-      type: "string"
+      type: "string",
     }),
     defineField({
       name: "defaultValue",
       title: "Default Value",
       type: "string",
-      initialValue: ""
-    })
+      initialValue: "",
+    }),
   ],
   preview: {
     select: {
       label: "label",
-      required: "required"
+      required: "required",
     },
     prepare(selection: { label?: string; required?: boolean }) {
       const { label, required } = selection;
@@ -69,8 +69,8 @@ export const textareaType = defineType({
       return {
         title: label ?? "Textarea Field",
         subtitle: `Textarea${requiredLabel}`,
-        media: DocumentTextIcon
+        media: DocumentTextIcon,
       };
-    }
-  }
+    },
+  },
 });

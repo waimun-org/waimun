@@ -52,7 +52,7 @@ export function HighImpactHero({ block }: HeroProps) {
       <div
         className={cn(
           "container flex flex-col items-center justify-center gap-8",
-          useLightText && "text-primary-foreground"
+          useLightText && "text-primary-foreground",
         )}
       >
         <div className="flex flex-col items-center gap-4 text-center">
@@ -64,7 +64,7 @@ export function HighImpactHero({ block }: HeroProps) {
             <div
               className={cn(
                 "prose prose-base md:prose-lg text-balance",
-                useLightText && "prose-invert"
+                useLightText && "prose-invert",
               )}
             >
               <PortableText value={block.text} />

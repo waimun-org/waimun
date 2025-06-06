@@ -13,7 +13,7 @@ interface PageProps {
 }
 
 export async function generateMetadata({
-  params
+  params,
 }: PageProps): Promise<Metadata> {
   const { slug = "home" } = await params;
   const page = await client.fetch<PAGE_QUERYResult>(PAGE_QUERY, { slug });

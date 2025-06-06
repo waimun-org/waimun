@@ -3,7 +3,7 @@ import {
   RocketIcon,
   DocumentTextIcon,
   LinkIcon,
-  ImageIcon
+  ImageIcon,
 } from "@sanity/icons";
 
 export const heroType = defineType({
@@ -16,18 +16,18 @@ export const heroType = defineType({
       name: "content",
       title: "Content",
       icon: DocumentTextIcon,
-      default: true
+      default: true,
     },
     {
       name: "actions",
       title: "Actions",
-      icon: LinkIcon
+      icon: LinkIcon,
     },
     {
       name: "design",
       title: "Design",
-      icon: ImageIcon
-    }
+      icon: ImageIcon,
+    },
   ],
   fields: [
     defineField({
@@ -35,7 +35,7 @@ export const heroType = defineType({
       title: "Title",
       type: "string",
       group: "content",
-      validation: (rule) => rule.required().max(100)
+      validation: (rule) => rule.required().max(100),
     }),
     defineField({
       name: "intent",
@@ -45,18 +45,18 @@ export const heroType = defineType({
       options: {
         list: [
           { title: "High Impact", value: "high-impact" },
-          { title: "Low Impact", value: "low-impact" }
+          { title: "Low Impact", value: "low-impact" },
         ],
-        layout: "radio"
+        layout: "radio",
       },
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "text",
       title: "Text",
       type: "array",
       of: [{ type: "block" }],
-      group: "content"
+      group: "content",
     }),
     defineField({
       name: "buttons",
@@ -64,7 +64,7 @@ export const heroType = defineType({
       type: "array",
       of: [defineArrayMember({ type: "button" })],
       group: "actions",
-      validation: (rule) => rule.max(3)
+      validation: (rule) => rule.max(3),
     }),
     defineField({
       name: "backgroundImage",
@@ -72,10 +72,10 @@ export const heroType = defineType({
       type: "image",
       group: "design",
       options: {
-        hotspot: true
+        hotspot: true,
       },
       hidden: ({ parent }: { parent?: { intent?: string } }) =>
-        parent?.intent !== "high-impact"
+        parent?.intent !== "high-impact",
     }),
     defineField({
       name: "backgroundColor",
@@ -83,18 +83,18 @@ export const heroType = defineType({
       type: "color",
       group: "design",
       options: {
-        disableAlpha: true
+        disableAlpha: true,
       },
       hidden: ({ parent }: { parent?: { intent?: string } }) =>
-        parent?.intent !== "high-impact"
-    })
+        parent?.intent !== "high-impact",
+    }),
   ],
   preview: {
     select: {
       title: "title",
       intent: "intent",
       hasImage: "backgroundImage",
-      hasColor: "backgroundColor"
+      hasColor: "backgroundColor",
     },
     prepare(selection: {
       title?: string;
@@ -109,8 +109,8 @@ export const heroType = defineType({
       return {
         title: title ?? "Hero Section",
         subtitle: `${impact}${visual}`,
-        media: RocketIcon
+        media: RocketIcon,
       };
-    }
-  }
+    },
+  },
 });

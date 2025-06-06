@@ -11,7 +11,7 @@ export const buttonType = defineType({
       name: "link",
       title: "Link",
       type: "link",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "variant",
@@ -23,12 +23,12 @@ export const buttonType = defineType({
           { title: "Secondary", value: "secondary" },
           { title: "Destructive", value: "destructive" },
           { title: "Outline", value: "outline" },
-          { title: "Ghost", value: "ghost" }
+          { title: "Ghost", value: "ghost" },
         ],
-        layout: "dropdown"
+        layout: "dropdown",
       },
       initialValue: "default",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "size",
@@ -38,20 +38,20 @@ export const buttonType = defineType({
         list: [
           { title: "Small", value: "sm" },
           { title: "Medium (Default)", value: "default" },
-          { title: "Large", value: "lg" }
+          { title: "Large", value: "lg" },
         ],
-        layout: "radio"
+        layout: "radio",
       },
       initialValue: "default",
-      validation: (rule) => rule.required()
-    })
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: {
     select: {
       text: "link.text",
       url: "link.url",
       variant: "variant",
-      size: "size"
+      size: "size",
     },
     prepare(selection: {
       text?: string;
@@ -72,8 +72,8 @@ export const buttonType = defineType({
       return {
         title: text ?? "Button",
         subtitle: `${style} • ${sizeLabel} • ${url ?? "No URL"}`,
-        media: LinkIcon
+        media: LinkIcon,
       };
-    }
-  }
+    },
+  },
 });

@@ -11,14 +11,14 @@ async function getLayoutData(): Promise<{
 }> {
   const [header, footer] = await Promise.all([
     client.fetch<HEADER_QUERYResult>(HEADER_QUERY),
-    client.fetch<FOOTER_QUERYResult>(FOOTER_QUERY)
+    client.fetch<FOOTER_QUERYResult>(FOOTER_QUERY),
   ]);
 
   return { header, footer };
 }
 
 export default async function AppLayout({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {

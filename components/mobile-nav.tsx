@@ -9,7 +9,7 @@ import {
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger
+  DrawerTrigger,
 } from "@/components/ui/drawer";
 import type { HEADER_QUERYResult } from "@/sanity/types";
 import { useState } from "react";
@@ -51,7 +51,7 @@ export function MobileNav({ header }: MobileNavProps) {
                 target={link.url.startsWith("http") ? "_blank" : undefined}
                 className={cn(
                   "text-lg font-medium",
-                  pathname !== link.url && "text-muted-foreground"
+                  pathname !== link.url && "text-muted-foreground",
                 )}
               >
                 {link.text}

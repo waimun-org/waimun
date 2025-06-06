@@ -2,7 +2,7 @@
 
 import type {
   Form as FormType,
-  FormBuilder as FormBuilderType
+  FormBuilder as FormBuilderType,
 } from "@/sanity/types";
 import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
@@ -15,7 +15,7 @@ import { toast } from "sonner";
 import {
   CheckCircleIcon,
   ChevronDownIcon,
-  LoaderCircleIcon
+  LoaderCircleIcon,
 } from "lucide-react";
 import { Form as UIForm } from "./ui/form";
 import { submitForm } from "@/app/(app)/forms/actions";
@@ -50,7 +50,7 @@ export function Form({ form: formConfig, price }: FormProps) {
   const [showBankDetailsDialog, setShowBankDetailsDialog] = useState(false);
   const [reference, setReference] = useState<string | null>(null);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(
-    null
+    null,
   );
 
   const hasStripe = formConfig.stripe?.enabled && !!formConfig.stripe.priceId;
@@ -60,12 +60,12 @@ export function Form({ form: formConfig, price }: FormProps) {
 
   const handleSubmit = async (
     data: Record<string, unknown>,
-    selectedPaymentMethod?: PaymentMethod
+    selectedPaymentMethod?: PaymentMethod,
   ) => {
     const result = await submitForm({
       slug: formConfig.slug.current,
       formValues: data,
-      paymentMethod: selectedPaymentMethod
+      paymentMethod: selectedPaymentMethod,
     });
 
     if (result.error) {
@@ -187,7 +187,7 @@ export function Form({ form: formConfig, price }: FormProps) {
             accountNumber:
               formConfig.bankTransfer.accountNumber ?? "Not configured",
             reference: reference ?? "Pending",
-            instructions: formConfig.bankTransfer.instructions
+            instructions: formConfig.bankTransfer.instructions,
           }}
         />
       )}
@@ -223,7 +223,7 @@ export function PaymentInformation({ price }: { price?: Price | null }) {
 
   const formattedPrice = new Intl.NumberFormat("en-NZ", {
     style: "currency",
-    currency: price.currency.toUpperCase()
+    currency: price.currency.toUpperCase(),
   }).format(price.unitAmount / 100);
 
   return (

@@ -11,30 +11,30 @@ export const seoType = defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (rule) => rule.required().max(60)
+      validation: (rule) => rule.required().max(60),
     }),
     defineField({
       name: "description",
       title: "Description",
       type: "text",
       rows: 3,
-      validation: (rule) => rule.max(160)
+      validation: (rule) => rule.max(160),
     }),
     defineField({
       name: "image",
       title: "Image",
       type: "image",
       options: {
-        hotspot: true
+        hotspot: true,
       },
       fields: [
         defineField({
           name: "alt",
           title: "Alt Text",
           type: "string",
-          validation: (rule) => rule.required()
-        })
-      ]
+          validation: (rule) => rule.required(),
+        }),
+      ],
     }),
     defineField({
       name: "noIndex",
@@ -42,19 +42,19 @@ export const seoType = defineType({
       description: "Prevent search engines from indexing this page.",
       type: "boolean",
       initialValue: false,
-      validation: (rule) => rule.required()
-    })
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: {
     select: {
       title: "title",
       description: "description",
-      noIndex: "noIndex"
+      noIndex: "noIndex",
     },
     prepare({
       title,
       description,
-      noIndex
+      noIndex,
     }: {
       title?: string;
       description?: string;
@@ -65,8 +65,8 @@ export const seoType = defineType({
         subtitle: noIndex
           ? "Hidden from search engines"
           : (description ?? "No description set"),
-        media: SearchIcon
+        media: SearchIcon,
       };
-    }
-  }
+    },
+  },
 });

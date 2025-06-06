@@ -14,12 +14,12 @@ import { headers } from "next/headers";
 const PAYMENT_METHODS = ["stripe", "bankTransfer"] as const;
 const PAYMENT_STATUS = {
   PENDING: "Pending",
-  COMPLETED: "Completed"
+  COMPLETED: "Completed",
 } as const;
 
 const PAYMENT_METHOD_LABELS = {
   stripe: "Stripe",
-  bankTransfer: "Bank Transfer"
+  bankTransfer: "Bank Transfer",
 } as const;
 
 const AIRTABLE_RECORD_PREFIX = "rec";
@@ -31,7 +31,7 @@ type FormData = Record<string, unknown>;
 const submitFormSchema = z.object({
   slug: z.string(),
   formValues: z.record(z.unknown()),
-  paymentMethod: z.enum(PAYMENT_METHODS).optional()
+  paymentMethod: z.enum(PAYMENT_METHODS).optional(),
 });
 
 type SubmitForm = z.infer<typeof submitFormSchema>;
@@ -55,13 +55,13 @@ function generateReference(recordId: string) {
 
 function cleanFormData(formData: FormData) {
   return Object.fromEntries(
-    Object.entries(formData).filter(([key]) => key !== "hcaptchaToken")
+    Object.entries(formData).filter(([key]) => key !== "hcaptchaToken"),
   );
 }
 
 function addPaymentDataToRecord(
   recordData: Record<string, unknown>,
-  paymentMethod: PaymentMethod
+  paymentMethod: PaymentMethod,
 ) {
   recordData["Payment Status"] = PAYMENT_STATUS.PENDING;
   recordData["Payment Method"] = PAYMENT_METHOD_LABELS[paymentMethod];
@@ -69,10 +69,10 @@ function addPaymentDataToRecord(
 
 async function validateFormSubmission(
   slug: string,
-  formValues: Record<string, unknown>
+  formValues: Record<string, unknown>,
 ) {
   const formResult = await tryCatch(
-    client.fetch<Form | null>(FORM_BY_SLUG_QUERY, { slug })
+    client.fetch<Form | null>(FORM_BY_SLUG_QUERY, { slug }),
   );
 
   if (formResult.error) {
@@ -126,9 +126,9 @@ async function createStripeCheckoutSession(form: Form, recordId: string) {
       cancel_url: `${baseUrl}/forms/${formSlug}`,
       metadata: {
         formId: form._id,
-        recordId
-      }
-    })
+        recordId,
+      },
+    }),
   );
 
   if (sessionResult.error) {
@@ -146,7 +146,7 @@ async function createStripeCheckoutSession(form: Form, recordId: string) {
 async function createFormRecord(
   form: Form,
   formData: FormData,
-  paymentMethod?: PaymentMethod | null
+  paymentMethod?: PaymentMethod | null,
 ) {
   const recordData = cleanFormData(formData);
 
@@ -157,8 +157,8 @@ async function createFormRecord(
   const recordResult = await tryCatch(
     createRecord(
       { baseId: form.airtable.baseId, tableId: form.airtable.tableId },
-      recordData
-    )
+      recordData,
+    ),
   );
 
   if (recordResult.error) {
@@ -179,7 +179,7 @@ export async function submitForm(input: SubmitForm) {
   const { slug, formValues, paymentMethod } = parsedInput.data;
 
   const validationResult = await tryCatch(
-    validateFormSubmission(slug, formValues)
+    validateFormSubmission(slug, formValues),
   );
 
   if (validationResult.error) {
@@ -190,7 +190,7 @@ export async function submitForm(input: SubmitForm) {
   const { form, formData } = validationResult.data;
 
   const recordResult = await tryCatch(
-    createFormRecord(form, formData, paymentMethod)
+    createFormRecord(form, formData, paymentMethod),
   );
 
   if (recordResult.error) {
@@ -202,14 +202,14 @@ export async function submitForm(input: SubmitForm) {
 
   if (paymentMethod === "stripe") {
     const stripeResult = await tryCatch(
-      createStripeCheckoutSession(form, recordId)
+      createStripeCheckoutSession(form, recordId),
     );
 
     if (stripeResult.error) {
       console.error(stripeResult.error);
       return {
         success: false,
-        error: "Failed to create Stripe checkout session"
+        error: "Failed to create Stripe checkout session",
       };
     }
 

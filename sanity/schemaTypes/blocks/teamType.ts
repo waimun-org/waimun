@@ -11,20 +11,20 @@ export const teamType = defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "members",
       title: "Members",
       type: "array",
       of: [defineArrayMember({ type: "teamMember" })],
-      validation: (rule) => rule.required()
-    })
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: {
     select: {
       title: "title",
-      memberCount: "members"
+      memberCount: "members",
     },
     prepare(selection: { title?: string; memberCount?: unknown[] }) {
       const { title, memberCount } = selection;
@@ -33,8 +33,8 @@ export const teamType = defineType({
       return {
         title: title ?? "Team",
         subtitle: `${count} member${count !== 1 ? "s" : ""}`,
-        media: UsersIcon
+        media: UsersIcon,
       };
-    }
-  }
+    },
+  },
 });

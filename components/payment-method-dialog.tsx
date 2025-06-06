@@ -3,7 +3,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { CreditCardIcon, BuildingIcon } from "lucide-react";
@@ -19,7 +19,7 @@ export function PaymentMethodDialog({
   isOpen,
   onClose,
   onCreditCard,
-  onBankTransfer
+  onBankTransfer,
 }: PaymentMethodDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>

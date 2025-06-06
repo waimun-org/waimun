@@ -11,13 +11,13 @@ export const socialType = defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "url",
       title: "URL",
       type: "url",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "icon",
@@ -28,19 +28,19 @@ export const socialType = defineType({
           name: "alt",
           title: "Alt Text",
           type: "string",
-          validation: (rule) => rule.required()
-        })
+          validation: (rule) => rule.required(),
+        }),
       ],
       validation: (rule) => rule.required(),
       options: {
-        hotspot: true
-      }
-    })
+        hotspot: true,
+      },
+    }),
   ],
   preview: {
     select: {
       title: "title",
-      subtitle: "url"
+      subtitle: "url",
     },
     prepare(selection: { title?: string; subtitle?: string }) {
       const { title, subtitle } = selection;
@@ -48,8 +48,8 @@ export const socialType = defineType({
       return {
         title: title ?? "Social",
         subtitle: subtitle ?? "No URL set",
-        media: ShareIcon
+        media: ShareIcon,
       };
-    }
-  }
+    },
+  },
 });

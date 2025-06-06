@@ -2,12 +2,12 @@ import { FlatCompat } from "@eslint/eslintrc";
 import tseslint from "typescript-eslint";
 
 const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname
+  baseDirectory: import.meta.dirname,
 });
 
 export default tseslint.config(
   {
-    ignores: [".next"]
+    ignores: [".next"],
   },
   ...compat.extends("next/core-web-vitals"),
   {
@@ -15,34 +15,34 @@ export default tseslint.config(
     extends: [
       ...tseslint.configs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
-      ...tseslint.configs.stylisticTypeChecked
+      ...tseslint.configs.stylisticTypeChecked,
     ],
     rules: {
       "@typescript-eslint/array-type": "off",
       "@typescript-eslint/consistent-type-definitions": "off",
       "@typescript-eslint/consistent-type-imports": [
         "warn",
-        { prefer: "type-imports", fixStyle: "inline-type-imports" }
+        { prefer: "type-imports", fixStyle: "inline-type-imports" },
       ],
       "@typescript-eslint/no-unused-vars": [
         "warn",
-        { argsIgnorePattern: "^_" }
+        { argsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/require-await": "off",
       "@typescript-eslint/no-misused-promises": [
         "error",
-        { checksVoidReturn: { attributes: false } }
-      ]
-    }
+        { checksVoidReturn: { attributes: false } },
+      ],
+    },
   },
   {
     linterOptions: {
-      reportUnusedDisableDirectives: true
+      reportUnusedDisableDirectives: true,
     },
     languageOptions: {
       parserOptions: {
-        projectService: true
-      }
-    }
-  }
+        projectService: true,
+      },
+    },
+  },
 );
