@@ -2,7 +2,7 @@ import { PortableText } from "next-sanity";
 import { Button } from "@/components/button";
 import type { HeroProps } from ".";
 import { Image } from "@/components/image";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 
 function getRelativeLuminance(hex: string): number {
   const cleanHex = hex.replace("#", "");

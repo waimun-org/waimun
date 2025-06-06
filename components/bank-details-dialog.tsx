@@ -10,7 +10,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CheckCircleIcon, CopyIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 
 export type BankDetails = {
   accountName: string;
