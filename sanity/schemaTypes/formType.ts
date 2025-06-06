@@ -4,7 +4,8 @@ import {
   DocumentTextIcon,
   LinkIcon,
   SearchIcon,
-  CogIcon
+  CogIcon,
+  CreditCardIcon
 } from "@sanity/icons";
 
 export const formType = defineType({
@@ -102,6 +103,60 @@ export const formType = defineType({
           name: "priceId",
           title: "Price ID",
           type: "string",
+          hidden: ({ parent }: { parent?: { enabled?: boolean } }) =>
+            !parent?.enabled
+        })
+      ],
+      validation: (rule) => rule.required()
+    }),
+    defineField({
+      name: "bankTransfer",
+      title: "Bank Transfer",
+      type: "object",
+      group: "integrations",
+      icon: CreditCardIcon,
+      fields: [
+        defineField({
+          name: "enabled",
+          title: "Enabled",
+          type: "boolean",
+          initialValue: false,
+          validation: (rule) => rule.required()
+        }),
+        defineField({
+          name: "accountName",
+          title: "Account Name",
+          type: "string",
+          hidden: ({ parent }: { parent?: { enabled?: boolean } }) =>
+            !parent?.enabled,
+          validation: (rule) =>
+            rule.custom((value, context) => {
+              const parent = context.parent as { enabled?: boolean };
+              return !parent?.enabled || value
+                ? true
+                : "Account name is required when bank transfer is enabled";
+            })
+        }),
+        defineField({
+          name: "accountNumber",
+          title: "Account Number",
+          type: "string",
+          hidden: ({ parent }: { parent?: { enabled?: boolean } }) =>
+            !parent?.enabled,
+          validation: (rule) =>
+            rule.custom((value, context) => {
+              const parent = context.parent as { enabled?: boolean };
+              return !parent?.enabled || value
+                ? true
+                : "Account number is required when bank transfer is enabled";
+            })
+        }),
+        defineField({
+          name: "instructions",
+          title: "Additional Instructions",
+          type: "text",
+          rows: 3,
+          description: "Optional instructions for the customer",
           hidden: ({ parent }: { parent?: { enabled?: boolean } }) =>
             !parent?.enabled
         })

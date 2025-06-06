@@ -166,6 +166,12 @@ export type Form = {
     enabled: boolean;
     priceId?: string;
   };
+  bankTransfer: {
+    enabled: boolean;
+    accountName?: string;
+    accountNumber?: string;
+    instructions?: string;
+  };
   slug: Slug;
   seo: Seo;
 };
@@ -1137,6 +1143,12 @@ export type FORM_BY_SLUG_QUERYResult = {
     enabled: boolean;
     priceId?: string;
   };
+  bankTransfer: {
+    enabled: boolean;
+    accountName?: string;
+    accountNumber?: string;
+    instructions?: string;
+  };
   slug: Slug;
   seo: Seo;
 } | null;
@@ -1223,6 +1235,12 @@ export type FORM_BY_ID_QUERYResult = {
   stripe: {
     enabled: boolean;
     priceId?: string;
+  };
+  bankTransfer: {
+    enabled: boolean;
+    accountName?: string;
+    accountNumber?: string;
+    instructions?: string;
   };
   slug: Slug;
   seo: Seo;

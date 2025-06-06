@@ -21,9 +21,11 @@ import { Form as UIForm } from "./ui/form";
 import { submitForm } from "@/app/(app)/forms/actions";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useState, useEffect } from "react";
+import { Suspense, useState } from "react";
 import type Stripe from "stripe";
 import Link from "next/link";
+import { PaymentMethodDialog } from "./payment-method-dialog";
+import { BankDetailsDialog } from "./bank-details-dialog";
 
 export type FormProps = {
   form: FormType & {
@@ -34,50 +36,102 @@ export type FormProps = {
 
 export type Price = Partial<Pick<Stripe.Price, "unit_amount" | "currency">>;
 
-export function Form({
-  form: { title, description, slug, content, stripe },
-  price
-}: FormProps) {
-  const defaultValues = getFormDefaultValues(content);
-  const resolver = zodResolver(getFormSchema(content));
+type PaymentMethod = "stripe" | "bankTransfer";
+
+export function Form({ form: formConfig, price }: FormProps) {
+  const defaultValues = getFormDefaultValues(formConfig.content);
+  const schema = getFormSchema(formConfig.content);
+  const resolver = zodResolver(schema);
   const form = useForm({ defaultValues, resolver });
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
+  const [showPaymentDialog, setShowPaymentDialog] = useState(false);
+  const [showBankDetailsDialog, setShowBankDetailsDialog] = useState(false);
+  const [reference, setReference] = useState<string | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(
+    null
+  );
 
-  async function handleSubmit(values: Record<string, unknown>) {
-    const res = await submitForm({ slug: slug.current, formValues: values });
+  const hasStripe = formConfig.stripe?.enabled && !!formConfig.stripe.priceId;
+  const hasBankTransfer = formConfig.bankTransfer?.enabled;
+  const hasPayment = hasStripe || hasBankTransfer;
+  const hasMultiplePaymentMethods = hasStripe && hasBankTransfer;
 
-    if (!res.success) {
-      toast.error(res.error);
+  const handleSubmit = async (
+    data: Record<string, unknown>,
+    selectedPaymentMethod?: PaymentMethod
+  ) => {
+    const result = await submitForm({
+      slug: formConfig.slug.current,
+      formValues: data,
+      paymentMethod: selectedPaymentMethod
+    });
+
+    if (result.error) {
+      toast.error(result.error);
       return;
     }
 
-    if (res.redirect) {
-      window.location.href = res.redirect;
+    if (result.redirect) {
+      window.location.href = result.redirect;
       return;
     }
 
-    setIsSuccess(true);
+    if (result.reference) {
+      setReference(result.reference);
+      setShowBankDetailsDialog(true);
+    }
+
     form.reset();
-  }
+    setPaymentMethod(null);
+    setIsSuccess(true);
 
-  useEffect(() => {
-    if (isSuccess) {
-      const timer = setTimeout(() => {
-        setIsSuccess(false);
-      }, 3000); // Green for 3 seconds
+    setTimeout(() => {
+      setIsSuccess(null);
+    }, 5000);
+  };
 
-      return () => clearTimeout(timer);
+  const handlePaymentMethodSelect = async (selectedMethod: PaymentMethod) => {
+    setPaymentMethod(selectedMethod);
+    setShowPaymentDialog(false);
+
+    const formData = form.getValues() as Record<string, unknown>;
+    await handleSubmit(formData, selectedMethod);
+  };
+
+  const onSubmit = async (data: Record<string, unknown>) => {
+    const selectedMethod = getSelectedPaymentMethod();
+
+    if (hasMultiplePaymentMethods && !selectedMethod) {
+      setShowPaymentDialog(true);
+      return;
     }
-  }, [isSuccess]);
+
+    await handleSubmit(data, selectedMethod);
+  };
+
+  const getSelectedPaymentMethod = (): PaymentMethod | undefined => {
+    if (paymentMethod) return paymentMethod;
+    if (hasStripe && !hasBankTransfer) return "stripe";
+    if (hasBankTransfer && !hasStripe) return "bankTransfer";
+    return undefined;
+  };
+
+  const getSubmitButtonText = () => {
+    if (isSuccess) return "Success";
+    if (!hasPayment) return "Submit";
+    if (hasMultiplePaymentMethods) return "Continue to Payment";
+    if (hasStripe) return "Pay with Card";
+    if (hasBankTransfer) return "Pay via Bank Transfer";
+    return "Submit";
+  };
 
   return (
     <div>
       <section className="border-b">
         <div className="container flex flex-col gap-4 py-8">
-          <h1 className="text-2xl font-bold md:text-4xl">{title}</h1>
-
+          <h1 className="text-2xl font-bold md:text-4xl">{formConfig.title}</h1>
           <div className="prose">
-            <PortableText value={description} />
+            <PortableText value={formConfig.description} />
           </div>
         </div>
       </section>
@@ -90,29 +144,50 @@ export function Form({
         <UIForm {...form}>
           <form
             className="flex flex-col gap-8"
-            onSubmit={form.handleSubmit(handleSubmit)}
+            onSubmit={form.handleSubmit(onSubmit)}
           >
-            <FormBuilder content={content} form={form} />
-
+            <FormBuilder content={formConfig.content} form={form} />
             <HCaptcha form={form} />
-
             <Button
               type="submit"
               disabled={form.formState.isSubmitting}
-              id="submit"
-              variant={isSuccess ? "success" : undefined}
+              variant={isSuccess === true ? "success" : undefined}
             >
               {form.formState.isSubmitting && (
                 <LoaderCircleIcon className="animate-spin" />
               )}
-              {isSuccess && <CheckCircleIcon />}
-              {isSuccess ? "Success" : stripe.enabled ? "Pay" : "Submit"}
+              {isSuccess === true && <CheckCircleIcon />}
+              {getSubmitButtonText()}
             </Button>
           </form>
         </UIForm>
 
         <PaymentInformation price={price} />
       </section>
+
+      {hasMultiplePaymentMethods && (
+        <PaymentMethodDialog
+          isOpen={showPaymentDialog}
+          onClose={() => setShowPaymentDialog(false)}
+          onCreditCard={() => handlePaymentMethodSelect("stripe")}
+          onBankTransfer={() => handlePaymentMethodSelect("bankTransfer")}
+        />
+      )}
+
+      {formConfig.bankTransfer?.enabled && (
+        <BankDetailsDialog
+          isOpen={showBankDetailsDialog}
+          onClose={() => setShowBankDetailsDialog(false)}
+          bankDetails={{
+            accountName:
+              formConfig.bankTransfer.accountName ?? "Not configured",
+            accountNumber:
+              formConfig.bankTransfer.accountNumber ?? "Not configured",
+            reference: reference ?? "Pending",
+            instructions: formConfig.bankTransfer.instructions
+          }}
+        />
+      )}
     </div>
   );
 }
