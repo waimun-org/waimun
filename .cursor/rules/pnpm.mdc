@@ -1,0 +1,20 @@
+---
+description: 
+globs: *.ts,*.tsx
+alwaysApply: false
+---
+General:
+- Always use pnpm when installing packages, running scripts, etc.
+- Replace npm commands with pnpm commands.
+- Do not edit the package.json file for package management directly, prefer using the pnpm CLI.
+
+Commands:
+- "build" - To build the project. Skips TypeScript checks and linting rules for faster builders.
+- "dev" - To run the development server.
+- "format" - To format code using Prettier.
+- "lint" - To run ESLint linting rules.
+- "start" - To start the server.
+- "check" - To check for TypeScript errors and run ESLint linting rules.
+- "stripe:listen" - To forward stripe webhook events.
+- "sanity:typegen" - To genenerate types for @/sanity/types.
+- "sanity:bridge" - To bridge the project with the Sanity Dashboard.
