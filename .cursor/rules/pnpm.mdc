@@ -1,7 +1,7 @@
 ---
 description: 
-globs: *.ts,*.tsx
-alwaysApply: false
+globs: 
+alwaysApply: true
 ---
 General:
 - Always use pnpm when installing packages, running scripts, etc.
