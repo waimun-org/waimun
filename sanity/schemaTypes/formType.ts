@@ -5,7 +5,7 @@ import {
   LinkIcon,
   SearchIcon,
   CogIcon,
-  CreditCardIcon
+  CreditCardIcon,
 } from "@sanity/icons";
 
 export const formType = defineType({
@@ -18,28 +18,28 @@ export const formType = defineType({
       name: "content",
       title: "Content",
       icon: DocumentTextIcon,
-      default: true
+      default: true,
     },
     {
       name: "fields",
       title: "Fields",
-      icon: EditIcon
+      icon: EditIcon,
     },
     {
       name: "integrations",
       title: "Integrations",
-      icon: CogIcon
+      icon: CogIcon,
     },
     {
       name: "settings",
       title: "Settings",
-      icon: LinkIcon
+      icon: LinkIcon,
     },
     {
       name: "seo",
       title: "SEO",
-      icon: SearchIcon
-    }
+      icon: SearchIcon,
+    },
   ],
   fields: [
     defineField({
@@ -47,7 +47,7 @@ export const formType = defineType({
       title: "Title",
       type: "string",
       group: "content",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "description",
@@ -55,7 +55,7 @@ export const formType = defineType({
       type: "array",
       of: [{ type: "block" }],
       group: "content",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "content",
@@ -63,7 +63,7 @@ export const formType = defineType({
       type: "formBuilder",
       group: "fields",
       validation: (rule) =>
-        rule.required().min(1).error("Form needs at least one field")
+        rule.required().min(1).error("Form needs at least one field"),
     }),
     defineField({
       name: "airtable",
@@ -75,16 +75,16 @@ export const formType = defineType({
           name: "baseId",
           title: "Base ID",
           type: "string",
-          validation: (rule) => rule.required()
+          validation: (rule) => rule.required(),
         }),
         defineField({
           name: "tableId",
           title: "Table ID",
           type: "string",
-          validation: (rule) => rule.required()
-        })
+          validation: (rule) => rule.required(),
+        }),
       ],
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "stripe",
@@ -97,17 +97,17 @@ export const formType = defineType({
           title: "Enabled",
           type: "boolean",
           initialValue: false,
-          validation: (rule) => rule.required()
+          validation: (rule) => rule.required(),
         }),
         defineField({
           name: "priceId",
           title: "Price ID",
           type: "string",
           hidden: ({ parent }: { parent?: { enabled?: boolean } }) =>
-            !parent?.enabled
-        })
+            !parent?.enabled,
+        }),
       ],
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "bankTransfer",
@@ -121,7 +121,7 @@ export const formType = defineType({
           title: "Enabled",
           type: "boolean",
           initialValue: false,
-          validation: (rule) => rule.required()
+          validation: (rule) => rule.required(),
         }),
         defineField({
           name: "accountName",
@@ -135,7 +135,7 @@ export const formType = defineType({
               return !parent?.enabled || value
                 ? true
                 : "Account name is required when bank transfer is enabled";
-            })
+            }),
         }),
         defineField({
           name: "accountNumber",
@@ -149,7 +149,7 @@ export const formType = defineType({
               return !parent?.enabled || value
                 ? true
                 : "Account number is required when bank transfer is enabled";
-            })
+            }),
         }),
         defineField({
           name: "instructions",
@@ -157,10 +157,10 @@ export const formType = defineType({
           type: "text",
           rows: 3,
           hidden: ({ parent }: { parent?: { enabled?: boolean } }) =>
-            !parent?.enabled
-        })
+            !parent?.enabled,
+        }),
       ],
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "slug",
@@ -171,22 +171,22 @@ export const formType = defineType({
         source: "title",
         maxLength: 96,
         slugify: (input: string) =>
-          input.toLowerCase().replace(/\s+/g, "-").slice(0, 96)
+          input.toLowerCase().replace(/\s+/g, "-").slice(0, 96),
       },
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "seo",
       title: "SEO",
       type: "seo",
       group: "seo",
-      validation: (rule) => rule.required()
-    })
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: {
     select: {
       title: "title",
-      fieldCount: "content"
+      fieldCount: "content",
     },
     prepare(selection: { title?: string; fieldCount?: unknown[] }) {
       const { title, fieldCount } = selection;
@@ -195,20 +195,20 @@ export const formType = defineType({
       return {
         title: title ?? "Untitled Form",
         subtitle: `${count} field${count !== 1 ? "s" : ""}`,
-        media: EditIcon
+        media: EditIcon,
       };
-    }
+    },
   },
   orderings: [
     {
       title: "Form Name A-Z",
       name: "titleAsc",
-      by: [{ field: "title", direction: "asc" }]
+      by: [{ field: "title", direction: "asc" }],
     },
     {
       title: "Last Updated",
       name: "updatedDesc",
-      by: [{ field: "_updatedAt", direction: "desc" }]
-    }
-  ]
+      by: [{ field: "_updatedAt", direction: "desc" }],
+    },
+  ],
 });

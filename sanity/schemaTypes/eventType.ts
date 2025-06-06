@@ -4,7 +4,7 @@ import {
   DocumentTextIcon,
   ImageIcon,
   LinkIcon,
-  SearchIcon
+  SearchIcon,
 } from "@sanity/icons";
 
 export const eventType = defineType({
@@ -17,28 +17,28 @@ export const eventType = defineType({
       name: "content",
       title: "Content",
       icon: DocumentTextIcon,
-      default: true
+      default: true,
     },
     {
       name: "actions",
       title: "Actions",
-      icon: LinkIcon
+      icon: LinkIcon,
     },
     {
       name: "media",
       title: "Media",
-      icon: ImageIcon
+      icon: ImageIcon,
     },
     {
       name: "settings",
       title: "Settings",
-      icon: LinkIcon
+      icon: LinkIcon,
     },
     {
       name: "seo",
       title: "SEO",
-      icon: SearchIcon
-    }
+      icon: SearchIcon,
+    },
   ],
   fields: [
     defineField({
@@ -46,14 +46,14 @@ export const eventType = defineType({
       title: "Name",
       type: "string",
       group: "content",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "description",
       title: "Description",
       type: "array",
       of: [{ type: "block" }],
-      group: "content"
+      group: "content",
     }),
     defineField({
       name: "date",
@@ -62,21 +62,21 @@ export const eventType = defineType({
       group: "content",
       options: {
         dateFormat: "YYYY-MM-DD",
-        timeFormat: "HH:mm"
-      }
+        timeFormat: "HH:mm",
+      },
     }),
     defineField({
       name: "venue",
       title: "Venue",
       type: "string",
-      group: "content"
+      group: "content",
     }),
     defineField({
       name: "price",
       title: "Price",
       type: "number",
       group: "content",
-      validation: (rule) => rule.min(0)
+      validation: (rule) => rule.min(0),
     }),
     defineField({
       name: "image",
@@ -88,27 +88,27 @@ export const eventType = defineType({
           name: "alt",
           type: "string",
           title: "Alt Text",
-          validation: (rule) => rule.required()
-        }
+          validation: (rule) => rule.required(),
+        },
       ],
       options: {
-        hotspot: true
+        hotspot: true,
       },
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "buttons",
       title: "Buttons",
       type: "array",
       of: [defineArrayMember({ type: "button" })],
-      group: "actions"
+      group: "actions",
     }),
     defineField({
       name: "details",
       title: "Details",
       type: "array",
       of: [{ type: "block" }],
-      group: "content"
+      group: "content",
     }),
     defineField({
       name: "slug",
@@ -119,22 +119,22 @@ export const eventType = defineType({
         source: "name",
         maxLength: 96,
         slugify: (input: string) =>
-          input.toLowerCase().replace(/\s+/g, "-").slice(0, 96)
+          input.toLowerCase().replace(/\s+/g, "-").slice(0, 96),
       },
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "seo",
       title: "SEO",
       type: "seo",
-      group: "seo"
-    })
+      group: "seo",
+    }),
   ],
   preview: {
     select: {
       title: "name",
       subtitle: "venue",
-      date: "date"
+      date: "date",
     },
     prepare(selection: { title?: string; subtitle?: string; date?: string }) {
       const { title, subtitle, date } = selection;
@@ -146,25 +146,25 @@ export const eventType = defineType({
           formattedDate && subtitle
             ? `${formattedDate} • ${subtitle}`
             : (formattedDate ?? subtitle ?? "No date or venue set"),
-        media: CalendarIcon
+        media: CalendarIcon,
       };
-    }
+    },
   },
   orderings: [
     {
       title: "Event Date (Newest First)",
       name: "dateDesc",
-      by: [{ field: "date", direction: "desc" }]
+      by: [{ field: "date", direction: "desc" }],
     },
     {
       title: "Event Date (Oldest First)",
       name: "dateAsc",
-      by: [{ field: "date", direction: "asc" }]
+      by: [{ field: "date", direction: "asc" }],
     },
     {
       title: "Event Name A-Z",
       name: "nameAsc",
-      by: [{ field: "name", direction: "asc" }]
-    }
-  ]
+      by: [{ field: "name", direction: "asc" }],
+    },
+  ],
 });

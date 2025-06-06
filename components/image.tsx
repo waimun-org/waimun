@@ -34,7 +34,7 @@ export function AvatarImage({ image, ...props }: ImageProps) {
   const sanityImageProps = useNextSanityImage(client, image);
   const { props: imageProps } = getImageProps({
     ...sanityImageProps,
-    ...props
+    ...props,
   });
 
   return <AvatarImagePrimitive {...imageProps} />;

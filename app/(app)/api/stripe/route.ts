@@ -15,7 +15,7 @@ export async function POST(request: Request) {
   if (!signature) {
     return NextResponse.json(
       { error: "No signature found in request headers" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -24,14 +24,14 @@ export async function POST(request: Request) {
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!
+      process.env.STRIPE_WEBHOOK_SECRET!,
     );
   } catch (error) {
     console.error(error);
 
     return NextResponse.json(
       { error: "Error verifying webhook signature" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
     if (!formId) {
       return NextResponse.json(
         { error: "No formId found in checkout session metadata" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -56,7 +56,7 @@ export async function POST(request: Request) {
 
     try {
       form = await client.fetch<FORM_BY_ID_QUERYResult>(FORM_BY_ID_QUERY, {
-        id: formId
+        id: formId,
       });
 
       if (!form) {
@@ -67,9 +67,9 @@ export async function POST(request: Request) {
 
       return NextResponse.json(
         {
-          error: "Failed to update form payment status."
+          error: "Failed to update form payment status.",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -78,7 +78,7 @@ export async function POST(request: Request) {
     if (!recordId) {
       return NextResponse.json(
         { error: "No recordId found in checkout session metadata" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -86,17 +86,17 @@ export async function POST(request: Request) {
       await updateRecord(
         {
           baseId: form.airtable.baseId,
-          tableId: form.airtable.tableId
+          tableId: form.airtable.tableId,
         },
         recordId,
-        { "Payment Status": "Paid" }
+        { "Payment Status": "Paid" },
       );
     } catch (error) {
       console.error(error);
 
       return NextResponse.json(
         { error: "Failed to update record in Airtable" },
-        { status: 500 }
+        { status: 500 },
       );
     }
   }

@@ -12,13 +12,13 @@ export default defineConfig({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
   schema: {
-    types: schemaTypes
+    types: schemaTypes,
   },
   plugins: [
     structureTool({ structure }),
     visionTool({
-      defaultApiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION!
+      defaultApiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION!,
     }),
-    colorInput()
-  ]
+    colorInput(),
+  ],
 });

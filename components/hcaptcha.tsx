@@ -21,7 +21,7 @@ export function HCaptcha({ form }: HCaptchaFieldProps) {
 
   if (!siteKey) {
     console.error(
-      "hCaptcha site key not found. Please set NEXT_PUBLIC_HCAPTCHA_SITE_KEY environment variable."
+      "hCaptcha site key not found. Please set NEXT_PUBLIC_HCAPTCHA_SITE_KEY environment variable.",
     );
     return null;
   }

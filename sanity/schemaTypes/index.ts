@@ -41,7 +41,7 @@ const schemaTypes = [
   eventsType,
   seoType,
   teamType,
-  teamMemberType
+  teamMemberType,
 ];
 
 export default schemaTypes;

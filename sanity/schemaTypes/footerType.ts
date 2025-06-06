@@ -11,18 +11,18 @@ export const footerType = defineType({
       name: "content",
       title: "Content",
       icon: ComponentIcon,
-      default: true
+      default: true,
     },
     {
       name: "navigation",
       title: "Links",
-      icon: LinkIcon
+      icon: LinkIcon,
     },
     {
       name: "social",
       title: "Social",
-      icon: ShareIcon
-    }
+      icon: ShareIcon,
+    },
   ],
   fields: [
     defineField({
@@ -30,7 +30,7 @@ export const footerType = defineType({
       title: "Title",
       type: "string",
       group: "content",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "links",
@@ -38,21 +38,21 @@ export const footerType = defineType({
       type: "array",
       of: [defineArrayMember({ type: "link" })],
       group: "navigation",
-      validation: (rule) => rule.required().min(1)
+      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: "socials",
       title: "Socials",
       type: "array",
       of: [defineArrayMember({ type: "social" })],
-      group: "social"
-    })
+      group: "social",
+    }),
   ],
   preview: {
     select: {
       title: "title",
       linkCount: "links",
-      socialCount: "socials"
+      socialCount: "socials",
     },
     prepare(selection: {
       title?: string;
@@ -66,8 +66,8 @@ export const footerType = defineType({
       return {
         title: title ?? "Footer",
         subtitle: `${links} link${links !== 1 ? "s" : ""} • ${socials} social${socials !== 1 ? "s" : ""}`,
-        media: ComponentIcon
+        media: ComponentIcon,
       };
-    }
-  }
+    },
+  },
 });

@@ -7,7 +7,7 @@ export const siteConfig = {
   description:
     "Empowering students to become active global citizens through public speaking, leadership development, and debate.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://waimun.org",
-  locale: "en-NZ"
+  locale: "en-NZ",
 };
 
 function getImages(seo: Seo) {
@@ -20,8 +20,8 @@ function getImages(seo: Seo) {
       url: urlFor(seo.image).width(1200).height(630).format("jpg").url(),
       width: 1200,
       height: 630,
-      alt: seo.image.alt
-    }
+      alt: seo.image.alt,
+    },
   ];
 }
 
@@ -32,12 +32,12 @@ export type GenerateNextMetadata = {
 
 export function generateNextMetadata({
   slug,
-  seo
+  seo,
 }: GenerateNextMetadata): Metadata {
   if (!seo) {
     return {
       title: siteConfig.name,
-      description: siteConfig.description
+      description: siteConfig.description,
     };
   }
 
@@ -48,7 +48,7 @@ export function generateNextMetadata({
     description: seo.description,
     robots: seo.noIndex ? "noindex, nofollow" : "index, follow",
     alternates: {
-      canonical: canonical
+      canonical: canonical,
     },
     openGraph: {
       type: "website",
@@ -57,7 +57,7 @@ export function generateNextMetadata({
       url: canonical,
       siteName: siteConfig.name,
       locale: siteConfig.locale,
-      images: getImages(seo)
+      images: getImages(seo),
     },
     twitter: {
       card: "summary_large_image",
@@ -65,8 +65,8 @@ export function generateNextMetadata({
       description: seo.description,
       site: siteConfig.name,
       creator: siteConfig.name,
-      images: getImages(seo)
-    }
+      images: getImages(seo),
+    },
   };
 
   return metadata;

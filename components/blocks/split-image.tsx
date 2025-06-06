@@ -24,7 +24,7 @@ export function SplitImage({ block }: SplitImageProps) {
         <Image
           className={cn(
             "aspect-[4/3] rounded-lg object-cover",
-            block.orientation === "imageLeft" && "md:order-first"
+            block.orientation === "imageLeft" && "md:order-first",
           )}
           image={block.image}
           sizes="(min-width: 768px) 50vw, 100vw"

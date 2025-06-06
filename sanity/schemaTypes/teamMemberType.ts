@@ -11,46 +11,46 @@ export const teamMemberType = defineType({
       name: "name",
       title: "Name",
       type: "string",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "role",
       title: "Role",
       type: "string",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "bio",
       title: "Bio",
       type: "array",
-      of: [{ type: "block" }]
+      of: [{ type: "block" }],
     }),
     defineField({
       name: "image",
       title: "Image",
       type: "image",
       options: {
-        hotspot: true
+        hotspot: true,
       },
       fields: [
         defineField({
           name: "alt",
           title: "Alt Text",
-          type: "string"
-        })
-      ]
+          type: "string",
+        }),
+      ],
     }),
     defineField({
       name: "socials",
       title: "Socials",
       type: "array",
-      of: [defineArrayMember({ type: "social" })]
-    })
+      of: [defineArrayMember({ type: "social" })],
+    }),
   ],
   preview: {
     select: {
       title: "name",
-      subtitle: "role"
+      subtitle: "role",
     },
     prepare(selection: { title?: string; subtitle?: string }) {
       const { title, subtitle } = selection;
@@ -58,8 +58,8 @@ export const teamMemberType = defineType({
       return {
         title: title ?? "Team Member",
         subtitle: subtitle ?? "No role specified",
-        media: UsersIcon
+        media: UsersIcon,
       };
-    }
-  }
+    },
+  },
 });

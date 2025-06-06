@@ -4,7 +4,7 @@ import {
   CalendarIcon,
   CogIcon,
   EditIcon,
-  ComponentIcon
+  ComponentIcon,
 } from "@sanity/icons";
 
 export const structure: StructureResolver = (S) =>
@@ -22,8 +22,8 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem("event")
                 .title("Events")
                 .icon(CalendarIcon),
-              S.documentTypeListItem("form").title("Forms").icon(EditIcon)
-            ])
+              S.documentTypeListItem("form").title("Forms").icon(EditIcon),
+            ]),
         ),
       S.listItem()
         .title("Website Configuration")
@@ -39,7 +39,7 @@ export const structure: StructureResolver = (S) =>
                   S.editor()
                     .id("header")
                     .schemaType("header")
-                    .documentId("header")
+                    .documentId("header"),
                 ),
               S.listItem()
                 .title("Footer")
@@ -48,8 +48,8 @@ export const structure: StructureResolver = (S) =>
                   S.editor()
                     .id("footer")
                     .schemaType("footer")
-                    .documentId("footer")
-                )
-            ])
-        )
+                    .documentId("footer"),
+                ),
+            ]),
+        ),
     ]);

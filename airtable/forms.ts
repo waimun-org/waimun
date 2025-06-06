@@ -5,7 +5,7 @@ interface AirtableConfig {
 
 export async function createRecord(
   config: AirtableConfig,
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
 ): Promise<string> {
   const response = await fetch(
     `https://api.airtable.com/v0/${config.baseId}/${config.tableId}`,
@@ -13,16 +13,16 @@ export async function createRecord(
       method: "POST",
       headers: {
         Authorization: `Bearer ${process.env.AIRTABLE_TOKEN}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         records: [
           {
-            fields: data
-          }
-        ]
-      })
-    }
+            fields: data,
+          },
+        ],
+      }),
+    },
   );
 
   if (!response.ok) {
@@ -30,7 +30,7 @@ export async function createRecord(
     console.error(error);
 
     throw new Error(
-      `Failed to save submission to Airtable: ${response.statusText}`
+      `Failed to save submission to Airtable: ${response.statusText}`,
     );
   }
 
@@ -44,7 +44,7 @@ export async function createRecord(
 export async function updateRecord(
   config: AirtableConfig,
   recordId: string,
-  data: Record<string, unknown>
+  data: Record<string, unknown>,
 ) {
   const response = await fetch(
     `https://api.airtable.com/v0/${config.baseId}/${config.tableId}`,
@@ -52,17 +52,17 @@ export async function updateRecord(
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${process.env.AIRTABLE_TOKEN}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         records: [
           {
             id: recordId,
-            fields: data
-          }
-        ]
-      })
-    }
+            fields: data,
+          },
+        ],
+      }),
+    },
   );
 
   if (!response.ok) {
@@ -70,7 +70,7 @@ export async function updateRecord(
     console.error(error);
 
     throw new Error(
-      `Failed to update record in Airtable: ${response.statusText}`
+      `Failed to update record in Airtable: ${response.statusText}`,
     );
   }
 }

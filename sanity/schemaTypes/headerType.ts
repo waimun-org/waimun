@@ -11,18 +11,18 @@ export const headerType = defineType({
       name: "branding",
       title: "Branding",
       icon: ImageIcon,
-      default: true
+      default: true,
     },
     {
       name: "navigation",
       title: "Navigation",
-      icon: LinkIcon
+      icon: LinkIcon,
     },
     {
       name: "social",
       title: "Social",
-      icon: ShareIcon
-    }
+      icon: ShareIcon,
+    },
   ],
   fields: [
     defineField({
@@ -30,7 +30,7 @@ export const headerType = defineType({
       title: "Title",
       type: "string",
       group: "branding",
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "logo",
@@ -38,17 +38,17 @@ export const headerType = defineType({
       type: "image",
       group: "branding",
       options: {
-        hotspot: true
+        hotspot: true,
       },
       fields: [
         defineField({
           name: "alt",
           title: "Alt Text",
           type: "string",
-          validation: (rule) => rule.required()
-        })
+          validation: (rule) => rule.required(),
+        }),
       ],
-      validation: (rule) => rule.required()
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "links",
@@ -56,20 +56,20 @@ export const headerType = defineType({
       type: "array",
       of: [defineArrayMember({ type: "link" })],
       group: "navigation",
-      validation: (rule) => rule.required().min(1)
+      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: "socials",
       title: "Socials",
       type: "array",
       of: [defineArrayMember({ type: "social" })],
-      group: "social"
-    })
+      group: "social",
+    }),
   ],
   preview: {
     select: {
       title: "title",
-      linkCount: "links"
+      linkCount: "links",
     },
     prepare(selection: { title?: string; linkCount?: unknown[] }) {
       const { title, linkCount } = selection;
@@ -78,8 +78,8 @@ export const headerType = defineType({
       return {
         title: title ?? "Header",
         subtitle: `${count} navigation link${count !== 1 ? "s" : ""}`,
-        media: ComponentIcon
+        media: ComponentIcon,
       };
-    }
-  }
+    },
+  },
 });

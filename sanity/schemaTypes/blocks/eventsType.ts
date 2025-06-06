@@ -10,20 +10,20 @@ export const eventsType = defineType({
     defineField({
       name: "title",
       title: "Title",
-      type: "string"
-    })
+      type: "string",
+    }),
   ],
   preview: {
     select: {
-      title: "title"
+      title: "title",
     },
     prepare(selection: { title?: string }) {
       const { title } = selection;
 
       return {
         title: title ?? "Events",
-        media: CalendarIcon
+        media: CalendarIcon,
       };
-    }
-  }
+    },
+  },
 });

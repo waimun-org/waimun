@@ -8,6 +8,6 @@ export const formBuilderType = defineType({
     defineArrayMember({ type: "input" }),
     defineArrayMember({ type: "textarea" }),
     defineArrayMember({ type: "select" }),
-    defineArrayMember({ type: "checkbox" })
-  ]
+    defineArrayMember({ type: "checkbox" }),
+  ],
 });

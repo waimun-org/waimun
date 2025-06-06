@@ -24,7 +24,7 @@ const blockComponents = {
   splitImage: SplitImage,
   prose: Prose,
   events: Events,
-  team: Team
+  team: Team,
 } as const;
 
 export function PageBuilder({ content }: PageBuilderProps) {

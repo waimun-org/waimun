@@ -9,22 +9,22 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "cdn.sanity.io",
-        pathname: "/**"
-      }
-    ]
+        pathname: "/**",
+      },
+    ],
   },
   async rewrites() {
     return [
       {
         source: "/script.js",
-        destination: `${process.env.NEXT_PUBLIC_UMAMI_URL}/script.js`
+        destination: `${process.env.NEXT_PUBLIC_UMAMI_URL}/script.js`,
       },
       {
         source: "/api/send",
-        destination: `${process.env.NEXT_PUBLIC_UMAMI_URL}/api/send`
-      }
+        destination: `${process.env.NEXT_PUBLIC_UMAMI_URL}/api/send`,
+      },
     ];
-  }
+  },
 };
 
 export default withSentryConfig(nextConfig, {
@@ -56,5 +56,5 @@ export default withSentryConfig(nextConfig, {
   // See the following for more information:
   // https://docs.sentry.io/product/crons/
   // https://vercel.com/docs/cron-jobs
-  automaticVercelMonitors: true
+  automaticVercelMonitors: true,
 });

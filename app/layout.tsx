@@ -6,20 +6,20 @@ import Script from "next/script";
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin"]
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`
+    template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.description
+  description: siteConfig.description,
 };
 
 export default async function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {

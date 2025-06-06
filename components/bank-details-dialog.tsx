@@ -3,7 +3,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -28,7 +28,7 @@ type BankDetailsDialogProps = {
 export function BankDetailsDialog({
   isOpen,
   onClose,
-  bankDetails
+  bankDetails,
 }: BankDetailsDialogProps) {
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
@@ -47,20 +47,20 @@ export function BankDetailsDialog({
     {
       label: "Account Name",
       value: bankDetails.accountName,
-      key: "accountName"
+      key: "accountName",
     },
     {
       label: "Account Number",
       value: bankDetails.accountNumber,
       key: "accountNumber",
-      mono: true
+      mono: true,
     },
     {
       label: "Reference",
       value: bankDetails.reference,
       key: "reference",
-      mono: true
-    }
+      mono: true,
+    },
   ];
 
   return (
@@ -91,7 +91,7 @@ export function BankDetailsDialog({
                 <div
                   className={cn(
                     "bg-muted/50 flex-1 rounded-md border px-3 py-2 text-sm",
-                    mono && "font-mono"
+                    mono && "font-mono",
                   )}
                 >
                   {value}
