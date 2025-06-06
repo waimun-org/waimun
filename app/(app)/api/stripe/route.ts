@@ -15,7 +15,7 @@ export async function POST(request: Request) {
   if (!signature) {
     return NextResponse.json(
       { error: "No signature found in request headers" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -23,15 +23,15 @@ export async function POST(request: Request) {
     stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!
-    )
+      process.env.STRIPE_WEBHOOK_SECRET!,
+    ),
   );
 
   if (eventResult.error) {
     console.error("Webhook signature verification failed:", eventResult.error);
     return NextResponse.json(
       { error: "Error verifying webhook signature" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -50,21 +50,21 @@ export async function POST(request: Request) {
     if (!formId) {
       return NextResponse.json(
         { error: "No formId found in checkout session metadata" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const formResult = await tryCatch(
       client.fetch<FORM_BY_ID_QUERYResult>(FORM_BY_ID_QUERY, {
-        id: formId
-      })
+        id: formId,
+      }),
     );
 
     if (formResult.error) {
       console.error("Failed to fetch form:", formResult.error);
       return NextResponse.json(
         { error: "Failed to fetch form data" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -79,7 +79,7 @@ export async function POST(request: Request) {
     if (!recordId) {
       return NextResponse.json(
         { error: "No recordId found in checkout session metadata" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -87,18 +87,18 @@ export async function POST(request: Request) {
       updateRecord(
         {
           baseId: form.airtable.baseId,
-          tableId: form.airtable.tableId
+          tableId: form.airtable.tableId,
         },
         recordId,
-        { "Payment Status": "Paid" }
-      )
+        { "Payment Status": "Paid" },
+      ),
     );
 
     if (updateResult.error) {
       console.error("Failed to update record in Airtable:", updateResult.error);
       return NextResponse.json(
         { error: "Failed to update record in Airtable" },
-        { status: 500 }
+        { status: 500 },
       );
     }
   }
