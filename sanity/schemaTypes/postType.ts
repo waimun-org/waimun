@@ -51,7 +51,6 @@ export const postType = defineType({
       group: "content",
       rows: 3,
       validation: (rule) => rule.max(200),
-      description: "Brief description of the post for previews and SEO",
     }),
     defineField({
       name: "content",
