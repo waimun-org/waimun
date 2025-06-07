@@ -40,5 +40,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   });
 
+  data.posts.forEach((post) => {
+    sitemap.push({
+      url: `${siteConfig.url}/blog/${post.slug}`,
+      lastModified: new Date(post.lastModified),
+      changeFrequency: "monthly",
+      priority: post.priority,
+    });
+  });
+
   return sitemap;
 }

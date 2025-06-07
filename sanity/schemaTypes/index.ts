@@ -1,4 +1,5 @@
 import { eventType } from "./eventType";
+import { postType } from "./postType";
 import { heroType } from "./blocks/heroType";
 import { pageBuilderType } from "./pageBuilderType";
 import { pageType } from "./pageType";
@@ -17,6 +18,7 @@ import { selectType } from "./fields/selectType";
 import { separatorType } from "./fields/separatorType";
 import { textBlockType } from "./fields/textBlockType";
 import { eventsType } from "./blocks/eventsType";
+import { postsType } from "./blocks/postsType";
 import { seoType } from "./seoType";
 import { socialType } from "./socialType";
 import { teamType } from "./blocks/teamType";
@@ -24,6 +26,7 @@ import { teamMemberType } from "./teamMemberType";
 
 const schemaTypes = [
   eventType,
+  postType,
   heroType,
   pageBuilderType,
   pageType,
@@ -43,6 +46,7 @@ const schemaTypes = [
   separatorType,
   textBlockType,
   eventsType,
+  postsType,
   seoType,
   teamType,
   teamMemberType,

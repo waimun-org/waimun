@@ -65,6 +65,11 @@ export type Team = {
   >;
 };
 
+export type Posts = {
+  _type: "posts";
+  title?: string;
+};
+
 export type Events = {
   _type: "events";
   title?: string;
@@ -375,6 +380,9 @@ export type Page = {
       } & Events)
     | ({
         _key: string;
+      } & Posts)
+    | ({
+        _key: string;
       } & Team)
   >;
   seo: Seo;
@@ -393,6 +401,9 @@ export type PageBuilder = Array<
   | ({
       _key: string;
     } & Events)
+  | ({
+      _key: string;
+    } & Posts)
   | ({
       _key: string;
     } & Team)
@@ -438,6 +449,51 @@ export type Hero = {
     _type: "image";
   };
   backgroundColor?: Color;
+};
+
+export type Post = {
+  _id: string;
+  _type: "post";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  excerpt?: string;
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  author: string;
+  publishedAt: string;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  };
+  slug: Slug;
+  seo?: Seo;
 };
 
 export type Event = {
@@ -682,6 +738,7 @@ export type SanityAssetSourceData = {
 export type AllSanitySchemaTypes =
   | TeamMember
   | Team
+  | Posts
   | Events
   | TextBlock
   | Separator
@@ -701,6 +758,7 @@ export type AllSanitySchemaTypes =
   | Page
   | PageBuilder
   | Hero
+  | Post
   | Event
   | Seo
   | Color
@@ -785,6 +843,11 @@ export type PAGE_QUERYResult = {
           _type: "image";
         };
         backgroundColor?: Color;
+      }
+    | {
+        _key: string;
+        _type: "posts";
+        title?: string;
       }
     | {
         _key: string;
@@ -1095,6 +1158,98 @@ export type EVENT_BY_SLUG_QUERYResult = {
   slug: Slug;
   seo?: Seo;
 } | null;
+// Variable: POSTS_QUERY
+// Query: *[_type == "post"] | order(publishedAt desc) {  ...,}
+export type POSTS_QUERYResult = Array<{
+  _id: string;
+  _type: "post";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  excerpt?: string;
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  author: string;
+  publishedAt: string;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  };
+  slug: Slug;
+  seo?: Seo;
+}>;
+// Variable: POST_BY_SLUG_QUERY
+// Query: *[_type == "post" && slug.current == $slug][0] {  ...}
+export type POST_BY_SLUG_QUERYResult = {
+  _id: string;
+  _type: "post";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  excerpt?: string;
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  author: string;
+  publishedAt: string;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  };
+  slug: Slug;
+  seo?: Seo;
+} | null;
 // Variable: FORM_BY_SLUG_QUERY
 // Query: *[_type == "form" && slug.current == $slug][0] {  ...,  content[] {    ...,  }}
 export type FORM_BY_SLUG_QUERYResult = {
@@ -1371,8 +1526,14 @@ export type FORMS_SLUGS_QUERYResult = Array<{
   slug: string;
   lastModified: string;
 }>;
+// Variable: POSTS_SLUGS_QUERY
+// Query: *[_type == "post" && defined(slug.current)]{  "slug": slug.current,  "lastModified": _updatedAt}
+export type POSTS_SLUGS_QUERYResult = Array<{
+  slug: string;
+  lastModified: string;
+}>;
 // Variable: SITEMAP_QUERY
-// Query: {  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": select(      slug.current == "home" => 1.0,      0.8    )  },  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.7  },  "forms": *[_type == "form" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.6  }}
+// Query: {  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": select(      slug.current == "home" => 1.0,      0.8    )  },  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.7  },  "forms": *[_type == "form" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.6  },  "posts": *[_type == "post" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.7  }}
 export type SITEMAP_QUERYResult = {
   pages: Array<{
     slug: string;
@@ -1389,6 +1550,11 @@ export type SITEMAP_QUERYResult = {
     lastModified: string;
     priority: 0.6;
   }>;
+  posts: Array<{
+    slug: string;
+    lastModified: string;
+    priority: 0.7;
+  }>;
 };
 
 // Query TypeMap
@@ -1400,11 +1566,14 @@ declare module "@sanity/client" {
     '*[_type == "footer"][0] {\n  ...,\n  links[] {\n    ...,\n  },\n  socials[] {\n    ...,\n  }\n}': FOOTER_QUERYResult;
     '*[_type == "event"] {\n  ...,\n}': EVENTS_QUERYResult;
     '*[_type == "event" && slug.current == $slug][0] {\n  ...\n}': EVENT_BY_SLUG_QUERYResult;
+    '*[_type == "post"] | order(publishedAt desc) {\n  ...,\n}': POSTS_QUERYResult;
+    '*[_type == "post" && slug.current == $slug][0] {\n  ...\n}': POST_BY_SLUG_QUERYResult;
     '*[_type == "form" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_BY_SLUG_QUERYResult;
     '*[_type == "form" && _id == $id][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_BY_ID_QUERYResult;
     '*[_type == "page" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': PAGES_SLUGS_QUERYResult;
     '*[_type == "event" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': EVENTS_SLUGS_QUERYResult;
     '*[_type == "form" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': FORMS_SLUGS_QUERYResult;
-    '{\n  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": select(\n      slug.current == "home" => 1.0,\n      0.8\n    )\n  },\n  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.7\n  },\n  "forms": *[_type == "form" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.6\n  }\n}': SITEMAP_QUERYResult;
+    '*[_type == "post" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': POSTS_SLUGS_QUERYResult;
+    '{\n  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": select(\n      slug.current == "home" => 1.0,\n      0.8\n    )\n  },\n  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.7\n  },\n  "forms": *[_type == "form" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.6\n  },\n  "posts": *[_type == "post" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.7\n  }\n}': SITEMAP_QUERYResult;
   }
 }
