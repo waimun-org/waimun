@@ -22,6 +22,7 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem("event")
                 .title("Events")
                 .icon(CalendarIcon),
+              S.documentTypeListItem("post").title("Posts").icon(DocumentIcon),
               S.documentTypeListItem("form").title("Forms").icon(EditIcon),
             ]),
         ),

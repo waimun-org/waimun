@@ -3,6 +3,7 @@ import { SplitImage } from "@/components/blocks/split-image";
 import type { PageBuilder } from "@/sanity/types";
 import { Prose } from "./blocks/prose";
 import { Events } from "./blocks/events";
+import { Posts } from "./blocks/posts";
 import { Team } from "./blocks/team";
 import { cn } from "@/utils/cn";
 
@@ -24,6 +25,7 @@ const blockComponents = {
   splitImage: SplitImage,
   prose: Prose,
   events: Events,
+  posts: Posts,
   team: Team,
 } as const;
 

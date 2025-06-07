@@ -14,7 +14,7 @@ interface FormPageProps {
   params: Promise<{ slug: string }>;
 }
 
-async function getFormBySlug(slug: string): Promise<FORM_BY_SLUG_QUERYResult> {
+async function getFormBySlug(slug: string) {
   const result = await tryCatch(
     client.fetch<FORM_BY_SLUG_QUERYResult>(FORM_BY_SLUG_QUERY, { slug }),
   );

@@ -9,6 +9,7 @@ export const pageBuilderType = defineType({
     defineArrayMember({ type: "splitImage" }),
     defineArrayMember({ type: "prose" }),
     defineArrayMember({ type: "events" }),
+    defineArrayMember({ type: "posts" }),
     defineArrayMember({ type: "team" }),
   ],
 });
