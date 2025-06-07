@@ -4,8 +4,6 @@ import {
   ImageIcon,
   LinkIcon,
   SearchIcon,
-  UserIcon,
-  CalendarIcon,
 } from "@sanity/icons";
 
 export const postType = defineType({
