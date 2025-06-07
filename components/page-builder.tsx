@@ -11,7 +11,7 @@ export type PageBuilderProps = {
   content: PageBuilder;
 };
 
-export type BlockWrapperProps = {
+type BlockWrapperProps = {
   children: React.ReactNode;
   isLast: boolean;
 };
@@ -20,7 +20,7 @@ function BlockWrapper({ children, isLast }: BlockWrapperProps) {
   return <div className={cn(!isLast && "border-b")}>{children}</div>;
 }
 
-const blockComponents = {
+const BLOCK_COMPONENTS = {
   hero: Hero,
   splitImage: SplitImage,
   prose: Prose,
@@ -31,19 +31,20 @@ const blockComponents = {
 
 export function PageBuilder({ content }: PageBuilderProps) {
   return (
-    <main>
+    <>
       {content.map((block, index) => {
-        const isLast = index === content.length - 1;
-        const Component = blockComponents[block._type] as React.ComponentType<{
+        const Component = BLOCK_COMPONENTS[block._type] as React.ComponentType<{
           block: PageBuilder[number];
         }>;
 
+        if (!Component) return null;
+
         return (
-          <BlockWrapper key={block._key} isLast={isLast}>
+          <BlockWrapper key={block._key} isLast={index === content.length - 1}>
             <Component block={block} />
           </BlockWrapper>
         );
       })}
-    </main>
+    </>
   );
 }

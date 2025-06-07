@@ -28,7 +28,7 @@ export default async function AppLayout({
     <>
       <div className="flex min-h-screen flex-col">
         <Header header={header} />
-        <div className="flex-1">{children}</div>
+        <main className="flex-1">{children}</main>
         <Footer footer={footer} />
       </div>
 
