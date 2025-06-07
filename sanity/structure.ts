@@ -22,7 +22,7 @@ export const structure: StructureResolver = (S) =>
         .icon(CogIcon)
         .child(
           S.list()
-            .title("Website")
+            .title("Settings")
             .items([
               S.listItem()
                 .title("Header")
