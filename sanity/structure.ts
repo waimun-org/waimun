@@ -9,7 +9,7 @@ import {
 
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title("Waimun")
+    .title("WaiMUN")
     .items([
       S.listItem()
         .title("Content")

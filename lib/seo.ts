@@ -3,7 +3,7 @@ import type { Seo, Slug } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 
 export const siteConfig = {
-  name: "Waimun",
+  name: "WaiMUN",
   description:
     "Empowering students to become active global citizens through public speaking, leadership development, and debate.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://waimun.org",
