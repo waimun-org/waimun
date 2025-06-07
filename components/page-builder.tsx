@@ -5,7 +5,6 @@ import { Prose } from "./blocks/prose";
 import { Events } from "./blocks/events";
 import { Posts } from "./blocks/posts";
 import { Team } from "./blocks/team";
-import { cn } from "@/utils/cn";
 
 export type PageBuilderProps = {
   content: PageBuilder;
@@ -17,7 +16,7 @@ type BlockWrapperProps = {
 };
 
 function BlockWrapper({ children, isLast }: BlockWrapperProps) {
-  return <div className={cn(!isLast && "border-b")}>{children}</div>;
+  return <div className={isLast ? undefined : "border-b"}>{children}</div>;
 }
 
 const BLOCK_COMPONENTS = {
