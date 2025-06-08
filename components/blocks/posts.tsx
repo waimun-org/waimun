@@ -19,7 +19,7 @@ async function getPosts(): Promise<POSTS_QUERYResult> {
   const result = await tryCatch(
     sanityFetch<POSTS_QUERYResult>({
       query: POSTS_QUERY,
-      tags: ["posts"],
+      tags: ["post"],
     }),
   );
 

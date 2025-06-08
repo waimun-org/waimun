@@ -58,7 +58,7 @@ export async function POST(request: Request) {
       sanityFetch<FORM_BY_ID_QUERYResult>({
         query: FORM_BY_ID_QUERY,
         params: { id: formId },
-        tags: ["form"],
+        tags: ["form", `form-${formId}`],
       }),
     );
 

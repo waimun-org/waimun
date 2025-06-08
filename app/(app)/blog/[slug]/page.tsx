@@ -16,7 +16,7 @@ async function getPostBySlug(slug: string) {
     sanityFetch<POST_BY_SLUG_QUERYResult>({
       query: POST_BY_SLUG_QUERY,
       params: { slug },
-      tags: ["post"],
+      tags: ["post", `post-${slug}`],
     }),
   );
 
