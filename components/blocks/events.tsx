@@ -19,7 +19,7 @@ async function getEvents(): Promise<EVENTS_QUERYResult> {
   const result = await tryCatch(
     sanityFetch<EVENTS_QUERYResult>({
       query: EVENTS_QUERY,
-      tags: ["events"],
+      tags: ["event"],
     }),
   );
 

@@ -7,6 +7,7 @@ import { stripe } from "@/lib/stripe";
 import type { Metadata } from "next";
 import { generateNextMetadata } from "@/lib/seo";
 import { tryCatch } from "@/utils/try-catch";
+import { unstable_cache as cache } from "next/cache";
 
 interface FormPageProps {
   params: Promise<{ slug: string }>;
@@ -17,7 +18,7 @@ async function getFormBySlug(slug: string) {
     sanityFetch<FORM_BY_SLUG_QUERYResult>({
       query: FORM_BY_SLUG_QUERY,
       params: { slug },
-      tags: ["form"],
+      tags: ["form", `form-${slug}`],
     }),
   );
 
@@ -71,16 +72,27 @@ export default async function FormPage({
 }
 
 export async function getPrice(priceId: string): Promise<Price | null> {
-  const priceResult = await stripe.prices.retrieve(priceId);
+  const getCachedPrice = cache(
+    async (id: string) => {
+      const priceResult = await stripe.prices.retrieve(id);
 
-  const { unit_amount, currency } = priceResult;
+      const { unit_amount, currency } = priceResult;
 
-  if (!unit_amount || !currency) {
-    throw new Error("Invalid price data: missing unit_amount or currency");
-  }
+      if (!unit_amount || !currency) {
+        throw new Error("Invalid price data: missing unit_amount or currency");
+      }
 
-  return {
-    unitAmount: unit_amount,
-    currency,
-  };
+      return {
+        unitAmount: unit_amount,
+        currency,
+      };
+    },
+    [priceId],
+    {
+      tags: ["price", `price-${priceId}`],
+      revalidate: 60,
+    },
+  );
+
+  return getCachedPrice(priceId);
 }
