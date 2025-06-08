@@ -12,15 +12,23 @@ import Link from "next/link";
 import { EVENTS_QUERY } from "@/sanity/lib/queries";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { AlertCircle } from "lucide-react";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
+import { tryCatch } from "@/utils/try-catch";
 
 async function getEvents(): Promise<EVENTS_QUERYResult> {
-  try {
-    return await client.fetch<EVENTS_QUERYResult>(EVENTS_QUERY);
-  } catch (error) {
-    console.error("Failed to fetch events:", error);
+  const result = await tryCatch(
+    sanityFetch<EVENTS_QUERYResult>({
+      query: EVENTS_QUERY,
+      tags: ["events"],
+    }),
+  );
+
+  if (result.error) {
+    console.error("Failed to fetch events:", result.error);
     return [];
   }
+
+  return result.data;
 }
 
 export type EventsProps = {

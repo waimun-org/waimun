@@ -1,6 +1,6 @@
 "use server";
 
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { FORM_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { getFormSchema } from "@/lib/form";
 import { verifyHCaptchaToken } from "@/lib/hcaptcha";
@@ -72,7 +72,11 @@ async function validateFormSubmission(
   formValues: Record<string, unknown>,
 ) {
   const formResult = await tryCatch(
-    client.fetch<Form | null>(FORM_BY_SLUG_QUERY, { slug }),
+    sanityFetch<FORM_BY_SLUG_QUERYResult>({
+      query: FORM_BY_SLUG_QUERY,
+      params: { slug },
+      tags: ["form"],
+    }),
   );
 
   if (formResult.error) {

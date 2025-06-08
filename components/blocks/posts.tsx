@@ -11,16 +11,24 @@ import Link from "next/link";
 import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { AlertCircle, CalendarIcon, UserIcon } from "lucide-react";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { format } from "date-fns";
+import { tryCatch } from "@/utils/try-catch";
 
 async function getPosts(): Promise<POSTS_QUERYResult> {
-  try {
-    return await client.fetch<POSTS_QUERYResult>(POSTS_QUERY);
-  } catch (error) {
-    console.error("Failed to fetch posts:", error);
+  const result = await tryCatch(
+    sanityFetch<POSTS_QUERYResult>({
+      query: POSTS_QUERY,
+      tags: ["posts"],
+    }),
+  );
+
+  if (result.error) {
+    console.error("Failed to fetch posts:", result.error);
     return [];
   }
+
+  return result.data;
 }
 
 export type PostsProps = {

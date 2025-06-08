@@ -1,14 +1,24 @@
 import type { MetadataRoute } from "next";
-import { client } from "@/sanity/lib/client";
-import { SITEMAP_QUERY } from "@/sanity/lib/queries";
+import { sanityFetch } from "@/sanity/lib/client";
 import { siteConfig } from "@/lib/seo";
+import { SITEMAP_QUERY } from "@/sanity/lib/queries";
 import type { SITEMAP_QUERYResult } from "@/sanity/types";
-
-export const dynamic = "force-dynamic";
+import { tryCatch } from "@/utils/try-catch";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const data = await client.fetch<SITEMAP_QUERYResult>(SITEMAP_QUERY);
+  const result = await tryCatch(
+    sanityFetch<SITEMAP_QUERYResult>({
+      query: SITEMAP_QUERY,
+      tags: ["page", "post", "event", "form"],
+    }),
+  );
 
+  if (result.error) {
+    console.error("Failed to fetch sitemap:", result.error);
+    return [];
+  }
+
+  const data = result.data;
   const sitemap: MetadataRoute.Sitemap = [];
 
   data.pages.forEach((page) => {
