@@ -1,13 +1,11 @@
 import { notFound } from "next/navigation";
 import { PageBuilder } from "@/components/page-builder";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import type { PAGE_QUERYResult } from "@/sanity/types";
 import { generateNextMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { tryCatch } from "@/utils/try-catch";
-
-export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{ slug?: string }>;
@@ -15,7 +13,11 @@ interface PageProps {
 
 async function getPageBySlug(slug: string) {
   const result = await tryCatch(
-    client.fetch<PAGE_QUERYResult>(PAGE_QUERY, { slug }),
+    sanityFetch<PAGE_QUERYResult>({
+      query: PAGE_QUERY,
+      params: { slug },
+      tags: ["page"],
+    }),
   );
 
   if (result.error) {

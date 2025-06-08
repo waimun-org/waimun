@@ -1,14 +1,12 @@
 import { FORM_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import { Form, type Price } from "@/components/form";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import type { FORM_BY_SLUG_QUERYResult } from "@/sanity/types";
 import { stripe } from "@/lib/stripe";
 import type { Metadata } from "next";
 import { generateNextMetadata } from "@/lib/seo";
 import { tryCatch } from "@/utils/try-catch";
-
-export const dynamic = "force-dynamic";
 
 interface FormPageProps {
   params: Promise<{ slug: string }>;
@@ -16,7 +14,11 @@ interface FormPageProps {
 
 async function getFormBySlug(slug: string) {
   const result = await tryCatch(
-    client.fetch<FORM_BY_SLUG_QUERYResult>(FORM_BY_SLUG_QUERY, { slug }),
+    sanityFetch<FORM_BY_SLUG_QUERYResult>({
+      query: FORM_BY_SLUG_QUERY,
+      params: { slug },
+      tags: ["form"],
+    }),
   );
 
   if (result.error) {

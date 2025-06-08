@@ -1,5 +1,5 @@
 import { updateRecord } from "@/lib/airtable";
-import { client } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/client";
 import { FORM_BY_ID_QUERY } from "@/sanity/lib/queries";
 import type { FORM_BY_ID_QUERYResult } from "@/sanity/types";
 import { stripe } from "@/lib/stripe";
@@ -55,8 +55,10 @@ export async function POST(request: Request) {
     }
 
     const formResult = await tryCatch(
-      client.fetch<FORM_BY_ID_QUERYResult>(FORM_BY_ID_QUERY, {
-        id: formId,
+      sanityFetch<FORM_BY_ID_QUERYResult>({
+        query: FORM_BY_ID_QUERY,
+        params: { id: formId },
+        tags: ["form"],
       }),
     );
 
