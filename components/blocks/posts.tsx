@@ -39,7 +39,7 @@ export async function Posts(_: PostsProps) {
   const posts = await getPosts();
 
   return (
-    <section className="container flex flex-col gap-8 py-8 md:py-16">
+    <section className="container flex flex-col gap-8 py-8">
       {posts.length === 0 && (
         <Alert>
           <AlertCircle className="h-4 w-4" />

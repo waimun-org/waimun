@@ -17,7 +17,7 @@ export type TeamProps = {
 
 export function Team({ block }: TeamProps) {
   return (
-    <section className="container flex flex-col gap-8 py-8 md:py-16">
+    <section className="container flex flex-col gap-8 py-8">
       <h2 className="text-2xl font-bold text-balance">{block.title}</h2>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">

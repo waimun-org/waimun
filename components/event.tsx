@@ -13,7 +13,7 @@ export function Event({ event }: EventProps) {
   return (
     <>
       <EventHero event={event} />
-      <section className="container py-8 md:py-16">
+      <section className="container py-8">
         <article className="prose max-w-none">
           {event.details ? (
             <PortableText value={event.details} />
