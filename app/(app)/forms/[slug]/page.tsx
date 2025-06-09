@@ -21,7 +21,7 @@ async function getFormBySlug(slug: string) {
     sanityFetch<FORM_BY_SLUG_QUERYResult>({
       query: FORM_BY_SLUG_QUERY,
       params: { slug },
-      tags: ["form", `form-${slug}`],
+      tags: [`form:${slug}`],
     }),
   );
 
@@ -113,7 +113,7 @@ export async function getPrice(priceId: string): Promise<Price | null> {
     },
     [priceId],
     {
-      tags: ["price", `price-${priceId}`],
+      tags: [`price:${priceId}`],
       revalidate: 60,
     },
   );

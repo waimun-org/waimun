@@ -16,7 +16,7 @@ async function getPageBySlug(slug: string) {
     sanityFetch<PAGE_QUERYResult>({
       query: PAGE_QUERY,
       params: { slug },
-      tags: ["page", `page-${slug}`],
+      tags: [`page:${slug}`],
     }),
   );
 
