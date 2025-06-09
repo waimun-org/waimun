@@ -5,7 +5,11 @@ import { tryCatch } from "@/utils/try-catch";
 
 export async function POST(req: NextRequest) {
   const result = await tryCatch(
-    parseBody<{ _type: string }>(req, process.env.SANITY_REVALIDATE_SECRET),
+    parseBody<{ _type: string }>(
+      req,
+      process.env.SANITY_REVALIDATE_SECRET,
+      true, // Wait for Content Lake eventual consistency
+    ),
   );
 
   if (result.error) {
