@@ -1,8 +1,11 @@
-import { EVENT_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { EVENT_BY_SLUG_QUERY, EVENTS_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { Event } from "@/components/event";
 import { notFound } from "next/navigation";
 import { sanityFetch } from "@/sanity/lib/client";
-import type { EVENT_BY_SLUG_QUERYResult } from "@/sanity/types";
+import type {
+  EVENT_BY_SLUG_QUERYResult,
+  EVENTS_SLUGS_QUERYResult,
+} from "@/sanity/types";
 import { generateNextMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { tryCatch } from "@/utils/try-catch";
@@ -26,6 +29,27 @@ async function getEventBySlug(slug: string) {
   }
 
   return result.data;
+}
+
+async function getEventSlugs() {
+  const result = await tryCatch(
+    sanityFetch<EVENTS_SLUGS_QUERYResult>({
+      query: EVENTS_SLUGS_QUERY,
+      tags: ["event"],
+    }),
+  );
+
+  if (result.error) {
+    console.error("Error fetching event slugs:", result.error);
+    return [];
+  }
+
+  return result.data.map((event) => event.slug);
+}
+
+export async function generateStaticParams() {
+  const slugs = await getEventSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
