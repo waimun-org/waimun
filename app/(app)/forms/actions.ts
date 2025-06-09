@@ -115,7 +115,7 @@ async function validateFormSubmission(
 }
 
 async function createStripeCheckoutSession(form: Form, recordId: string) {
-  if (!form.stripe.enabled) {
+  if (!form.stripe?.enabled) {
     throw new Error("Stripe is not enabled");
   }
 

@@ -201,12 +201,12 @@ export type Form = {
     baseId: string;
     tableId: string;
   };
-  stripe: {
+  stripe?: {
     enabled: boolean;
     priceId?: string;
     priceIdTest?: string;
   };
-  bankTransfer: {
+  bankTransfer?: {
     enabled: boolean;
     accountName?: string;
     accountNumber?: string;
@@ -1377,12 +1377,12 @@ export type FORM_BY_SLUG_QUERYResult = {
     baseId: string;
     tableId: string;
   };
-  stripe: {
+  stripe?: {
     enabled: boolean;
     priceId?: string;
     priceIdTest?: string;
   };
-  bankTransfer: {
+  bankTransfer?: {
     enabled: boolean;
     accountName?: string;
     accountNumber?: string;
@@ -1508,12 +1508,12 @@ export type FORM_BY_ID_QUERYResult = {
     baseId: string;
     tableId: string;
   };
-  stripe: {
+  stripe?: {
     enabled: boolean;
     priceId?: string;
     priceIdTest?: string;
   };
-  bankTransfer: {
+  bankTransfer?: {
     enabled: boolean;
     accountName?: string;
     accountNumber?: string;
