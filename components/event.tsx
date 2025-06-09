@@ -13,13 +13,15 @@ export function Event({ event }: EventProps) {
   return (
     <>
       <EventHero event={event} />
-      <article className="prose container max-w-4xl py-8 md:py-16">
-        {event.details ? (
-          <PortableText value={event.details} />
-        ) : (
-          <p>No details available</p>
-        )}
-      </article>
+      <section className="container py-8 md:py-16">
+        <article className="prose max-w-none">
+          {event.details ? (
+            <PortableText value={event.details} />
+          ) : (
+            <p>No details available</p>
+          )}
+        </article>
+      </section>
     </>
   );
 }
@@ -37,7 +39,7 @@ function EventHero({ event }: EventProps) {
             </h1>
 
             {event.description && (
-              <div className="prose prose-lg text-balance">
+              <div className="prose prose-lg max-w-none">
                 <PortableText value={event.description} />
               </div>
             )}

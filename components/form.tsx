@@ -130,9 +130,11 @@ export function Form({ form: formConfig, price }: FormProps) {
   return (
     <>
       <section className="border-b">
-        <div className="container flex flex-col gap-4 py-8">
-          <h1 className="text-2xl font-bold md:text-4xl">{formConfig.title}</h1>
-          <div className="prose">
+        <div className="container flex flex-col gap-4 py-8 md:py-16">
+          <h1 className="text-2xl font-bold text-balance md:text-4xl">
+            {formConfig.title}
+          </h1>
+          <div className="prose max-w-none">
             <PortableText value={formConfig.description} />
           </div>
         </div>

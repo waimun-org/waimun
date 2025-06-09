@@ -7,8 +7,8 @@ export type ProseProps = {
 
 export function Prose({ block }: ProseProps) {
   return (
-    <section className="container py-8">
-      <div className="prose">
+    <section className="container py-8 md:py-16">
+      <div className="prose max-w-none">
         <PortableText value={block.content} />
       </div>
     </section>
