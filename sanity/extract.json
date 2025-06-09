@@ -2115,6 +2115,13 @@
                 },
                 "optional": false
               },
+              "priority": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "boolean"
+                },
+                "optional": false
+              },
               "_type": {
                 "type": "objectAttribute",
                 "value": {

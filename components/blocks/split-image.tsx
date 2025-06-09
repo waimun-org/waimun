@@ -29,6 +29,7 @@ export function SplitImage({ block }: SplitImageProps) {
           image={block.image}
           sizes="(min-width: 768px) 50vw, 100vw"
           alt={block.image.alt}
+          priority={block.image.priority}
         />
       </div>
     </section>
