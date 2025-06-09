@@ -3,7 +3,7 @@ import { PortableText } from "next-sanity";
 import { Button } from "./button";
 import { Image } from "./image";
 import { CalendarIcon, CircleDollarSignIcon, MapPinIcon } from "lucide-react";
-import { format } from "date-fns";
+import { formatDate } from "@/utils/date";
 
 export type EventProps = {
   event: Event;
@@ -73,7 +73,7 @@ function EventMeta({ event }: EventProps) {
         <div className="flex items-center gap-2">
           <CalendarIcon className="size-5" />
           <span className="text-sm whitespace-nowrap">
-            {format(new Date(event.date), "MMM d, yyyy")}
+            {formatDate(event.date)}
           </span>
         </div>
       )}

@@ -11,11 +11,14 @@ import { CheckCircleIcon, CopyIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { cn } from "@/utils/cn";
+import { formatPrice } from "@/utils/price";
+import type { Price } from "@/sanity/types";
 
 export type BankDetails = {
   accountName: string;
   accountNumber: string;
   reference: string;
+  price: Price;
   instructions?: string;
 };
 
@@ -59,6 +62,12 @@ export function BankDetailsDialog({
       label: "Reference",
       value: bankDetails.reference,
       key: "reference",
+      mono: true,
+    },
+    {
+      label: "Price",
+      value: formatPrice(bankDetails.price),
+      key: "price",
       mono: true,
     },
   ];

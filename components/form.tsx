@@ -25,17 +25,13 @@ import { Suspense, useState } from "react";
 import Link from "next/link";
 import { PaymentMethodDialog } from "./payment-method-dialog";
 import { BankDetailsDialog } from "./bank-details-dialog";
+import type { Price } from "@/utils/price";
 
 export type FormProps = {
   form: FormType & {
     content: FormBuilderType;
   };
   price?: Price | null;
-};
-
-export type Price = {
-  unitAmount: number;
-  currency: string;
 };
 
 type PaymentMethod = "stripe" | "bankTransfer";
@@ -167,7 +163,7 @@ export function Form({ form: formConfig, price }: FormProps) {
           </form>
         </UIForm>
 
-        <PaymentInformation price={price} />
+        <PaymentInformation price={price ?? formConfig.bankTransfer?.price} />
       </section>
 
       {hasMultiplePaymentMethods && (
@@ -189,6 +185,11 @@ export function Form({ form: formConfig, price }: FormProps) {
             accountNumber:
               formConfig.bankTransfer.accountNumber ?? "Not configured",
             reference: reference ?? "Pending",
+            price: formConfig.bankTransfer.price ?? {
+              _type: "price",
+              unitAmount: 0,
+              currency: "NZD",
+            },
             instructions: formConfig.bankTransfer.instructions,
           }}
         />

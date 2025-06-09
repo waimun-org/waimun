@@ -23,6 +23,7 @@ import { seoType } from "./seoType";
 import { socialType } from "./socialType";
 import { teamType } from "./blocks/teamType";
 import { teamMemberType } from "./teamMemberType";
+import { priceType } from "./priceType";
 
 const schemaTypes = [
   eventType,
@@ -39,6 +40,7 @@ const schemaTypes = [
   proseType,
   formType,
   formBuilderType,
+  priceType,
   inputType,
   textareaType,
   selectType,

@@ -209,10 +209,17 @@ export type Form = {
     enabled: boolean;
     accountName?: string;
     accountNumber?: string;
+    price?: Price;
     instructions?: string;
   };
   slug: Slug;
   seo: Seo;
+};
+
+export type Price = {
+  _type: "price";
+  unitAmount: number;
+  currency: string;
 };
 
 export type Prose = {
@@ -749,6 +756,7 @@ export type AllSanitySchemaTypes =
   | Input
   | FormBuilder
   | Form
+  | Price
   | Prose
   | Button
   | Link
@@ -1376,6 +1384,7 @@ export type FORM_BY_SLUG_QUERYResult = {
     enabled: boolean;
     accountName?: string;
     accountNumber?: string;
+    price?: Price;
     instructions?: string;
   };
   slug: Slug;
@@ -1505,6 +1514,7 @@ export type FORM_BY_ID_QUERYResult = {
     enabled: boolean;
     accountName?: string;
     accountNumber?: string;
+    price?: Price;
     instructions?: string;
   };
   slug: Slug;

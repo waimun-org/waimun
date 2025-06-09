@@ -152,6 +152,20 @@ export const formType = defineType({
             }),
         }),
         defineField({
+          name: "price",
+          title: "Price",
+          type: "price",
+          hidden: ({ parent }: { parent?: { enabled?: boolean } }) =>
+            !parent?.enabled,
+          validation: (rule) =>
+            rule.custom((value, context) => {
+              const parent = context.parent as { enabled?: boolean };
+              return !parent?.enabled || value
+                ? true
+                : "Price is required when bank transfer is enabled";
+            }),
+        }),
+        defineField({
           name: "instructions",
           title: "Additional Instructions",
           type: "text",

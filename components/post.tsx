@@ -2,7 +2,7 @@ import type { Post } from "@/sanity/types";
 import { PortableText } from "next-sanity";
 import { Image } from "@/components/image";
 import { CalendarIcon, UserIcon } from "lucide-react";
-import { format } from "date-fns";
+import { formatDate } from "@/utils/date";
 
 export type PostProps = {
   post: Post;
@@ -47,7 +47,7 @@ function PostMeta({ post }: PostMetaProps) {
       <div className="flex items-center gap-2">
         <CalendarIcon className="size-5" />
         <span className="whitespace-nowrap">
-          {format(new Date(post.publishedAt), "MMM d, yyyy")}
+          {formatDate(post.publishedAt)}
         </span>
       </div>
     </div>

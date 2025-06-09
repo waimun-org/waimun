@@ -12,8 +12,8 @@ import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { AlertCircle, CalendarIcon, UserIcon } from "lucide-react";
 import { sanityFetch } from "@/sanity/lib/client";
-import { format } from "date-fns";
 import { tryCatch } from "@/utils/try-catch";
+import { formatDate } from "@/utils/date";
 
 async function getPosts(): Promise<POSTS_QUERYResult> {
   const result = await tryCatch(
@@ -68,7 +68,7 @@ export async function Posts(_: PostsProps) {
                   <div className="flex items-center gap-1.5">
                     <CalendarIcon className="size-4" />
                     <span className="whitespace-nowrap">
-                      {format(new Date(post.publishedAt), "MMM d, yyyy")}
+                      {formatDate(post.publishedAt)}
                     </span>
                   </div>
 
