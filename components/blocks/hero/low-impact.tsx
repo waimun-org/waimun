@@ -11,7 +11,7 @@ export function LowImpactHero({ block }: HeroProps) {
         </h1>
 
         {block.text && (
-          <div className="prose md:prose-lg max-w-none text-balance">
+          <div className="prose md:prose-lg max-w-none">
             <PortableText value={block.text} />
           </div>
         )}

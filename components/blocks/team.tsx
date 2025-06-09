@@ -17,8 +17,8 @@ export type TeamProps = {
 
 export function Team({ block }: TeamProps) {
   return (
-    <section className="container flex flex-col gap-8 py-16">
-      <h2 className="text-2xl font-bold">{block.title}</h2>
+    <section className="container flex flex-col gap-8 py-8 md:py-16">
+      <h2 className="text-2xl font-bold text-balance">{block.title}</h2>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {block.members.map((member) => (
@@ -64,7 +64,7 @@ export function TeamMember({ member }: TeamMemberProps) {
       {(member.bio ?? member.socials) && (
         <CardContent className="flex flex-col gap-8">
           {member.bio && (
-            <div className="prose prose-sm text-muted-foreground text-balance">
+            <div className="prose prose-sm text-muted-foreground max-w-none">
               <PortableText value={member.bio} />
             </div>
           )}

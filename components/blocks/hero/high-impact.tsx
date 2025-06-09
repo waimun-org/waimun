@@ -55,15 +55,15 @@ export function HighImpactHero({ block }: HeroProps) {
           useLightText && "text-primary-foreground",
         )}
       >
-        <div className="flex flex-col items-center gap-4 text-center">
-          <h1 className="text-2xl font-bold text-balance md:text-4xl lg:text-6xl">
+        <div className="mx-auto flex max-w-xl flex-col items-center gap-4 text-center md:max-w-2xl lg:max-w-3xl">
+          <h1 className="text-4xl font-bold text-balance md:text-5xl lg:text-6xl">
             {block.title}
           </h1>
 
           {block.text && (
             <div
               className={cn(
-                "prose prose-base md:prose-lg text-balance",
+                "prose md:prose-lg max-w-none",
                 useLightText && "prose-invert",
               )}
             >
