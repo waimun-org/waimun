@@ -147,16 +147,16 @@ export function Form({ form: formConfig, price }: FormProps) {
         isOpen={showBankDetailsDialog}
         onClose={() => setShowBankDetailsDialog(false)}
         bankDetails={{
-          accountName: formConfig.bankTransfer.accountName ?? "Not configured",
+          accountName: formConfig.bankTransfer?.accountName ?? "Not configured",
           accountNumber:
-            formConfig.bankTransfer.accountNumber ?? "Not configured",
+            formConfig.bankTransfer?.accountNumber ?? "Not configured",
           reference: reference ?? "Pending",
-          price: formConfig.bankTransfer.price ?? {
+          price: formConfig.bankTransfer?.price ?? {
             _type: "price",
             unitAmount: 0,
             currency: "NZD",
           },
-          instructions: formConfig.bankTransfer.instructions,
+          instructions: formConfig.bankTransfer?.instructions,
         }}
       />
     </>

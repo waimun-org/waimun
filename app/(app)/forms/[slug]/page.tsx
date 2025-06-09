@@ -83,7 +83,7 @@ export default async function FormPage({
 
   let price: Price | null = null;
 
-  if (form.stripe.enabled) {
+  if (form.stripe?.enabled) {
     const priceResult = await tryCatch(getPrice(form.stripe));
 
     if (priceResult.error) {
@@ -112,7 +112,7 @@ const getCachedPrice = cache(async (priceId: string) => {
   };
 });
 
-export async function getPrice(stripe: FormType["stripe"]) {
+export async function getPrice(stripe: NonNullable<FormType["stripe"]>) {
   const priceID = isStripeProduction() ? stripe.priceId : stripe.priceIdTest;
 
   if (!priceID) {

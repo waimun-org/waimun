@@ -128,7 +128,6 @@ export const formType = defineType({
             }),
         }),
       ],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "bankTransfer",
@@ -195,7 +194,6 @@ export const formType = defineType({
             !parent?.enabled,
         }),
       ],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "slug",
