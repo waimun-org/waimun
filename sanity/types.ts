@@ -335,6 +335,7 @@ export type SplitImage = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
+    priority: boolean;
     _type: "image";
   };
   text?: Array<{
@@ -895,6 +896,7 @@ export type PAGE_QUERYResult = {
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           alt: string;
+          priority: boolean;
           _type: "image";
         };
         text?: Array<{

@@ -36,6 +36,14 @@ export const splitImageType = defineType({
           type: "string",
           validation: (rule) => rule.required(),
         },
+        {
+          name: "priority",
+          title: "Priority",
+          description: "Whether this image should be preloaded",
+          type: "boolean",
+          initialValue: false,
+          validation: (rule) => rule.required(),
+        },
       ],
       options: {
         hotspot: true,

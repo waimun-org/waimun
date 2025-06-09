@@ -39,7 +39,7 @@ export const seoType = defineType({
     defineField({
       name: "noIndex",
       title: "Hide from Search Engines",
-      description: "Prevent search engines from indexing this page.",
+      description: "Prevent search engines from indexing this page",
       type: "boolean",
       initialValue: false,
       validation: (rule) => rule.required(),
