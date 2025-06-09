@@ -1,9 +1,7 @@
 import { type FormBuilder } from "@/sanity/types";
-import { z, type ZodSchema } from "zod";
+import { z } from "zod";
 
-export function getFormDefaultValues(
-  formBuilder: FormBuilder,
-): Record<string, unknown> {
+export function getFormDefaultValues(formBuilder: FormBuilder) {
   const values = formBuilder.reduce(
     (acc, field) => {
       if (field._type === "separator" || field._type === "textBlock") {
@@ -35,7 +33,7 @@ export function getFormDefaultValues(
   return values;
 }
 
-export function getFormSchema(formBuilder: FormBuilder): ZodSchema {
+export function getFormSchema(formBuilder: FormBuilder) {
   const schema: Record<string, z.ZodTypeAny> = {};
 
   formBuilder.forEach((field) => {

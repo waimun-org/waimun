@@ -30,7 +30,7 @@ type FormData = Record<string, unknown>;
 
 const submitFormSchema = z.object({
   slug: z.string(),
-  formValues: z.record(z.unknown()),
+  formValues: z.record(z.string(), z.unknown()),
   paymentMethod: z.enum(PAYMENT_METHODS).optional(),
 });
 

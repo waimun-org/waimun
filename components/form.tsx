@@ -128,7 +128,7 @@ export function Form({ form: formConfig, price }: FormProps) {
   };
 
   return (
-    <div>
+    <>
       <section className="border-b">
         <div className="container flex flex-col gap-4 py-8">
           <h1 className="text-2xl font-bold md:text-4xl">{formConfig.title}</h1>
@@ -191,7 +191,7 @@ export function Form({ form: formConfig, price }: FormProps) {
           }}
         />
       )}
-    </div>
+    </>
   );
 }
 
