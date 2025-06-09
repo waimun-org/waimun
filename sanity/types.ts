@@ -204,6 +204,7 @@ export type Form = {
   stripe: {
     enabled: boolean;
     priceId?: string;
+    priceIdTest?: string;
   };
   bankTransfer: {
     enabled: boolean;
@@ -1379,6 +1380,7 @@ export type FORM_BY_SLUG_QUERYResult = {
   stripe: {
     enabled: boolean;
     priceId?: string;
+    priceIdTest?: string;
   };
   bankTransfer: {
     enabled: boolean;
@@ -1509,6 +1511,7 @@ export type FORM_BY_ID_QUERYResult = {
   stripe: {
     enabled: boolean;
     priceId?: string;
+    priceIdTest?: string;
   };
   bankTransfer: {
     enabled: boolean;

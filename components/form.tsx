@@ -5,19 +5,15 @@ import type {
   FormBuilder as FormBuilderType,
 } from "@/sanity/types";
 import { useForm } from "react-hook-form";
-import { Button } from "./ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getFormDefaultValues, getFormSchema } from "@/lib/form";
 import { FormBuilder } from "./form-builder";
 import { HCaptcha } from "./hcaptcha";
 import { PortableText } from "next-sanity";
 import { toast } from "sonner";
-import {
-  CheckCircleIcon,
-  ChevronDownIcon,
-  LoaderCircleIcon,
-} from "lucide-react";
+import { ChevronDownIcon, CheckCircleIcon } from "lucide-react";
 import { Form as UIForm } from "./ui/form";
+import { SubmitButton } from "./submit-button";
 import { submitForm } from "@/app/(app)/forms/actions";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { useSearchParams } from "next/navigation";
@@ -26,6 +22,11 @@ import Link from "next/link";
 import { PaymentMethodDialog } from "./payment-method-dialog";
 import { BankDetailsDialog } from "./bank-details-dialog";
 import type { Price } from "@/utils/price";
+import { useFormSubmission } from "@/hooks/use-form-submission";
+import {
+  usePaymentMethods,
+  type PaymentMethod,
+} from "@/hooks/use-payment-methods";
 
 export type FormProps = {
   form: FormType & {
@@ -34,30 +35,25 @@ export type FormProps = {
   price?: Price | null;
 };
 
-type PaymentMethod = "stripe" | "bankTransfer";
-
 export function Form({ form: formConfig, price }: FormProps) {
   const defaultValues = getFormDefaultValues(formConfig.content);
   const schema = getFormSchema(formConfig.content);
   const resolver = zodResolver(schema);
   const form = useForm({ defaultValues, resolver });
-  const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
+
+  const submission = useFormSubmission({ autoClearDelay: 3000 });
+  const payment = usePaymentMethods(formConfig);
+
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
   const [showBankDetailsDialog, setShowBankDetailsDialog] = useState(false);
   const [reference, setReference] = useState<string | null>(null);
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(
-    null,
-  );
-
-  const hasStripe = formConfig.stripe?.enabled && !!formConfig.stripe.priceId;
-  const hasBankTransfer = formConfig.bankTransfer?.enabled;
-  const hasPayment = hasStripe || hasBankTransfer;
-  const hasMultiplePaymentMethods = hasStripe && hasBankTransfer;
 
   const handleSubmit = async (
     data: Record<string, unknown>,
     selectedPaymentMethod?: PaymentMethod,
   ) => {
+    submission.setSubmitting();
+
     const result = await submitForm({
       slug: formConfig.slug.current,
       formValues: data,
@@ -65,11 +61,16 @@ export function Form({ form: formConfig, price }: FormProps) {
     });
 
     if (result.error) {
+      payment.setPaymentMethod(null);
+      submission.setError();
       toast.error(result.error);
       return;
     }
 
     if (result.redirect) {
+      form.reset();
+      payment.setPaymentMethod(null);
+      submission.setSuccess();
       window.location.href = result.redirect;
       return;
     }
@@ -80,16 +81,12 @@ export function Form({ form: formConfig, price }: FormProps) {
     }
 
     form.reset();
-    setPaymentMethod(null);
-    setIsSuccess(true);
-
-    setTimeout(() => {
-      setIsSuccess(null);
-    }, 5000);
+    payment.setPaymentMethod(null);
+    submission.setSuccess();
   };
 
   const handlePaymentMethodSelect = async (selectedMethod: PaymentMethod) => {
-    setPaymentMethod(selectedMethod);
+    payment.setPaymentMethod(selectedMethod);
     setShowPaymentDialog(false);
 
     const formData = form.getValues() as Record<string, unknown>;
@@ -97,30 +94,14 @@ export function Form({ form: formConfig, price }: FormProps) {
   };
 
   const onSubmit = async (data: Record<string, unknown>) => {
-    const selectedMethod = getSelectedPaymentMethod();
+    const selectedMethod = payment.getSelectedPaymentMethod();
 
-    if (hasMultiplePaymentMethods && !selectedMethod) {
+    if (payment.paymentConfig.hasMultiplePaymentMethods && !selectedMethod) {
       setShowPaymentDialog(true);
       return;
     }
 
     await handleSubmit(data, selectedMethod);
-  };
-
-  const getSelectedPaymentMethod = (): PaymentMethod | undefined => {
-    if (paymentMethod) return paymentMethod;
-    if (hasStripe && !hasBankTransfer) return "stripe";
-    if (hasBankTransfer && !hasStripe) return "bankTransfer";
-    return undefined;
-  };
-
-  const getSubmitButtonText = () => {
-    if (isSuccess) return "Success";
-    if (!hasPayment) return "Submit";
-    if (hasMultiplePaymentMethods) return "Continue to Payment";
-    if (hasStripe) return "Pay with Card";
-    if (hasBankTransfer) return "Pay via Bank Transfer";
-    return "Submit";
   };
 
   return (
@@ -148,52 +129,41 @@ export function Form({ form: formConfig, price }: FormProps) {
           >
             <FormBuilder content={formConfig.content} form={form} />
             <HCaptcha form={form} />
-            <Button
+            <SubmitButton
               id="submit"
-              type="submit"
+              submitState={submission.submitState}
+              idleText={payment.getSubmitButtonText()}
               disabled={form.formState.isSubmitting}
-              variant={isSuccess === true ? "success" : undefined}
-            >
-              {form.formState.isSubmitting && (
-                <LoaderCircleIcon className="animate-spin" />
-              )}
-              {isSuccess === true && <CheckCircleIcon />}
-              {getSubmitButtonText()}
-            </Button>
+            />
           </form>
         </UIForm>
 
         <PaymentInformation price={price ?? formConfig.bankTransfer?.price} />
       </section>
 
-      {hasMultiplePaymentMethods && (
-        <PaymentMethodDialog
-          isOpen={showPaymentDialog}
-          onClose={() => setShowPaymentDialog(false)}
-          onCreditCard={() => handlePaymentMethodSelect("stripe")}
-          onBankTransfer={() => handlePaymentMethodSelect("bankTransfer")}
-        />
-      )}
+      <PaymentMethodDialog
+        isOpen={showPaymentDialog}
+        onClose={() => setShowPaymentDialog(false)}
+        onCreditCard={() => handlePaymentMethodSelect("stripe")}
+        onBankTransfer={() => handlePaymentMethodSelect("bankTransfer")}
+      />
 
-      {formConfig.bankTransfer?.enabled && (
-        <BankDetailsDialog
-          isOpen={showBankDetailsDialog}
-          onClose={() => setShowBankDetailsDialog(false)}
-          bankDetails={{
-            accountName:
-              formConfig.bankTransfer.accountName ?? "Not configured",
-            accountNumber:
-              formConfig.bankTransfer.accountNumber ?? "Not configured",
-            reference: reference ?? "Pending",
-            price: formConfig.bankTransfer.price ?? {
-              _type: "price",
-              unitAmount: 0,
-              currency: "NZD",
-            },
-            instructions: formConfig.bankTransfer.instructions,
-          }}
-        />
-      )}
+      <BankDetailsDialog
+        isOpen={showBankDetailsDialog}
+        onClose={() => setShowBankDetailsDialog(false)}
+        bankDetails={{
+          accountName: formConfig.bankTransfer.accountName ?? "Not configured",
+          accountNumber:
+            formConfig.bankTransfer.accountNumber ?? "Not configured",
+          reference: reference ?? "Pending",
+          price: formConfig.bankTransfer.price ?? {
+            _type: "price",
+            unitAmount: 0,
+            currency: "NZD",
+          },
+          instructions: formConfig.bankTransfer.instructions,
+        }}
+      />
     </>
   );
 }
@@ -217,10 +187,6 @@ export function PaymentStatus() {
 
 export function PaymentInformation({ price }: { price?: Price | null }) {
   if (!price) {
-    return null;
-  }
-
-  if (!price.unitAmount || !price.currency) {
     return null;
   }
 

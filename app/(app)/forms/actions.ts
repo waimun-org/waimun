@@ -6,7 +6,7 @@ import { getFormSchema } from "@/lib/form";
 import { verifyHCaptchaToken } from "@/lib/hcaptcha";
 import { tryCatch } from "@/utils/try-catch";
 import { z } from "zod";
-import { stripe } from "@/lib/stripe";
+import { isStripeProduction, stripe } from "@/lib/stripe";
 import { createRecord } from "@/lib/airtable";
 import type { FORM_BY_SLUG_QUERYResult } from "@/sanity/types";
 import { headers } from "next/headers";
@@ -115,16 +115,24 @@ async function validateFormSubmission(
 }
 
 async function createStripeCheckoutSession(form: Form, recordId: string) {
-  if (!form.stripe.enabled || !form.stripe.priceId) {
+  if (!form.stripe.enabled) {
     throw new Error("Stripe is not enabled");
   }
 
   const baseUrl = await getBaseUrl();
   const formSlug = form.slug.current;
 
+  const priceId = isStripeProduction()
+    ? form.stripe.priceId
+    : form.stripe.priceIdTest;
+
+  if (!priceId) {
+    throw new Error("Stripe price ID is missing");
+  }
+
   const sessionResult = await tryCatch(
     stripe.checkout.sessions.create({
-      line_items: [{ price: form.stripe.priceId, quantity: 1 }],
+      line_items: [{ price: priceId, quantity: 1 }],
       mode: "payment",
       success_url: `${baseUrl}/forms/${formSlug}?paymentStatus=success`,
       cancel_url: `${baseUrl}/forms/${formSlug}`,
@@ -136,12 +144,14 @@ async function createStripeCheckoutSession(form: Form, recordId: string) {
   );
 
   if (sessionResult.error) {
-    throw new Error("Failed to create Stripe checkout session");
+    throw new Error(
+      `Failed to create Stripe checkout session: ${sessionResult.error.message}`,
+    );
   }
 
   const session = sessionResult.data;
   if (!session.url) {
-    throw new Error("Failed to create Stripe checkout session");
+    throw new Error("Stripe checkout session URL is missing");
   }
 
   return { url: session.url };

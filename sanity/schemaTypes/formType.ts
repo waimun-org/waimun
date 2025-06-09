@@ -101,10 +101,31 @@ export const formType = defineType({
         }),
         defineField({
           name: "priceId",
-          title: "Price ID",
+          title: "Price ID (Production)",
           type: "string",
           hidden: ({ parent }: { parent?: { enabled?: boolean } }) =>
             !parent?.enabled,
+          validation: (rule) =>
+            rule.custom((value, context) => {
+              const parent = context.parent as { enabled?: boolean };
+              return !parent?.enabled || value
+                ? true
+                : "Price ID is required when Stripe is enabled";
+            }),
+        }),
+        defineField({
+          name: "priceIdTest",
+          title: "Price ID (Test)",
+          type: "string",
+          hidden: ({ parent }: { parent?: { enabled?: boolean } }) =>
+            !parent?.enabled,
+          validation: (rule) =>
+            rule.custom((value, context) => {
+              const parent = context.parent as { enabled?: boolean };
+              return !parent?.enabled || value
+                ? true
+                : "Price ID is required when Stripe is enabled";
+            }),
         }),
       ],
       validation: (rule) => rule.required(),
