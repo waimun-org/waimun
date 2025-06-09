@@ -26,6 +26,7 @@ const config: NextConfig = {
   },
   experimental: {
     reactCompiler: true,
+    inlineCss: true,
   },
 };
 
