@@ -75,7 +75,7 @@ async function validateFormSubmission(
     sanityFetch<FORM_BY_SLUG_QUERYResult>({
       query: FORM_BY_SLUG_QUERY,
       params: { slug },
-      tags: ["form", `form-${slug}`],
+      tags: [`form:${slug}`],
     }),
   );
 

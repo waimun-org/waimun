@@ -19,7 +19,7 @@ async function getEventBySlug(slug: string) {
     sanityFetch<EVENT_BY_SLUG_QUERYResult>({
       query: EVENT_BY_SLUG_QUERY,
       params: { slug },
-      tags: ["event", `event-${slug}`],
+      tags: [`event:${slug}`],
     }),
   );
 
