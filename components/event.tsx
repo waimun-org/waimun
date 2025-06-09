@@ -31,9 +31,9 @@ function EventHero({ event }: EventProps) {
     <section className="border-b">
       <div className="container grid grid-cols-1 gap-8 py-8 md:grid-cols-2 lg:grid-cols-3">
         <div className="col-span-1 flex flex-col gap-8 lg:col-span-2">
-          <EventMeta event={event} />
-
           <div className="flex flex-col gap-4">
+            <EventMeta event={event} />
+
             <h1 className="text-2xl font-bold text-balance md:text-4xl">
               {event.name}
             </h1>
