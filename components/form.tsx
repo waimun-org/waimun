@@ -106,21 +106,15 @@ export function Form({ form: formConfig, price }: FormProps) {
 
   return (
     <>
-      <section className="border-b">
-        <div className="container flex flex-col gap-4 py-8">
-          <h1 className="text-2xl font-bold text-balance md:text-4xl">
-            {formConfig.title}
-          </h1>
-          <div className="prose max-w-none">
-            <PortableText value={formConfig.description} />
-          </div>
-        </div>
-      </section>
-
-      <section className="container flex max-w-2xl flex-col gap-8 py-8">
+      <section className="container flex max-w-2xl flex-col gap-8 py-8 md:py-16">
         <Suspense fallback={null}>
           <PaymentStatus />
         </Suspense>
+
+        <FormHeader
+          title={formConfig.title}
+          description={formConfig.description}
+        />
 
         <UIForm {...form}>
           <form
@@ -128,6 +122,7 @@ export function Form({ form: formConfig, price }: FormProps) {
             onSubmit={form.handleSubmit(onSubmit)}
           >
             <FormBuilder content={formConfig.content} form={form} />
+
             <HCaptcha form={form} />
             <SubmitButton
               id="submit"
@@ -168,7 +163,20 @@ export function Form({ form: formConfig, price }: FormProps) {
   );
 }
 
-export function PaymentStatus() {
+type FormHeaderProps = Pick<FormType, "title" | "description">;
+
+function FormHeader({ title, description }: FormHeaderProps) {
+  return (
+    <div className="flex flex-col gap-4">
+      <h1 className="text-2xl font-bold text-balance md:text-4xl">{title}</h1>
+      <div className="prose max-w-none">
+        <PortableText value={description} />
+      </div>
+    </div>
+  );
+}
+
+function PaymentStatus() {
   const searchParams = useSearchParams();
   const paymentStatus = searchParams.get("paymentStatus");
 
@@ -185,7 +193,7 @@ export function PaymentStatus() {
   return null;
 }
 
-export function PaymentInformation({ price }: { price?: Price | null }) {
+function PaymentInformation({ price }: { price?: Price | null }) {
   if (!price) {
     return null;
   }
