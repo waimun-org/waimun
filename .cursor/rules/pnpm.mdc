@@ -17,4 +17,3 @@ Commands:
 - "check" - To check for TypeScript errors and run ESLint linting rules.
 - "stripe:listen" - To forward stripe webhook events.
 - "sanity:typegen" - To genenerate types for @/sanity/types.
-- "sanity:bridge" - To bridge the project with the Sanity Dashboard.
