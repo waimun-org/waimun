@@ -1,8 +1,11 @@
-import { FORM_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { FORM_BY_SLUG_QUERY, FORMS_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import { Form, type Price } from "@/components/form";
 import { sanityFetch } from "@/sanity/lib/client";
-import type { FORM_BY_SLUG_QUERYResult } from "@/sanity/types";
+import type {
+  FORM_BY_SLUG_QUERYResult,
+  FORMS_SLUGS_QUERYResult,
+} from "@/sanity/types";
 import { stripe } from "@/lib/stripe";
 import type { Metadata } from "next";
 import { generateNextMetadata } from "@/lib/seo";
@@ -28,6 +31,27 @@ async function getFormBySlug(slug: string) {
   }
 
   return result.data;
+}
+
+async function getFormSlugs() {
+  const result = await tryCatch(
+    sanityFetch<FORMS_SLUGS_QUERYResult>({
+      query: FORMS_SLUGS_QUERY,
+      tags: ["form"],
+    }),
+  );
+
+  if (result.error) {
+    console.error("Error fetching form slugs:", result.error);
+    return [];
+  }
+
+  return result.data.map((form) => form.slug);
+}
+
+export async function generateStaticParams() {
+  const slugs = await getFormSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({

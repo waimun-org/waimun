@@ -1,8 +1,11 @@
-import { POST_BY_SLUG_QUERY } from "@/sanity/lib/queries";
+import { POST_BY_SLUG_QUERY, POSTS_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { Post } from "@/components/post";
 import { notFound } from "next/navigation";
 import { sanityFetch } from "@/sanity/lib/client";
-import type { POST_BY_SLUG_QUERYResult } from "@/sanity/types";
+import type {
+  POST_BY_SLUG_QUERYResult,
+  POSTS_SLUGS_QUERYResult,
+} from "@/sanity/types";
 import { generateNextMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { tryCatch } from "@/utils/try-catch";
@@ -26,6 +29,27 @@ async function getPostBySlug(slug: string) {
   }
 
   return result.data;
+}
+
+async function getPostSlugs() {
+  const result = await tryCatch(
+    sanityFetch<POSTS_SLUGS_QUERYResult>({
+      query: POSTS_SLUGS_QUERY,
+      tags: ["post"],
+    }),
+  );
+
+  if (result.error) {
+    console.error("Error fetching post slugs:", result.error);
+    return [];
+  }
+
+  return result.data.map((post) => post.slug);
+}
+
+export async function generateStaticParams() {
+  const slugs = await getPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
