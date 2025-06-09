@@ -5,7 +5,7 @@ import { tryCatch } from "@/utils/try-catch";
 
 export async function POST(req: NextRequest) {
   const result = await tryCatch(
-    parseBody<{ _type: string; slug: string }>(
+    parseBody<{ tags: string[] }>(
       req,
       process.env.SANITY_REVALIDATE_SECRET,
       true, // Wait for Content Lake eventual consistency
@@ -42,14 +42,15 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (!body?._type) {
+  if (!body?.tags) {
     return new Response(JSON.stringify({ message: "Bad Request", body }), {
       status: 400,
     });
   }
 
-  revalidateTag(body._type);
-  revalidateTag(`${body._type}:${body.slug}`);
+  body.tags.forEach((tag) => {
+    revalidateTag(tag);
+  });
 
   return NextResponse.json({ body });
 }
