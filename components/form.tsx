@@ -198,7 +198,7 @@ export function PaymentInformation({ price }: { price?: Price | null }) {
   return (
     <Link
       href="#submit"
-      className="bg-background/80 hover:bg-accent/80 hover:text-accent-foreground fixed bottom-8 left-1/2 flex h-8 -translate-x-1/2 items-center gap-1.5 rounded-full border px-2.5 text-sm shadow-xs backdrop-blur"
+      className="bg-background/80 hover:bg-accent/80 hover:text-accent-foreground fixed bottom-8 left-1/2 flex h-8 -translate-x-1/2 items-center gap-1.5 rounded-md border px-2.5 text-sm shadow-xs backdrop-blur"
     >
       <p>{formattedPrice}</p>
       <ChevronDownIcon className="size-4" />

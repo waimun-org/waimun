@@ -33,7 +33,7 @@ export function CheckboxField({
               />
             </FormControl>
 
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-2">
               <FormLabel>
                 {label}
                 {required && <span className="text-red-500">*</span>}
