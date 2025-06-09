@@ -11,61 +11,60 @@ export type EventProps = {
 
 export function Event({ event }: EventProps) {
   return (
-    <div>
-      <section className="border-b">
-        <div className="container grid grid-cols-1 gap-8 py-8 md:grid-cols-2 lg:grid-cols-3">
-          <div className="col-span-1 flex flex-col gap-8 lg:col-span-2">
-            <EventMeta event={event} />
+    <>
+      <EventHero event={event} />
+      <article className="prose container max-w-4xl py-8 md:py-16">
+        {event.details ? (
+          <PortableText value={event.details} />
+        ) : (
+          <p>No details available</p>
+        )}
+      </article>
+    </>
+  );
+}
 
-            <div className="flex flex-col gap-4">
-              <h1 className="text-2xl font-bold text-balance md:text-4xl">
-                {event.name}
-              </h1>
+function EventHero({ event }: EventProps) {
+  return (
+    <section className="border-b">
+      <div className="container grid grid-cols-1 gap-8 py-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="col-span-1 flex flex-col gap-8 lg:col-span-2">
+          <EventMeta event={event} />
 
-              {event.description && (
-                <div className="prose prose-lg text-balance">
-                  <PortableText value={event.description} />
-                </div>
-              )}
-            </div>
+          <div className="flex flex-col gap-4">
+            <h1 className="text-2xl font-bold text-balance md:text-4xl">
+              {event.name}
+            </h1>
 
-            {event.buttons && (
-              <div className="mt-auto flex flex-wrap gap-4">
-                {event.buttons.map((button) => (
-                  <Button key={button._key} button={button} />
-                ))}
+            {event.description && (
+              <div className="prose prose-lg text-balance">
+                <PortableText value={event.description} />
               </div>
             )}
           </div>
 
-          <Image
-            image={event.image}
-            alt={event.image.alt}
-            priority
-            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-            className="col-span-1 aspect-[4/3] rounded-lg object-cover"
-          />
-        </div>
-      </section>
-
-      <section className="container py-8">
-        <div className="prose">
-          {event.details ? (
-            <PortableText value={event.details} />
-          ) : (
-            <p>No details available</p>
+          {event.buttons && (
+            <div className="mt-auto flex flex-wrap gap-4">
+              {event.buttons.map((button) => (
+                <Button key={button._key} button={button} />
+              ))}
+            </div>
           )}
         </div>
-      </section>
-    </div>
+
+        <Image
+          image={event.image}
+          alt={event.image.alt}
+          priority
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="col-span-1 aspect-[4/3] rounded-lg object-cover"
+        />
+      </div>
+    </section>
   );
 }
 
-type EventMetaProps = {
-  event: Event;
-};
-
-function EventMeta({ event }: EventMetaProps) {
+function EventMeta({ event }: EventProps) {
   return (
     <div className="flex flex-wrap gap-4">
       {event.date && (
