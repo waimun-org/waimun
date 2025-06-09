@@ -1296,6 +1296,13 @@
                 "type": "string"
               },
               "optional": true
+            },
+            "priceIdTest": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
             }
           }
         },

@@ -3,10 +3,11 @@ import { notFound } from "next/navigation";
 import { Form } from "@/components/form";
 import { sanityFetch } from "@/sanity/lib/client";
 import type {
+  Form as FormType,
   FORM_BY_SLUG_QUERYResult,
   FORMS_SLUGS_QUERYResult,
 } from "@/sanity/types";
-import { stripe } from "@/lib/stripe";
+import { isStripeProduction, stripe } from "@/lib/stripe";
 import type { Metadata } from "next";
 import { generateNextMetadata } from "@/lib/seo";
 import { tryCatch } from "@/utils/try-catch";
@@ -82,8 +83,8 @@ export default async function FormPage({
 
   let price: Price | null = null;
 
-  if (form.stripe.enabled && form.stripe.priceId) {
-    const priceResult = await tryCatch(getPrice(form.stripe.priceId));
+  if (form.stripe.enabled) {
+    const priceResult = await tryCatch(getPrice(form.stripe));
 
     if (priceResult.error) {
       console.error(priceResult.error);
@@ -96,28 +97,27 @@ export default async function FormPage({
   return <Form form={form} price={price} />;
 }
 
-export async function getPrice(priceId: string) {
-  const getCachedPrice = cache(
-    async (id: string) => {
-      const priceResult = await stripe.prices.retrieve(id);
+const getCachedPrice = cache(async (priceId: string) => {
+  const priceResult = await stripe.prices.retrieve(priceId);
 
-      const { unit_amount, currency } = priceResult;
+  const { unit_amount, currency } = priceResult;
 
-      if (!unit_amount || !currency) {
-        throw new Error("Invalid price data: missing unit_amount or currency");
-      }
+  if (!unit_amount || !currency) {
+    throw new Error("Invalid price data: missing unit_amount or currency");
+  }
 
-      return {
-        unitAmount: unit_amount,
-        currency,
-      };
-    },
-    [priceId],
-    {
-      tags: [`price:${priceId}`],
-      revalidate: 60,
-    },
-  );
+  return {
+    unitAmount: unit_amount,
+    currency,
+  };
+});
 
-  return getCachedPrice(priceId);
+export async function getPrice(stripe: FormType["stripe"]) {
+  const priceID = isStripeProduction() ? stripe.priceId : stripe.priceIdTest;
+
+  if (!priceID) {
+    throw new Error("Stripe price ID is missing");
+  }
+
+  return getCachedPrice(priceID);
 }

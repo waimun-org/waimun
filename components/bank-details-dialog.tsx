@@ -68,7 +68,7 @@ export function BankDetailsDialog({
       label: "Price",
       value: formatPrice(bankDetails.price),
       key: "price",
-      mono: true,
+      mono: false,
     },
   ];
 
