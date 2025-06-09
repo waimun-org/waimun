@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (!body?.tags) {
+  if (!Array.isArray(body?.tags) || body.tags.length === 0) {
     return new Response(JSON.stringify({ message: "Bad Request", body }), {
       status: 400,
     });
