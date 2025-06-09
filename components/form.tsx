@@ -130,7 +130,7 @@ export function Form({ form: formConfig, price }: FormProps) {
   return (
     <>
       <section className="border-b">
-        <div className="container flex flex-col gap-4 py-8 md:py-16">
+        <div className="container flex flex-col gap-4 py-8">
           <h1 className="text-2xl font-bold text-balance md:text-4xl">
             {formConfig.title}
           </h1>
@@ -140,7 +140,7 @@ export function Form({ form: formConfig, price }: FormProps) {
         </div>
       </section>
 
-      <section className="container flex max-w-2xl flex-col gap-8 py-8 md:py-16">
+      <section className="container flex max-w-2xl flex-col gap-8 py-8">
         <Suspense fallback={null}>
           <PaymentStatus />
         </Suspense>

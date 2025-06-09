@@ -39,7 +39,7 @@ export async function Events(_: EventsProps) {
   const events = await getEvents();
 
   return (
-    <section className="container flex flex-col gap-8 py-8 md:py-16">
+    <section className="container flex flex-col gap-8 py-8">
       {events.length === 0 && (
         <Alert>
           <AlertCircle className="h-4 w-4" />

@@ -10,7 +10,7 @@ export type PostProps = {
 
 export function Post({ post }: PostProps) {
   return (
-    <article className="container flex max-w-4xl flex-col gap-8 py-8 md:py-16">
+    <article className="container flex max-w-4xl flex-col gap-8 py-8">
       <section className="flex flex-col gap-8">
         <div className="flex flex-col gap-4">
           <h1 className="text-4xl font-bold text-balance">{post.title}</h1>
