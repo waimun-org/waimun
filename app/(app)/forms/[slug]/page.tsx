@@ -1,6 +1,6 @@
 import { FORM_BY_SLUG_QUERY, FORMS_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
-import { Form, type Price } from "@/components/form";
+import { Form } from "@/components/form";
 import { sanityFetch } from "@/sanity/lib/client";
 import type {
   FORM_BY_SLUG_QUERYResult,
@@ -11,6 +11,7 @@ import type { Metadata } from "next";
 import { generateNextMetadata } from "@/lib/seo";
 import { tryCatch } from "@/utils/try-catch";
 import { unstable_cache as cache } from "next/cache";
+import type { Price } from "@/utils/price";
 
 interface FormPageProps {
   params: Promise<{ slug: string }>;
@@ -95,7 +96,7 @@ export default async function FormPage({
   return <Form form={form} price={price} />;
 }
 
-export async function getPrice(priceId: string): Promise<Price | null> {
+export async function getPrice(priceId: string) {
   const getCachedPrice = cache(
     async (id: string) => {
       const priceResult = await stripe.prices.retrieve(id);
