@@ -63,7 +63,7 @@ export function HighImpactHero({ block }: HeroProps) {
           {block.text && (
             <div
               className={cn(
-                "prose md:prose-lg max-w-none",
+                "prose md:prose-lg max-w-none text-balance",
                 useLightText && "prose-invert",
               )}
             >
