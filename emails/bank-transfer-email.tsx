@@ -29,12 +29,10 @@ export const BankTransferEmail = ({
   price,
   instructions,
 }: BankTransferEmailProps) => {
-  const previewText = `Bank transfer payment details - ${reference}`;
-
   return (
     <Html>
       <Head />
-      <Preview>{previewText}</Preview>
+      <Preview>Payment is required to complete your submission</Preview>
       <Tailwind>
         <Body className="bg-white font-sans">
           <Container className="mx-auto w-full max-w-[600px] p-8">
