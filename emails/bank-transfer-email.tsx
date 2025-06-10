@@ -38,7 +38,7 @@ export const BankTransferEmail = ({
           <Container className="mx-auto w-full max-w-[600px] p-8">
             <Img
               src="https://cdn.sanity.io/images/qs4butxl/production/0deb901f492621309f640cb22dca833424998c20-8380x2134.svg?h=80&q=75&fit=clip&auto=format&fm=png"
-              alt="Waimun"
+              alt="WaiMUN"
               className="mx-auto mb-8 h-[40px]"
             />
 
@@ -130,13 +130,13 @@ export const BankTransferEmail = ({
             <Text className="mt-8 text-base leading-relaxed text-neutral-700">
               Ngā mihi nui,
               <br />
-              Waimun Team
+              WaiMUN Team
             </Text>
 
             <Hr />
 
             <Text className="text-sm leading-relaxed text-neutral-500">
-              This is an automated message from Waimun. Please do not reply to
+              This is an automated message from WaiMUN. Please do not reply to
               this email unless you need assistance.
             </Text>
           </Container>
@@ -148,7 +148,7 @@ export const BankTransferEmail = ({
 
 BankTransferEmail.PreviewProps = {
   fullName: "James Blair",
-  accountName: "Waimun",
+  accountName: "WaiMUN",
   accountNumber: "12-3456-7890123-00",
   reference: "REF123456",
   price: "$50.00",
