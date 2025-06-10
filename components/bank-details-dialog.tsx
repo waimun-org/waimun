@@ -50,24 +50,20 @@ export function BankDetailsDialog({
     {
       label: "Account Name",
       value: bankDetails.accountName,
-      key: "accountName",
     },
     {
       label: "Account Number",
       value: bankDetails.accountNumber,
-      key: "accountNumber",
       mono: true,
     },
     {
       label: "Reference",
       value: bankDetails.reference,
-      key: "reference",
       mono: true,
     },
     {
-      label: "Price",
+      label: "Amount",
       value: formatPrice(bankDetails.price),
-      key: "price",
       mono: false,
     },
   ];
@@ -93,8 +89,8 @@ export function BankDetailsDialog({
         </Alert>
 
         <div className="space-y-4">
-          {fields.map(({ label, value, key, mono }) => (
-            <div key={key} className="space-y-2">
+          {fields.map(({ label, value, mono }) => (
+            <div key={label} className="space-y-2">
               <label className="text-sm font-medium">{label}</label>
               <div className="flex items-center gap-2">
                 <div
