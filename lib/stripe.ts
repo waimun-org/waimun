@@ -1,8 +1,8 @@
 import Stripe from "stripe";
+import { env } from "@/lib/env";
 
-const apiKey = process.env.STRIPE_SECRET_KEY!;
-export const stripe = new Stripe(apiKey);
+export const stripe = new Stripe(env.STRIPE_SECRET_KEY);
 
 export function isStripeProduction() {
-  return apiKey.startsWith("sk_live_");
+  return env.STRIPE_SECRET_KEY.startsWith("sk_live_");
 }

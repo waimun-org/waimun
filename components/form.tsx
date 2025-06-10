@@ -49,15 +49,15 @@ export function Form({ form: formConfig, price }: FormProps) {
   const [reference, setReference] = useState<string | null>(null);
 
   const handleSubmit = async (
-    data: Record<string, unknown>,
+    values: Record<string, unknown>,
     selectedPaymentMethod?: PaymentMethod,
   ) => {
     submission.setSubmitting();
 
     const result = await submitForm({
       slug: formConfig.slug.current,
-      formValues: data,
       paymentMethod: selectedPaymentMethod,
+      values,
     });
 
     if (result.error) {
@@ -93,7 +93,7 @@ export function Form({ form: formConfig, price }: FormProps) {
     await handleSubmit(formData, selectedMethod);
   };
 
-  const onSubmit = async (data: Record<string, unknown>) => {
+  const onSubmit = async (values: Record<string, unknown>) => {
     const selectedMethod = payment.getSelectedPaymentMethod();
 
     if (payment.paymentConfig.hasMultiplePaymentMethods && !selectedMethod) {
@@ -101,7 +101,7 @@ export function Form({ form: formConfig, price }: FormProps) {
       return;
     }
 
-    await handleSubmit(data, selectedMethod);
+    await handleSubmit(values, selectedMethod);
   };
 
   return (

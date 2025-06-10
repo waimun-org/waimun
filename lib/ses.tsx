@@ -4,28 +4,13 @@ import React from "react";
 import BankTransferEmail, {
   type BankTransferEmailProps,
 } from "@/emails/bank-transfer-email";
-
-const {
-  AWS_REGION,
-  AWS_ACCESS_KEY_ID,
-  AWS_SECRET_ACCESS_KEY,
-  AWS_SES_FROM_EMAIL,
-} = process.env;
-
-if (
-  !AWS_REGION ||
-  !AWS_ACCESS_KEY_ID ||
-  !AWS_SECRET_ACCESS_KEY ||
-  !AWS_SES_FROM_EMAIL
-) {
-  throw new Error("Missing required environment variables for SES");
-}
+import { env } from "@/lib/env";
 
 const sesClient = new SESClient({
-  region: AWS_REGION,
+  region: env.AWS_REGION,
   credentials: {
-    accessKeyId: AWS_ACCESS_KEY_ID,
-    secretAccessKey: AWS_SECRET_ACCESS_KEY,
+    accessKeyId: env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
   },
 });
 
@@ -33,19 +18,22 @@ type BankTransferEmailData = BankTransferEmailProps & {
   to: string;
 };
 
-export async function sendBankTransferEmail(data: BankTransferEmailData) {
+export async function sendBankTransferEmail({
+  to,
+  ...data
+}: BankTransferEmailData) {
   const email = <BankTransferEmail {...data} />;
   const htmlBody = await render(email);
   const textBody = await render(email, { plainText: true });
 
   const sendEmailCommand = new SendEmailCommand({
-    Source: AWS_SES_FROM_EMAIL,
+    Source: env.AWS_SES_SENDER_EMAIL,
     Destination: {
-      ToAddresses: [data.to],
+      ToAddresses: [to],
     },
     Message: {
       Subject: {
-        Data: "Complete your form submission payment",
+        Data: "Complete Your Payment",
         Charset: "UTF-8",
       },
       Body: {

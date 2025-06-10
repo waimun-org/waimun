@@ -49,8 +49,7 @@ export const BankTransferEmail = ({
             </Text>
 
             <Text className="text-base leading-relaxed text-neutral-700">
-              Thank you for your form submission! We have received your
-              application and appreciate your interest.
+              Thank you for your form submission! We appreciate your interest.
             </Text>
 
             <Text className="mb-8 text-base leading-relaxed text-neutral-700">

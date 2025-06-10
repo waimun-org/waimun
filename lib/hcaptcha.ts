@@ -1,17 +1,13 @@
+import { env } from "@/lib/env";
+
 export async function verifyHCaptchaToken(token: string): Promise<boolean> {
-  const { HCAPTCHA_SECRET_KEY } = process.env;
-
-  if (!HCAPTCHA_SECRET_KEY) {
-    throw new Error("HCAPTCHA_SECRET_KEY environment variable is not set");
-  }
-
   const response = await fetch("https://hcaptcha.com/siteverify", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
     body: new URLSearchParams({
-      secret: HCAPTCHA_SECRET_KEY,
+      secret: env.HCAPTCHA_SECRET_KEY,
       response: token,
     }),
   });

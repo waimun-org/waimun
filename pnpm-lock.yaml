@@ -56,6 +56,9 @@ importers:
       '@sanity/vision':
         specifier: ^3.91.0
         version: 3.91.0(@babel/runtime@7.27.6)(@codemirror/lint@6.8.5)(@codemirror/theme-one-dark@6.1.2)(@emotion/is-prop-valid@1.2.2)(codemirror@6.0.1)(react-dom@19.1.0(react@19.1.0))(react-is@18.3.1)(react@19.1.0)(styled-components@6.1.18(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+      '@t3-oss/env-nextjs':
+        specifier: ^0.13.8
+        version: 0.13.8(typescript@5.8.3)(valibot@1.1.0(typescript@5.8.3))(zod@3.25.56)
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@4.1.8)
@@ -71,6 +74,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      jiti:
+        specifier: ^2.4.2
+        version: 2.4.2
       lucide-react:
         specifier: ^0.511.0
         version: 0.511.0(react@19.1.0)
@@ -2719,6 +2725,40 @@ packages:
 
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
+
+  '@t3-oss/env-core@0.13.8':
+    resolution: {integrity: sha512-L1inmpzLQyYu4+Q1DyrXsGJYCXbtXjC4cICw1uAKv0ppYPQv656lhZPU91Qd1VS6SO/bou1/q5ufVzBGbNsUpw==}
+    peerDependencies:
+      arktype: ^2.1.0
+      typescript: '>=5.0.0'
+      valibot: ^1.0.0-beta.7 || ^1.0.0
+      zod: ^3.24.0 || ^4.0.0-beta.0
+    peerDependenciesMeta:
+      arktype:
+        optional: true
+      typescript:
+        optional: true
+      valibot:
+        optional: true
+      zod:
+        optional: true
+
+  '@t3-oss/env-nextjs@0.13.8':
+    resolution: {integrity: sha512-QmTLnsdQJ8BiQad2W2nvV6oUpH4oMZMqnFEjhVpzU0h3sI9hn8zb8crjWJ1Amq453mGZs6A4v4ihIeBFDOrLeQ==}
+    peerDependencies:
+      arktype: ^2.1.0
+      typescript: '>=5.0.0'
+      valibot: ^1.0.0-beta.7 || ^1.0.0
+      zod: ^3.24.0 || ^4.0.0-beta.0
+    peerDependenciesMeta:
+      arktype:
+        optional: true
+      typescript:
+        optional: true
+      valibot:
+        optional: true
+      zod:
+        optional: true
 
   '@tailwindcss/node@4.1.8':
     resolution: {integrity: sha512-OWwBsbC9BFAJelmnNcrKuf+bka2ZxCE2A4Ft53Tkg4uoiE67r/PMEYwCsourC26E+kmxfwE0hVzMdxqeW+xu7Q==}
@@ -10193,6 +10233,20 @@ snapshots:
   '@swc/helpers@0.5.15':
     dependencies:
       tslib: 2.8.1
+
+  '@t3-oss/env-core@0.13.8(typescript@5.8.3)(valibot@1.1.0(typescript@5.8.3))(zod@3.25.56)':
+    optionalDependencies:
+      typescript: 5.8.3
+      valibot: 1.1.0(typescript@5.8.3)
+      zod: 3.25.56
+
+  '@t3-oss/env-nextjs@0.13.8(typescript@5.8.3)(valibot@1.1.0(typescript@5.8.3))(zod@3.25.56)':
+    dependencies:
+      '@t3-oss/env-core': 0.13.8(typescript@5.8.3)(valibot@1.1.0(typescript@5.8.3))(zod@3.25.56)
+    optionalDependencies:
+      typescript: 5.8.3
+      valibot: 1.1.0(typescript@5.8.3)
+      zod: 3.25.56
 
   '@tailwindcss/node@4.1.8':
     dependencies:
