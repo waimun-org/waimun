@@ -14,6 +14,7 @@ export const env = createEnv({
     AWS_SECRET_ACCESS_KEY: z.string(),
     AWS_REGION: z.string(),
     AWS_SES_SENDER_EMAIL: z.string(),
+    AWS_SES_REPLY_TO_EMAIL: z.string(),
   },
   client: {
     NEXT_PUBLIC_SANITY_PROJECT_ID: z.string(),
@@ -46,5 +47,6 @@ export const env = createEnv({
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
     AWS_REGION: process.env.AWS_REGION,
     AWS_SES_SENDER_EMAIL: process.env.AWS_SES_SENDER_EMAIL,
+    AWS_SES_REPLY_TO_EMAIL: process.env.AWS_SES_REPLY_TO_EMAIL,
   },
 });

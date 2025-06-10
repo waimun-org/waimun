@@ -31,6 +31,7 @@ export async function sendBankTransferEmail({
     Destination: {
       ToAddresses: [to],
     },
+    ReplyToAddresses: [env.AWS_SES_REPLY_TO_EMAIL],
     Message: {
       Subject: {
         Data: "Complete Your Payment",
