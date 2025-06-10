@@ -68,7 +68,7 @@ function EventHero({ event }: EventProps) {
 
 function EventMeta({ event }: EventProps) {
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-col flex-wrap gap-4 md:flex-row">
       {event.date && (
         <div className="flex items-center gap-2">
           <CalendarIcon className="size-5" />
