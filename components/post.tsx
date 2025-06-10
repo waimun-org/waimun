@@ -38,7 +38,7 @@ type PostMetaProps = {
 
 function PostMeta({ post }: PostMetaProps) {
   return (
-    <div className="flex flex-wrap gap-4 text-sm">
+    <div className="flex flex-col flex-wrap gap-4 text-sm md:flex-row">
       <div className="flex items-center gap-2">
         <UserIcon className="size-5" />
         <span className="whitespace-nowrap">{post.author}</span>
