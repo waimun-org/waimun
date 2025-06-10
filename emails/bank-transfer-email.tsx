@@ -46,14 +46,9 @@ export const BankTransferEmail = ({
               Kia ora{fullName ? ` ${fullName}` : ""},
             </Text>
 
-            <Text className="text-base leading-relaxed text-neutral-700">
-              Thank you for your form submission! We appreciate your interest.
-            </Text>
-
             <Text className="mb-8 text-base leading-relaxed text-neutral-700">
               To complete your submission, please make a bank transfer using the
-              details provided below. Your submission will be processed once
-              payment is received.
+              details provided below.
             </Text>
 
             <Heading className="mt-16 mb-8 text-center text-base leading-relaxed text-neutral-700">
