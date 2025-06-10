@@ -130,7 +130,7 @@ export const BankTransferEmail = ({
             <Text className="mt-8 text-base leading-relaxed text-neutral-700">
               Ngā mihi nui,
               <br />
-              WaiMUN Team
+              WaiMUN
             </Text>
 
             <Hr />
