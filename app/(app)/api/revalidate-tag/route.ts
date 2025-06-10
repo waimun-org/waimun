@@ -2,10 +2,11 @@ import { revalidateTag } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import { parseBody } from "next-sanity/webhook";
 import { tryCatch } from "@/utils/try-catch";
+import { env } from "@/lib/env";
 
 export async function POST(req: NextRequest) {
   const result = await tryCatch(
-    parseBody<{ tags: string[] }>(req, process.env.SANITY_REVALIDATE_SECRET),
+    parseBody<{ tags: string[] }>(req, env.SANITY_REVALIDATE_SECRET),
   );
 
   if (result.error) {

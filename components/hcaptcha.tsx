@@ -4,6 +4,7 @@ import HCaptchaComponent from "@hcaptcha/react-hcaptcha";
 import { type UseFormReturn } from "react-hook-form";
 import { FormField, FormItem, FormMessage } from "./ui/form";
 import { useRef, useEffect } from "react";
+import { env } from "@/lib/env";
 
 export type HCaptchaFieldProps = {
   form: UseFormReturn<Record<string, unknown>>;
@@ -11,7 +12,7 @@ export type HCaptchaFieldProps = {
 
 export function HCaptcha({ form }: HCaptchaFieldProps) {
   const hcaptchaRef = useRef<HCaptchaComponent>(null);
-  const siteKey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY!;
+  const siteKey = env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
 
   useEffect(() => {
     if (form.formState.isSubmitted && hcaptchaRef.current) {

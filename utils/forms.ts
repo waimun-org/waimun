@@ -35,7 +35,7 @@ export async function sendBankTransferEmailForForm(
   }
 
   return await sendBankTransferEmail({
-    to: email,
+    to: fullName ? `${fullName} <${email}>` : email,
     fullName: fullName ?? undefined,
     accountName: form.bankTransfer.accountName,
     accountNumber: form.bankTransfer.accountNumber,

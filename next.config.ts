@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { env } from "@/lib/env";
 
 const config: NextConfig = {
   typescript: { ignoreBuildErrors: true },
@@ -16,11 +17,11 @@ const config: NextConfig = {
     return [
       {
         source: "/script.js",
-        destination: `${process.env.NEXT_PUBLIC_UMAMI_URL}/script.js`,
+        destination: `${env.NEXT_PUBLIC_UMAMI_URL}/script.js`,
       },
       {
         source: "/api/send",
-        destination: `${process.env.NEXT_PUBLIC_UMAMI_URL}/api/send`,
+        destination: `${env.NEXT_PUBLIC_UMAMI_URL}/api/send`,
       },
     ];
   },

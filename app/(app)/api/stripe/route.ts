@@ -6,6 +6,7 @@ import { stripe } from "@/lib/stripe";
 import { tryCatch } from "@/utils/try-catch";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
+import { env } from "@/lib/env";
 
 export async function POST(request: Request) {
   const headersList = await headers();
@@ -20,11 +21,7 @@ export async function POST(request: Request) {
   }
 
   const eventResult = tryCatch(() =>
-    stripe.webhooks.constructEvent(
-      body,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET!,
-    ),
+    stripe.webhooks.constructEvent(body, signature, env.STRIPE_WEBHOOK_SECRET),
   );
 
   if (eventResult.error) {

@@ -1,3 +1,5 @@
+import { env } from "@/lib/env";
+
 interface AirtableConfig {
   baseId: string;
   tableId: string;
@@ -18,7 +20,7 @@ export async function createRecord(
     {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.AIRTABLE_TOKEN}`,
+        Authorization: `Bearer ${env.AIRTABLE_TOKEN}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -47,7 +49,7 @@ export async function updateRecord(
     {
       method: "PATCH",
       headers: {
-        Authorization: `Bearer ${process.env.AIRTABLE_TOKEN}`,
+        Authorization: `Bearer ${env.AIRTABLE_TOKEN}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

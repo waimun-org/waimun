@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import type { Seo, Slug } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
+import { env } from "@/lib/env";
 
 export const siteConfig = {
   name: "WaiMUN",
   description:
     "Empowering students to become active global citizens through public speaking, leadership development, and debate.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://waimun.org",
+  url: env.NEXT_PUBLIC_SITE_URL ?? "https://waimun.org",
   locale: "en-NZ",
 };
 
