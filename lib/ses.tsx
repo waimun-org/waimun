@@ -4,6 +4,9 @@ import React from "react";
 import BankTransferEmail, {
   type BankTransferEmailProps,
 } from "@/emails/bank-transfer-email";
+import PaymentConfirmationEmail, {
+  type PaymentConfirmationEmailProps,
+} from "@/emails/payment-confirmation-email";
 import { env } from "@/lib/env";
 
 const sesClient = new SESClient({
@@ -15,6 +18,10 @@ const sesClient = new SESClient({
 });
 
 type BankTransferEmailData = BankTransferEmailProps & {
+  to: string;
+};
+
+type PaymentConfirmationEmailData = PaymentConfirmationEmailProps & {
   to: string;
 };
 
@@ -35,6 +42,41 @@ export async function sendBankTransferEmail({
     Message: {
       Subject: {
         Data: "Complete Your Payment",
+        Charset: "UTF-8",
+      },
+      Body: {
+        Html: {
+          Data: htmlBody,
+          Charset: "UTF-8",
+        },
+        Text: {
+          Data: textBody,
+          Charset: "UTF-8",
+        },
+      },
+    },
+  });
+
+  return await sesClient.send(sendEmailCommand);
+}
+
+export async function sendPaymentConfirmationEmail({
+  to,
+  ...data
+}: PaymentConfirmationEmailData) {
+  const email = <PaymentConfirmationEmail {...data} />;
+  const htmlBody = await render(email);
+  const textBody = await render(email, { plainText: true });
+
+  const sendEmailCommand = new SendEmailCommand({
+    Source: env.AWS_SES_SENDER_EMAIL,
+    Destination: {
+      ToAddresses: [to],
+    },
+    ReplyToAddresses: [env.AWS_SES_REPLY_TO_EMAIL],
+    Message: {
+      Subject: {
+        Data: "Payment Confirmation - WaiMUN",
         Charset: "UTF-8",
       },
       Body: {

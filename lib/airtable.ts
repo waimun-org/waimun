@@ -30,6 +30,13 @@ export async function createRecord(
   );
 
   if (!response.ok) {
+    const data = (await response.json()) as unknown;
+
+    console.error(
+      `Failed to save submission to Airtable: ${JSON.stringify(data)}`,
+      data,
+    );
+
     throw new Error(
       `Failed to save submission to Airtable: ${response.statusText}`,
     );

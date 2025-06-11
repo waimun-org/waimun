@@ -3,10 +3,13 @@ import { sanityFetch } from "@/sanity/lib/client";
 import { FORM_BY_ID_QUERY } from "@/sanity/lib/queries";
 import type { FORM_BY_ID_QUERYResult } from "@/sanity/types";
 import { stripe } from "@/lib/stripe";
+import { sendPaymentConfirmationEmail } from "@/lib/ses";
 import { tryCatch } from "@/utils/try-catch";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { env } from "@/lib/env";
+import { formatDate } from "@/utils/date";
+import { formatPrice } from "@/utils/price";
 
 export async function POST(request: Request) {
   const headersList = await headers();
@@ -99,6 +102,50 @@ export async function POST(request: Request) {
         { error: "Failed to update record in Airtable" },
         { status: 500 },
       );
+    }
+
+    if (session.customer_details?.email) {
+      const paymentIntentResult = await tryCatch(
+        stripe.paymentIntents.retrieve(session.payment_intent as string),
+      );
+
+      if (paymentIntentResult.error) {
+        console.error(
+          "Failed to retrieve payment intent:",
+          paymentIntentResult.error,
+        );
+        return NextResponse.json({ success: true });
+      }
+
+      if (paymentIntentResult.data) {
+        const paymentIntent = paymentIntentResult.data;
+
+        const amount = formatPrice({
+          unitAmount: paymentIntent.amount,
+          currency: paymentIntent.currency,
+        });
+
+        const paymentDate = formatDate(new Date(session.created * 1000));
+
+        const emailResult = await tryCatch(
+          sendPaymentConfirmationEmail({
+            to: session.customer_details.email,
+            fullName: session.customer_details.name ?? undefined,
+            amount,
+            paymentDate,
+            paymentMethod: "Card",
+            transactionId: paymentIntent.id,
+          }),
+        );
+
+        if (emailResult.error) {
+          console.error(
+            "Failed to send payment confirmation email:",
+            emailResult.error,
+          );
+          return NextResponse.json({ success: true });
+        }
+      }
     }
   }
 
