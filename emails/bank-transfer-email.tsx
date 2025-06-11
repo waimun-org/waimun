@@ -40,6 +40,7 @@ export const BankTransferEmail = ({
               src="https://cdn.sanity.io/images/qs4butxl/production/0deb901f492621309f640cb22dca833424998c20-8380x2134.svg?h=80&q=75&fit=clip&auto=format&fm=png"
               alt="WaiMUN"
               className="mx-auto mb-8 h-[40px]"
+              height={40}
             />
 
             <Text className="mb-8 text-base leading-relaxed text-neutral-700">
