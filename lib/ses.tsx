@@ -76,7 +76,7 @@ export async function sendPaymentConfirmationEmail({
     ReplyToAddresses: [env.AWS_SES_REPLY_TO_EMAIL],
     Message: {
       Subject: {
-        Data: "Payment Confirmation - WaiMUN",
+        Data: "Payment Confirmation",
         Charset: "UTF-8",
       },
       Body: {
