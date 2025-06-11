@@ -17,21 +17,15 @@ const sesClient = new SESClient({
   },
 });
 
-type BankTransferEmailData = BankTransferEmailProps & {
+type EmailData = {
   to: string;
+  subject: string;
+  component: React.ReactElement;
 };
 
-type PaymentConfirmationEmailData = PaymentConfirmationEmailProps & {
-  to: string;
-};
-
-export async function sendBankTransferEmail({
-  to,
-  ...data
-}: BankTransferEmailData) {
-  const email = <BankTransferEmail {...data} />;
-  const htmlBody = await render(email);
-  const textBody = await render(email, { plainText: true });
+async function sendEmail({ to, subject, component }: EmailData) {
+  const htmlBody = await render(component);
+  const textBody = await render(component, { plainText: true });
 
   const sendEmailCommand = new SendEmailCommand({
     Source: env.AWS_SES_SENDER_EMAIL,
@@ -41,7 +35,7 @@ export async function sendBankTransferEmail({
     ReplyToAddresses: [env.AWS_SES_REPLY_TO_EMAIL],
     Message: {
       Subject: {
-        Data: "Complete Your Payment",
+        Data: subject,
         Charset: "UTF-8",
       },
       Body: {
@@ -60,37 +54,32 @@ export async function sendBankTransferEmail({
   return await sesClient.send(sendEmailCommand);
 }
 
+type BankTransferEmailData = BankTransferEmailProps & {
+  to: string;
+};
+
+type PaymentConfirmationEmailData = PaymentConfirmationEmailProps & {
+  to: string;
+};
+
+export async function sendBankTransferEmail({
+  to,
+  ...data
+}: BankTransferEmailData) {
+  return sendEmail({
+    to,
+    subject: "Complete Your Payment",
+    component: <BankTransferEmail {...data} />,
+  });
+}
+
 export async function sendPaymentConfirmationEmail({
   to,
   ...data
 }: PaymentConfirmationEmailData) {
-  const email = <PaymentConfirmationEmail {...data} />;
-  const htmlBody = await render(email);
-  const textBody = await render(email, { plainText: true });
-
-  const sendEmailCommand = new SendEmailCommand({
-    Source: env.AWS_SES_SENDER_EMAIL,
-    Destination: {
-      ToAddresses: [to],
-    },
-    ReplyToAddresses: [env.AWS_SES_REPLY_TO_EMAIL],
-    Message: {
-      Subject: {
-        Data: "Payment Confirmation",
-        Charset: "UTF-8",
-      },
-      Body: {
-        Html: {
-          Data: htmlBody,
-          Charset: "UTF-8",
-        },
-        Text: {
-          Data: textBody,
-          Charset: "UTF-8",
-        },
-      },
-    },
+  return sendEmail({
+    to,
+    subject: "Payment Confirmation",
+    component: <PaymentConfirmationEmail {...data} />,
   });
-
-  return await sesClient.send(sendEmailCommand);
 }
