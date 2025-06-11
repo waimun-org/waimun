@@ -57,13 +57,9 @@ export const eventType = defineType({
     }),
     defineField({
       name: "date",
-      title: "Date & Time",
-      type: "datetime",
+      title: "Date",
+      type: "date",
       group: "content",
-      options: {
-        dateFormat: "YYYY-MM-DD",
-        timeFormat: "HH:mm",
-      },
     }),
     defineField({
       name: "venue",
