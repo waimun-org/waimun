@@ -4,6 +4,7 @@ import { Button } from "./button";
 import { Image } from "./image";
 import { CalendarIcon, CircleDollarSignIcon, MapPinIcon } from "lucide-react";
 import { formatDate } from "@/utils/date";
+import { formatPrice } from "@/utils/price";
 
 export type EventProps = {
   event: Event;
@@ -85,11 +86,11 @@ function EventMeta({ event }: EventProps) {
         </div>
       )}
 
-      {typeof event.price === "number" && (
+      {event.price && (
         <div className="flex items-center gap-2">
           <CircleDollarSignIcon className="size-5" />
           <span className="text-sm whitespace-nowrap">
-            ${event.price.toFixed(2)}
+            {formatPrice(event.price)}
           </span>
         </div>
       )}

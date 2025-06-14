@@ -70,9 +70,8 @@ export const eventType = defineType({
     defineField({
       name: "price",
       title: "Price",
-      type: "number",
+      type: "price",
       group: "content",
-      validation: (rule) => rule.min(0),
     }),
     defineField({
       name: "image",

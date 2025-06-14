@@ -1372,36 +1372,6 @@
     }
   },
   {
-    "name": "price",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "price"
-          }
-        },
-        "unitAmount": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "number"
-          },
-          "optional": false
-        },
-        "currency": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": false
-        }
-      }
-    }
-  },
-  {
     "name": "prose",
     "type": "type",
     "value": {
@@ -3516,7 +3486,8 @@
       "price": {
         "type": "objectAttribute",
         "value": {
-          "type": "number"
+          "type": "inline",
+          "name": "price"
         },
         "optional": true
       },
@@ -3922,6 +3893,36 @@
           "type": "objectAttribute",
           "value": {
             "type": "boolean"
+          },
+          "optional": false
+        }
+      }
+    }
+  },
+  {
+    "name": "price",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "price"
+          }
+        },
+        "unitAmount": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": false
+        },
+        "currency": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
           },
           "optional": false
         }
