@@ -217,12 +217,6 @@ export type Form = {
   seo: Seo;
 };
 
-export type Price = {
-  _type: "price";
-  unitAmount: number;
-  currency: string;
-};
-
 export type Prose = {
   _type: "prose";
   content: Array<{
@@ -532,7 +526,7 @@ export type Event = {
   }>;
   date?: string;
   venue?: string;
-  price?: number;
+  price?: Price;
   image: {
     asset?: {
       _ref: string;
@@ -591,6 +585,12 @@ export type Seo = {
     _type: "image";
   };
   noIndex: boolean;
+};
+
+export type Price = {
+  _type: "price";
+  unitAmount: number;
+  currency: string;
 };
 
 export type Color = {
@@ -757,7 +757,6 @@ export type AllSanitySchemaTypes =
   | Input
   | FormBuilder
   | Form
-  | Price
   | Prose
   | Button
   | Link
@@ -771,6 +770,7 @@ export type AllSanitySchemaTypes =
   | Post
   | Event
   | Seo
+  | Price
   | Color
   | RgbaColor
   | HsvaColor
@@ -1060,7 +1060,7 @@ export type EVENTS_QUERYResult = Array<{
   }>;
   date?: string;
   venue?: string;
-  price?: number;
+  price?: Price;
   image: {
     asset?: {
       _ref: string;
@@ -1129,7 +1129,7 @@ export type EVENT_BY_SLUG_QUERYResult = {
   }>;
   date?: string;
   venue?: string;
-  price?: number;
+  price?: Price;
   image: {
     asset?: {
       _ref: string;
