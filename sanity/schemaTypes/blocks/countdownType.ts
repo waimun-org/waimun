@@ -18,13 +18,6 @@ export const countdownType = defineType({
       type: "datetime",
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: "completedMessage",
-      title: "Completed Message",
-      type: "string",
-      description: "Message to show when countdown reaches zero",
-      initialValue: "Event has started!",
-    }),
   ],
   preview: {
     select: {

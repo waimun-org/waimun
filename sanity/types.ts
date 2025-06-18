@@ -17,7 +17,6 @@ export type Countdown = {
   _type: "countdown";
   title?: string;
   endDateTime: string;
-  completedMessage?: string;
 };
 
 export type TeamMember = {
@@ -819,7 +818,6 @@ export type PAGE_QUERYResult = {
         _type: "countdown";
         title?: string;
         endDateTime: string;
-        completedMessage?: string;
       }
     | {
         _key: string;
