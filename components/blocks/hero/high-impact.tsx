@@ -3,6 +3,7 @@ import { Button } from "@/components/button";
 import type { HeroProps } from ".";
 import { Image } from "@/components/image";
 import { cn } from "@/utils/cn";
+import Link from "next/link";
 
 function getRelativeLuminance(hex: string): number {
   const cleanHex = hex.replace("#", "");
@@ -56,6 +57,20 @@ export function HighImpactHero({ block }: HeroProps) {
         )}
       >
         <div className="mx-auto flex max-w-xl flex-col items-center gap-4 text-center md:max-w-2xl lg:max-w-3xl">
+          {block.callout && (
+            <Link
+              href={block.callout.url}
+              className={cn(
+                "rounded-full border px-3 py-1 text-sm transition-colors",
+                useLightText
+                  ? "border-primary-foreground/20 text-primary-foreground hover:border-primary-foreground/40"
+                  : "border-primary/20 text-primary hover:border-primary/40",
+              )}
+            >
+              {block.callout.text} &rarr;
+            </Link>
+          )}
+
           <h1 className="text-4xl font-bold text-balance md:text-5xl lg:text-6xl">
             {block.title}
           </h1>
@@ -63,7 +78,7 @@ export function HighImpactHero({ block }: HeroProps) {
           {block.text && (
             <div
               className={cn(
-                "prose md:prose-lg max-w-none text-balance",
+                "prose md:prose-lg lg:prose-xl max-w-none text-balance",
                 useLightText && "prose-invert",
               )}
             >
