@@ -20,7 +20,9 @@ export function Countdown({ block }: CountdownProps) {
   return (
     <section>
       <div className="container space-y-8 py-8 text-center">
-        {block.title && <p className="font-medium">{block.title}</p>}
+        {block.title && (
+          <h3 className="font-medium text-balance">{block.title}</h3>
+        )}
 
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           <CountdownItem label="Days" value={timeLeft.days} />
