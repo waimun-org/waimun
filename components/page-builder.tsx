@@ -5,6 +5,7 @@ import { Prose } from "./blocks/prose";
 import { Events } from "./blocks/events";
 import { Posts } from "./blocks/posts";
 import { Team } from "./blocks/team";
+import { Countdown } from "./blocks/countdown";
 
 export type PageBuilderProps = {
   content: PageBuilder;
@@ -26,6 +27,7 @@ const BLOCK_COMPONENTS = {
   events: Events,
   posts: Posts,
   team: Team,
+  countdown: Countdown,
 } as const;
 
 export function PageBuilder({ content }: PageBuilderProps) {
