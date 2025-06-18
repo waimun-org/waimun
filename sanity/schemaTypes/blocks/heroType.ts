@@ -67,6 +67,12 @@ export const heroType = defineType({
       validation: (rule) => rule.max(3),
     }),
     defineField({
+      name: "callout",
+      title: "Callout",
+      type: "link",
+      group: "actions",
+    }),
+    defineField({
       name: "backgroundImage",
       title: "Background Image",
       type: "image",

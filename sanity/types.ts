@@ -246,12 +246,6 @@ export type Button = {
   size: "sm" | "default" | "lg";
 };
 
-export type Link = {
-  _type: "link";
-  text: string;
-  url: string;
-};
-
 export type Social = {
   _type: "social";
   title: string;
@@ -439,6 +433,7 @@ export type Hero = {
       _key: string;
     } & Button
   >;
+  callout?: Link;
   backgroundImage?: {
     asset?: {
       _ref: string;
@@ -452,6 +447,12 @@ export type Hero = {
     _type: "image";
   };
   backgroundColor?: Color;
+};
+
+export type Link = {
+  _type: "link";
+  text: string;
+  url: string;
 };
 
 export type Post = {
@@ -759,7 +760,6 @@ export type AllSanitySchemaTypes =
   | Form
   | Prose
   | Button
-  | Link
   | Social
   | Footer
   | Header
@@ -767,6 +767,7 @@ export type AllSanitySchemaTypes =
   | Page
   | PageBuilder
   | Hero
+  | Link
   | Post
   | Event
   | Seo
@@ -840,6 +841,7 @@ export type PAGE_QUERYResult = {
             _key: string;
           } & Button
         >;
+        callout?: Link;
         backgroundImage?: {
           asset?: {
             _ref: string;
