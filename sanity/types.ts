@@ -13,6 +13,13 @@
  */
 
 // Source: schema.json
+export type Countdown = {
+  _type: "countdown";
+  title?: string;
+  endDateTime: string;
+  completedMessage?: string;
+};
+
 export type TeamMember = {
   _type: "teamMember";
   name: string;
@@ -381,6 +388,9 @@ export type Page = {
     | ({
         _key: string;
       } & Team)
+    | ({
+        _key: string;
+      } & Countdown)
   >;
   seo: Seo;
 };
@@ -404,6 +414,9 @@ export type PageBuilder = Array<
   | ({
       _key: string;
     } & Team)
+  | ({
+      _key: string;
+    } & Countdown)
 >;
 
 export type Hero = {
@@ -746,6 +759,7 @@ export type SanityAssetSourceData = {
 };
 
 export type AllSanitySchemaTypes =
+  | Countdown
   | TeamMember
   | Team
   | Posts
@@ -800,6 +814,13 @@ export type PAGE_QUERYResult = {
   title: string;
   slug: Slug;
   content: Array<
+    | {
+        _key: string;
+        _type: "countdown";
+        title?: string;
+        endDateTime: string;
+        completedMessage?: string;
+      }
     | {
         _key: string;
         _type: "events";
