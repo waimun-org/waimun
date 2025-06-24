@@ -10,7 +10,7 @@ export type SocialsProps = {
 
 export function Socials({ socials }: SocialsProps) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-4">
       {socials.map((social) => (
         <Link
           key={social._key}
