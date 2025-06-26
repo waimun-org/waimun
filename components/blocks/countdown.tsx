@@ -35,17 +35,13 @@ export function Countdown({ block }: CountdownProps) {
   );
 }
 
-export function CountdownItem({
-  label,
-  value,
-}: {
-  label: string;
-  value: number;
-}) {
+function CountdownItem({ label, value }: { label: string; value: number }) {
   return (
     <Card>
       <div className="flex flex-col items-center gap-1">
-        <div className="text-4xl font-bold">{value}</div>
+        <div className="text-4xl font-bold" suppressHydrationWarning>
+          {value}
+        </div>
         <div className="text-muted-foreground">{label}</div>
       </div>
     </Card>
