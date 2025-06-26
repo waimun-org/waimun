@@ -3537,7 +3537,14 @@
         },
         "optional": true
       },
-      "date": {
+      "startDate": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "endDate": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

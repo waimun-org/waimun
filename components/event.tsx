@@ -70,14 +70,7 @@ function EventHero({ event }: EventProps) {
 function EventMeta({ event }: EventProps) {
   return (
     <div className="flex flex-col flex-wrap gap-4 md:flex-row">
-      {event.date && (
-        <div className="flex items-center gap-2">
-          <CalendarIcon className="size-5" />
-          <span className="text-sm whitespace-nowrap">
-            {formatDate(event.date)}
-          </span>
-        </div>
-      )}
+      <EventDate event={event} />
 
       {event.venue && (
         <div className="flex items-center gap-2">
@@ -94,6 +87,32 @@ function EventMeta({ event }: EventProps) {
           </span>
         </div>
       )}
+    </div>
+  );
+}
+
+function EventDate({ event }: EventProps) {
+  if (!event.startDate) {
+    return null;
+  }
+
+  if (!event.endDate) {
+    return (
+      <div className="flex items-center gap-2">
+        <CalendarIcon className="size-5" />
+        <span className="text-sm whitespace-nowrap">
+          {formatDate(event.startDate)}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <CalendarIcon className="size-5" />
+      <span className="text-sm whitespace-nowrap">
+        {formatDate(event.startDate)} - {formatDate(event.endDate)}
+      </span>
     </div>
   );
 }

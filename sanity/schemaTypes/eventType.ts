@@ -56,8 +56,14 @@ export const eventType = defineType({
       group: "content",
     }),
     defineField({
-      name: "date",
-      title: "Date",
+      name: "startDate",
+      title: "Start Date",
+      type: "date",
+      group: "content",
+    }),
+    defineField({
+      name: "endDate",
+      title: "End Date",
       type: "date",
       group: "content",
     }),
