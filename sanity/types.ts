@@ -537,7 +537,8 @@ export type Event = {
     _type: "block";
     _key: string;
   }>;
-  date?: string;
+  startDate?: string;
+  endDate?: string;
   venue?: string;
   price?: Price;
   image: {
@@ -1079,7 +1080,8 @@ export type EVENTS_QUERYResult = Array<{
     _type: "block";
     _key: string;
   }>;
-  date?: string;
+  startDate?: string;
+  endDate?: string;
   venue?: string;
   price?: Price;
   image: {
@@ -1148,7 +1150,8 @@ export type EVENT_BY_SLUG_QUERYResult = {
     _type: "block";
     _key: string;
   }>;
-  date?: string;
+  startDate?: string;
+  endDate?: string;
   venue?: string;
   price?: Price;
   image: {
