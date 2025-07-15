@@ -87,6 +87,7 @@ export async function createStripeCheckoutSession(
       formId: form._id,
       recordId,
     },
+    allow_promotion_codes: true,
   });
 
   if (!session.url) {
