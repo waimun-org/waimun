@@ -9,7 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const result = await tryCatch(
     sanityFetch<SITEMAP_QUERYResult>({
       query: SITEMAP_QUERY,
-      tags: ["page", "post", "event", "form"],
+      tags: ["page", "event"],
     }),
   );
 
@@ -38,24 +38,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(event.lastModified),
       changeFrequency: "monthly",
       priority: event.priority,
-    });
-  });
-
-  data.forms.forEach((form) => {
-    sitemap.push({
-      url: `${siteConfig.url}/forms/${form.slug}`,
-      lastModified: new Date(form.lastModified),
-      changeFrequency: "monthly",
-      priority: form.priority,
-    });
-  });
-
-  data.posts.forEach((post) => {
-    sitemap.push({
-      url: `${siteConfig.url}/blog/${post.slug}`,
-      lastModified: new Date(post.lastModified),
-      changeFrequency: "monthly",
-      priority: post.priority,
     });
   });
 

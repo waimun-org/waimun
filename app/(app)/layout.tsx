@@ -1,6 +1,5 @@
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { Toaster } from "@/components/ui/sonner";
 import { sanityFetch } from "@/sanity/lib/client";
 import { FOOTER_QUERY, HEADER_QUERY } from "@/sanity/lib/queries";
 import type { FOOTER_QUERYResult, HEADER_QUERYResult } from "@/sanity/types";
@@ -37,14 +36,10 @@ export default async function AppLayout({
   const { header, footer } = await getLayoutData();
 
   return (
-    <>
-      <div className="flex min-h-screen flex-col">
-        <Header header={header} />
-        <main className="flex-1">{children}</main>
-        <Footer footer={footer} />
-      </div>
-
-      <Toaster />
-    </>
+    <div className="flex min-h-screen flex-col">
+      <Header header={header} />
+      <main className="flex-1">{children}</main>
+      <Footer footer={footer} />
+    </div>
   );
 }
