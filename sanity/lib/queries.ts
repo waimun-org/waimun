@@ -35,44 +35,12 @@ export const EVENT_BY_SLUG_QUERY = groq`*[_type == "event" && slug.current == $s
   ...
 }`;
 
-export const POSTS_QUERY = groq`*[_type == "post"] | order(publishedAt desc) {
-  ...,
-}`;
-
-export const POST_BY_SLUG_QUERY = groq`*[_type == "post" && slug.current == $slug][0] {
-  ...
-}`;
-
-export const FORM_BY_SLUG_QUERY = groq`*[_type == "form" && slug.current == $slug][0] {
-  ...,
-  content[] {
-    ...,
-  }
-}`;
-
-export const FORM_BY_ID_QUERY = groq`*[_type == "form" && _id == $id][0] {
-  ...,
-  content[] {
-    ...,
-  }
-}`;
-
 export const PAGES_SLUGS_QUERY = groq`*[_type == "page" && defined(slug.current)]{
   "slug": slug.current,
   "lastModified": _updatedAt
 }`;
 
 export const EVENTS_SLUGS_QUERY = groq`*[_type == "event" && defined(slug.current)]{
-  "slug": slug.current,
-  "lastModified": _updatedAt
-}`;
-
-export const FORMS_SLUGS_QUERY = groq`*[_type == "form" && defined(slug.current)]{
-  "slug": slug.current,
-  "lastModified": _updatedAt
-}`;
-
-export const POSTS_SLUGS_QUERY = groq`*[_type == "post" && defined(slug.current)]{
   "slug": slug.current,
   "lastModified": _updatedAt
 }`;
@@ -87,16 +55,6 @@ export const SITEMAP_QUERY = groq`{
     )
   },
   "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{
-    "slug": slug.current,
-    "lastModified": _updatedAt,
-    "priority": 0.7
-  },
-  "forms": *[_type == "form" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{
-    "slug": slug.current,
-    "lastModified": _updatedAt,
-    "priority": 0.6
-  },
-  "posts": *[_type == "post" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{
     "slug": slug.current,
     "lastModified": _updatedAt,
     "priority": 0.7

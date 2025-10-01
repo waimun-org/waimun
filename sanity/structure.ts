@@ -3,9 +3,7 @@ import {
   DocumentIcon,
   CalendarIcon,
   CogIcon,
-  EditIcon,
   ComponentIcon,
-  DocumentTextIcon,
 } from "@sanity/icons";
 
 export const structure: StructureResolver = (S) =>
@@ -14,8 +12,6 @@ export const structure: StructureResolver = (S) =>
     .items([
       S.documentTypeListItem("page").title("Pages").icon(DocumentIcon),
       S.documentTypeListItem("event").title("Events").icon(CalendarIcon),
-      S.documentTypeListItem("post").title("Posts").icon(DocumentTextIcon),
-      S.documentTypeListItem("form").title("Forms").icon(EditIcon),
       S.divider(),
       S.listItem()
         .title("Settings")

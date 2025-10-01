@@ -13,12 +13,6 @@
  */
 
 // Source: schema.json
-export type Countdown = {
-  _type: "countdown";
-  title?: string;
-  endDateTime: string;
-};
-
 export type TeamMember = {
   _type: "teamMember";
   name: string;
@@ -69,158 +63,6 @@ export type Team = {
       _key: string;
     } & TeamMember
   >;
-};
-
-export type Posts = {
-  _type: "posts";
-  title?: string;
-};
-
-export type Events = {
-  _type: "events";
-  title?: string;
-};
-
-export type TextBlock = {
-  _type: "textBlock";
-  label?: string;
-  content: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-};
-
-export type Separator = {
-  _type: "separator";
-  label?: string;
-};
-
-export type Checkbox = {
-  _type: "checkbox";
-  name: string;
-  label: string;
-  description?: string;
-  required?: boolean;
-  defaultValue?: boolean;
-};
-
-export type Select = {
-  _type: "select";
-  name: string;
-  label: string;
-  description?: string;
-  placeholder?: string;
-  required?: boolean;
-  options: Array<string>;
-  defaultValue?: string;
-};
-
-export type Textarea = {
-  _type: "textarea";
-  name: string;
-  label: string;
-  description?: string;
-  placeholder?: string;
-  required?: boolean;
-  minLength?: number;
-  maxLength?: number;
-  pattern?: string;
-  defaultValue?: string;
-};
-
-export type Input = {
-  _type: "input";
-  name: string;
-  label: string;
-  description?: string;
-  placeholder?: string;
-  required?: boolean;
-  type?: "text" | "email" | "tel" | "number";
-  minLength?: number;
-  maxLength?: number;
-  pattern?: string;
-  defaultValue?: string;
-};
-
-export type FormBuilder = Array<
-  | ({
-      _key: string;
-    } & Input)
-  | ({
-      _key: string;
-    } & Textarea)
-  | ({
-      _key: string;
-    } & Select)
-  | ({
-      _key: string;
-    } & Checkbox)
-  | ({
-      _key: string;
-    } & Separator)
-  | ({
-      _key: string;
-    } & TextBlock)
->;
-
-export type Form = {
-  _id: string;
-  _type: "form";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  description: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  content: FormBuilder;
-  airtable: {
-    baseId: string;
-    tableId: string;
-  };
-  stripe?: {
-    enabled: boolean;
-    priceId?: string;
-    priceIdTest?: string;
-  };
-  bankTransfer?: {
-    enabled: boolean;
-    accountName?: string;
-    accountNumber?: string;
-    price?: Price;
-    instructions?: string;
-  };
-  slug: Slug;
-  seo: Seo;
 };
 
 export type Prose = {
@@ -383,13 +225,7 @@ export type Page = {
       } & Events)
     | ({
         _key: string;
-      } & Posts)
-    | ({
-        _key: string;
       } & Team)
-    | ({
-        _key: string;
-      } & Countdown)
   >;
   seo: Seo;
 };
@@ -409,13 +245,7 @@ export type PageBuilder = Array<
     } & Events)
   | ({
       _key: string;
-    } & Posts)
-  | ({
-      _key: string;
     } & Team)
-  | ({
-      _key: string;
-    } & Countdown)
 >;
 
 export type Hero = {
@@ -467,49 +297,9 @@ export type Link = {
   url: string;
 };
 
-export type Post = {
-  _id: string;
-  _type: "post";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  excerpt?: string;
-  content: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  author: string;
-  publishedAt: string;
-  image: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt: string;
-    _type: "image";
-  };
-  slug: Slug;
-  seo?: Seo;
+export type Events = {
+  _type: "events";
+  title?: string;
 };
 
 export type Event = {
@@ -759,19 +549,8 @@ export type SanityAssetSourceData = {
 };
 
 export type AllSanitySchemaTypes =
-  | Countdown
   | TeamMember
   | Team
-  | Posts
-  | Events
-  | TextBlock
-  | Separator
-  | Checkbox
-  | Select
-  | Textarea
-  | Input
-  | FormBuilder
-  | Form
   | Prose
   | Button
   | Social
@@ -782,7 +561,7 @@ export type AllSanitySchemaTypes =
   | PageBuilder
   | Hero
   | Link
-  | Post
+  | Events
   | Event
   | Seo
   | Price
@@ -814,12 +593,6 @@ export type PAGE_QUERYResult = {
   title: string;
   slug: Slug;
   content: Array<
-    | {
-        _key: string;
-        _type: "countdown";
-        title?: string;
-        endDateTime: string;
-      }
     | {
         _key: string;
         _type: "events";
@@ -875,11 +648,6 @@ export type PAGE_QUERYResult = {
           _type: "image";
         };
         backgroundColor?: Color;
-      }
-    | {
-        _key: string;
-        _type: "posts";
-        title?: string;
       }
     | {
         _key: string;
@@ -1193,360 +961,6 @@ export type EVENT_BY_SLUG_QUERYResult = {
   slug: Slug;
   seo?: Seo;
 } | null;
-// Variable: POSTS_QUERY
-// Query: *[_type == "post"] | order(publishedAt desc) {  ...,}
-export type POSTS_QUERYResult = Array<{
-  _id: string;
-  _type: "post";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  excerpt?: string;
-  content: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  author: string;
-  publishedAt: string;
-  image: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt: string;
-    _type: "image";
-  };
-  slug: Slug;
-  seo?: Seo;
-}>;
-// Variable: POST_BY_SLUG_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0] {  ...}
-export type POST_BY_SLUG_QUERYResult = {
-  _id: string;
-  _type: "post";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  excerpt?: string;
-  content: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  author: string;
-  publishedAt: string;
-  image: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt: string;
-    _type: "image";
-  };
-  slug: Slug;
-  seo?: Seo;
-} | null;
-// Variable: FORM_BY_SLUG_QUERY
-// Query: *[_type == "form" && slug.current == $slug][0] {  ...,  content[] {    ...,  }}
-export type FORM_BY_SLUG_QUERYResult = {
-  _id: string;
-  _type: "form";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  description: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  content: Array<
-    | {
-        _key: string;
-        _type: "checkbox";
-        name: string;
-        label: string;
-        description?: string;
-        required?: boolean;
-        defaultValue?: boolean;
-      }
-    | {
-        _key: string;
-        _type: "input";
-        name: string;
-        label: string;
-        description?: string;
-        placeholder?: string;
-        required?: boolean;
-        type?: "email" | "number" | "tel" | "text";
-        minLength?: number;
-        maxLength?: number;
-        pattern?: string;
-        defaultValue?: string;
-      }
-    | {
-        _key: string;
-        _type: "select";
-        name: string;
-        label: string;
-        description?: string;
-        placeholder?: string;
-        required?: boolean;
-        options: Array<string>;
-        defaultValue?: string;
-      }
-    | {
-        _key: string;
-        _type: "separator";
-        label?: string;
-      }
-    | {
-        _key: string;
-        _type: "textarea";
-        name: string;
-        label: string;
-        description?: string;
-        placeholder?: string;
-        required?: boolean;
-        minLength?: number;
-        maxLength?: number;
-        pattern?: string;
-        defaultValue?: string;
-      }
-    | {
-        _key: string;
-        _type: "textBlock";
-        label?: string;
-        content: Array<{
-          children?: Array<{
-            marks?: Array<string>;
-            text?: string;
-            _type: "span";
-            _key: string;
-          }>;
-          style?:
-            | "blockquote"
-            | "h1"
-            | "h2"
-            | "h3"
-            | "h4"
-            | "h5"
-            | "h6"
-            | "normal";
-          listItem?: "bullet" | "number";
-          markDefs?: Array<{
-            href?: string;
-            _type: "link";
-            _key: string;
-          }>;
-          level?: number;
-          _type: "block";
-          _key: string;
-        }>;
-      }
-  >;
-  airtable: {
-    baseId: string;
-    tableId: string;
-  };
-  stripe?: {
-    enabled: boolean;
-    priceId?: string;
-    priceIdTest?: string;
-  };
-  bankTransfer?: {
-    enabled: boolean;
-    accountName?: string;
-    accountNumber?: string;
-    price?: Price;
-    instructions?: string;
-  };
-  slug: Slug;
-  seo: Seo;
-} | null;
-// Variable: FORM_BY_ID_QUERY
-// Query: *[_type == "form" && _id == $id][0] {  ...,  content[] {    ...,  }}
-export type FORM_BY_ID_QUERYResult = {
-  _id: string;
-  _type: "form";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  description: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  content: Array<
-    | {
-        _key: string;
-        _type: "checkbox";
-        name: string;
-        label: string;
-        description?: string;
-        required?: boolean;
-        defaultValue?: boolean;
-      }
-    | {
-        _key: string;
-        _type: "input";
-        name: string;
-        label: string;
-        description?: string;
-        placeholder?: string;
-        required?: boolean;
-        type?: "email" | "number" | "tel" | "text";
-        minLength?: number;
-        maxLength?: number;
-        pattern?: string;
-        defaultValue?: string;
-      }
-    | {
-        _key: string;
-        _type: "select";
-        name: string;
-        label: string;
-        description?: string;
-        placeholder?: string;
-        required?: boolean;
-        options: Array<string>;
-        defaultValue?: string;
-      }
-    | {
-        _key: string;
-        _type: "separator";
-        label?: string;
-      }
-    | {
-        _key: string;
-        _type: "textarea";
-        name: string;
-        label: string;
-        description?: string;
-        placeholder?: string;
-        required?: boolean;
-        minLength?: number;
-        maxLength?: number;
-        pattern?: string;
-        defaultValue?: string;
-      }
-    | {
-        _key: string;
-        _type: "textBlock";
-        label?: string;
-        content: Array<{
-          children?: Array<{
-            marks?: Array<string>;
-            text?: string;
-            _type: "span";
-            _key: string;
-          }>;
-          style?:
-            | "blockquote"
-            | "h1"
-            | "h2"
-            | "h3"
-            | "h4"
-            | "h5"
-            | "h6"
-            | "normal";
-          listItem?: "bullet" | "number";
-          markDefs?: Array<{
-            href?: string;
-            _type: "link";
-            _key: string;
-          }>;
-          level?: number;
-          _type: "block";
-          _key: string;
-        }>;
-      }
-  >;
-  airtable: {
-    baseId: string;
-    tableId: string;
-  };
-  stripe?: {
-    enabled: boolean;
-    priceId?: string;
-    priceIdTest?: string;
-  };
-  bankTransfer?: {
-    enabled: boolean;
-    accountName?: string;
-    accountNumber?: string;
-    price?: Price;
-    instructions?: string;
-  };
-  slug: Slug;
-  seo: Seo;
-} | null;
 // Variable: PAGES_SLUGS_QUERY
 // Query: *[_type == "page" && defined(slug.current)]{  "slug": slug.current,  "lastModified": _updatedAt}
 export type PAGES_SLUGS_QUERYResult = Array<{
@@ -1559,20 +973,8 @@ export type EVENTS_SLUGS_QUERYResult = Array<{
   slug: string;
   lastModified: string;
 }>;
-// Variable: FORMS_SLUGS_QUERY
-// Query: *[_type == "form" && defined(slug.current)]{  "slug": slug.current,  "lastModified": _updatedAt}
-export type FORMS_SLUGS_QUERYResult = Array<{
-  slug: string;
-  lastModified: string;
-}>;
-// Variable: POSTS_SLUGS_QUERY
-// Query: *[_type == "post" && defined(slug.current)]{  "slug": slug.current,  "lastModified": _updatedAt}
-export type POSTS_SLUGS_QUERYResult = Array<{
-  slug: string;
-  lastModified: string;
-}>;
 // Variable: SITEMAP_QUERY
-// Query: {  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": select(      slug.current == "home" => 1.0,      0.8    )  },  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.7  },  "forms": *[_type == "form" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.6  },  "posts": *[_type == "post" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.7  }}
+// Query: {  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": select(      slug.current == "home" => 1.0,      0.8    )  },  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.7  }}
 export type SITEMAP_QUERYResult = {
   pages: Array<{
     slug: string;
@@ -1580,16 +982,6 @@ export type SITEMAP_QUERYResult = {
     priority: 0.8 | 1;
   }>;
   events: Array<{
-    slug: string;
-    lastModified: string;
-    priority: 0.7;
-  }>;
-  forms: Array<{
-    slug: string;
-    lastModified: string;
-    priority: 0.6;
-  }>;
-  posts: Array<{
     slug: string;
     lastModified: string;
     priority: 0.7;
@@ -1605,14 +997,8 @@ declare module "@sanity/client" {
     '*[_type == "footer"][0] {\n  ...,\n  links[] {\n    ...,\n  },\n  socials[] {\n    ...,\n  }\n}': FOOTER_QUERYResult;
     '*[_type == "event"] {\n  ...,\n}': EVENTS_QUERYResult;
     '*[_type == "event" && slug.current == $slug][0] {\n  ...\n}': EVENT_BY_SLUG_QUERYResult;
-    '*[_type == "post"] | order(publishedAt desc) {\n  ...,\n}': POSTS_QUERYResult;
-    '*[_type == "post" && slug.current == $slug][0] {\n  ...\n}': POST_BY_SLUG_QUERYResult;
-    '*[_type == "form" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_BY_SLUG_QUERYResult;
-    '*[_type == "form" && _id == $id][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': FORM_BY_ID_QUERYResult;
     '*[_type == "page" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': PAGES_SLUGS_QUERYResult;
     '*[_type == "event" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': EVENTS_SLUGS_QUERYResult;
-    '*[_type == "form" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': FORMS_SLUGS_QUERYResult;
-    '*[_type == "post" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': POSTS_SLUGS_QUERYResult;
-    '{\n  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": select(\n      slug.current == "home" => 1.0,\n      0.8\n    )\n  },\n  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.7\n  },\n  "forms": *[_type == "form" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.6\n  },\n  "posts": *[_type == "post" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.7\n  }\n}': SITEMAP_QUERYResult;
+    '{\n  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": select(\n      slug.current == "home" => 1.0,\n      0.8\n    )\n  },\n  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.7\n  }\n}': SITEMAP_QUERYResult;
   }
 }

@@ -1,9 +1,0 @@
----
-description: 
-globs: *.ts,*.tsx
-alwaysApply: false
----
-- Use the container utility class for containers.
-- The container utility is configred to auto center with margin and apply 2 rem padding.
-- Keep the amount of class names short.
-- Keep styling consistent with the rest of the project.
