@@ -12,7 +12,14 @@
  * ---------------------------------------------------------------------------------
  */
 
-// Source: schema.json
+// Source: sanity/extract.json
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
 export type TeamMember = {
   _type: "teamMember";
   name: string;
@@ -36,12 +43,7 @@ export type TeamMember = {
     _key: string;
   }>;
   image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -63,6 +65,27 @@ export type Team = {
       _key: string;
     } & TeamMember
   >;
+};
+
+export type Seo = {
+  _type: "seo";
+  title: string;
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  };
+  noIndex: boolean;
+};
+
+export type Price = {
+  _type: "price";
+  unitAmount: number;
+  currency: string;
 };
 
 export type Prose = {
@@ -87,6 +110,12 @@ export type Prose = {
   }>;
 };
 
+export type Link = {
+  _type: "link";
+  text: string;
+  url: string;
+};
+
 export type Button = {
   _type: "button";
   link: Link;
@@ -99,12 +128,7 @@ export type Social = {
   title: string;
   url: string;
   icon: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -140,12 +164,7 @@ export type Header = {
   _rev: string;
   title: string;
   logo: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -164,17 +183,28 @@ export type Header = {
   >;
 };
 
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x: number;
+  y: number;
+  height: number;
+  width: number;
+};
+
 export type SplitImage = {
   _type: "splitImage";
   orientation: "imageLeft" | "imageRight";
   title: string;
   image: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -210,23 +240,7 @@ export type Page = {
   _rev: string;
   title: string;
   slug: Slug;
-  content: Array<
-    | ({
-        _key: string;
-      } & Hero)
-    | ({
-        _key: string;
-      } & SplitImage)
-    | ({
-        _key: string;
-      } & Prose)
-    | ({
-        _key: string;
-      } & Events)
-    | ({
-        _key: string;
-      } & Team)
-  >;
+  content: PageBuilder;
   seo: Seo;
 };
 
@@ -247,6 +261,12 @@ export type PageBuilder = Array<
       _key: string;
     } & Team)
 >;
+
+export type Slug = {
+  _type: "slug";
+  current: string;
+  source?: string;
+};
 
 export type Hero = {
   _type: "hero";
@@ -277,12 +297,7 @@ export type Hero = {
   >;
   callout?: Link;
   backgroundImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -291,10 +306,13 @@ export type Hero = {
   backgroundColor?: Color;
 };
 
-export type Link = {
-  _type: "link";
-  text: string;
-  url: string;
+export type Color = {
+  _type: "color";
+  hex?: string;
+  alpha?: number;
+  hsl?: HslaColor;
+  hsv?: HsvaColor;
+  rgb?: RgbaColor;
 };
 
 export type Events = {
@@ -332,12 +350,7 @@ export type Event = {
   venue?: string;
   price?: Price;
   image: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -369,41 +382,6 @@ export type Event = {
   }>;
   slug: Slug;
   seo?: Seo;
-};
-
-export type Seo = {
-  _type: "seo";
-  title: string;
-  description?: string;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt: string;
-    _type: "image";
-  };
-  noIndex: boolean;
-};
-
-export type Price = {
-  _type: "price";
-  unitAmount: number;
-  currency: string;
-};
-
-export type Color = {
-  _type: "color";
-  hex?: string;
-  alpha?: number;
-  hsl?: HslaColor;
-  hsv?: HsvaColor;
-  rgb?: RgbaColor;
 };
 
 export type RgbaColor = {
@@ -456,20 +434,16 @@ export type SanityImageDimensions = {
   aspectRatio: number;
 };
 
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
+export type SanityImageMetadata = {
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  thumbHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
 };
 
 export type SanityFileAsset = {
@@ -492,6 +466,13 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
+};
+
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
 };
 
 export type SanityImageAsset = {
@@ -517,17 +498,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
-
 export type Geopoint = {
   _type: "geopoint";
   lat?: number;
@@ -535,56 +505,46 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
-};
-
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
 export type AllSanitySchemaTypes =
+  | SanityImageAssetReference
   | TeamMember
   | Team
+  | Seo
+  | Price
   | Prose
+  | Link
   | Button
   | Social
   | Footer
   | Header
+  | SanityImageCrop
+  | SanityImageHotspot
   | SplitImage
   | Page
   | PageBuilder
+  | Slug
   | Hero
-  | Link
+  | Color
   | Events
   | Event
-  | Seo
-  | Price
-  | Color
   | RgbaColor
   | HsvaColor
   | HslaColor
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
-  | SanityImageHotspot
-  | SanityImageCrop
-  | SanityFileAsset
-  | SanityImageAsset
   | SanityImageMetadata
-  | Geopoint
-  | Slug
-  | SanityAssetSourceData;
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint;
+
 export declare const internalGroqTypeReferenceTo: unique symbol;
+
 // Source: sanity/lib/queries.ts
 // Variable: PAGE_QUERY
 // Query: *[_type == "page" && slug.current == $slug][0] {  ...,  content[] {    ...,  }}
-export type PAGE_QUERYResult = {
+export type PAGE_QUERY_RESULT = {
   _id: string;
   _type: "page";
   _createdAt: string;
@@ -636,12 +596,7 @@ export type PAGE_QUERYResult = {
         >;
         callout?: Link;
         backgroundImage?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -685,12 +640,7 @@ export type PAGE_QUERYResult = {
         orientation: "imageLeft" | "imageRight";
         title: string;
         image: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
+          asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
@@ -738,9 +688,11 @@ export type PAGE_QUERYResult = {
   >;
   seo: Seo;
 } | null;
+
+// Source: sanity/lib/queries.ts
 // Variable: HEADER_QUERY
 // Query: *[_type == "header"][0] {  ...,  links[] {    ...,  },  socials[] {    ...,  }}
-export type HEADER_QUERYResult = {
+export type HEADER_QUERY_RESULT = {
   _id: string;
   _type: "header";
   _createdAt: string;
@@ -748,12 +700,7 @@ export type HEADER_QUERYResult = {
   _rev: string;
   title: string;
   logo: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -772,12 +719,7 @@ export type HEADER_QUERYResult = {
     title: string;
     url: string;
     icon: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
+      asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
@@ -786,9 +728,11 @@ export type HEADER_QUERYResult = {
     };
   }> | null;
 } | null;
+
+// Source: sanity/lib/queries.ts
 // Variable: FOOTER_QUERY
 // Query: *[_type == "footer"][0] {  ...,  links[] {    ...,  },  socials[] {    ...,  }}
-export type FOOTER_QUERYResult = {
+export type FOOTER_QUERY_RESULT = {
   _id: string;
   _type: "footer";
   _createdAt: string;
@@ -807,12 +751,7 @@ export type FOOTER_QUERYResult = {
     title: string;
     url: string;
     icon: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
+      asset?: SanityImageAssetReference;
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
@@ -821,9 +760,11 @@ export type FOOTER_QUERYResult = {
     };
   }> | null;
 } | null;
+
+// Source: sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
 // Query: *[_type == "event"] {  ...,}
-export type EVENTS_QUERYResult = Array<{
+export type EVENTS_QUERY_RESULT = Array<{
   _id: string;
   _type: "event";
   _createdAt: string;
@@ -853,12 +794,7 @@ export type EVENTS_QUERYResult = Array<{
   venue?: string;
   price?: Price;
   image: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -891,9 +827,11 @@ export type EVENTS_QUERYResult = Array<{
   slug: Slug;
   seo?: Seo;
 }>;
+
+// Source: sanity/lib/queries.ts
 // Variable: EVENT_BY_SLUG_QUERY
 // Query: *[_type == "event" && slug.current == $slug][0] {  ...}
-export type EVENT_BY_SLUG_QUERYResult = {
+export type EVENT_BY_SLUG_QUERY_RESULT = {
   _id: string;
   _type: "event";
   _createdAt: string;
@@ -923,12 +861,7 @@ export type EVENT_BY_SLUG_QUERYResult = {
   venue?: string;
   price?: Price;
   image: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
+    asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
@@ -961,21 +894,27 @@ export type EVENT_BY_SLUG_QUERYResult = {
   slug: Slug;
   seo?: Seo;
 } | null;
+
+// Source: sanity/lib/queries.ts
 // Variable: PAGES_SLUGS_QUERY
 // Query: *[_type == "page" && defined(slug.current)]{  "slug": slug.current,  "lastModified": _updatedAt}
-export type PAGES_SLUGS_QUERYResult = Array<{
+export type PAGES_SLUGS_QUERY_RESULT = Array<{
   slug: string;
   lastModified: string;
 }>;
+
+// Source: sanity/lib/queries.ts
 // Variable: EVENTS_SLUGS_QUERY
 // Query: *[_type == "event" && defined(slug.current)]{  "slug": slug.current,  "lastModified": _updatedAt}
-export type EVENTS_SLUGS_QUERYResult = Array<{
+export type EVENTS_SLUGS_QUERY_RESULT = Array<{
   slug: string;
   lastModified: string;
 }>;
+
+// Source: sanity/lib/queries.ts
 // Variable: SITEMAP_QUERY
 // Query: {  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": select(      slug.current == "home" => 1.0,      0.8    )  },  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.7  }}
-export type SITEMAP_QUERYResult = {
+export type SITEMAP_QUERY_RESULT = {
   pages: Array<{
     slug: string;
     lastModified: string;
@@ -992,13 +931,13 @@ export type SITEMAP_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "page" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': PAGE_QUERYResult;
-    '*[_type == "header"][0] {\n  ...,\n  links[] {\n    ...,\n  },\n  socials[] {\n    ...,\n  }\n}': HEADER_QUERYResult;
-    '*[_type == "footer"][0] {\n  ...,\n  links[] {\n    ...,\n  },\n  socials[] {\n    ...,\n  }\n}': FOOTER_QUERYResult;
-    '*[_type == "event"] {\n  ...,\n}': EVENTS_QUERYResult;
-    '*[_type == "event" && slug.current == $slug][0] {\n  ...\n}': EVENT_BY_SLUG_QUERYResult;
-    '*[_type == "page" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': PAGES_SLUGS_QUERYResult;
-    '*[_type == "event" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': EVENTS_SLUGS_QUERYResult;
-    '{\n  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": select(\n      slug.current == "home" => 1.0,\n      0.8\n    )\n  },\n  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.7\n  }\n}': SITEMAP_QUERYResult;
+    '*[_type == "page" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': PAGE_QUERY_RESULT;
+    '*[_type == "header"][0] {\n  ...,\n  links[] {\n    ...,\n  },\n  socials[] {\n    ...,\n  }\n}': HEADER_QUERY_RESULT;
+    '*[_type == "footer"][0] {\n  ...,\n  links[] {\n    ...,\n  },\n  socials[] {\n    ...,\n  }\n}': FOOTER_QUERY_RESULT;
+    '*[_type == "event"] {\n  ...,\n}': EVENTS_QUERY_RESULT;
+    '*[_type == "event" && slug.current == $slug][0] {\n  ...\n}': EVENT_BY_SLUG_QUERY_RESULT;
+    '*[_type == "page" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': PAGES_SLUGS_QUERY_RESULT;
+    '*[_type == "event" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': EVENTS_SLUGS_QUERY_RESULT;
+    '{\n  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": select(\n      slug.current == "home" => 1.0,\n      0.8\n    )\n  },\n  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.7\n  }\n}': SITEMAP_QUERY_RESULT;
   }
 }

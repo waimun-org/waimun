@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
   }
 
   body.tags.forEach((tag) => {
-    revalidateTag(tag);
+    revalidateTag(tag, "max");
   });
 
   return NextResponse.json({ body });

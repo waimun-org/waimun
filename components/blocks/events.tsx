@@ -1,4 +1,4 @@
-import type { EVENTS_QUERYResult, Events } from "@/sanity/types";
+import type { EVENTS_QUERY_RESULT, Events } from "@/sanity/types";
 import {
   Card,
   CardContent,
@@ -15,9 +15,9 @@ import { AlertCircle } from "lucide-react";
 import { sanityFetch } from "@/sanity/lib/client";
 import { tryCatch } from "@/utils/try-catch";
 
-async function getEvents(): Promise<EVENTS_QUERYResult> {
+async function getEvents(): Promise<EVENTS_QUERY_RESULT> {
   const result = await tryCatch(
-    sanityFetch<EVENTS_QUERYResult>({
+    sanityFetch<EVENTS_QUERY_RESULT>({
       query: EVENTS_QUERY,
       tags: ["event"],
     }),
@@ -67,7 +67,7 @@ export async function Events(_: EventsProps) {
                 <Image
                   image={event.image}
                   alt={event.image.alt}
-                  className="aspect-[4/3] rounded-lg object-cover"
+                  className="aspect-4/3 rounded-lg object-cover"
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                 />
               </CardContent>

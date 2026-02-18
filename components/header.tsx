@@ -2,10 +2,10 @@ import { MainNav } from "./main-nav";
 import { MobileNav } from "./mobile-nav";
 import { Image } from "./image";
 import Link from "next/link";
-import type { HEADER_QUERYResult } from "@/sanity/types";
+import type { HEADER_QUERY_RESULT } from "@/sanity/types";
 
 export type HeaderProps = {
-  header: HEADER_QUERYResult;
+  header: HEADER_QUERY_RESULT;
 };
 
 export function Header({ header }: HeaderProps) {

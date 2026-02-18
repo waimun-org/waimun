@@ -3,8 +3,8 @@ import { Event } from "@/components/event";
 import { notFound } from "next/navigation";
 import { sanityFetch } from "@/sanity/lib/client";
 import type {
-  EVENT_BY_SLUG_QUERYResult,
-  EVENTS_SLUGS_QUERYResult,
+  EVENT_BY_SLUG_QUERY_RESULT,
+  EVENTS_SLUGS_QUERY_RESULT,
 } from "@/sanity/types";
 import { generateNextMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -16,7 +16,7 @@ interface EventPageProps {
 
 async function getEventBySlug(slug: string) {
   const result = await tryCatch(
-    sanityFetch<EVENT_BY_SLUG_QUERYResult>({
+    sanityFetch<EVENT_BY_SLUG_QUERY_RESULT>({
       query: EVENT_BY_SLUG_QUERY,
       params: { slug },
       tags: [`event:${slug}`],
@@ -33,7 +33,7 @@ async function getEventBySlug(slug: string) {
 
 async function getEventSlugs() {
   const result = await tryCatch(
-    sanityFetch<EVENTS_SLUGS_QUERYResult>({
+    sanityFetch<EVENTS_SLUGS_QUERY_RESULT>({
       query: EVENTS_SLUGS_QUERY,
       tags: ["event"],
     }),

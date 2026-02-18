@@ -2,12 +2,12 @@ import type { MetadataRoute } from "next";
 import { sanityFetch } from "@/sanity/lib/client";
 import { siteConfig } from "@/lib/seo";
 import { SITEMAP_QUERY } from "@/sanity/lib/queries";
-import type { SITEMAP_QUERYResult } from "@/sanity/types";
+import type { SITEMAP_QUERY_RESULT } from "@/sanity/types";
 import { tryCatch } from "@/utils/try-catch";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const result = await tryCatch(
-    sanityFetch<SITEMAP_QUERYResult>({
+    sanityFetch<SITEMAP_QUERY_RESULT>({
       query: SITEMAP_QUERY,
       tags: ["page", "event"],
     }),
