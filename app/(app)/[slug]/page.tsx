@@ -2,7 +2,10 @@ import { notFound } from "next/navigation";
 import { PageBuilder } from "@/components/page-builder";
 import { PAGE_QUERY, PAGES_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/client";
-import type { PAGE_QUERY_RESULT, PAGES_SLUGS_QUERY_RESULT } from "@/sanity/types";
+import type {
+  PAGE_QUERY_RESULT,
+  PAGES_SLUGS_QUERY_RESULT,
+} from "@/sanity/types";
 import { generateNextMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { tryCatch } from "@/utils/try-catch";
