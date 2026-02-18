@@ -1,9 +1,9 @@
-import type { FOOTER_QUERYResult } from "@/sanity/types";
+import type { FOOTER_QUERY_RESULT } from "@/sanity/types";
 import Link from "next/link";
 import { Socials } from "./socials";
 
 export type FooterProps = {
-  footer: FOOTER_QUERYResult;
+  footer: FOOTER_QUERY_RESULT;
 };
 
 export function Footer({ footer }: FooterProps) {

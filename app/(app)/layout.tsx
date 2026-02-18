@@ -2,21 +2,21 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { sanityFetch } from "@/sanity/lib/client";
 import { FOOTER_QUERY, HEADER_QUERY } from "@/sanity/lib/queries";
-import type { FOOTER_QUERYResult, HEADER_QUERYResult } from "@/sanity/types";
+import type { FOOTER_QUERY_RESULT, HEADER_QUERY_RESULT } from "@/sanity/types";
 
 async function getLayoutData(): Promise<{
-  header: HEADER_QUERYResult;
-  footer: FOOTER_QUERYResult;
+  header: HEADER_QUERY_RESULT;
+  footer: FOOTER_QUERY_RESULT;
 }> {
   const [header, footer] = await Promise.all([
-    sanityFetch<HEADER_QUERYResult>({
+    sanityFetch<HEADER_QUERY_RESULT>({
       query: HEADER_QUERY,
       tags: ["header"],
     }).catch((error) => {
       console.error("Failed to fetch header:", error);
       return null;
     }),
-    sanityFetch<FOOTER_QUERYResult>({
+    sanityFetch<FOOTER_QUERY_RESULT>({
       query: FOOTER_QUERY,
       tags: ["footer"],
     }).catch((error) => {

@@ -4,11 +4,13 @@ import { useNextSanityImage } from "next-sanity-image";
 import { client } from "@/sanity/lib/client";
 import NextImage, { getImageProps } from "next/image";
 import type { ImageProps as NextImageProps } from "next/image";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from "@sanity/image-url";
 import { AvatarImage as AvatarImagePrimitive } from "@/components/ui/avatar";
 
-export interface ImageProps
-  extends Omit<NextImageProps, "src" | "width" | "height"> {
+export interface ImageProps extends Omit<
+  NextImageProps,
+  "src" | "width" | "height"
+> {
   image: SanityImageSource;
 }
 

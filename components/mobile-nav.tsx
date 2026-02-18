@@ -11,14 +11,14 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import type { HEADER_QUERYResult } from "@/sanity/types";
+import type { HEADER_QUERY_RESULT } from "@/sanity/types";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/utils/cn";
 import { Socials } from "./socials";
 
 export type MobileNavProps = {
-  header: NonNullable<HEADER_QUERYResult>;
+  header: NonNullable<HEADER_QUERY_RESULT>;
 };
 
 export function MobileNav({ header }: MobileNavProps) {

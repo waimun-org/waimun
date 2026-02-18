@@ -1,6 +1,6 @@
 import { env } from "@/lib/env";
-import createImageUrlBuilder from "@sanity/image-url";
-import { type SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { createImageUrlBuilder } from "@sanity/image-url";
+import { type SanityImageSource } from "@sanity/image-url";
 
 const builder = createImageUrlBuilder({
   projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,

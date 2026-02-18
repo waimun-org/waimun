@@ -60,7 +60,7 @@ function EventHero({ event }: EventProps) {
           alt={event.image.alt}
           priority
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-          className="col-span-1 aspect-[4/3] rounded-lg object-cover"
+          className="col-span-1 aspect-4/3 rounded-lg object-cover"
         />
       </div>
     </section>
