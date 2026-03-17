@@ -40,7 +40,7 @@ export const PAGES_SLUGS_QUERY = groq`*[_type == "page" && defined(slug.current)
   "lastModified": _updatedAt
 }`;
 
-export const EVENTS_SLUGS_QUERY = groq`*[_type == "event" && defined(slug.current)]{
+export const EVENTS_SLUGS_QUERY = groq`*[_type == "event" && defined(slug.current)] | order(startDate desc) {
   "slug": slug.current,
   "lastModified": _updatedAt
 }`;
