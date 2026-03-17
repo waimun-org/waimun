@@ -12,6 +12,8 @@
  * ---------------------------------------------------------------------------------
  */
 
+export declare const internalGroqTypeReferenceTo: unique symbol;
+
 // Source: sanity/extract.json
 export type SanityImageAssetReference = {
   _ref: string;
@@ -457,14 +459,14 @@ export type SanityFileAsset = {
   title?: string;
   description?: string;
   altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
+  sha1hash: string;
+  extension: string;
+  mimeType: string;
+  size: number;
+  assetId: string;
   uploadId?: string;
-  path?: string;
-  url?: string;
+  path: string;
+  url: string;
   source?: SanityAssetSourceData;
 };
 
@@ -486,14 +488,14 @@ export type SanityImageAsset = {
   title?: string;
   description?: string;
   altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
+  sha1hash: string;
+  extension: string;
+  mimeType: string;
+  size: number;
+  assetId: string;
   uploadId?: string;
-  path?: string;
-  url?: string;
+  path: string;
+  url: string;
   metadata?: SanityImageMetadata;
   source?: SanityAssetSourceData;
 };
@@ -538,8 +540,6 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint;
-
-export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: sanity/lib/queries.ts
 // Variable: PAGE_QUERY
@@ -763,7 +763,7 @@ export type FOOTER_QUERY_RESULT = {
 
 // Source: sanity/lib/queries.ts
 // Variable: EVENTS_QUERY
-// Query: *[_type == "event"] {  ...,}
+// Query: *[_type == "event"] | order(startDate desc) {  ...,}
 export type EVENTS_QUERY_RESULT = Array<{
   _id: string;
   _type: "event";
@@ -905,7 +905,7 @@ export type PAGES_SLUGS_QUERY_RESULT = Array<{
 
 // Source: sanity/lib/queries.ts
 // Variable: EVENTS_SLUGS_QUERY
-// Query: *[_type == "event" && defined(slug.current)]{  "slug": slug.current,  "lastModified": _updatedAt}
+// Query: *[_type == "event" && defined(slug.current)] {  "slug": slug.current,  "lastModified": _updatedAt}
 export type EVENTS_SLUGS_QUERY_RESULT = Array<{
   slug: string;
   lastModified: string;
@@ -934,10 +934,10 @@ declare module "@sanity/client" {
     '*[_type == "page" && slug.current == $slug][0] {\n  ...,\n  content[] {\n    ...,\n  }\n}': PAGE_QUERY_RESULT;
     '*[_type == "header"][0] {\n  ...,\n  links[] {\n    ...,\n  },\n  socials[] {\n    ...,\n  }\n}': HEADER_QUERY_RESULT;
     '*[_type == "footer"][0] {\n  ...,\n  links[] {\n    ...,\n  },\n  socials[] {\n    ...,\n  }\n}': FOOTER_QUERY_RESULT;
-    '*[_type == "event"] {\n  ...,\n}': EVENTS_QUERY_RESULT;
+    '*[_type == "event"] | order(startDate desc) {\n  ...,\n}': EVENTS_QUERY_RESULT;
     '*[_type == "event" && slug.current == $slug][0] {\n  ...\n}': EVENT_BY_SLUG_QUERY_RESULT;
     '*[_type == "page" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': PAGES_SLUGS_QUERY_RESULT;
-    '*[_type == "event" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': EVENTS_SLUGS_QUERY_RESULT;
+    '*[_type == "event" && defined(slug.current)] {\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': EVENTS_SLUGS_QUERY_RESULT;
     '{\n  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": select(\n      slug.current == "home" => 1.0,\n      0.8\n    )\n  },\n  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.7\n  }\n}': SITEMAP_QUERY_RESULT;
   }
 }
