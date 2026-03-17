@@ -96,7 +96,7 @@ function EventDate({ event }: EventProps) {
     return null;
   }
 
-  if (!event.endDate) {
+  if (!event.endDate || event.startDate === event.endDate) {
     return (
       <div className="flex items-center gap-2">
         <CalendarIcon className="size-5" />
