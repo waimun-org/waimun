@@ -27,7 +27,7 @@ export const FOOTER_QUERY = groq`*[_type == "footer"][0] {
   }
 }`;
 
-export const EVENTS_QUERY = groq`*[_type == "event"] {
+export const EVENTS_QUERY = groq`*[_type == "event"] | order(startDate desc) {
   ...,
 }`;
 
@@ -40,7 +40,7 @@ export const PAGES_SLUGS_QUERY = groq`*[_type == "page" && defined(slug.current)
   "lastModified": _updatedAt
 }`;
 
-export const EVENTS_SLUGS_QUERY = groq`*[_type == "event" && defined(slug.current)] | order(startDate desc) {
+export const EVENTS_SLUGS_QUERY = groq`*[_type == "event" && defined(slug.current)] {
   "slug": slug.current,
   "lastModified": _updatedAt
 }`;
