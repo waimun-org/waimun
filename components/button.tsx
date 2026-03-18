@@ -9,7 +9,12 @@ export type ButtonProps = {
 export function Button({ button }: ButtonProps) {
   return (
     <ButtonComponent variant={button.variant} size={button.size} asChild>
-      <Link href={button.link.url}>{button.link.text}</Link>
+      <Link
+        href={button.link.url}
+        target={button.link.url.startsWith("http") ? "_blank" : undefined}
+      >
+        {button.link.text}
+      </Link>
     </ButtonComponent>
   );
 }
