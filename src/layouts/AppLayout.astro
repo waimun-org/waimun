@@ -28,10 +28,10 @@ const { title, description, robots, canonical, openGraph } = Astro.props;
   openGraph={openGraph}
 >
   <div class="flex min-h-screen flex-col">
-    <Header header={header} client:load />
-    <main class="flex-1">
+    <Header header={header} pathname={Astro.url.pathname} client:load />
+    <main class="flex-1" transition:animate="none">
       <slot />
     </main>
-    <Footer footer={footer} />
+    <Footer footer={footer} transition:persist />
   </div>
 </Layout>

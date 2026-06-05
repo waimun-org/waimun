@@ -1,5 +1,3 @@
-"use client";
-
 import { MenuIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,10 +15,15 @@ import { Socials } from "./socials";
 
 export type MobileNavProps = {
   header: NonNullable<HEADER_QUERY_RESULT>;
+  pathname: string;
 };
 
-export function MobileNav({ header }: MobileNavProps) {
-  const pathname = typeof window !== "undefined" ? window.location.pathname : "/";
+function normalizePath(path: string) {
+  return path === "/" ? "/" : path.replace(/\/+$/, "");
+}
+
+export function MobileNav({ header, pathname }: MobileNavProps) {
+  const current = normalizePath(pathname);
   const [open, setOpen] = useState(false);
 
   return (
@@ -49,7 +52,7 @@ export function MobileNav({ header }: MobileNavProps) {
                 target={link.url.startsWith("http") ? "_blank" : undefined}
                 className={cn(
                   "text-lg font-medium",
-                  pathname !== link.url && "text-muted-foreground",
+                  normalizePath(link.url) !== current && "text-muted-foreground",
                 )}
               >
                 {link.text}

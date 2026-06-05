@@ -1,5 +1,6 @@
 import * as React from "react";
 import { urlFor } from "@/lib/image";
+import { cn } from "@/utils/cn";
 import type { SanityImageSource } from "@sanity/image-url";
 
 export interface SanityImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -33,7 +34,7 @@ export function AvatarImage({ image, alt, className, ...props }: SanityImageProp
     <img
       src={src}
       alt={alt}
-      className={className}
+      className={cn("aspect-square size-full object-cover", className)}
       {...props}
     />
   );

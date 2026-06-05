@@ -5,9 +5,10 @@ import type { HEADER_QUERY_RESULT } from "@/sanity/types";
 
 export type HeaderProps = {
   header: HEADER_QUERY_RESULT;
+  pathname: string;
 };
 
-export function Header({ header }: HeaderProps) {
+export function Header({ header, pathname }: HeaderProps) {
   if (!header) {
     return null;
   }
@@ -25,8 +26,8 @@ export function Header({ header }: HeaderProps) {
           />
         </a>
 
-        <MainNav header={header} />
-        <MobileNav header={header} />
+        <MainNav header={header} pathname={pathname} />
+        <MobileNav header={header} pathname={pathname} />
       </div>
     </header>
   );
