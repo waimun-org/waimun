@@ -6,17 +6,19 @@ export interface SanityImageProps extends React.ImgHTMLAttributes<HTMLImageEleme
   image: SanityImageSource;
   alt: string;
   fill?: boolean;
+  priority?: boolean;
 }
 
-export function Image({ image, alt, fill, className, style, ...props }: SanityImageProps) {
+export function Image({ image, alt, fill, priority, className, style, ...props }: SanityImageProps) {
   const src = urlFor(image).auto("format").url();
 
   return (
     <img
       src={src}
       alt={alt}
-      loading="lazy"
+      loading={priority ? "eager" : "lazy"}
       decoding="async"
+      fetchPriority={priority ? "high" : "auto"}
       className={className}
       style={fill ? { width: "100%", height: "100%", objectFit: "cover", ...style } : style}
       {...props}
