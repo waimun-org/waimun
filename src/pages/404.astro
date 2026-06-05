@@ -1,0 +1,44 @@
+---
+import AppLayout from "../layouts/AppLayout.astro";
+import { Hero } from "../components/blocks/hero/index";
+import type { Hero as HeroType, Button, Link } from "../sanity/types";
+
+const homeLink: Link = {
+  _type: "link",
+  text: "Go home",
+  url: "/",
+};
+
+const homeButton: Button & { _key: string } = {
+  _key: "home-btn",
+  _type: "button",
+  link: homeLink,
+  variant: "default",
+  size: "default",
+};
+
+const heroBlock: HeroType = {
+  _type: "hero",
+  title: "Page not found",
+  intent: "low-impact",
+  text: [
+    {
+      _type: "block",
+      _key: "desc",
+      style: "normal",
+      children: [
+        {
+          _type: "span",
+          _key: "span1",
+          text: "The page you're looking for doesn't exist or has been moved.",
+        },
+      ],
+    },
+  ],
+  buttons: [homeButton],
+};
+---
+
+<AppLayout title="Page Not Found">
+  <Hero block={heroBlock} client:load />
+</AppLayout>

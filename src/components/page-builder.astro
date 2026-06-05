@@ -1,0 +1,62 @@
+---
+import type { PageBuilder as PageBuilderType, EVENTS_QUERY_RESULT } from "../sanity/types";
+import { Hero } from "./blocks/hero/index";
+import { SplitImage } from "./blocks/split-image";
+import { Prose } from "./blocks/prose";
+import { Events } from "./blocks/events";
+import { Team } from "./blocks/team";
+import { sanityFetch } from "../lib/client";
+import { EVENTS_QUERY } from "../lib/queries";
+import { tryCatch } from "../utils/try-catch";
+
+interface Props {
+  content: PageBuilderType;
+}
+
+const { content } = Astro.props;
+
+// Pre-fetch events if any block needs them
+const hasEventsBlock = content.some((block) => block._type === "events");
+let events: EVENTS_QUERY_RESULT = [];
+
+if (hasEventsBlock) {
+  const result = await tryCatch(
+    sanityFetch<EVENTS_QUERY_RESULT>({ query: EVENTS_QUERY }),
+  );
+
+  if (result.error) {
+    console.error("Failed to fetch events:", result.error);
+  } else {
+    events = result.data;
+  }
+}
+
+const BLOCK_COMPONENTS = {
+  hero: Hero,
+  splitImage: SplitImage,
+  prose: Prose,
+  events: Events,
+  team: Team,
+} as const;
+---
+
+{content.map((block, index) => {
+  const isLast = index === content.length - 1;
+
+  if (block._type === "events") {
+    return (
+      <div class={isLast ? undefined : "border-b"}>
+        <Events block={block} events={events} />
+      </div>
+    );
+  }
+
+  const Component = BLOCK_COMPONENTS[block._type as keyof typeof BLOCK_COMPONENTS];
+  if (!Component) return null;
+
+  return (
+    <div class={isLast ? undefined : "border-b"}>
+      <Component block={block as any} />
+    </div>
+  );
+})

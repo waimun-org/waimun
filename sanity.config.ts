@@ -3,22 +3,25 @@
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import schemaTypes from "@/sanity/schemaTypes";
-import { structure } from "@/sanity/structure";
+import schemaTypes from "./sanity/schemaTypes/index";
+import { structure } from "./sanity/structure";
 import { colorInput } from "@sanity/color-input";
-import { env } from "@/lib/env";
+
+const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID || process.env.PUBLIC_SANITY_PROJECT_ID;
+const dataset = import.meta.env.PUBLIC_SANITY_DATASET || process.env.PUBLIC_SANITY_DATASET;
+const apiVersion = import.meta.env.PUBLIC_SANITY_API_VERSION || process.env.PUBLIC_SANITY_API_VERSION;
 
 export default defineConfig({
   basePath: "/studio",
-  projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: env.NEXT_PUBLIC_SANITY_DATASET,
+  projectId: projectId!,
+  dataset: dataset!,
   schema: {
     types: schemaTypes,
   },
   plugins: [
     structureTool({ structure }),
     visionTool({
-      defaultApiVersion: env.NEXT_PUBLIC_SANITY_API_VERSION,
+      defaultApiVersion: apiVersion!,
     }),
     colorInput(),
   ],
