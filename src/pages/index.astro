@@ -1,0 +1,29 @@
+---
+import AppLayout from "../layouts/AppLayout.astro";
+import PageBuilder from "../components/page-builder.astro";
+import { PAGE_QUERY } from "../lib/queries";
+import { sanityFetch } from "../lib/client";
+import type { PAGE_QUERY_RESULT } from "../sanity/types";
+import { getSeoMeta, siteConfig } from "../lib/seo";
+
+const page = await sanityFetch<PAGE_QUERY_RESULT>({
+  query: PAGE_QUERY,
+  params: { slug: "home" },
+});
+
+if (!page) {
+  return Astro.redirect("/404");
+}
+
+const seo = getSeoMeta({ slug: { _type: "slug", current: "/" }, seo: page.seo });
+---
+
+<AppLayout
+  title={seo.title}
+  description={seo.description}
+  robots={seo.robots}
+  canonical={seo.canonical}
+  openGraph={seo.openGraph}
+>
+  <PageBuilder content={page.content} />
+</AppLayout>
