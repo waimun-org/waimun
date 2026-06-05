@@ -1,0 +1,37 @@
+---
+import Layout from "./Layout.astro";
+import { Header } from "../components/header";
+import { Footer } from "../components/footer";
+import { sanityFetch } from "../lib/client";
+import { HEADER_QUERY, FOOTER_QUERY } from "../lib/queries";
+import type { FOOTER_QUERY_RESULT, HEADER_QUERY_RESULT } from "../sanity/types";
+
+const [header, footer] = await Promise.all([
+  sanityFetch<HEADER_QUERY_RESULT>({ query: HEADER_QUERY }).catch((error) => {
+    console.error("Failed to fetch header:", error);
+    return null;
+  }),
+  sanityFetch<FOOTER_QUERY_RESULT>({ query: FOOTER_QUERY }).catch((error) => {
+    console.error("Failed to fetch footer:", error);
+    return null;
+  }),
+]);
+
+const { title, description, robots, canonical, openGraph } = Astro.props;
+---
+
+<Layout
+  title={title}
+  description={description}
+  robots={robots}
+  canonical={canonical}
+  openGraph={openGraph}
+>
+  <div class="flex min-h-screen flex-col">
+    <Header header={header} client:load />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer footer={footer} />
+  </div>
+</Layout>

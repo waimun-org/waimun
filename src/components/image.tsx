@@ -1,0 +1,38 @@
+import * as React from "react";
+import { urlFor } from "@/lib/image";
+import type { SanityImageSource } from "@sanity/image-url";
+
+export interface SanityImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  image: SanityImageSource;
+  alt: string;
+  fill?: boolean;
+}
+
+export function Image({ image, alt, fill, className, style, ...props }: SanityImageProps) {
+  const src = urlFor(image).auto("format").url();
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      className={className}
+      style={fill ? { width: "100%", height: "100%", objectFit: "cover", ...style } : style}
+      {...props}
+    />
+  );
+}
+
+export function AvatarImage({ image, alt, className, ...props }: SanityImageProps) {
+  const src = urlFor(image).auto("format").url();
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      {...props}
+    />
+  );
+}

@@ -1,0 +1,84 @@
+---
+import "../styles/global.css";
+import { siteConfig } from "../lib/seo";
+
+interface Props {
+  title?: string;
+  description?: string;
+  robots?: string;
+  canonical?: string;
+  openGraph?: {
+    type?: string;
+    title?: string;
+    description?: string;
+    url?: string;
+    siteName?: string;
+    locale?: string;
+    images?: Array<{ url: string; width: number; height: number; alt: string }>;
+  };
+}
+
+const {
+  title = siteConfig.name,
+  description = siteConfig.description,
+  robots = "index, follow",
+  canonical,
+  openGraph,
+} = Astro.props;
+
+const fullTitle = title === siteConfig.name ? title : `${title} - ${siteConfig.name}`;
+---
+
+<!doctype html>
+<html lang={siteConfig.locale} class="inter_variable">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+      as="style"
+    />
+    <style>
+      :root {
+        --font-inter: "Inter", ui-sans-serif, system-ui, sans-serif;
+      }
+    </style>
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {openGraph && (
+      <>
+        <meta property="og:type" content={openGraph.type ?? "website"} />
+        <meta property="og:title" content={openGraph.title ?? title} />
+        <meta property="og:description" content={openGraph.description ?? description} />
+        <meta property="og:url" content={openGraph.url} />
+        <meta property="og:site_name" content={openGraph.siteName ?? siteConfig.name} />
+        <meta property="og:locale" content={openGraph.locale ?? siteConfig.locale} />
+        {openGraph.images?.map((img) => (
+          <>
+            <meta property="og:image" content={img.url} />
+            <meta property="og:image:width" content={String(img.width)} />
+            <meta property="og:image:height" content={String(img.height)} />
+            <meta property="og:image:alt" content={img.alt} />
+          </>
+        ))}
+      </>
+    )}
+    {openGraph?.images?.[0] && (
+      <>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={openGraph.title ?? title} />
+        <meta name="twitter:description" content={openGraph.description ?? description} />
+        <meta name="twitter:image" content={openGraph.images[0].url} />
+      </>
+    )}
+  </head>
+  <body class="antialiased">
+    <slot />
+  </body>
+</html>
