@@ -12,6 +12,7 @@ import type {
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { AvatarImage } from "@/components/image";
 import { PortableText } from "@portabletext/react";
+import color from "tinycolor2";
 import { Socials } from "../socials";
 
 export type TeamProps = {
@@ -85,18 +86,9 @@ function TeamMember({ member }: TeamMemberProps) {
   );
 }
 
-const gradientPairs = [
-  ["var(--chart-1)", "var(--chart-2)"],
-  ["var(--chart-2)", "var(--chart-4)"],
-  ["var(--chart-3)", "var(--chart-1)"],
-  ["var(--chart-4)", "var(--chart-5)"],
-  ["var(--chart-5)", "var(--chart-2)"],
-  ["var(--primary)", "var(--chart-1)"],
-] as const;
-
 function getFallbackAvatar(id: string, name: string) {
   const hash = hashString(id || name);
-  const [from, to] = gradientPairs[hash % gradientPairs.length];
+  const { fromColor, toColor } = generateGradient(hash);
   const angle = 120 + (hash % 90);
   const highlightX = 20 + (hash % 60);
   const highlightY = 15 + ((hash >> 3) % 55);
@@ -105,8 +97,21 @@ function getFallbackAvatar(id: string, name: string) {
     initials: getInitials(name),
     background: [
       `radial-gradient(circle at ${highlightX}% ${highlightY}%, rgb(255 255 255 / 0.38), transparent 34%)`,
-      `linear-gradient(${angle}deg, ${from}, ${to})`,
+      `linear-gradient(${angle}deg, ${fromColor}, ${toColor})`,
     ].join(", "),
+  };
+}
+
+function generateGradient(hash: number) {
+  const hue = hash % 360;
+  const saturation = 0.86 + ((hash >> 4) % 12) / 100;
+  const lightness = 0.42 + ((hash >> 8) % 14) / 100;
+  const from = color({ h: hue, s: saturation, l: lightness });
+  const to = from.triad()[1];
+
+  return {
+    fromColor: from.toHexString(),
+    toColor: to.toHexString(),
   };
 }
 

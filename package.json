@@ -34,7 +34,8 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "sanity": "^5.30.0",
-    "tailwind-merge": "^3.6.0"
+    "tailwind-merge": "^3.6.0",
+    "tinycolor2": "^1.6.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
@@ -43,6 +44,7 @@
     "@types/node": "^25.9.1",
     "@types/react": "^19.2.16",
     "@types/react-dom": "^19.2.3",
+    "@types/tinycolor2": "^1.4.6",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.0",
