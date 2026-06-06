@@ -90,15 +90,10 @@ function getFallbackAvatar(id: string, name: string) {
   const hash = hashString(id || name);
   const { fromColor, toColor } = generateGradient(hash);
   const angle = 120 + (hash % 90);
-  const highlightX = 20 + (hash % 60);
-  const highlightY = 15 + ((hash >> 3) % 55);
 
   return {
     initials: getInitials(name),
-    background: [
-      `radial-gradient(circle at ${highlightX}% ${highlightY}%, rgb(255 255 255 / 0.38), transparent 34%)`,
-      `linear-gradient(${angle}deg, ${fromColor}, ${toColor})`,
-    ].join(", "),
+    background: `linear-gradient(${angle}deg, ${fromColor}, ${toColor})`,
   };
 }
 
