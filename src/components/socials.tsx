@@ -18,7 +18,13 @@ export function Socials({ socials }: SocialsProps) {
           rel="noopener noreferrer"
           className="transition-opacity hover:opacity-50"
         >
-          <Image alt={social.title} image={social.icon} className="size-5" />
+          <Image
+            alt={social.title}
+            image={social.icon}
+            className="size-5"
+            sizes="20px"
+            widths={[20, 40]}
+          />
         </a>
       ))}
     </div>

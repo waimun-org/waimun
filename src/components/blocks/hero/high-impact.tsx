@@ -36,6 +36,8 @@ export function HighImpactHero({ block }: HeroProps) {
           className="pointer-events-none absolute inset-0 -z-10 object-cover"
           fill
           sizes="100vw"
+          widths={[640, 960, 1280, 1600, 1920, 2560]}
+          priority
           alt=""
         />
       )}
