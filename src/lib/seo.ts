@@ -1,12 +1,11 @@
 import type { Seo, Slug } from "@/sanity/types";
 import { urlFor } from "@/lib/image";
-import { env } from "@/lib/env";
 
 export const siteConfig = {
   name: "WaiMUN",
   description:
     "Empowering students to become active global citizens through public speaking, leadership development, and debate.",
-  url: env.PUBLIC_SITE_URL ?? "https://waimun.org",
+  url: "https://waimun.org",
   locale: "en-NZ",
 };
 

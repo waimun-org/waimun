@@ -35,8 +35,7 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "sanity": "^5.30.0",
-    "tailwind-merge": "^3.6.0",
-    "zod": "^4.4.3"
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
