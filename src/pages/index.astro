@@ -4,7 +4,7 @@ import PageBuilder from "../components/page-builder.astro";
 import { PAGE_QUERY } from "../lib/queries";
 import { sanityFetch } from "../lib/client";
 import type { PAGE_QUERY_RESULT } from "../sanity/types";
-import { getSeoMeta, siteConfig } from "../lib/seo";
+import { getSeoMeta } from "../lib/seo";
 
 const page = await sanityFetch<PAGE_QUERY_RESULT>({
   query: PAGE_QUERY,

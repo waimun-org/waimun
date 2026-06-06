@@ -1,0 +1,51 @@
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Format, typecheck, and build
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_SANITY_API_VERSION: "2025-05-11"
+      PUBLIC_SANITY_DATASET: production
+      PUBLIC_SANITY_PROJECT_ID: qs4butxl
+      PUBLIC_SITE_URL: https://waimun.org
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Sanity types
+        run: pnpm sanity:typegen
+
+      - name: Verify generated Sanity files are up to date
+        run: git diff --exit-code -- sanity/extract.json src/sanity/types.ts
+
+      - name: Check formatting
+        run: pnpm format:check
+
+      - name: Typecheck Astro
+        run: pnpm check
+
+      - name: Build
+        run: pnpm build

@@ -5,7 +5,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { Team as TeamType, TeamMember as TeamMemberType } from "@/sanity/types";
+import type {
+  Team as TeamType,
+  TeamMember as TeamMemberType,
+} from "@/sanity/types";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { AvatarImage } from "@/components/image";
 import { PortableText } from "@portabletext/react";
