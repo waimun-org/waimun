@@ -4,7 +4,7 @@ const envSchema = z.object({
   PUBLIC_SANITY_PROJECT_ID: z.string(),
   PUBLIC_SANITY_DATASET: z.string(),
   PUBLIC_SANITY_API_VERSION: z.string(),
-  PUBLIC_SITE_URL: z.string().url(),
+  PUBLIC_SITE_URL: z.url(),
 });
 
 function getEnv() {
@@ -16,7 +16,10 @@ function getEnv() {
   });
 
   if (!parsed.success) {
-    console.error("Invalid environment variables:", parsed.error.flatten().fieldErrors);
+    console.error(
+      "Invalid environment variables:",
+      z.flattenError(parsed.error).fieldErrors,
+    );
     throw new Error("Invalid environment variables");
   }
 

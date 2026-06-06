@@ -541,7 +541,7 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 
-// Source: sanity/lib/queries.ts
+// Source: src/lib/queries.ts
 // Variable: PAGE_QUERY
 // Query: *[_type == "page" && slug.current == $slug][0] {  ...,  content[] {    ...,  }}
 export type PAGE_QUERY_RESULT = {
@@ -689,7 +689,7 @@ export type PAGE_QUERY_RESULT = {
   seo: Seo;
 } | null;
 
-// Source: sanity/lib/queries.ts
+// Source: src/lib/queries.ts
 // Variable: HEADER_QUERY
 // Query: *[_type == "header"][0] {  ...,  links[] {    ...,  },  socials[] {    ...,  }}
 export type HEADER_QUERY_RESULT = {
@@ -729,7 +729,7 @@ export type HEADER_QUERY_RESULT = {
   }> | null;
 } | null;
 
-// Source: sanity/lib/queries.ts
+// Source: src/lib/queries.ts
 // Variable: FOOTER_QUERY
 // Query: *[_type == "footer"][0] {  ...,  links[] {    ...,  },  socials[] {    ...,  }}
 export type FOOTER_QUERY_RESULT = {
@@ -761,7 +761,7 @@ export type FOOTER_QUERY_RESULT = {
   }> | null;
 } | null;
 
-// Source: sanity/lib/queries.ts
+// Source: src/lib/queries.ts
 // Variable: EVENTS_QUERY
 // Query: *[_type == "event"] | order(startDate desc) {  ...,}
 export type EVENTS_QUERY_RESULT = Array<{
@@ -828,7 +828,7 @@ export type EVENTS_QUERY_RESULT = Array<{
   seo?: Seo;
 }>;
 
-// Source: sanity/lib/queries.ts
+// Source: src/lib/queries.ts
 // Variable: EVENT_BY_SLUG_QUERY
 // Query: *[_type == "event" && slug.current == $slug][0] {  ...}
 export type EVENT_BY_SLUG_QUERY_RESULT = {
@@ -895,7 +895,7 @@ export type EVENT_BY_SLUG_QUERY_RESULT = {
   seo?: Seo;
 } | null;
 
-// Source: sanity/lib/queries.ts
+// Source: src/lib/queries.ts
 // Variable: PAGES_SLUGS_QUERY
 // Query: *[_type == "page" && defined(slug.current)]{  "slug": slug.current,  "lastModified": _updatedAt}
 export type PAGES_SLUGS_QUERY_RESULT = Array<{
@@ -903,7 +903,7 @@ export type PAGES_SLUGS_QUERY_RESULT = Array<{
   lastModified: string;
 }>;
 
-// Source: sanity/lib/queries.ts
+// Source: src/lib/queries.ts
 // Variable: EVENTS_SLUGS_QUERY
 // Query: *[_type == "event" && defined(slug.current)] {  "slug": slug.current,  "lastModified": _updatedAt}
 export type EVENTS_SLUGS_QUERY_RESULT = Array<{
@@ -911,7 +911,7 @@ export type EVENTS_SLUGS_QUERY_RESULT = Array<{
   lastModified: string;
 }>;
 
-// Source: sanity/lib/queries.ts
+// Source: src/lib/queries.ts
 // Variable: SITEMAP_QUERY
 // Query: {  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": select(      slug.current == "home" => 1.0,      0.8    )  },  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.7  }}
 export type SITEMAP_QUERY_RESULT = {

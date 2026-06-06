@@ -1,18 +1,17 @@
-import "dotenv/config";
 import { defineCliConfig } from "sanity/cli";
 
 export default defineCliConfig({
   api: {
-    projectId: process.env.PUBLIC_SANITY_PROJECT_ID,
-    dataset: process.env.PUBLIC_SANITY_DATASET,
+    projectId: "qs4butxl",
+    dataset: "production",
   },
   studioHost: "waimun",
   typegen: {
-    path: "./**/*.{ts,tsx,js,jsx}",
+    path: "./src/**/*.{ts,tsx,js,jsx}",
     schema: "./sanity/extract.json",
-    generates: "./sanity/types.ts",
+    generates: "./src/sanity/types.ts",
   },
   deployment: {
-    appId: 'yq2zo6ahm9nbf0qjvhnomcsy',
+    appId: "yq2zo6ahm9nbf0qjvhnomcsy",
   },
 });
