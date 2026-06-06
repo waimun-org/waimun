@@ -22,6 +22,7 @@ export function Header({ header, pathname }: HeaderProps) {
             alt={header.logo.alt}
             priority
             sizes="200px"
+            widths={[128, 256, 384]}
             className="h-8 w-auto"
           />
         </a>

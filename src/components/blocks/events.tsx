@@ -47,6 +47,7 @@ export function Events({ events }: EventsProps) {
                   alt={event.image.alt}
                   className="aspect-4/3 rounded-lg object-cover"
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  widths={[320, 640, 960]}
                 />
               </CardContent>
             </Card>
