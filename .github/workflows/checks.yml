@@ -1,27 +1,26 @@
-# Depot CI Migration
-# Source: .github/workflows/checks.yml
-#
-# Changes made:
-# - Changed GitHub runs-on labels to their Depot equivalents
-
 name: Checks
+
 on:
   pull_request:
   push:
     branches:
       - main
+
 permissions:
   contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
+
 defaults:
   run:
     shell: bash --noprofile --norc -euo pipefail {0}
+
 jobs:
   checks:
     name: Format, typecheck, and build
-    runs-on: depot-ubuntu-24.04 # was: ubuntu-24.04. Mapped standard GitHub runner to Depot equivalent.
+    runs-on: blacksmith-2vcpu-ubuntu-2404
     timeout-minutes: 15
     env:
       CI: true
@@ -29,27 +28,36 @@ jobs:
       PUBLIC_SANITY_DATASET: production
       PUBLIC_SANITY_PROJECT_ID: qs4butxl
       PUBLIC_SITE_URL: https://waimun.org
+
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           persist-credentials: false
+
       - name: Setup pnpm
         uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+
       - name: Setup Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
           cache: pnpm
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
+
       - name: Generate Sanity types
         run: pnpm sanity:typegen
+
       - name: Verify generated Sanity files are up to date
         run: git diff --exit-code -- sanity/extract.json src/sanity/types.ts
+
       - name: Check formatting
         run: pnpm format:check
+
       - name: Typecheck Astro
         run: pnpm check
+
       - name: Build
         run: pnpm build
