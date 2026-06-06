@@ -1,15 +1,7 @@
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, XIcon } from "lucide-react";
+import { useEffect, useId, useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
 import type { HEADER_QUERY_RESULT } from "@/sanity/types";
-import { useState } from "react";
 import { cn } from "@/utils/cn";
 import { Socials } from "./socials";
 
@@ -25,25 +17,54 @@ function normalizePath(path: string) {
 export function MobileNav({ header, pathname }: MobileNavProps) {
   const current = normalizePath(pathname);
   const [open, setOpen] = useState(false);
+  const menuId = useId();
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
-          <MenuIcon className="size-5" />
-          <span className="sr-only">Toggle Menu</span>
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader className="sr-only">
-          <DrawerTitle>{header.title}</DrawerTitle>
-          <DrawerDescription>
-            Navigation menu for mobile devices
-          </DrawerDescription>
-        </DrawerHeader>
+    <div className="md:hidden">
+      <Button
+        variant="ghost"
+        size="icon"
+        type="button"
+        aria-controls={menuId}
+        aria-expanded={open}
+        onClick={() => setOpen((isOpen) => !isOpen)}
+      >
+        {open ? <XIcon className="size-5" /> : <MenuIcon className="size-5" />}
+        <span className="sr-only">Toggle Menu</span>
+      </Button>
 
-        <div className="container flex min-h-[240px] flex-col gap-6 py-8">
-          <div className="flex flex-1 flex-col gap-4 overflow-y-auto">
+      <nav
+        id={menuId}
+        aria-label="Mobile navigation"
+        className={cn(
+          "bg-background fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col border-t transition-[opacity,visibility]",
+          open ? "visible opacity-100" : "invisible opacity-0",
+        )}
+      >
+        <div className="container flex min-h-0 flex-1 flex-col gap-8 py-8">
+          <div className="flex flex-1 flex-col gap-5 overflow-y-auto">
             {header.links.map((link) => (
               <a
                 key={link._key}
@@ -51,8 +72,9 @@ export function MobileNav({ header, pathname }: MobileNavProps) {
                 onClick={() => setOpen(false)}
                 target={link.url.startsWith("http") ? "_blank" : undefined}
                 className={cn(
-                  "text-lg font-medium",
-                  normalizePath(link.url) !== current && "text-muted-foreground",
+                  "text-2xl font-semibold transition-colors hover:text-foreground",
+                  normalizePath(link.url) !== current &&
+                    "text-muted-foreground",
                 )}
               >
                 {link.text}
@@ -62,7 +84,7 @@ export function MobileNav({ header, pathname }: MobileNavProps) {
 
           {header.socials && <Socials socials={header.socials} />}
         </div>
-      </DrawerContent>
-    </Drawer>
+      </nav>
+    </div>
   );
 }
