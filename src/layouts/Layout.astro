@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { siteConfig } from "../lib/seo";
+import { Font } from "astro:assets";
 
 interface Props {
   title?: string;
@@ -35,6 +36,7 @@ const fullTitle = title === siteConfig.name ? title : `${title} - ${siteConfig.n
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Font cssVariable="--font-inter" preload />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
