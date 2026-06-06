@@ -4,7 +4,7 @@ import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import schemaTypes from "./sanity/schemaTypes/index";
-import { structure } from "./sanity/structure";
+import { structure } from "./sanity/desk-structure";
 import { colorInput } from "@sanity/color-input";
 
 export default defineConfig({

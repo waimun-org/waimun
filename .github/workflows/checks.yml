@@ -1,0 +1,32 @@
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    name: Format, typecheck, and build
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    env:
+      CI: true
+      PUBLIC_SANITY_API_VERSION: "2025-05-11"
+      PUBLIC_SANITY_DATASET: production
+      PUBLIC_SANITY_PROJECT_ID: qs4butxl
+      PUBLIC_SITE_URL: https://waimun.org
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm sanity:typegen
+      - run: git diff --exit-code -- sanity/extract.json src/sanity/types.ts
+      - run: pnpm format:check
+      - run: pnpm check
+      - run: pnpm build
