@@ -11,10 +11,6 @@ jobs:
     runs-on: blacksmith-2vcpu-ubuntu-2404
     env:
       CI: true
-      PUBLIC_SANITY_API_VERSION: "2025-05-11"
-      PUBLIC_SANITY_DATASET: production
-      PUBLIC_SANITY_PROJECT_ID: qs4butxl
-      PUBLIC_SITE_URL: https://waimun.org
 
     steps:
       - uses: actions/checkout@v4
