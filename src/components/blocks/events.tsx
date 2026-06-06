@@ -31,8 +31,12 @@ export function Events({ events }: EventsProps) {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {events.map((event) => (
-          <a href={`/events/${event.slug?.current}`} key={event._id}>
-            <Card>
+          <a
+            href={`/events/${event.slug?.current}`}
+            key={event._id}
+            className="block h-full"
+          >
+            <Card className="h-full">
               <CardHeader>
                 <CardTitle>{event.name}</CardTitle>
                 {event.description && (
@@ -41,7 +45,7 @@ export function Events({ events }: EventsProps) {
                   </CardDescription>
                 )}
               </CardHeader>
-              <CardContent>
+              <CardContent className="mt-auto">
                 <Image
                   image={event.image}
                   alt={event.image.alt}
