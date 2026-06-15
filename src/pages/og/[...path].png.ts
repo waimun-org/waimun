@@ -54,8 +54,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
       title: event.name,
       description: getDescription(portableTextToPlainText(event.description)),
       imageUrl: urlFor(event.image)
-        .width(OG_WIDTH)
-        .height(300)
+        .width(OG_WIDTH / 2)
+        .height(OG_HEIGHT)
         .fit("crop")
         .auto("format")
         .url(),
@@ -198,7 +198,6 @@ async function renderEventOg(props: OgImageProps, logo: string) {
         width: `${OG_WIDTH}px`,
         height: `${OG_HEIGHT}px`,
         display: "flex",
-        flexDirection: "column",
         backgroundColor: ogColors.background,
         color: ogColors.foreground,
         fontFamily: "Inter, Inter Ext",
@@ -208,37 +207,39 @@ async function renderEventOg(props: OgImageProps, logo: string) {
       "div",
       {
         style: {
-          width: "100%",
-          height: 300,
+          width: "50%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          backgroundColor: ogColors.background,
+          padding: "68px 64px 64px",
+        },
+      },
+      renderTextBlock({
+        ...props,
+        titleSize: 56,
+        descriptionSize: 25,
+        maxWidth: "472px",
+      }),
+      renderLogo(logo),
+    ),
+    createElement(
+      "div",
+      {
+        style: {
+          width: "50%",
+          height: "100%",
           display: "flex",
           overflow: "hidden",
         },
       },
       createElement("img", {
         src: eventImage,
-        width: OG_WIDTH,
-        height: 300,
+        width: OG_WIDTH / 2,
+        height: OG_HEIGHT,
         style: { objectFit: "cover" },
       }),
-    ),
-    createElement(
-      "div",
-      {
-        style: {
-          display: "flex",
-          flex: 1,
-          justifyContent: "space-between",
-          alignItems: "flex-end",
-          padding: "64px 64px 64px",
-        },
-      },
-      renderTextBlock({
-        ...props,
-        titleSize: 64,
-        descriptionSize: 28,
-        maxWidth: "840px",
-      }),
-      renderLogo(logo),
     ),
   );
 }
