@@ -236,6 +236,9 @@ export type PageBuilder = Array<
     } & Hero)
   | ({
       _key: string;
+    } & Countdown)
+  | ({
+      _key: string;
     } & SplitImage)
   | ({
       _key: string;
@@ -304,6 +307,33 @@ export type Color = {
 export type Events = {
   _type: "events";
   title?: string;
+};
+
+export type Countdown = {
+  _type: "countdown";
+  title: string;
+  text?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  targetDateTime: string;
+  timeZone: "Pacific/Auckland";
+  link?: Link;
+  expiredText?: string;
 };
 
 export type Event = {
@@ -510,6 +540,7 @@ export type AllSanitySchemaTypes =
   | Hero
   | Color
   | Events
+  | Countdown
   | Event
   | RgbaColor
   | HsvaColor
@@ -535,6 +566,41 @@ export type PAGE_QUERY_RESULT = {
   title: string;
   slug: Slug;
   content: Array<
+    | {
+        _key: string;
+        _type: "countdown";
+        title: string;
+        text?: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?:
+            | "blockquote"
+            | "h1"
+            | "h2"
+            | "h3"
+            | "h4"
+            | "h5"
+            | "h6"
+            | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            href?: string;
+            _type: "link";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }>;
+        targetDateTime: string;
+        timeZone: "Pacific/Auckland";
+        link?: Link;
+        expiredText?: string;
+      }
     | {
         _key: string;
         _type: "events";
