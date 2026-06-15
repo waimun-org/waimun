@@ -2142,23 +2142,10 @@
           },
           "optional": true
         },
-        "targetDateTime": {
+        "date": {
           "type": "objectAttribute",
           "value": {
             "type": "string"
-          },
-          "optional": false
-        },
-        "timeZone": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "Pacific/Auckland"
-              }
-            ]
           },
           "optional": false
         },
@@ -2167,13 +2154,6 @@
           "value": {
             "type": "inline",
             "name": "link"
-          },
-          "optional": true
-        },
-        "expiredText": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
           },
           "optional": true
         }

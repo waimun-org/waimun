@@ -330,10 +330,8 @@ export type Countdown = {
     _type: "block";
     _key: string;
   }>;
-  targetDateTime: string;
-  timeZone: "Pacific/Auckland";
+  date: string;
   link?: Link;
-  expiredText?: string;
 };
 
 export type Event = {
@@ -596,10 +594,8 @@ export type PAGE_QUERY_RESULT = {
           _type: "block";
           _key: string;
         }>;
-        targetDateTime: string;
-        timeZone: "Pacific/Auckland";
+        date: string;
         link?: Link;
-        expiredText?: string;
       }
     | {
         _key: string;

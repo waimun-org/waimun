@@ -20,21 +20,9 @@ export const countdownType = defineType({
       of: [{ type: "block" }],
     }),
     defineField({
-      name: "targetDateTime",
-      title: "Target Date and Time",
+      name: "date",
+      title: "Date",
       type: "datetime",
-      description:
-        "The exact instant to count down to. For WaiMUN event deadlines, enter the New Zealand local time and keep the timezone as Pacific/Auckland.",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "timeZone",
-      title: "Timezone",
-      type: "string",
-      initialValue: "Pacific/Auckland",
-      options: {
-        list: [{ title: "New Zealand", value: "Pacific/Auckland" }],
-      },
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -42,22 +30,16 @@ export const countdownType = defineType({
       title: "Link",
       type: "link",
     }),
-    defineField({
-      name: "expiredText",
-      title: "Expired Text",
-      type: "string",
-      description: "Shown once the countdown reaches zero.",
-    }),
   ],
   preview: {
     select: {
       title: "title",
-      targetDateTime: "targetDateTime",
+      date: "date",
     },
-    prepare(selection: { title?: string; targetDateTime?: string }) {
+    prepare(selection: { title?: string; date?: string }) {
       return {
         title: selection.title ?? "Countdown",
-        subtitle: selection.targetDateTime ?? "No target date set",
+        subtitle: selection.date ?? "No date set",
         media: CalendarIcon,
       };
     },

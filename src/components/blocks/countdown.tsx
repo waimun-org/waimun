@@ -20,36 +20,34 @@ function CountdownUnit({ value, label }: UnitProps) {
   const formatted = numberFormatter.format(value);
 
   return (
-    <div className="bg-background flex min-w-0 flex-col items-center justify-center gap-1 rounded-md border px-3 py-3 md:px-4 md:py-4">
+    <div className="bg-background flex min-w-0 flex-col items-center justify-center gap-1 rounded-md border py-3 md:py-4">
       <span className="sr-only">
         {value} {label}
       </span>
       <span
         aria-hidden="true"
-        className="text-2xl font-semibold tracking-tight tabular-nums md:text-3xl"
+        className="text-2xl font-semibold tabular-nums md:text-3xl"
       >
         {formatted}
       </span>
-      <span className="text-muted-foreground text-[10px] font-medium tracking-wide uppercase md:text-xs">
-        {label}
-      </span>
+      <span className="text-muted-foreground text-xs uppercase">{label}</span>
     </div>
   );
 }
 
 export function Countdown({ block }: CountdownProps) {
-  const countdown = useCountdown(block.targetDateTime);
-  const title =
-    countdown.isExpired && block.expiredText ? block.expiredText : block.title;
+  const countdown = useCountdown(block.date);
+
+  if (countdown.isExpired) {
+    return null;
+  }
 
   return (
     <section className="bg-muted/30">
       <div className="container flex flex-col items-center gap-3 py-6 text-center md:py-8">
-        {title && (
-          <p className="text-sm font-medium text-balance md:text-base">
-            {title}
-          </p>
-        )}
+        <p className="text-sm font-medium text-balance md:text-base">
+          {block.title}
+        </p>
 
         <div
           className="grid w-full max-w-md grid-cols-4 gap-2 md:gap-3"
