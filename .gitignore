@@ -1,6 +1,9 @@
 # build output
 dist/
 
+# sanity studio dev cache
+.sanity/
+
 # generated types
 .astro/
 
