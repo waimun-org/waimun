@@ -3,7 +3,10 @@ import AppLayout from "../../layouts/AppLayout.astro";
 import { EventComponent } from "../../components/event";
 import { EVENT_BY_SLUG_QUERY, EVENTS_SLUGS_QUERY } from "../../lib/queries";
 import { sanityFetch } from "../../lib/client";
-import type { EVENT_BY_SLUG_QUERY_RESULT, EVENTS_SLUGS_QUERY_RESULT } from "../../sanity/types";
+import type {
+  EVENT_BY_SLUG_QUERY_RESULT,
+  EVENTS_SLUGS_QUERY_RESULT,
+} from "../../sanity/types";
 import {
   getDescription,
   getSeoMeta,

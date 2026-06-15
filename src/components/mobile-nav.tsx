@@ -72,7 +72,7 @@ export function MobileNav({ header, pathname }: MobileNavProps) {
                 onClick={() => setOpen(false)}
                 target={link.url.startsWith("http") ? "_blank" : undefined}
                 className={cn(
-                  "text-2xl font-semibold transition-colors hover:text-foreground",
+                  "hover:text-foreground text-2xl font-semibold transition-colors",
                   normalizePath(link.url) !== current &&
                     "text-muted-foreground",
                 )}
