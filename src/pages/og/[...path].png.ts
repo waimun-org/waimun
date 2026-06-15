@@ -74,7 +74,7 @@ export const GET: APIRoute<OgImageProps> = async ({ props }) => {
     justifyContent: "space-between",
     backgroundColor: ogColors.background,
     color: ogColors.foreground,
-    padding: "76px 84px 64px",
+    padding: "76px 84px 84px",
     fontFamily: "Inter",
   };
 
@@ -124,7 +124,7 @@ export const GET: APIRoute<OgImageProps> = async ({ props }) => {
         },
         createElement("img", {
           src: logo,
-          width: 250,
+          width: 64,
           height: 64,
           style: { objectFit: "contain" },
         }),
