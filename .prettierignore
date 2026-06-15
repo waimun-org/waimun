@@ -1,3 +1,6 @@
 sanity/extract.json
 src/sanity/types.ts
+pnpm-lock.yaml.sanity
+
+.sanity/
 pnpm-lock.yaml

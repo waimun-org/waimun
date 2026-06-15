@@ -1,4 +1,5 @@
 import { eventType } from "./eventType";
+import { countdownType } from "./blocks/countdownType";
 import { eventsType } from "./blocks/eventsType";
 import { heroType } from "./blocks/heroType";
 import { pageBuilderType } from "./pageBuilderType";
@@ -16,6 +17,7 @@ import { priceType } from "./priceType";
 
 const schemaTypes = [
   eventType,
+  countdownType,
   eventsType,
   heroType,
   pageBuilderType,

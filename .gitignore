@@ -1,6 +1,9 @@
 # build output
 dist/
 
+# sanity studio dev cache
+.sanity/
+
 # generated types
 .astro/
 
@@ -16,3 +19,6 @@ node_modules/
 .DS_Store
 *.tsbuildinfo
 pnpm-debug.log*
+
+# direnv
+.direnv/

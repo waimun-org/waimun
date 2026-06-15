@@ -1,6 +1,10 @@
 ---
-import type { PageBuilder as PageBuilderType, EVENTS_QUERY_RESULT } from "../sanity/types";
+import type {
+  PageBuilder as PageBuilderType,
+  EVENTS_QUERY_RESULT,
+} from "../sanity/types";
 import { Hero } from "./blocks/hero/index";
+import { Countdown } from "./blocks/countdown";
 import { SplitImage } from "./blocks/split-image";
 import { Prose } from "./blocks/prose";
 import { Events } from "./blocks/events";
@@ -39,6 +43,7 @@ if (hasEventsBlock) {
     return (
       <div class={isLast ? undefined : "border-b"}>
         {block._type === "hero" && <Hero block={block} />}
+        {block._type === "countdown" && <Countdown block={block} client:load />}
         {block._type === "splitImage" && <SplitImage block={block} />}
         {block._type === "prose" && <Prose block={block} />}
         {block._type === "events" && <Events block={block} events={events} />}
