@@ -4,7 +4,6 @@ import {
   DocumentTextIcon,
   ImageIcon,
   LinkIcon,
-  SearchIcon,
 } from "@sanity/icons";
 
 export const eventType = defineType({
@@ -33,11 +32,6 @@ export const eventType = defineType({
       name: "settings",
       title: "Settings",
       icon: LinkIcon,
-    },
-    {
-      name: "seo",
-      title: "SEO",
-      icon: SearchIcon,
     },
   ],
   fields: [
@@ -123,12 +117,6 @@ export const eventType = defineType({
           input.toLowerCase().replace(/\s+/g, "-").slice(0, 96),
       },
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "seo",
-      title: "SEO",
-      type: "seo",
-      group: "seo",
     }),
   ],
   preview: {

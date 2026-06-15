@@ -46,7 +46,7 @@ export const EVENTS_SLUGS_QUERY = groq`*[_type == "event" && defined(slug.curren
 }`;
 
 export const SITEMAP_QUERY = groq`{
-  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{
+  "pages": *[_type == "page" && defined(slug.current)]{
     "slug": slug.current,
     "lastModified": _updatedAt,
     "priority": select(
@@ -54,7 +54,7 @@ export const SITEMAP_QUERY = groq`{
       0.8
     )
   },
-  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{
+  "events": *[_type == "event" && defined(slug.current)]{
     "slug": slug.current,
     "lastModified": _updatedAt,
     "priority": 0.7

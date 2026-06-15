@@ -16,9 +16,11 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
+    "@fontsource/inter": "^5.2.8",
     "@portabletext/react": "^3.2.1",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-slot": "^1.2.4",
+    "@resvg/resvg-js": "^2.6.2",
     "@sanity/client": "^7.22.1",
     "@sanity/color-input": "^6.0.6",
     "@sanity/icons": "^3.7.4",
@@ -34,6 +36,7 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "sanity": "^5.30.0",
+    "satori": "^0.26.0",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {

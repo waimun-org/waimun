@@ -9,7 +9,6 @@ import { buttonType } from "./buttonType";
 import { footerType } from "./footerType";
 import { linkType } from "./linkType";
 import { proseType } from "./blocks/proseType";
-import { seoType } from "./seoType";
 import { socialType } from "./socialType";
 import { teamType } from "./blocks/teamType";
 import { teamMemberType } from "./teamMemberType";
@@ -29,7 +28,6 @@ const schemaTypes = [
   linkType,
   proseType,
   priceType,
-  seoType,
   teamType,
   teamMemberType,
 ];
