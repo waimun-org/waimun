@@ -1,6 +1,7 @@
 import { useCountdown } from "@/hooks/use-countdown";
 import type { Countdown as CountdownType } from "@/sanity/types";
 import { ArrowRightIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 
 type CountdownProps = {
@@ -8,7 +9,7 @@ type CountdownProps = {
 };
 
 type UnitProps = {
-  value: number;
+  value: number | null;
   label: string;
 };
 
@@ -18,12 +19,12 @@ const numberFormatter = new Intl.NumberFormat("en-NZ", {
 });
 
 function CountdownUnit({ value, label }: UnitProps) {
-  const formatted = numberFormatter.format(value);
+  const formatted = value === null ? "--" : numberFormatter.format(value);
 
   return (
     <div className="bg-background flex min-w-0 flex-col items-center justify-center gap-1 rounded-md border py-3 md:py-4">
       <span className="sr-only">
-        {value} {label}
+        {value === null ? "Loading" : `${value} ${label}`}
       </span>
       <span
         aria-hidden="true"
@@ -37,9 +38,14 @@ function CountdownUnit({ value, label }: UnitProps) {
 }
 
 export function Countdown({ block }: CountdownProps) {
+  const [mounted, setMounted] = useState(false);
   const countdown = useCountdown(block.date);
 
-  if (countdown.isExpired) {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (countdown.isExpired && mounted) {
     return null;
   }
 
@@ -49,13 +55,26 @@ export function Countdown({ block }: CountdownProps) {
         <p className="font-medium text-balance text-lg">{block.title}</p>
 
         <div
-          className="grid w-full max-w-md grid-cols-4 gap-2 3"
-          aria-label={`${countdown.days} days, ${countdown.hours} hours, ${countdown.minutes} minutes, and ${countdown.seconds} seconds remaining`}
+          className="grid w-full max-w-md grid-cols-4 gap-2"
+          aria-label={
+            mounted
+              ? `${countdown.days} days, ${countdown.hours} hours, ${countdown.minutes} minutes, and ${countdown.seconds} seconds remaining`
+              : "Countdown loading"
+          }
         >
-          <CountdownUnit value={countdown.days} label="days" />
-          <CountdownUnit value={countdown.hours} label="hours" />
-          <CountdownUnit value={countdown.minutes} label="mins" />
-          <CountdownUnit value={countdown.seconds} label="secs" />
+          <CountdownUnit value={mounted ? countdown.days : null} label="days" />
+          <CountdownUnit
+            value={mounted ? countdown.hours : null}
+            label="hours"
+          />
+          <CountdownUnit
+            value={mounted ? countdown.minutes : null}
+            label="mins"
+          />
+          <CountdownUnit
+            value={mounted ? countdown.seconds : null}
+            label="secs"
+          />
         </div>
 
         {block.link && (
