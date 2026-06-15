@@ -82,7 +82,15 @@ export function MobileNav({ header, pathname }: MobileNavProps) {
             ))}
           </div>
 
-          {header.socials && <Socials socials={header.socials} />}
+          {header.socials && (
+            <Socials
+              socials={header.socials}
+              className="gap-5"
+              iconClassName="size-8"
+              sizes="32px"
+              widths={[32, 64]}
+            />
+          )}
         </div>
       </nav>
     </div>

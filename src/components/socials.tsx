@@ -1,15 +1,26 @@
 import type { Social } from "@/sanity/types";
+import { cn } from "@/utils/cn";
 import { Image } from "./image";
 
 export type SocialsType = Array<Social & { _key: string }>;
 
 export type SocialsProps = {
   socials: SocialsType;
+  className?: string;
+  iconClassName?: string;
+  sizes?: string;
+  widths?: number[];
 };
 
-export function Socials({ socials }: SocialsProps) {
+export function Socials({
+  socials,
+  className,
+  iconClassName,
+  sizes = "20px",
+  widths = [20, 40],
+}: SocialsProps) {
   return (
-    <div className="flex items-center gap-4">
+    <div className={cn("flex items-center gap-4", className)}>
       {socials.map((social) => (
         <a
           key={social._key}
@@ -21,9 +32,9 @@ export function Socials({ socials }: SocialsProps) {
           <Image
             alt={social.title}
             image={social.icon}
-            className="size-5"
-            sizes="20px"
-            widths={[20, 40]}
+            className={cn("size-5", iconClassName)}
+            sizes={sizes}
+            widths={widths}
           />
         </a>
       ))}
