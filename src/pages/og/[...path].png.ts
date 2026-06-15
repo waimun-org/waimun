@@ -57,7 +57,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
         .width(OG_WIDTH / 2)
         .height(OG_HEIGHT)
         .fit("crop")
-        .crop("top")
         .auto("format")
         .url(),
     } satisfies OgImageProps,
@@ -239,7 +238,7 @@ async function renderEventOg(props: OgImageProps, logo: string) {
         src: eventImage,
         width: OG_WIDTH / 2,
         height: OG_HEIGHT,
-        style: { objectFit: "cover", objectPosition: "center top" },
+        style: { objectFit: "cover" },
       }),
     ),
   );
