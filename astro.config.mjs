@@ -22,5 +22,8 @@ export default defineConfig({
         "@": path.resolve("./src"),
       },
     },
+    optimizeDeps: {
+      include: ["react-dom/client", "react-dom"],
+    },
   },
 });
