@@ -57,6 +57,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         .width(OG_WIDTH)
         .height(300)
         .fit("crop")
+        .crop("top")
         .auto("format")
         .url(),
     } satisfies OgImageProps,
