@@ -1,10 +1,5 @@
 import { defineField, defineType } from "sanity";
-import {
-  DocumentIcon,
-  LinkIcon,
-  SearchIcon,
-  ComponentIcon,
-} from "@sanity/icons";
+import { DocumentIcon, LinkIcon, ComponentIcon } from "@sanity/icons";
 
 export const pageType = defineType({
   name: "page",
@@ -22,11 +17,6 @@ export const pageType = defineType({
       name: "settings",
       title: "Settings",
       icon: LinkIcon,
-    },
-    {
-      name: "seo",
-      title: "SEO",
-      icon: SearchIcon,
     },
   ],
   fields: [
@@ -55,13 +45,6 @@ export const pageType = defineType({
       title: "Content",
       type: "pageBuilder",
       group: "content",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "seo",
-      title: "SEO",
-      type: "seo",
-      group: "seo",
       validation: (rule) => rule.required(),
     }),
   ],

@@ -4,7 +4,7 @@ import PageBuilder from "../components/page-builder.astro";
 import { PAGE_QUERY, PAGES_SLUGS_QUERY } from "../lib/queries";
 import { sanityFetch } from "../lib/client";
 import type { PAGE_QUERY_RESULT, PAGES_SLUGS_QUERY_RESULT } from "../sanity/types";
-import { getSeoMeta } from "../lib/seo";
+import { getPageDescription, getPageTitle, getSeoMeta } from "../lib/seo";
 
 export async function getStaticPaths() {
   const slugs = await sanityFetch<PAGES_SLUGS_QUERY_RESULT>({
@@ -29,7 +29,12 @@ if (!page) {
   return Astro.redirect("/404");
 }
 
-const seo = getSeoMeta({ slug: { _type: "slug", current: `/${slug}` }, seo: page.seo });
+const seo = getSeoMeta({
+  pathname: `/${slug}`,
+  title: getPageTitle(page.content, page.title),
+  description: getPageDescription(page.content),
+  ogPath: `/og/${slug}.png`,
+});
 ---
 
 <AppLayout

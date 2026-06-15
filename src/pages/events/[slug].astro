@@ -4,7 +4,11 @@ import { EventComponent } from "../../components/event";
 import { EVENT_BY_SLUG_QUERY, EVENTS_SLUGS_QUERY } from "../../lib/queries";
 import { sanityFetch } from "../../lib/client";
 import type { EVENT_BY_SLUG_QUERY_RESULT, EVENTS_SLUGS_QUERY_RESULT } from "../../sanity/types";
-import { getSeoMeta } from "../../lib/seo";
+import {
+  getDescription,
+  getSeoMeta,
+  portableTextToPlainText,
+} from "../../lib/seo";
 
 export async function getStaticPaths() {
   const slugs = await sanityFetch<EVENTS_SLUGS_QUERY_RESULT>({
@@ -27,7 +31,12 @@ if (!event) {
   return Astro.redirect("/404");
 }
 
-const seo = getSeoMeta({ slug: { _type: "slug", current: `/events/${slug}` }, seo: event.seo });
+const seo = getSeoMeta({
+  pathname: `/events/${slug}`,
+  title: event.name,
+  description: getDescription(portableTextToPlainText(event.description)),
+  ogPath: `/og/events/${slug}.png`,
+});
 ---
 
 <AppLayout

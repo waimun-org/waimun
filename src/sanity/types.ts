@@ -69,21 +69,6 @@ export type Team = {
   >;
 };
 
-export type Seo = {
-  _type: "seo";
-  title: string;
-  description?: string;
-  image?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt: string;
-    _type: "image";
-  };
-  noIndex: boolean;
-};
-
 export type Price = {
   _type: "price";
   unitAmount: number;
@@ -243,7 +228,6 @@ export type Page = {
   title: string;
   slug: Slug;
   content: PageBuilder;
-  seo: Seo;
 };
 
 export type PageBuilder = Array<
@@ -383,7 +367,6 @@ export type Event = {
     _key: string;
   }>;
   slug: Slug;
-  seo?: Seo;
 };
 
 export type RgbaColor = {
@@ -511,7 +494,6 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | TeamMember
   | Team
-  | Seo
   | Price
   | Prose
   | Link
@@ -686,7 +668,6 @@ export type PAGE_QUERY_RESULT = {
         >;
       }
   >;
-  seo: Seo;
 } | null;
 
 // Source: src/lib/queries.ts
@@ -825,7 +806,6 @@ export type EVENTS_QUERY_RESULT = Array<{
     _key: string;
   }>;
   slug: Slug;
-  seo?: Seo;
 }>;
 
 // Source: src/lib/queries.ts
@@ -892,7 +872,6 @@ export type EVENT_BY_SLUG_QUERY_RESULT = {
     _key: string;
   }>;
   slug: Slug;
-  seo?: Seo;
 } | null;
 
 // Source: src/lib/queries.ts
@@ -913,7 +892,7 @@ export type EVENTS_SLUGS_QUERY_RESULT = Array<{
 
 // Source: src/lib/queries.ts
 // Variable: SITEMAP_QUERY
-// Query: {  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": select(      slug.current == "home" => 1.0,      0.8    )  },  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.7  }}
+// Query: {  "pages": *[_type == "page" && defined(slug.current)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": select(      slug.current == "home" => 1.0,      0.8    )  },  "events": *[_type == "event" && defined(slug.current)]{    "slug": slug.current,    "lastModified": _updatedAt,    "priority": 0.7  }}
 export type SITEMAP_QUERY_RESULT = {
   pages: Array<{
     slug: string;
@@ -938,6 +917,6 @@ declare module "@sanity/client" {
     '*[_type == "event" && slug.current == $slug][0] {\n  ...\n}': EVENT_BY_SLUG_QUERY_RESULT;
     '*[_type == "page" && defined(slug.current)]{\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': PAGES_SLUGS_QUERY_RESULT;
     '*[_type == "event" && defined(slug.current)] {\n  "slug": slug.current,\n  "lastModified": _updatedAt\n}': EVENTS_SLUGS_QUERY_RESULT;
-    '{\n  "pages": *[_type == "page" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": select(\n      slug.current == "home" => 1.0,\n      0.8\n    )\n  },\n  "events": *[_type == "event" && defined(slug.current) && (!defined(seo.noIndex) || seo.noIndex != true)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.7\n  }\n}': SITEMAP_QUERY_RESULT;
+    '{\n  "pages": *[_type == "page" && defined(slug.current)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": select(\n      slug.current == "home" => 1.0,\n      0.8\n    )\n  },\n  "events": *[_type == "event" && defined(slug.current)]{\n    "slug": slug.current,\n    "lastModified": _updatedAt,\n    "priority": 0.7\n  }\n}': SITEMAP_QUERY_RESULT;
   }
 }
