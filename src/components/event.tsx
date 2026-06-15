@@ -1,10 +1,10 @@
 import type { Event as EventType } from "@/sanity/types";
-import { PortableText } from "@portabletext/react";
-import { Button } from "./button";
-import { Image } from "./image";
-import { CalendarIcon, CircleDollarSignIcon, MapPinIcon } from "lucide-react";
 import { formatDate } from "@/utils/date";
 import { formatPrice } from "@/utils/price";
+import { PortableText } from "@portabletext/react";
+import { CalendarIcon, CircleDollarSignIcon, MapPinIcon } from "lucide-react";
+import { Button } from "./button";
+import { Image } from "./image";
 
 export type EventProps = {
   event: EventType;
@@ -30,7 +30,7 @@ export function EventComponent({ event }: EventProps) {
 function EventHero({ event }: EventProps) {
   return (
     <section className="border-b">
-      <div className="container grid grid-cols-1 gap-8 py-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="container grid grid-cols-1 gap-8 py-8 lg:grid-cols-3">
         <div className="col-span-1 flex flex-col gap-8 lg:col-span-2">
           <div className="flex flex-col gap-4">
             <EventMeta event={event} />
@@ -47,7 +47,7 @@ function EventHero({ event }: EventProps) {
           </div>
 
           {event.buttons && (
-            <div className="mt-auto flex flex-wrap gap-4">
+            <div className="mt-auto flex flex-col flex-wrap gap-x-4 gap-y-2 md:flex-row">
               {event.buttons.map((button) => (
                 <Button key={button._key} button={button} />
               ))}
