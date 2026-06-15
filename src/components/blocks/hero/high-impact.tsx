@@ -3,6 +3,7 @@ import { Button } from "@/components/button";
 import type { HeroProps } from ".";
 import { Image } from "@/components/image";
 import { cn } from "@/utils/cn";
+import { getLinkProps } from "@/utils/link";
 import { ArrowRightIcon } from "lucide-react";
 
 function getRelativeLuminance(hex: string): number {
@@ -57,7 +58,7 @@ export function HighImpactHero({ block }: HeroProps) {
       >
         {block.callout && (
           <a
-            href={block.callout.url}
+            {...getLinkProps(block.callout.url)}
             className={cn(
               "mx-auto inline-flex h-9 max-w-xl items-center justify-center gap-2 rounded-full border px-3 py-2 text-center text-sm whitespace-nowrap transition-colors md:max-w-2xl lg:max-w-3xl",
               useLightText

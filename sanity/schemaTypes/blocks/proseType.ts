@@ -1,5 +1,6 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 import { DocumentTextIcon } from "@sanity/icons";
+import { TrimmingPortableTextInput } from "../../components/trimming-portable-text-input";
 
 export const proseType = defineType({
   name: "prose",
@@ -11,7 +12,8 @@ export const proseType = defineType({
       name: "content",
       title: "Content",
       type: "array",
-      of: [{ type: "block" }],
+      of: [defineArrayMember({ type: "block" })],
+      components: { input: TrimmingPortableTextInput },
       validation: (rule) => rule.required(),
     }),
   ],

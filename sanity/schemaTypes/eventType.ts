@@ -6,6 +6,7 @@ import {
   LinkIcon,
   SearchIcon,
 } from "@sanity/icons";
+import { TrimmingPortableTextInput } from "../components/trimming-portable-text-input";
 
 export const eventType = defineType({
   name: "event",
@@ -52,7 +53,8 @@ export const eventType = defineType({
       name: "description",
       title: "Description",
       type: "array",
-      of: [{ type: "block" }],
+      of: [defineArrayMember({ type: "block" })],
+      components: { input: TrimmingPortableTextInput },
       group: "content",
     }),
     defineField({
@@ -108,7 +110,8 @@ export const eventType = defineType({
       name: "details",
       title: "Details",
       type: "array",
-      of: [{ type: "block" }],
+      of: [defineArrayMember({ type: "block" })],
+      components: { input: TrimmingPortableTextInput },
       group: "content",
     }),
     defineField({

@@ -1,4 +1,5 @@
 import type { FOOTER_QUERY_RESULT } from "@/sanity/types";
+import { getLinkProps } from "@/utils/link";
 import { Socials } from "./socials";
 
 export type FooterProps = {
@@ -17,7 +18,7 @@ export function Footer({ footer }: FooterProps) {
           {footer.links.map((link) => (
             <a
               key={link._key}
-              href={link.url}
+              {...getLinkProps(link.url)}
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               {link.text}

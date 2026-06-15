@@ -1,5 +1,6 @@
 import type { Button as ButtonType } from "@/sanity/types";
 import { Button as ButtonComponent } from "@/components/ui/button";
+import { getLinkProps } from "@/utils/link";
 
 export type ButtonProps = {
   button: ButtonType;
@@ -8,12 +9,7 @@ export type ButtonProps = {
 export function Button({ button }: ButtonProps) {
   return (
     <ButtonComponent variant={button.variant} size={button.size} asChild>
-      <a
-        href={button.link.url}
-        target={button.link.url.startsWith("http") ? "_blank" : undefined}
-      >
-        {button.link.text}
-      </a>
+      <a {...getLinkProps(button.link.url)}>{button.link.text}</a>
     </ButtonComponent>
   );
 }

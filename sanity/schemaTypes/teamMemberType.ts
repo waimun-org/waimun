@@ -1,5 +1,6 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { UsersIcon } from "@sanity/icons";
+import { TrimmingPortableTextInput } from "../components/trimming-portable-text-input";
 
 export const teamMemberType = defineType({
   name: "teamMember",
@@ -23,7 +24,8 @@ export const teamMemberType = defineType({
       name: "bio",
       title: "Bio",
       type: "array",
-      of: [{ type: "block" }],
+      of: [defineArrayMember({ type: "block" })],
+      components: { input: TrimmingPortableTextInput },
     }),
     defineField({
       name: "image",

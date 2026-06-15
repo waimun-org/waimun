@@ -1,4 +1,5 @@
 import type { Social } from "@/sanity/types";
+import { getLinkProps } from "@/utils/link";
 import { Image } from "./image";
 
 export type SocialsType = Array<Social & { _key: string }>;
@@ -13,9 +14,7 @@ export function Socials({ socials }: SocialsProps) {
       {socials.map((social) => (
         <a
           key={social._key}
-          href={social.url}
-          target="_blank"
-          rel="noopener noreferrer"
+          {...getLinkProps(social.url)}
           className="transition-opacity hover:opacity-50"
         >
           <Image
