@@ -1,5 +1,6 @@
 import type { HEADER_QUERY_RESULT } from "@/sanity/types";
 import { cn } from "@/utils/cn";
+import { getLinkProps } from "@/utils/link";
 import { Socials } from "./socials";
 
 export type MainNavProps = {
@@ -19,8 +20,7 @@ export function MainNav({ header, pathname }: MainNavProps) {
       {header.links.map((link) => (
         <a
           key={link._key}
-          href={link.url}
-          target={link.url.startsWith("http") ? "_blank" : undefined}
+          {...getLinkProps(link.url)}
           className={cn(
             "text-muted-foreground hover:text-foreground text-sm font-medium transition-colors",
             normalizePath(link.url) === current && "text-foreground",

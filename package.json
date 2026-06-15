@@ -11,6 +11,7 @@
     "check": "astro check",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
+    "sanity:audit": "node scripts/audit-sanity-content.mjs",
     "sanity:typegen": "sanity schema extract --path ./sanity/extract.json --enforce-required-fields && sanity typegen generate",
     "sanity:deploy": "sanity deploy"
   },

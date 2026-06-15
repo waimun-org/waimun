@@ -3,6 +3,7 @@ import { useEffect, useId, useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { HEADER_QUERY_RESULT } from "@/sanity/types";
 import { cn } from "@/utils/cn";
+import { getLinkProps } from "@/utils/link";
 import { Socials } from "./socials";
 
 export type MobileNavProps = {
@@ -68,9 +69,8 @@ export function MobileNav({ header, pathname }: MobileNavProps) {
             {header.links.map((link) => (
               <a
                 key={link._key}
-                href={link.url}
+                {...getLinkProps(link.url)}
                 onClick={() => setOpen(false)}
-                target={link.url.startsWith("http") ? "_blank" : undefined}
                 className={cn(
                   "text-2xl font-semibold transition-colors hover:text-foreground",
                   normalizePath(link.url) !== current &&

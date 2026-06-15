@@ -1,5 +1,6 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 import { ImageIcon } from "@sanity/icons";
+import { TrimmingPortableTextInput } from "../../components/trimming-portable-text-input";
 
 export const splitImageType = defineType({
   name: "splitImage",
@@ -54,7 +55,8 @@ export const splitImageType = defineType({
       name: "text",
       title: "Text",
       type: "array",
-      of: [{ type: "block" }],
+      of: [defineArrayMember({ type: "block" })],
+      components: { input: TrimmingPortableTextInput },
     }),
   ],
   preview: {

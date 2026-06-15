@@ -5,6 +5,7 @@ import {
   LinkIcon,
   ImageIcon,
 } from "@sanity/icons";
+import { TrimmingPortableTextInput } from "../../components/trimming-portable-text-input";
 
 export const heroType = defineType({
   name: "hero",
@@ -55,7 +56,8 @@ export const heroType = defineType({
       name: "text",
       title: "Text",
       type: "array",
-      of: [{ type: "block" }],
+      of: [defineArrayMember({ type: "block" })],
+      components: { input: TrimmingPortableTextInput },
       group: "content",
     }),
     defineField({

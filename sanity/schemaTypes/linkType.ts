@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { LinkIcon } from "@sanity/icons";
+import { NormalizingUrlInput } from "../components/normalizing-url-input";
 
 export const linkType = defineType({
   name: "link",
@@ -17,10 +18,13 @@ export const linkType = defineType({
       name: "url",
       title: "URL",
       type: "url",
+      description:
+        "Paste a website, email address, relative path, or anchor. The Studio will infer https:// or mailto: where possible.",
+      components: { input: NormalizingUrlInput },
       validation: (rule) =>
         rule.required().uri({
           allowRelative: true,
-          scheme: ["http", "https", "mailto", "tel"],
+          scheme: ["http", "https", "mailto"],
         }),
     }),
   ],
