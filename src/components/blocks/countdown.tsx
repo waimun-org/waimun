@@ -52,7 +52,9 @@ export function Countdown({ block }: CountdownProps) {
   return (
     <section className="bg-muted">
       <div className="container flex flex-col items-center gap-3 py-6 text-center md:py-8">
-        <p className="font-medium text-balance text-lg">{block.title}</p>
+        <p className="text-base font-medium text-balance md:text-lg">
+          {block.title}
+        </p>
 
         <div
           className="grid w-full max-w-md grid-cols-4 gap-2"
