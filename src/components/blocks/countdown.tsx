@@ -1,6 +1,7 @@
-import type { Countdown as CountdownType } from "@/sanity/types";
 import { useCountdown } from "@/hooks/use-countdown";
+import type { Countdown as CountdownType } from "@/sanity/types";
 import { ArrowRightIcon } from "lucide-react";
+import { Button } from "../ui/button";
 
 type CountdownProps = {
   block: CountdownType;
@@ -43,14 +44,12 @@ export function Countdown({ block }: CountdownProps) {
   }
 
   return (
-    <section className="bg-muted/30">
+    <section className="bg-muted">
       <div className="container flex flex-col items-center gap-3 py-6 text-center md:py-8">
-        <p className="text-sm font-medium text-balance md:text-base">
-          {block.title}
-        </p>
+        <p className="font-medium text-balance text-lg">{block.title}</p>
 
         <div
-          className="grid w-full max-w-md grid-cols-4 gap-2 md:gap-3"
+          className="grid w-full max-w-md grid-cols-4 gap-2 3"
           aria-label={`${countdown.days} days, ${countdown.hours} hours, ${countdown.minutes} minutes, and ${countdown.seconds} seconds remaining`}
         >
           <CountdownUnit value={countdown.days} label="days" />
@@ -60,15 +59,16 @@ export function Countdown({ block }: CountdownProps) {
         </div>
 
         {block.link && (
-          <a
-            href={block.link.url}
-            target={block.link.url.startsWith("http") ? "_blank" : undefined}
-            rel={block.link.url.startsWith("http") ? "noreferrer" : undefined}
-            className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-xs font-medium underline-offset-4 hover:underline"
-          >
-            {block.link.text}
-            <ArrowRightIcon className="size-3.5" aria-hidden="true" />
-          </a>
+          <Button variant="link" asChild>
+            <a
+              href={block.link.url}
+              target={block.link.url.startsWith("http") ? "_blank" : undefined}
+              rel={block.link.url.startsWith("http") ? "noreferrer" : undefined}
+            >
+              {block.link.text}
+              <ArrowRightIcon className="size-3.5" aria-hidden="true" />
+            </a>
+          </Button>
         )}
       </div>
     </section>
