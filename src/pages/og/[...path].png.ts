@@ -97,8 +97,7 @@ export const GET: APIRoute<OgImageProps> = async ({ props }) => {
             style: {
               fontSize: 72,
               fontWeight: 700,
-              lineHeight: 1.08,
-              letterSpacing: "-3px",
+              lineHeight: 1.1,
             },
           },
           props.title,
@@ -109,7 +108,7 @@ export const GET: APIRoute<OgImageProps> = async ({ props }) => {
             style: {
               color: ogColors.muted,
               fontSize: 30,
-              lineHeight: 1.35,
+              lineHeight: 1.5,
               marginTop: 30,
               maxWidth: "930px",
             },
