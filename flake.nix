@@ -1,5 +1,5 @@
 {
-  description = "Development shell for jamesblair.nz";
+  description = "Development shell";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
