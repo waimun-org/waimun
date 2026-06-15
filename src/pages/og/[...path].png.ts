@@ -66,12 +66,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const require = createRequire(import.meta.url);
-const [regularFont, boldFont] = await Promise.all([
+const [regularFont, regularFontExt, boldFont, boldFontExt] = await Promise.all([
   readFile(
     require.resolve("@fontsource/inter/files/inter-latin-400-normal.woff"),
   ),
   readFile(
+    require.resolve("@fontsource/inter/files/inter-latin-ext-400-normal.woff"),
+  ),
+  readFile(
     require.resolve("@fontsource/inter/files/inter-latin-700-normal.woff"),
+  ),
+  readFile(
+    require.resolve("@fontsource/inter/files/inter-latin-ext-700-normal.woff"),
   ),
 ]);
 
@@ -162,8 +168,8 @@ function renderPageOg(props: OgImageProps, logo: string) {
     justifyContent: "space-between",
     backgroundColor: ogColors.background,
     color: ogColors.foreground,
-    padding: "76px 84px 84px",
-    fontFamily: "Inter",
+    padding: "84px 84px 84px",
+    fontFamily: "Inter, Inter Ext",
   };
 
   return createElement(
@@ -195,7 +201,7 @@ async function renderEventOg(props: OgImageProps, logo: string) {
         flexDirection: "column",
         backgroundColor: ogColors.background,
         color: ogColors.foreground,
-        fontFamily: "Inter",
+        fontFamily: "Inter, Inter Ext",
       },
     },
     createElement(
@@ -223,7 +229,7 @@ async function renderEventOg(props: OgImageProps, logo: string) {
           flex: 1,
           justifyContent: "space-between",
           alignItems: "flex-end",
-          padding: "44px 64px 64px",
+          padding: "64px 64px 64px",
         },
       },
       renderTextBlock({
@@ -248,7 +254,9 @@ export const GET: APIRoute<OgImageProps> = async ({ props }) => {
     height: OG_HEIGHT,
     fonts: [
       { name: "Inter", data: regularFont, weight: 400, style: "normal" },
+      { name: "Inter Ext", data: regularFontExt, weight: 400, style: "normal" },
       { name: "Inter", data: boldFont, weight: 700, style: "normal" },
+      { name: "Inter Ext", data: boldFontExt, weight: 700, style: "normal" },
     ],
   });
   const png = new Resvg(svg, {
