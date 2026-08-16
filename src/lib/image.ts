@@ -9,3 +9,7 @@ const builder = createImageUrlBuilder({
 export const urlFor = (source: SanityImageSource) => {
   return builder.image(source);
 };
+
+export function downloadUrlFor(assetReference: string) {
+  return `${urlFor(assetReference).url()}?dl=`;
+}

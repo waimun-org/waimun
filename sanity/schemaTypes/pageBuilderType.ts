@@ -11,5 +11,6 @@ export const pageBuilderType = defineType({
     defineArrayMember({ type: "prose" }),
     defineArrayMember({ type: "events" }),
     defineArrayMember({ type: "team" }),
+    defineArrayMember({ type: "gallery" }),
   ],
 });

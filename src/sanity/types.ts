@@ -22,6 +22,21 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
+export type Gallery = {
+  _type: "gallery";
+  images: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    date: string;
+    priority: boolean;
+    _type: "galleryImage";
+    _key: string;
+  }>;
+};
+
 export type TeamMember = {
   _type: "teamMember";
   name: string;
@@ -249,6 +264,9 @@ export type PageBuilder = Array<
   | ({
       _key: string;
     } & Team)
+  | ({
+      _key: string;
+    } & Gallery)
 >;
 
 export type Slug = {
@@ -520,6 +538,7 @@ export type Geopoint = {
 
 export type AllSanitySchemaTypes =
   | SanityImageAssetReference
+  | Gallery
   | TeamMember
   | Team
   | Price
@@ -601,6 +620,21 @@ export type PAGE_QUERY_RESULT = {
         _key: string;
         _type: "events";
         title?: string;
+      }
+    | {
+        _key: string;
+        _type: "gallery";
+        images: Array<{
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt: string;
+          date: string;
+          priority: boolean;
+          _type: "galleryImage";
+          _key: string;
+        }>;
       }
     | {
         _key: string;

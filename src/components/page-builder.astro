@@ -9,6 +9,7 @@ import { SplitImage } from "./blocks/split-image";
 import { Prose } from "./blocks/prose";
 import { Events } from "./blocks/events";
 import { Team } from "./blocks/team";
+import { Gallery } from "./blocks/gallery";
 import { sanityFetch } from "../lib/client";
 import { EVENTS_QUERY } from "../lib/queries";
 import { tryCatch } from "../utils/try-catch";
@@ -48,6 +49,7 @@ if (hasEventsBlock) {
         {block._type === "prose" && <Prose block={block} />}
         {block._type === "events" && <Events block={block} events={events} />}
         {block._type === "team" && <Team block={block} />}
+        {block._type === "gallery" && <Gallery block={block} client:load />}
       </div>
     );
   })
