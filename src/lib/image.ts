@@ -10,23 +10,10 @@ export const urlFor = (source: SanityImageSource) => {
   return builder.image(source);
 };
 
-function getSanityImageAssetReference(image: SanityImageSource) {
-  if (!image || typeof image !== "object" || !("asset" in image)) {
-    return undefined;
-  }
-
-  const asset = image.asset;
-
-  if (!asset || typeof asset !== "object" || !("_ref" in asset)) {
-    return undefined;
-  }
-
-  return typeof asset._ref === "string" ? asset._ref : undefined;
-}
-
 export function getSanityImageAssetInfo(image: SanityImageSource) {
-  const reference = getSanityImageAssetReference(image);
-  const match = reference?.match(/^image-[^-]+-(\d+)x(\d+)-(\w+)$/);
+  const match = urlFor(image)
+    .url()
+    .match(/-(\d+)x(\d+)\.(\w+)(?:\?|$)/);
 
   if (!match) {
     return undefined;
