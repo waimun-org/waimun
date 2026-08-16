@@ -1,16 +1,33 @@
 import { Image } from "@/components/image";
 import { Button } from "@/components/ui/button";
-import { downloadUrlFor } from "@/lib/image";
+import { downloadUrlFor, getSanityImageAssetInfo } from "@/lib/image";
 import type { Gallery as GalleryType } from "@/sanity/types";
 import { formatDate } from "@/utils/date";
 import * as Dialog from "@radix-ui/react-dialog";
 import { DownloadIcon, XIcon } from "lucide-react";
+import type { CSSProperties } from "react";
 
 type GalleryImage = GalleryType["images"][number];
 
 type GalleryImageViewerProps = {
   readonly image: GalleryImage;
 };
+
+function getGalleryViewerImageStyle(image: GalleryImage): CSSProperties {
+  const assetInfo = getSanityImageAssetInfo(image);
+
+  if (!assetInfo) {
+    return {};
+  }
+
+  const heightToWidthRatio = assetInfo.height / assetInfo.width;
+  const widthConstrainedHeight = `calc(${heightToWidthRatio * 100}vw - ${heightToWidthRatio * 2}rem)`;
+
+  return {
+    aspectRatio: `${assetInfo.width} / ${assetInfo.height}`,
+    height: `min(calc(100dvh - 10rem), ${widthConstrainedHeight}, ${assetInfo.height}px)`,
+  };
+}
 
 export function GalleryImageViewer({ image }: GalleryImageViewerProps) {
   return (
@@ -40,6 +57,7 @@ export function GalleryImageViewer({ image }: GalleryImageViewerProps) {
             alt={image.alt}
             priority
             className="h-auto max-h-[calc(100dvh-10rem)] w-auto max-w-[calc(100vw-2rem)] object-contain"
+            style={getGalleryViewerImageStyle(image)}
             sizes="(min-width: 1024px) 80vw, 100vw"
             widths={[640, 960, 1280, 1600, 1920]}
           />

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { urlFor } from "@/lib/image";
+import { getSanityImageAssetInfo, urlFor } from "@/lib/image";
 import { cn } from "@/utils/cn";
 import type { SanityImageSource } from "@sanity/image-url";
 
@@ -9,10 +9,6 @@ const DEFAULT_QUALITY = 80;
 type ImageDimensions = {
   width: number;
   height: number;
-};
-
-type AssetInfo = ImageDimensions & {
-  format: string;
 };
 
 export interface SanityImageProps extends Omit<
@@ -25,35 +21,6 @@ export interface SanityImageProps extends Omit<
   priority?: boolean;
   quality?: number;
   widths?: number[];
-}
-
-function getAssetRef(image: SanityImageSource): string | undefined {
-  if (!image || typeof image !== "object" || !("asset" in image)) {
-    return undefined;
-  }
-
-  const asset = image.asset;
-
-  if (!asset || typeof asset !== "object" || !("_ref" in asset)) {
-    return undefined;
-  }
-
-  return typeof asset._ref === "string" ? asset._ref : undefined;
-}
-
-function getAssetInfo(image: SanityImageSource): AssetInfo | undefined {
-  const ref = getAssetRef(image);
-  const match = ref?.match(/^image-[^-]+-(\d+)x(\d+)-(\w+)$/);
-
-  if (!match) {
-    return undefined;
-  }
-
-  return {
-    width: Number(match[1]),
-    height: Number(match[2]),
-    format: match[3],
-  };
 }
 
 function getSrcWidths(widths: number[], dimensions?: ImageDimensions) {
@@ -91,7 +58,7 @@ export function Image({
   widths = DEFAULT_WIDTHS,
   ...props
 }: SanityImageProps) {
-  const assetInfo = getAssetInfo(image);
+  const assetInfo = getSanityImageAssetInfo(image);
   const isSvg = assetInfo?.format === "svg";
   const srcWidths = getSrcWidths(widths, assetInfo);
   const largestWidth = srcWidths[srcWidths.length - 1];
