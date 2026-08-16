@@ -14,6 +14,7 @@ import { socialType } from "./socialType";
 import { teamType } from "./blocks/teamType";
 import { teamMemberType } from "./teamMemberType";
 import { priceType } from "./priceType";
+import { galleryType } from "./blocks/galleryType";
 
 const schemaTypes = [
   eventType,
@@ -32,6 +33,7 @@ const schemaTypes = [
   priceType,
   teamType,
   teamMemberType,
+  galleryType,
 ];
 
 export default schemaTypes;

@@ -4,6 +4,7 @@ import {
   CalendarIcon,
   CogIcon,
   ComponentIcon,
+  ImagesIcon,
 } from "@sanity/icons";
 
 export const structure: StructureResolver = (S) =>
@@ -11,6 +12,17 @@ export const structure: StructureResolver = (S) =>
     .title("WaiMUN")
     .items([
       S.documentTypeListItem("page").title("Pages").icon(DocumentIcon),
+      S.listItem()
+        .title("Galleries")
+        .icon(ImagesIcon)
+        .child(
+          S.documentList()
+            .title("Galleries")
+            .schemaType("page")
+            .filter(
+              '_type == "page" && count(content[_type == "gallery"]) > 0',
+            ),
+        ),
       S.documentTypeListItem("event").title("Events").icon(CalendarIcon),
       S.divider(),
       S.listItem()
